@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+
+  <!-- Libre Franklin font -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header (optional) -->
+  <header class="hero">
+    <h1>Friends of the Earth Open Data Portal</h1>
+    <p>Environmental data for research and action</p>
+  </header>
+
+  <!-- Page Content -->
+  <main class="content">
+    {{ content }}
+  </main>
+
+  <!-- Footer (optional) -->
+  <footer class="site-footer">
+    <p>&copy; {{ site.time | date: '%Y' }} Friends of the Earth. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
