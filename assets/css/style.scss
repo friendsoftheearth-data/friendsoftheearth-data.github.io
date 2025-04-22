@@ -1,0 +1,129 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Import Libre Franklin font */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
+/* Apply custom colors and fonts */
+body {
+  font-family: 'Libre Franklin', sans-serif;
+  background-color: #f4f6fa;
+  color: #1e234d;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 600;
+  color: #1e234d;
+}
+
+a {
+  color: #61bdaa;
+}
+
+a:hover {
+  color: #4fa092;
+}
+
+/* Header customization */
+.page-header {
+  background-color: #1e234d;
+  background-image: linear-gradient(120deg, #1e234d, #2a3159);
+}
+
+.project-name {
+  font-weight: 700;
+}
+
+/* Main content customization */
+.main-content {
+  background-color: #f4f6fa;
+}
+
+.main-content h1, 
+.main-content h2, 
+.main-content h3, 
+.main-content h4, 
+.main-content h5, 
+.main-content h6 {
+  color: #1e234d;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Button styling */
+.btn {
+  background-color: #61bdaa;
+  border-color: #61bdaa;
+  color: white;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background-color: #4fa092;
+  border-color: #4fa092;
+}
+
+/* Secondary text color for descriptions, metadata, etc. */
+.text-secondary {
+  color: #61bdaa;
+}
+
+/* Navigation elements */
+.site-nav {
+  background-color: #f4f6fa;
+  border-bottom: 1px solid rgba(30, 35, 77, 0.1);
+}
+
+.site-nav .page-link {
+  color: #1e234d;
+}
+
+/* Footer styling */
+.site-footer {
+  border-top: 1px solid rgba(30, 35, 77, 0.1);
+  background-color: #f4f6fa;
+}
+
+/* Card styling for dataset lists */
+.card {
+  border: 1px solid rgba(30, 35, 77, 0.1);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(30, 35, 77, 0.1);
+}
+
+.card-title {
+  margin-top: 0;
+  color: #1e234d;
+}
+
+.card-meta {
+  color: #61bdaa;
+  font-size: 0.9rem;
+}
+
+/* Download buttons */
+.download-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #61bdaa;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.download-button:hover {
+  background-color: #4fa092;
+  text-decoration: none;
+  color: white;
+}
