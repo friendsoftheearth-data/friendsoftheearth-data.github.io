@@ -1,1 +1,64 @@
+# Site settings for Friends of the Earth Open Data Portal
+title: Friends of the Earth Open Data Portal
+description: Access to environmental GIS data and spatial analysis from Friends of the Earth
+email: data@foe.co.uk
+baseurl: "" # Leave empty for organization GitHub Pages
+url: "https://friendsoftheearth.github.io"
+
+# Social media links (optional)
+twitter_username: friends_earth
+github_username: friendsoftheearth
+
+# Theme selection
 theme: jekyll-theme-cayman
+
+# Theme customization
+show_downloads: true
+google_analytics: # Add your Google Analytics ID here if needed
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Navigation menu links
+header_pages:
+  - datasets.md
+  - maps.md
+  - about.md
+
+# Collections for organizing content
+collections:
+  datasets:
+    output: true
+    permalink: /:collection/:name
+  maps:
+    output: true
+    permalink: /:collection/:name
+
+# Default front matter settings
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: "datasets"
+    values:
+      layout: dataset
+  - scope:
+      path: ""
+      type: "maps"
+    values:
+      layout: map
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
