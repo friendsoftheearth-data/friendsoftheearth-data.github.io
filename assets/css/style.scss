@@ -29,17 +29,18 @@ color: #4fa092;
 
 /* Header customization */
 .page-header {
-background-color: #1e234d;
+  background-color: #1e234d;
+  color: #f4f6fa;
 }
 
 .project-name {
   font-weight: 700;
-  color: #f4f6fa;
+  color: inherit;
 }
 
 /* Main content customization */
 .main-content {
-background-color: #f4f6fa;
+  background-color: #f4f6fa;
 }
 
 .main-content h1,
@@ -48,17 +49,17 @@ background-color: #f4f6fa;
 .main-content h4,
 .main-content h5,
 .main-content h6 {
-color: #1e234d;
-margin-top: 1.5rem;
-margin-bottom: 1rem;
+  color: #1e234d;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 /* Button styling */
 .btn {
-background-color: #61bdaa;
-border-color: #61bdaa;
-color: white;
-font-weight: 500;
+  background-color: #61bdaa;
+  border-color: #61bdaa;
+  color: white;
+  font-weight: 500;
 }
 
 .btn:hover {
