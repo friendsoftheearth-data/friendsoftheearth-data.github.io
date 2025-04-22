@@ -3,130 +3,91 @@
 /* Import Libre Franklin font */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
 
-/* Apply custom colors and fonts */
+/* Base Styles */
 body {
-  font-family: 'Libre Franklin', sans-serif;
-  background-color: #f4f6fa;
-  color: #1e234d;
+    background-color: #f4f6fa;
+    color: #1e234d;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Libre Franklin', sans-serif;
-  font-weight: 600;
-  color: #1e234d;
+/* Banner Styles */
+.banner {
+    background-color: #1e234d;
+    color: #f4f6fa;
+    padding: 3rem 2rem;
+    text-align: center;
 }
 
-a {
-  color: #61bdaa;
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
 }
 
-a:hover {
-  color: #4fa092;
+.banner p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    font-weight: 400;
 }
 
-/* Header customization */
-.page-header {
-  background-color: #1e234d !important; /* Ensure solid background */
-  color: #f4f6fa; /* Default text color for header */
-  padding: 1rem; /* Add padding for better spacing */
+/* Content Styling */
+.content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
-.project-name {
-  font-weight: 700;
-  color: inherit; /* Inherit color from .page-header */
+h1, h2, h3 {
+    color: #1e234d;
 }
 
-.project-tagline {
-  color: inherit; /* Inherit color from .page-header */
+h2 {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    border-bottom: 2px solid #61bdaa;
+    padding-bottom: 0.5rem;
 }
 
-/* Main content customization */
-.main-content {
-  background-color: #f4f6fa;
+p, li {
+    color: #1e234d;
+    font-size: 1.1rem;
 }
 
-.main-content h1,
-.main-content h2,
-.main-content h3,
-.main-content h4,
-.main-content h5,
-.main-content h6 {
-  color: #1e234d;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+.secondary-text {
+    color: #61bdaa;
 }
 
-/* Button styling */
-.btn {
-  background-color: #61bdaa;
-  border-color: #61bdaa;
-  color: white;
-  font-weight: 500;
+/* Modern Elements */
+button, .button {
+    background-color: #1e234d;
+    color: #f4f6fa;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #4fa092;
-  border-color: #4fa092;
+button:hover, .button:hover {
+    background-color: #61bdaa;
+    transform: translateY(-2px);
 }
 
-/* Secondary text color for descriptions, metadata, etc. */
-.text-secondary {
-  color: #61bdaa;
-}
-
-/* Navigation elements */
-.site-nav {
-  background-color: #f4f6fa;
-  border-bottom: 1px solid rgba(30, 35, 77, 0.1);
-}
-
-.site-nav .page-link {
-  color: #1e234d;
-}
-
-/* Footer styling */
-.site-footer {
-  border-top: 1px solid rgba(30, 35, 77, 0.1);
-  background-color: #f4f6fa;
-}
-
-/* Card styling for dataset lists */
-.card {
-  border: 1px solid rgba(30, 35, 77, 0.1);
-  border-radius: 4px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 5px 15px rgba(30, 35, 77, 0.1);
-}
-
-.card-title {
-  margin-top: 0;
-  color: #1e234d;
-}
-
-.card-meta {
-  color: #61bdaa;
-  font-size: 0.9rem;
-}
-
-/* Download buttons */
-.download-button {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #61bdaa;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 500;
-  margin: 5px 0;
-}
-
-.download-button:hover {
-  background-color: #4fa092;
-  text-decoration: none;
-  color: white;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 2rem;
+    }
+    
+    .banner p {
+        font-size: 1.1rem;
+    }
+    
+    .content {
+        padding: 0 1rem;
+    }
 }
