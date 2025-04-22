@@ -7,7 +7,7 @@
 body {
     background-color: #f4f6fa;
     color: #1e234d;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -24,7 +24,7 @@ body {
 .banner h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    font-weight: 800;
+    font-weight: 800; /* Project name in bold */
 }
 
 .banner p {
@@ -42,12 +42,13 @@ body {
 
 h1, h2, h3 {
     color: #1e234d;
+    font-family: 'Libre Franklin', sans-serif;
 }
 
 h2 {
     font-size: 1.75rem;
     margin-top: 2.5rem;
-    border-bottom: 2px solid #61bdaa;
+    border-bottom: 2px solid #1e234d;
     padding-bottom: 0.5rem;
 }
 
@@ -57,10 +58,11 @@ p, li {
 }
 
 .secondary-text {
-    color: #61bdaa;
+    color: #1e234d;
+    opacity: 0.7;
 }
 
-/* Modern Elements */
+/* Buttons */
 button, .button {
     background-color: #1e234d;
     color: #f4f6fa;
@@ -73,7 +75,7 @@ button, .button {
 }
 
 button:hover, .button:hover {
-    background-color: #61bdaa;
+    background-color: #111533; /* Slightly darker hover */
     transform: translateY(-2px);
 }
 
@@ -82,11 +84,11 @@ button:hover, .button:hover {
     .banner h1 {
         font-size: 2rem;
     }
-    
+
     .banner p {
         font-size: 1.1rem;
     }
-    
+
     .content {
         padding: 0 1rem;
     }
