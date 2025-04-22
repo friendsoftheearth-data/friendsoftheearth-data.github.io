@@ -38,11 +38,7 @@ Our open datasets support:
 
 ## Get Started
 
-<div class="cta-container">
-  [Browse All Datasets](/datasets){: .button }
-  [Explore Interactive Maps](/maps){: .button }
-  [Learn About Our Methods](/about){: .button }
-</div>
+[Browse All Datasets](/datasets){: .button }  [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/about){: .button }
 
 ## Latest Updates
 
