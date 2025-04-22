@@ -8,27 +8,27 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     
-    steps:
-      # Clean previous artifacts first
-      - name: Clean Artifacts
-        uses: geekyeggo/delete-artifact@v2
-        with:
-          name: github-pages
+steps:
+  # Clean old artifacts FIRST
+  - name: Delete Previous Artifacts
+    uses: geekyeggo/delete-artifact@v2
+    with:
+      name: github-pages
 
-      # Checkout code
-      - name: Checkout
-        uses: actions/checkout@v4
+  # Checkout code
+  - name: Checkout
+    uses: actions/checkout@v4
 
-      # Add build steps here (Jekyll/Hugo/static site)
-      # - run: bundle install  # Uncomment for Jekyll
-      # - run: bundle exec jekyll build  # Uncomment for Jekyll
+  # Add your build commands here (if any)
+  # - run: npm run build
 
-      # Upload artifact
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./_site  # Change to your build directory
+  # Upload artifact
+  - name: Upload Pages Artifact
+    uses: actions/upload-pages-artifact@v2
+    with:
+      path: './_site'  # Replace with your build folder
 
-      # Deploy
-      - name: Deploy
-        uses: actions/deploy-pages@v4
+  # Deploy
+  - name: Deploy
+    uses: actions/deploy-pages@v4
+
