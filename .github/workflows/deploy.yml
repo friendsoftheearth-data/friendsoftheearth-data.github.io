@@ -2,33 +2,32 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # Trigger on main branch pushes
+    branches: ["main"]
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     
-steps:
-  # Clean old artifacts FIRST
-  - name: Delete Previous Artifacts
-    uses: geekyeggo/delete-artifact@v2
-    with:
-      name: github-pages
+    steps:
+      # Clean old artifacts FIRST
+      - name: Delete Previous Artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: github-pages
 
-  # Checkout code
-  - name: Checkout
-    uses: actions/checkout@v4
+      # Checkout code
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  # Add your build commands here (if any)
-  # - run: npm run build
+      # Add your build commands here (if any)
+      # - run: npm run build
 
-  # Upload artifact
-  - name: Upload Pages Artifact
-    uses: actions/upload-pages-artifact@v2
-    with:
-      path: './_site'  # Replace with your build folder
+      # Upload artifact
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './_site'  # Replace with your build folder
 
-  # Deploy
-  - name: Deploy
-    uses: actions/deploy-pages@v4
-
+      # Deploy
+      - name: Deploy
+        uses: actions/deploy-pages@v4
