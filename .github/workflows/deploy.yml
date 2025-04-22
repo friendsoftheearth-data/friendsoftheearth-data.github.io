@@ -12,10 +12,10 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    environment:
+    environment:  # ✅ Required for GitHub Pages deployment
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
+      url: ${{ steps.deploy.outputs.page_url }}  # optional but nice for linking
+
     steps:
       # Clean old artifacts FIRST
       - name: Delete Previous Artifacts
@@ -28,9 +28,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Build step (placeholder)
       - name: Verify Build Directory
         run: mkdir -p _site && echo "Hello" > _site/index.html
 
+      # Optional debug
       - name: List Artifacts (Debug)
         run: |
           echo "Existing artifacts:"
@@ -42,8 +44,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: './_site'  # Replace with your build folder
+          path: './_site'
 
       # Deploy
       - name: Deploy
+        id: deploy  # 👈 add ID so we can reference outputs
         uses: actions/deploy-pages@v4
