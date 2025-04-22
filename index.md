@@ -38,7 +38,7 @@ Our open datasets support:
 
 ## Get Started
 
-[Browse All Datasets](/datasets){: .button }  [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/about){: .button }
+[Browse All Datasets](/datasets){: .button }  [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button }
 
 ## Latest Updates
 
