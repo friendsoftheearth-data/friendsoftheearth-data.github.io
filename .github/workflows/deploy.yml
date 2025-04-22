@@ -19,6 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify Build Directory
+        run: ls -la ./_site  # Check if files exist
+
       # Add your build commands here (if any)
       # - run: npm run build
 
