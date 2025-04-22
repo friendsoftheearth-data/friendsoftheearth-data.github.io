@@ -13,14 +13,17 @@ Friends of the Earth is committed to making environmental data accessible to res
 
 ### Climate Impact Mapping
 Visualizations and data showing climate change impacts across regions, including temperature changes, extreme weather events, and vulnerability assessments.  
+
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ### Biodiversity Monitoring
 Spatial data on biodiversity hotspots, threatened species habitats, and conservation priority areas.  
+
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ### Pollution Tracking
 Geographic information on pollution sources, affected communities, and environmental quality measurements.  
+
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ## How Our Data Is Used
