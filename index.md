@@ -39,9 +39,9 @@ Our open datasets support:
 ## Get Started
 
 <div class="cta-container">
-  <a href="/datasets" class="download-button">Browse All Datasets</a>
-  <a href="/maps" class="download-button">Explore Interactive Maps</a>
-  <a href="/about" class="download-button">Learn About Our Methods</a>
+  [Browse All Datasets](/datasets){: .button }
+  [Explore Interactive Maps](/maps){: .button }
+  [Learn About Our Methods](/about){: .button }
 </div>
 
 ## Latest Updates
