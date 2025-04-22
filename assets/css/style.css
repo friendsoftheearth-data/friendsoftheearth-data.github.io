@@ -14,20 +14,20 @@ body {
 }
 
 /* Banner Styles */
-.banner {
+.hero {
     background-color: #1e234d;
     color: #f4f6fa;
     padding: 3rem 2rem;
     text-align: center;
 }
 
-.banner h1 {
+.hero h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 800; /* Project name in bold */
 }
 
-.banner p {
+.hero p {
     font-size: 1.25rem;
     opacity: 0.9;
     font-weight: 400;
