@@ -11,7 +11,7 @@ jobs:
     steps:
       # Clean old artifacts FIRST
       - name: Delete Previous Artifacts
-        uses: geekyeggo/delete-artifact@v2
+        uses: geekyeggo/delete-artifact@v5
         with:
           name: github-pages
 
@@ -22,13 +22,17 @@ jobs:
       - name: Verify Build Directory
         run: ls -la ./_site  # Check if files exist
 
-      # Add your build commands here (if any)
-      # - run: npm run build
+      - name: List Artifacts (Debug)
+        run: |
+          echo "Existing artifacts:"
+          curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/${{ github.repository }}/actions/artifacts | jq '.artifacts[] | .name'
 
       # Upload artifact
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: github-pages
           path: './_site'  # Replace with your build folder
 
       # Deploy
