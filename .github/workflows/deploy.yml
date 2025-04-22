@@ -1,0 +1,34 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: ["main"]  # Trigger on main branch pushes
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Clean previous artifacts first
+      - name: Clean Artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: github-pages
+
+      # Checkout code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Add build steps here (Jekyll/Hugo/static site)
+      # - run: bundle install  # Uncomment for Jekyll
+      # - run: bundle exec jekyll build  # Uncomment for Jekyll
+
+      # Upload artifact
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./_site  # Change to your build directory
+
+      # Deploy
+      - name: Deploy
+        uses: actions/deploy-pages@v4
