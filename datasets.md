@@ -16,16 +16,20 @@ Explore and download open geospatial datasets grouped by key environmental theme
 
 Datasets related to energy production, renewable energy potential, grid infrastructure, and energy justice.
 
-- **Onshore renewable Energy: Priority Areas for Wind** 
+- **Onshore renewable Energy: Priority Areas for Wind**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Onshore renewable Energy: Priority Areas for Solar**  
+- **Onshore renewable Energy: Priority Areas for Solar**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Onshore renewable Energy: Exclusion Areas for Wind** 
+- **Onshore renewable Energy: Exclusion Areas for Wind**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Onshore renewable Energy: Exclusion Areas for Solar**  
+- **Onshore renewable Energy: Exclusion Areas for Solar**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ---
@@ -34,7 +38,8 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
-- **Bus Service Frequency 2010-2023 by LSOA**  
+- **Bus Service Frequency 2010-2023 by LSOA**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ---
@@ -43,13 +48,16 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 
 Information on housing energy efficiency, retrofit needs, and environmental performance.
 
-- **Home Energy Efficiency Ratings by LSOA**  
+- **Home Energy Efficiency Ratings by LSOA**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Insulation recommnendations from EPC data by LSOA**  
+- **Insulation recommnendations from EPC data by LSOA**
+    
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Energy Crisis Hotspots**  
+- **Energy Crisis Hotspots**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ---
@@ -58,7 +66,8 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
 
 Datasets focusing on biodiversity, habitat quality, green spaces, and ecological networks.
 
-- **Summer tree canopy cover by LSOA**  
+- **Summer tree canopy cover by LSOA**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ---
@@ -67,7 +76,8 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
 
 Mapping of air and water quality, industrial sites, and environmental justice indicators.
 
-- **Air Pollution levels by LSOA**  
+- **Air Pollution levels by LSOA**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 ---
@@ -76,10 +86,12 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
 Mapping of locations most at risks from extreme weather and flooding.
 
-- **Properties at risk of flooding by Constituency**  
+- **Properties at risk of flooding by Constituency**
+   
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-- **Heat risk LSOAs**  
+- **Heat risk LSOAs**
+  
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 
