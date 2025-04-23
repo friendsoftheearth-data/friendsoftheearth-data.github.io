@@ -11,18 +11,18 @@ Friends of the Earth is committed to making environmental data accessible to res
 
 ## Featured Datasets
 
-### Climate Impact Mapping
-Visualizations and data showing climate change impacts across regions, including temperature changes, extreme weather events, and vulnerability assessments.  
+### Onshore renewable energy: priority areas
+Visualizations and data showing priority areas for onshore renewable, outside of nature, wildlife, heritage, infrastructure and other planning constraint locations.  
 
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-### Biodiversity Monitoring
-Spatial data on biodiversity hotspots, threatened species habitats, and conservation priority areas.  
+### Index of Multiple Environmental Degredation
+[Coming soon] 
 
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
-### Pollution Tracking
-Geographic information on pollution sources, affected communities, and environmental quality measurements.  
+### Air pollution (NO2 and PM2.5) by LSOA
+[Coming soon] 
 
 [View Dataset](#){: .button }  [Download Data](#){: .button }
 
