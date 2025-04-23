@@ -16,21 +16,17 @@ Explore and download open geospatial datasets grouped by key environmental theme
 
 Datasets related to energy production, renewable energy potential, grid infrastructure, and energy justice.
 
-- **Onshore renewable Energy: Priority Areas for Wind**
-  
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
-
-- **Onshore renewable Energy: Priority Areas for Solar**
+- **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
   [View Dataset](#){: .button }  [Download Data](#){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  [View Dataset](#){: .button }  [Download Data](onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Solar**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  [View Dataset](#){: .button }  [Download Data](onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
 
