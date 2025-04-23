@@ -4,6 +4,8 @@ title: Datasets
 permalink: /datasets
 ---
 
+[← Back to Home](/)
+
 # Browse All Datasets
 
 Explore and download open geospatial datasets grouped by key environmental themes. Each category contains spatial data that supports policy, research, and community action.
