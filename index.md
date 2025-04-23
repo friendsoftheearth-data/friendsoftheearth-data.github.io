@@ -42,9 +42,7 @@ Our open datasets support:
 
 ## Latest Updates
 
-- **April 2025**: Added new dataset on renewable energy potential mapping
-- **March 2025**: Updated air quality measurements with Q1 2025 data
-- **February 2025**: Released water quality monitoring toolkit
+- **April 2025**: First version of this site published - please bear with us as we get this site looking smarter and containing more datasets for download!
 
 ## Connect With Us
 
