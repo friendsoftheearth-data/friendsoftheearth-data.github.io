@@ -35,6 +35,20 @@ body {
     font-weight: 400;
 }
 
+.hero-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+}
+
+.site-logo {
+    max-height: 60px;
+    width: auto;
+}
+
 /* Content Styling */
 .content {
     max-width: 1200px;
