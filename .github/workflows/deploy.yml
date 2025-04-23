@@ -29,8 +29,8 @@ jobs:
         uses: actions/checkout@v4
 
       # Build step (placeholder)
-      - name: Verify Build Directory
-        run: mkdir -p _site && echo "Hello" > _site/index.html
+      #- name: Verify Build Directory
+      #  run: mkdir -p _site && echo "Hello" > _site/index.html
 
       # Optional debug
       - name: List Artifacts (Debug)
