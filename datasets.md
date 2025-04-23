@@ -22,11 +22,11 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
-  [View Dataset](#){: .button }  [Download Data](onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
+  [View Dataset](#){: .button }  [Download Data](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Solar**
   
-  [View Dataset](#){: .button }  [Download Data](onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
+  [View Dataset](#){: .button }  [Download Data](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
 
