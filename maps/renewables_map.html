@@ -76,14 +76,18 @@
   function formatArea(n) {
     return `${parseFloat(n).toFixed(2)} km²`;
   }
+
+  function formatDistance(n) {
+      return `${parseFloat(n).toFixed(2)} km`;
+    }
   
   function popupSolar(f, l) {
     const p = f.properties;
     let html = `<strong>${p.name || 'Solar Site'}</strong>`;
-    if (p.solar_area_km2) html += `<br><strong>Area (km2):</strong> ${formatArea(p.solar_area_km2)} km2`;
+    if (p.solar_area_km2) html += `<br><strong>Area (km2):</strong> ${formatArea(p.solar_area_km2)}`;
     if (p.solar_capacity_MW) html += `<br><strong>Solar capacity:</strong> ${formatNumber(p.solar_capacity_MW)} MW`;
     if (p.solar_generation_MWh) html += `<br><strong>Solar potential generation:</strong> ${formatNumber(p.solar_generation_MWh)} MWh`;
-    if (p.distance_to_nearest_substation_km) html += `<br><strong>Distance to nearest substation:</strong> ${formatArea(p.distance_to_nearest_substation_km)} km`;
+    if (p.distance_to_nearest_substation_km) html += `<br><strong>Distance to nearest substation:</strong> ${formatDistance(p.distance_to_nearest_substation_km)}`;
     l.bindPopup(html);
   }
 
