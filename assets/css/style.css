@@ -104,6 +104,23 @@ button:hover, .button:hover {
     transform: translateY(-2px);
 }
 
+.legend {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d; /* brand color */
+}
+
+.leaflet-popup-content {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content strong {
+  color: #1e234d;
+  font-weight: 600;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .banner h1 {
