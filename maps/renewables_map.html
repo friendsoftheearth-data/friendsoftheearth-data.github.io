@@ -56,8 +56,10 @@
 <script>
   const map = L.map('map').setView([54, -2.5], 6);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
+   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors & Carto',
+    subdomains: 'abcd',
+    maxZoom: 19
   }).addTo(map);
 
   const layers = {};
@@ -67,22 +69,31 @@
     mixed: { color: '#9b59b6', weight: 1, fillOpacity: 0.5 }
   };
 
+  function formatNumber(n) {
+    return n.toLocaleString('en-UK');
+  }
+  
+  function formatArea(n) {
+    return `${parseFloat(n).toFixed(2)} km²`;
+  }
+  
   function popupSolar(f, l) {
     const p = f.properties;
     let html = `<strong>${p.name || 'Solar Site'}</strong>`;
-    if (p.solar_area_km2) html += `<br><strong>Area (km2):</strong> ${p.solar_area_km2}`;
-    if (p.solar_capacity_MW) html += `<br><strong>Solar capacity:</strong> ${p.solar_capacity_MW} MW`;
-    if (p.solar_generation_MWh) html += `<br><strong>Solar generation:</strong> ${p.solar_generation_MWh} MWh`;
-    if (p.distance_to_nearest_substation_km) html += `<br><strong>Distance to nearest substation:</strong> ${p.distance_to_nearest_substation_km} km`;
+    if (p.solar_area_km2) html += `<br><strong>Area (km2):</strong> ${formatArea(p.solar_area_km2)} km2`;
+    if (p.solar_capacity_MW) html += `<br><strong>Solar capacity:</strong> ${formatNumber(p.solar_capacity_MW)} MW`;
+    if (p.solar_generation_MWh) html += `<br><strong>Solar potential generation:</strong> ${formatNumber(p.solar_generation_MWh)} MWh`;
+    if (p.distance_to_nearest_substation_km) html += `<br><strong>Distance to nearest substation:</strong> ${formatArea(p.distance_to_nearest_substation_km)} km`;
     l.bindPopup(html);
   }
 
   function popupWind(f, l) {
     const p = f.properties;
     let html = `<strong>${p.name || 'Wind Site'}</strong>`;
-    if (p.turbines) html += `<br><strong>Turbines:</strong> ${p.turbines}`;
-    if (p.capacity_mw) html += `<br><strong>Capacity:</strong> ${p.capacity_mw} MW`;
-    if (p.status) html += `<br><strong>Status:</strong> ${p.status}`;
+    if (p.wind_area_km2) html += `<br><strong>Area (km2):</strong> ${formatArea(p.wind_area_km2)} km2`;
+    if (p.wind_capacity_MW) html += `<br><strong>Wind capacity:</strong> ${formatNumber(p.wind_capacity_MW)} MW`;
+    if (p.wind_generation_MWh) html += `<br><strong>wind potential generation:</strong> ${formatNumber(p.wind_generation_MWh)} MWh`;
+    if (p.distance_to_nearest_substation_km) html += `<br><strong>Distance to nearest substation:</strong> ${formatArea(p.distance_to_nearest_substation_km)} km`;
     l.bindPopup(html);
   }
 
@@ -122,37 +133,36 @@
       }).addTo(map);
     });
 
-  setTimeout(() => {
-    L.control.layers(null, layers, { collapsed: false }).addTo(map);
-
-    // Add Legend
+  // Add Legend
     const legend = L.control({ position: 'topright' });
 
-legend.onAdd = function () {
-  const container = L.DomUtil.create('div', 'legend collapsible-legend');
-
-  container.innerHTML = `
-    <div class="legend-toggle" onclick="toggleLegend()" aria-label="Toggle Legend" role="button">🛈</div>
-    <div id="legend-content">
-      <strong>Onshore renewable energy: Priority areas</strong><br>
-      This map shows locations of land most suitable for future onshore renewable energy projects in England.
-      <div class="legend-item"><span class="legend-color" style="background:#f39c12"></span>Solar Sites</div>
-      <div class="legend-item"><span class="legend-color" style="background:#3498db"></span>Wind Sites</div>
-      <div class="legend-item"><span class="legend-color" style="background:#9b59b6"></span>Wind + Solar Sites</div>
-    </div>
-  `;
-
-  return container;
-};
-
-legend.addTo(map);
-
-// Toggle functionality
-function toggleLegend() {
-  const content = document.getElementById('legend-content');
-  content.style.display = content.style.display === 'none' ? 'block' : 'none';
-}
-
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend collapsible-legend');
+  
+    container.innerHTML = `
+      <div class="legend-toggle" onclick="toggleLegend()" aria-label="Toggle Legend" role="button">🛈</div>
+      <div id="legend-content">
+        <strong>Onshore renewable energy: Priority areas</strong><br>
+        This map shows locations of land most suitable for future onshore renewable energy projects in England.
+        <div class="legend-item"><span class="legend-color" style="background:#f39c12"></span>Solar Sites</div>
+        <div class="legend-item"><span class="legend-color" style="background:#3498db"></span>Wind Sites</div>
+        <div class="legend-item"><span class="legend-color" style="background:#9b59b6"></span>Wind + Solar Sites</div>
+      </div>
+    `;
+  
+    return container;
+  };
+  
+  legend.addTo(map);
+  
+  // Toggle functionality
+  function toggleLegend() {
+    const content = document.getElementById('legend-content');
+    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+  }
+  
+  setTimeout(() => {
+    L.control.layers(null, layers, { collapsed: false }).addTo(map);
   }, 1000);
 </script>
 
