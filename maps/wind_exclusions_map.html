@@ -143,14 +143,14 @@
   
   function popupMOD(f, l) {
     const p = f.properties;
-    let html = `<strong>${p.name || 'MOD land and restrictions'}</strong>`<br>
+    let html = `<strong>${p.name || 'MOD land and restrictions'}</strong><br>
     Areas where Ministry of Defence restrictions apply.';
     l.bindPopup(html);
   }
 
   function popupGreenbelt(f, l) {
     const p = f.properties;
-    let html = `<strong>${p.name || 'Greenbelt'}</strong>`<br>
+    let html = `<strong>${p.name || 'Greenbelt'}</strong><br>
     Protected greenbelt zones that restrict development.`;
     l.bindPopup(html);
   }
