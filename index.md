@@ -9,7 +9,11 @@ title: Friends of the Earth Open Data Portal
 
 Friends of the Earth is committed to making environmental data accessible to researchers, advocates, policymakers, and the public. Our open data portal provides free access to geospatial datasets that can help inform environmental action and policy decisions.
 
-## Featured Datasets
+## Get Started
+
+[Browse All Datasets](/datasets){: .button }  <!-- [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button } -->
+
+<!-- TO ADD LATER ## Featured Datasets
 
 ### Onshore renewable energy: priority areas
 Visualizations and data showing priority areas for onshore renewable, outside of nature, wildlife, heritage, infrastructure and other planning constraint locations.  
@@ -24,7 +28,7 @@ Visualizations and data showing priority areas for onshore renewable, outside of
 ### Air pollution (NO2 and PM2.5) by LSOA
 [Coming soon] 
 
-[View Dataset](#){: .button }  [Download Data](#){: .button }
+[View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ## How Our Data Is Used
 
@@ -35,10 +39,6 @@ Our open datasets support:
 - Community advocacy for environmental justice
 - Policy development for sustainable solutions
 - Public education on environmental issues
-
-## Get Started
-
-[Browse All Datasets](/datasets){: .button }  [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button }
 
 ## Latest Updates
 
