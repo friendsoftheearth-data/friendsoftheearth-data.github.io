@@ -18,7 +18,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 - **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  [View Map](/renewables-map.html){: .button }  [Download Data](#){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
