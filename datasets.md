@@ -37,7 +37,9 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 - **Bus Service Frequency 2010-2023 by LSOA**
 
   Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
-  [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank} rel = "noopener"}
+
+  [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
+
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
@@ -81,6 +83,7 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 - **Air Pollution levels by LSOA**
  
   Coming soon, we hope! Meanwhile, check out our air pollution story which includes an interactive map:
+
   [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
