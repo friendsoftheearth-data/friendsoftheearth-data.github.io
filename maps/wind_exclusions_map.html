@@ -1,0 +1,220 @@
+4<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Renewables Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- External stylesheet (ours) -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- Leaflet styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body, html { margin: 0; padding: 0; }
+    #map { height: 100vh; }
+
+    .legend {
+      background: #f4f6fa;
+      padding: 1em;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #1e234d;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .legend-toggle {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #444;
+      font-size: 1.1em;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([54, -2.5], 6);
+
+  // 💡 Make toggle function available BEFORE it's used
+  function toggleLegend() {
+    const content = document.getElementById('legend-content');
+    if (content) {
+      content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    }
+  }
+
+  const legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <strong>Onshore renewable energy: Onshore wind exclusion areas </strong><br>
+      This map shows exclusion and constraints layers for onshore wind in England.
+      <form id="layer-controls">
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-mod" checked>
+          <span class="legend-color" style="background:#f39c12"></span>
+          <label for="toggle-mod">MOD restrictions</label>
+        </div>
+		<div class="legend-item">
+          <input type="checkbox" id="toggle-greenbelt" checked>
+          <span class="legend-color" style="background:#f39c12"></span>
+          <label for="toggle-greenbelt">Greenbelt</label>
+        </div>
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-heritage" checked>
+          <span class="legend-color" style="background:#3498db"></span>
+          <label for="toggle-heritage">Heritage locations</label>
+        </div>
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-renewables" checked>
+          <span class="legend-color" style="background:#9b59b6"></span>
+          <label for="toggle-renewables">Existing renewables</label>
+        </div>
+        <hr>
+        <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
+      </form>
+    `;
+    return container;
+  };
+  
+  legend.addTo(map);
+  
+   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors & Carto',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  const styles = {
+    mod: { color: '#f49a3f', weight: 1, fillOpacity: 0.7 },
+    greenbelt: { color: '#61bdaa', weight: 1, fillOpacity: 0.7 },
+    heritage: { color: '#5a54a0', weight: 1, fillOpacity: 0.7 }
+	renewables: { color: '#00608a', weight: 1, fillOpacity: 0.7 }
+  };
+
+  function formatNumber(n) {
+    return n.toLocaleString('en-UK');
+  }
+  
+  function formatArea(n) {
+    return `${parseFloat(n).toFixed(2)} km²`;
+  }
+
+  function formatDistance(n) {
+      return `${parseFloat(n).toFixed(2)} km`;
+    }
+  
+  function popupMOD(f, l) {
+    const p = f.properties;
+    let html = `<strong>${p.name || 'MOD land and restrictions'}</strong>`;
+    l.bindPopup(html);
+  }
+
+  function popupGreenbelt(f, l) {
+    const p = f.properties;
+    let html = `<strong>${p.name || 'Greenbelt'}</strong>`;
+    l.bindPopup(html);
+  }
+
+  function popupHeritage(f, l) {
+    const p = f.properties;
+    let html = `<strong>${p.site_name || 'Heritage land and properties'}</strong>`;
+    l.bindPopup(html);
+  }
+  
+   function popupRenewables(f, l) {
+    const p = f.properties;
+    let html = `<strong>${p.site_name || 'Existing renewables'}</strong>`;
+    l.bindPopup(html);
+  }
+
+  let modLayer, greenbeltLayer, heritageLayer, renewablesLayer;
+
+  fetch('/datasets/exclusions-wind-geojson/exclusions-MOD-exclusions-wind.geojson')
+  .then(res => res.json())
+  .then(data => {
+    modLayer = L.geoJSON(data, {
+      style: styles.mod,
+      onEachFeature: popupMOD
+    }).addTo(map);
+  });
+
+  fetch('/datasets/exclusions-wind-geojson/exclusions-greenbelt-wind.geojson')
+    .then(res => res.json())
+    .then(data => {
+      greenbeltLayer = L.geoJSON(data, {
+        style: styles.greenbelt,
+        onEachFeature: popupGreenbelt
+      }).addTo(map);
+    });
+  
+  fetch('/datasets/exclusions-wind-geojson/exclusions-heritage-wind.geojson')
+    .then(res => res.json())
+    .then(data => {
+      heritageLayer = L.geoJSON(data, {
+        style: styles.heritage,
+        onEachFeature: popupHeritage
+      }).addTo(map);
+    });
+
+  fetch('/datasets/exclusions-wind-geojson/exclusions-existing-renewables.geojson')
+    .then(res => res.json())
+    .then(data => {
+      heritageLayer = L.geoJSON(data, {
+        style: styles.renewables,
+        onEachFeature: popupRenewables
+      }).addTo(map);
+    });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('toggle-mod').addEventListener('change', (e) => {
+      if (modLayer) {
+        e.target.checked ? modLayer.addTo(map) : map.removeLayer(modLayer);
+      }
+    });
+    document.getElementById('toggle-greenbelt').addEventListener('change', (e) => {
+      if (greenbeltLayer) {
+        e.target.checked ? greenbeltLayer.addTo(map) : map.removeLayer(greenbeltLayer);
+      }
+    });
+    document.getElementById('toggle-heritage').addEventListener('change', (e) => {
+      if (heritageLayer) {
+        e.target.checked ? heritageLayer.addTo(map) : map.removeLayer(heritageLayer);
+      }
+	});
+	document.getElementById('toggle-renewables').addEventListener('change', (e) => {
+      if (renewablesLayer) {
+        e.target.checked ? renewablesLayer.addTo(map) : map.removeLayer(renewablesLayer);
+      }
+	});
+  });
+    
+</script>
+
+</body>
+</html>
