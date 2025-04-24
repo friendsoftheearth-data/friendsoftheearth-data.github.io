@@ -21,6 +21,19 @@ body {
     text-align: center;
 }
 
+/* Base link style */
+a {
+  color: #61bdaa;
+  text-decoration: underline; /* or none if you prefer */
+  font-weight: 600;
+}
+
+/* Link hover style */
+a:hover {
+  color: #094839; /* example accent color */
+  text-decoration: underline;
+}
+
 .hero h1 {
     font-size: 2.5rem;
     color: #f4f6fa;
