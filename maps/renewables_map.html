@@ -68,21 +68,30 @@
 
   legend.onAdd = function () {
     const container = L.DomUtil.create('div', 'legend');
-
     container.innerHTML = `
-      <div class="legend-toggle" onclick="toggleLegend()" aria-label="Toggle Legend" role="button">🛈</div>
-      <div id="legend-content">
-        <strong>Onshore renewable energy: Priority areas</strong><br>
-        This map shows locations of land most suitable for future onshore renewable energy projects in England.
-        <div class="legend-item"><span class="legend-color" style="background:#f39c12"></span>Solar Sites</div>
-        <div class="legend-item"><span class="legend-color" style="background:#3498db"></span>Wind Sites</div>
-        <div class="legend-item"><span class="legend-color" style="background:#9b59b6"></span>Wind + Solar Sites</div>
-      </div>
+      <strong>Onshore renewable energy: Priority areas</strong><br>
+      This map shows locations of land most suitable for future onshore renewable energy projects in England.
+      <form id="layer-controls">
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-solar" checked>
+          <span class="legend-color" style="background:#f39c12"></span>
+          <label for="toggle-solar">Solar Sites</label>
+        </div>
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-wind" checked>
+          <span class="legend-color" style="background:#3498db"></span>
+          <label for="toggle-wind">Wind Sites</label>
+        </div>
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-mixed" checked>
+          <span class="legend-color" style="background:#9b59b6"></span>
+          <label for="toggle-mixed">Wind + Solar Sites</label>
+        </div>
+      </form>
     `;
-
     return container;
   };
-
+  
   legend.addTo(map);
   
    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -139,33 +148,52 @@
     l.bindPopup(html);
   }
 
+  let solarLayer, windLayer, mixedLayer;
+
   fetch('/datasets/friends-of-earth-onshore-renewables-solar.geojson')
-    .then(res => res.json())
-    .then(data => {
-      layers["Solar Sites"] = L.geoJSON(data, {
-        style: styles.solar,
-        onEachFeature: popupSolar
-      }).addTo(map);
-    });
+  .then(res => res.json())
+  .then(data => {
+    solarLayer = L.geoJSON(data, {
+      style: styles.solar,
+      onEachFeature: popupSolar
+    }).addTo(map);
+  });
 
   fetch('/datasets/friends-of-earth-onshore-renewables-wind.geojson')
     .then(res => res.json())
     .then(data => {
-      layers["Wind Sites"] = L.geoJSON(data, {
+      windLayer = L.geoJSON(data, {
         style: styles.wind,
         onEachFeature: popupWind
       }).addTo(map);
     });
-
+  
   fetch('/datasets/friends-of-earth-onshore-renewables-wind-and-solar.geojson')
     .then(res => res.json())
     .then(data => {
-      layers["Wind + Solar Sites"] = L.geoJSON(data, {
+      mixedLayer = L.geoJSON(data, {
         style: styles.mixed,
         onEachFeature: popupMixed
       }).addTo(map);
     });
 
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('toggle-solar').addEventListener('change', (e) => {
+      if (solarLayer) {
+        e.target.checked ? solarLayer.addTo(map) : map.removeLayer(solarLayer);
+      }
+    });
+    document.getElementById('toggle-wind').addEventListener('change', (e) => {
+      if (windLayer) {
+        e.target.checked ? windLayer.addTo(map) : map.removeLayer(windLayer);
+      }
+    });
+    document.getElementById('toggle-mixed').addEventListener('change', (e) => {
+      if (mixedLayer) {
+        e.target.checked ? mixedLayer.addTo(map) : map.removeLayer(mixedLayer);
+      }
+    });
+  });
   
   setTimeout(() => {
     L.control.layers(null, layers, { collapsed: false }).addTo(map);
