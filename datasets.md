@@ -18,15 +18,15 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 - **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
-  [View Map](/maps/renewables_map.html){: .button }  [Download Data](#){: .button }
+  [View Map](/maps/renewables_map.html){: .button }  [Download Data]([#](/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
-  [View Dataset](#){: .button }  [Download Data](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
+  [Download Data](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Solar**
   
-  [View Dataset](#){: .button }  [Download Data](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
+  [Download Data](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
 
@@ -35,8 +35,10 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
 - **Bus Service Frequency 2010-2023 by LSOA**
-  
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+
+  Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
+  https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
 
@@ -46,15 +48,19 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
 
 - **Home Energy Efficiency Ratings by LSOA**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+   [Coming soon, we hope!]
+   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 - **Insulation recommnendations from EPC data by LSOA**
     
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+   [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
 
 - **Energy Crisis Hotspots**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
 
@@ -64,8 +70,8 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
 
 - **Summer tree canopy cover by LSOA**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
-
+   [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 ---
 
 ## ☣️ Pollution
@@ -73,8 +79,11 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
 Mapping of air and water quality, industrial sites, and environmental justice indicators.
 
 - **Air Pollution levels by LSOA**
+ 
+  Coming soon, we hope! Meanwhile, check out our air pollution story which includes an interactive map:
+  https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
 
@@ -83,12 +92,14 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 Mapping of locations most at risks from extreme weather and flooding.
 
 - **Properties at risk of flooding by Constituency**
-   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  
+  [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 - **Heat risk LSOAs**
   
-  [View Dataset](#){: .button }  [Download Data](#){: .button }
+  [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 
 ---
