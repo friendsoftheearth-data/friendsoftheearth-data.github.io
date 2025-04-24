@@ -17,15 +17,11 @@
 </head>
 <body>
 
-#61bdaa green
-#00608a blue
-#faef63 yellow
-
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const map = L.map('map').setView([54, -2.5], 6); // Center over UK
+  const map = L.map('map').setView([54, -2.5], 6); // Center on UK
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
@@ -33,15 +29,29 @@
 
   const layers = {};
 
+  // Popup formatter based on feature properties
+  function bindPopupFromProps(feature, layer) {
+    const props = feature.properties;
+    const name = props.name || props.title || "Unnamed site";
+    const capacity = props.capacity_mw ? `<br><strong>Capacity:</strong> ${props.capacity_mw} MW` : '';
+    const type = props.type ? `<br><strong>Type:</strong> ${props.type}` : '';
+    layer.bindPopup(`<strong>${name}</strong>${capacity}${type}`);
+  }
+
+  // Style templates for polygons
+  const styles = {
+    solar: { color: '#faef63', weight: 1, fillOpacity: 0.8 },
+    wind: { color: '#00608a', weight: 1, fillOpacity: 0.8 },
+    mixed: { color: '#61bdaa', weight: 1, fillOpacity: 0.8 }
+  };
+
   // Load Solar Layer
   fetch('/datasets/friends-of-earth-onshore-renewables-solar.geojson')
     .then(res => res.json())
     .then(data => {
       layers["Solar Sites"] = L.geoJSON(data, {
-        style: { color: '#faef63', weight: 2 },
-        onEachFeature: (feature, layer) => {
-          layer.bindPopup(feature.properties.name || 'Solar Site');
-        }
+        style: styles.solar,
+        onEachFeature: bindPopupFromProps
       }).addTo(map);
     });
 
@@ -50,10 +60,8 @@
     .then(res => res.json())
     .then(data => {
       layers["Wind Sites"] = L.geoJSON(data, {
-        style: { color: '#00608a', weight: 2 },
-        onEachFeature: (feature, layer) => {
-          layer.bindPopup(feature.properties.name || 'Wind Site');
-        }
+        style: styles.wind,
+        onEachFeature: bindPopupFromProps
       }).addTo(map);
     });
 
@@ -62,14 +70,12 @@
     .then(res => res.json())
     .then(data => {
       layers["Wind + Solar Sites"] = L.geoJSON(data, {
-        style: { color: '#61bdaa', weight: 2 },
-        onEachFeature: (feature, layer) => {
-          layer.bindPopup(feature.properties.name || 'Mixed Site');
-        }
+        style: styles.mixed,
+        onEachFeature: bindPopupFromProps
       }).addTo(map);
     });
 
-  // Wait a second and then add controls (ensures layers exist)
+  // Add layer controls after slight delay
   setTimeout(() => {
     L.control.layers(null, layers, { collapsed: false }).addTo(map);
   }, 1000);
