@@ -100,7 +100,6 @@
     maxZoom: 19
   }).addTo(map);
 
-  const layers = {};
   const styles = {
     solar: { color: '#f39c12', weight: 1, fillOpacity: 0.5 },
     wind: { color: '#3498db', weight: 1, fillOpacity: 0.5 },
@@ -194,10 +193,7 @@
       }
     });
   });
-  
-  setTimeout(() => {
-    L.control.layers(null, layers, { collapsed: false }).addTo(map);
-  }, 1000);
+    
 </script>
 
 </body>
