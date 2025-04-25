@@ -57,7 +57,9 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const map = L.map('map').setView([54, -2.5], 6);
+  const map = L.map('map', {
+    preferCanvas: true
+    }).setView([54, -2.5], 7);
 
   // 💡 Make toggle function available BEFORE it's used
   function toggleLegend() {
