@@ -78,14 +78,14 @@
       This map shows locations of land most suitable for future onshore renewable energy projects in England.
       <form id="layer-controls">
         <div class="legend-item">
-          <input type="checkbox" id="toggle-solar" checked>
-          <span class="legend-color" style="background:#f39c12"></span>
-          <label for="toggle-solar">Solar Sites</label>
-        </div>
-        <div class="legend-item">
           <input type="checkbox" id="toggle-wind" checked>
           <span class="legend-color" style="background:#3498db"></span>
           <label for="toggle-wind">Wind Sites</label>
+        </div>
+        <div class="legend-item">
+          <input type="checkbox" id="toggle-solar" checked>
+          <span class="legend-color" style="background:#f39c12"></span>
+          <label for="toggle-solar">Solar Sites</label>
         </div>
         <div class="legend-item">
           <input type="checkbox" id="toggle-mixed" checked>
@@ -180,7 +180,7 @@
       mixedLayer = L.geoJSON(data, {
         style: styles.mixed,
         onEachFeature: popupMixed
-      }).addTo(map);
+      });//.addTo(map);
     });
 
   document.addEventListener('DOMContentLoaded', () => {
