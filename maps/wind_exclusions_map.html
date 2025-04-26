@@ -107,6 +107,11 @@
           <span class="legend-color" style="background:#1e234d"></span>
           <label for="toggle-land">Land constraints</label>
         </div>
+	<div class="legend-item">
+          <input type="checkbox" id="toggle-nature" checked>
+          <span class="legend-color" style="background:#094839"></span>
+          <label for="toggle-nature">Land constraints</label>
+        </div>
         <hr>
         <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
       </form>
@@ -129,6 +134,7 @@
     renewables: { color: '#00608a', weight: 0, fillOpacity: 0.7 },
     infrastructure: { color: "#ed6132", weight: 0, fillOpacity: 0.7 },
     land: { color: "#1e234d", weight: 0, fillOpacity: 0.7 },
+    nature: { color: "#094839", weight: 0, fillOpacity: 0.7 },
   };
 
   function formatNumber(n) {
@@ -184,8 +190,15 @@ function popupInfrastructure(f, l) {
     Sloping land and areas of low average wind speed.`;
     l.bindPopup(html);
   }
+
+function popupNature(f, l) {
+    const p = f.properties;
+    let html = `<strong>${p.site_name || 'Nature and wildlife'}</strong><br>
+    National Parks, AONBs, SSSIs, protected sites, wetland sites, woodland, water.`;
+    l.bindPopup(html);
+  }
   
-  let modLayer, greenbeltLayer, heritageLayer, renewablesLayer, infrastructureLayer, landLayer;
+  let modLayer, greenbeltLayer, heritageLayer, renewablesLayer, infrastructureLayer, landLayer, natureLayer;
 
   fetch('/datasets/exclusions-wind-geojson/exclusions-MOD-exclusions-wind.geojson')
   .then(res => res.json())
@@ -241,6 +254,15 @@ function popupInfrastructure(f, l) {
       }).addTo(map);
     });
 
+ fetch('/datasets/exclusions-wind-geojson/exclusions-nature-wind.geojson')
+    .then(res => res.json())
+    .then(data => {
+      natureLayer = L.geoJSON(data, {
+        style: styles.land,
+        onEachFeature: popupNature
+      }).addTo(map);
+    });
+
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toggle-mod').addEventListener('change', (e) => {
       if (modLayer) {
@@ -270,6 +292,11 @@ function popupInfrastructure(f, l) {
   document.getElementById('toggle-land').addEventListener('change', (e) => {
       if (landLayer) {
         e.target.checked ? landLayer.addTo(map) : map.removeLayer(landLayer);
+      }
+	});
+  document.getElementById('toggle-nature').addEventListener('change', (e) => {
+      if (natureLayer) {
+        e.target.checked ? natureLayer.addTo(map) : map.removeLayer(natureLayer);
       }
 	});
   });
