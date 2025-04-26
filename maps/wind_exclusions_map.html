@@ -258,7 +258,7 @@ function popupNature(f, l) {
     .then(res => res.json())
     .then(data => {
       natureLayer = L.geoJSON(data, {
-        style: styles.land,
+        style: styles.nature,
         onEachFeature: popupNature
       }); //.addTo(map);
     });
