@@ -98,19 +98,19 @@
           <label for="toggle-renewables">Existing renewables</label>
         </div>
 	<div class="legend-item">
-          <input type="checkbox" id="toggle-infrastructure" checked>
+          <input type="checkbox" id="toggle-infrastructure">
           <span class="legend-color" style="background:#ed6132"></span>
           <label for="toggle-infrastructure">infrastructure</label>
         </div>
 	<div class="legend-item">
-          <input type="checkbox" id="toggle-land" checked>
+          <input type="checkbox" id="toggle-land">
           <span class="legend-color" style="background:#1e234d"></span>
           <label for="toggle-land">Land constraints</label>
         </div>
 	<div class="legend-item">
-          <input type="checkbox" id="toggle-nature" checked>
+          <input type="checkbox" id="toggle-nature">
           <span class="legend-color" style="background:#094839"></span>
-          <label for="toggle-nature">Land constraints</label>
+          <label for="toggle-nature">Nature and wildlife</label>
         </div>
         <hr>
         <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
@@ -254,7 +254,7 @@ function popupNature(f, l) {
       }); //.addTo(map);
     });
 
- fetch('/datasets/exclusions-wind-geojson/exclusions-nature-wind.geojson')
+ fetch('/datasets/exclusions-wind-geojson/exclusions-nature-wildlife-wind.geojson')
     .then(res => res.json())
     .then(data => {
       natureLayer = L.geoJSON(data, {
