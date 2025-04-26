@@ -242,7 +242,7 @@ function popupNature(f, l) {
       infrastructureLayer = L.geoJSON(data, {
         style: styles.infrastructure,
         onEachFeature: popupInfrastructure
-      }).addTo(map);
+      }); //.addTo(map);
     });
 
   fetch('/datasets/exclusions-wind-geojson/exclusions-land-constraints-wind.geojson')
@@ -251,7 +251,7 @@ function popupNature(f, l) {
       landLayer = L.geoJSON(data, {
         style: styles.land,
         onEachFeature: popupLand
-      }).addTo(map);
+      }); //.addTo(map);
     });
 
  fetch('/datasets/exclusions-wind-geojson/exclusions-nature-wind.geojson')
@@ -260,7 +260,7 @@ function popupNature(f, l) {
       natureLayer = L.geoJSON(data, {
         style: styles.land,
         onEachFeature: popupNature
-      }).addTo(map);
+      }); //.addTo(map);
     });
 
   document.addEventListener('DOMContentLoaded', () => {
