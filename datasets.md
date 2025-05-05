@@ -86,7 +86,8 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
   [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
-  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+  <!-- [View Dataset](#){: .button } -->
+  [Download Data](datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
 
 ---
 
