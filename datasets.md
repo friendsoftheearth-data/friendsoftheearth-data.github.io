@@ -12,7 +12,14 @@ Explore and download open geospatial datasets grouped by key environmental theme
 
 ---
 
-## ⚡ Energy
+<!-- ENERGY HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/BCP Green Jobs.png"
+       alt="FoE Green Jobs"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Energy
+</h2>
 
 Datasets related to energy production, renewable energy potential, grid infrastructure, and energy justice.
 
@@ -33,7 +40,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 <h2>
   <img src="/assets/images/BCP Transport.png"
        alt="FoE Bus"
-       height="40"
+       height="60"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Transport
 </h2>
@@ -54,7 +61,7 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 <h2>
   <img src="/assets/images/BCP Warm Homes.png"
        alt="FoE Bus"
-       height="40"
+       height="60"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Homes
 </h2>
@@ -79,7 +86,14 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
 
 ---
 
-## 🌱 Nature
+<!-- NATURE HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Oak Leaf copy.png"
+       alt="FoE oak leaf"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Energy
+</h2>
 
 Datasets focusing on biodiversity, habitat quality, green spaces, and ecological networks.
 
@@ -89,7 +103,14 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 ---
 
-## ☣️ Pollution
+<!-- POLLUTION HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/car.png"
+       alt="FoE car"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Pollution
+</h2>
 
 Mapping of air and water quality, industrial sites, and environmental justice indicators.
 
