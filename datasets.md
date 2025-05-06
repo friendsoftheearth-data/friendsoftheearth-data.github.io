@@ -18,15 +18,15 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 - **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
-  [View Map](/maps/renewables_map.html){: .button }  [Download Data]([#](/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
+  [View Map](/maps/renewables_map.html){: .button }  [Download Data (gpkg)]([#](/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
-  [View Map](/maps/wind_exclusions_map.html){: .button }  [Download Data](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
+  [View Map](/maps/wind_exclusions_map.html){: .button }  [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Solar**
   
-  [Download Data](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
+  [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
 
@@ -82,11 +82,14 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
 - **Air Pollution levels by LSOA**
  
-  Coming soon, we hope! Meanwhile, check out our air pollution story which includes an interactive map:
-
-  [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
+  Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
-  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+  <!-- [View Dataset](#){: .button } -->
+  And you can download air pollution data for NO2 and PM2.5 by LSOA below. It's a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps:
+
+  [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
+
+  [View air pollution map](/maps/air-pollution-map-template.html){: .button }
 
 ---
 
@@ -101,9 +104,8 @@ Mapping of locations most at risks from extreme weather and flooding.
 
 - **Heat risk LSOAs**
   
-  [Coming soon, we hope!]
+  [Coming soon! We are currently analysing Land Surface Temperature data and how to make it available aggregated to LSOA level. Watch this space!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
-
 
 ---
 
