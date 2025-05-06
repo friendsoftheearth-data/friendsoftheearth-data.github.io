@@ -33,7 +33,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 <h2>
   <img src="/assets/images/BCP Transport.png"
        alt="FoE Bus"
-       width="40" height="40"
+       height="40"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Transport
 </h2>
@@ -54,7 +54,7 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 <h2>
   <img src="/assets/images/BCP Warm Homes.png"
        alt="FoE Bus"
-       width="40" height="40"
+       height="40"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Homes
 </h2>
