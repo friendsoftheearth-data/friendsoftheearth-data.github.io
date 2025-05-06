@@ -30,7 +30,13 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 ---
 
-## <img src="/assets/images/BCP Transport.png" alt="FoE bus" height="50"> Transport
+<h2>
+  <img src="/assets/images/BCP Transport.png"
+       alt="FoE Bus"
+       width="32" height="32"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Transport
+</h2>
 
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
