@@ -89,6 +89,8 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
 
+  [View air pollution map](/maps/air-pollution-map-template.html){: .button }
+
 ---
 
 ## Climate Risks/Extreme weather
