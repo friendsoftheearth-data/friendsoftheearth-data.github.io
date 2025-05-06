@@ -107,7 +107,7 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
 <h2>
   <img src="/assets/images/car.png"
        alt="FoE car"
-       height="60"
+       height="50"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Pollution
 </h2>
@@ -127,7 +127,14 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
 ---
 
-## Climate Risks/Extreme weather
+<!-- ## Climate risks and extreme weather -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="50"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Climate risks and extreme weather
+</h2>
 
 Mapping of locations most at risks from extreme weather and flooding.
 
