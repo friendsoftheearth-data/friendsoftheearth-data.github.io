@@ -29,11 +29,11 @@ Datasets related to energy production, renewable energy potential, grid infrastr
   [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
-
+<!-- TRANSPORT HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/BCP Transport.png"
        alt="FoE Bus"
-       width="32" height="32"
+       width="40" height="40"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Transport
 </h2>
@@ -50,7 +50,14 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 
 ---
 
-## <img src="/assets/images/BCP Warm Homes.png" alt="FoE bus" height="50"> Homes
+<!-- HOMES HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/BCP Warm Homes.png"
+       alt="FoE Bus"
+       width="40" height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Homes
+</h2>
 
 Information on housing energy efficiency, retrofit needs, and environmental performance.
 
