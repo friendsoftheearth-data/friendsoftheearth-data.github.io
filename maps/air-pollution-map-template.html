@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Air Pollution Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    #map { height: 100vh; }
+
+    .info,
+    .legend {
+      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    /* ------------------------------------------------------------------
+       Configuration — set the property names for the two pollution metrics
+       ------------------------------------------------------------------*/
+    const pollutionLayers = [
+      {
+        name: 'PM2.5 (µg/m³)',      // 🌟 Layer label in the control
+        property: 'pm25_202123_conc',           // 🔑 Property key inside your GeoJSON features
+      },
+      {
+        name: 'NO₂ (µg/m³)',       // 🌟 Layer label in the control
+        property: 'no2_202123_conc',            // 🔑 Property key inside your GeoJSON features
+      }
+    ];
+
+    /* ------------------------------------------------------------------
+       Colour scale — Blue ➔ Yellow ➔ Red (low ➔ high)
+       ------------------------------------------------------------------*/
+    function getColor (d) {
+      return d > 20 ? '#d73027' :
+             d > 15  ? '#fc8d59' :
+             d > 10  ? '#fee08b' :
+             d > 5  ? '#abd9e9' :
+             d > 2.5  ? '#74add1' :
+                        '#4575b4';
+    }
+
+    /* ------------------------------------------------------------------
+       Build the map
+       ------------------------------------------------------------------*/
+    const map = L.map('map').setView([51.505, -0.09], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    /* Info control (updates on hover) */
+    const info = L.control();
+    info.onAdd = function () {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
+    info.update = function (props, metricName) {
+      this._div.innerHTML = '<h4>' + (metricName || 'Air Pollution') + '</h4>' + (props ?
+        `<strong>${props.name || 'Area'}</strong><br/>${props.value} µg/m³` :
+        'Hover over an area');
+    };
+    info.addTo(map);
+
+    /* Legend */
+    function createLegend () {
+      const legend = L.control({ position: 'bottomright' });
+      legend.onAdd = function () {
+        const div = L.DomUtil.create('div', 'legend');
+        const grades = [0, 10, 25, 50, 75, 100];
+        for (let i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+            `<i style="background:${getColor(grades[i] + 0.1)}"></i> ` +
+            `${grades[i]}${grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+'}`;
+        }
+        return div;
+      };
+      return legend;
+    }
+    const legend = createLegend();
+    legend.addTo(map);
+
+    /* ------------------------------------------------------------------
+       Fetch the GeoJSON and build layers
+       ------------------------------------------------------------------*/
+    const overlays = {};  // for layer control
+
+    fetch('datasets/air-pollution/air-pollution-lsoa11-2021-23.geojson')
+      .then(response => response.json())
+      .then(geojsonData => {
+        pollutionLayers.forEach(({ name, property }, idx) => {
+          const layer = L.geoJson(geojsonData, {
+            style: feature => ({
+              fillColor: getColor(feature.properties[property]),
+              weight: 1,
+              opacity: 1,
+              color: 'white',
+              dashArray: '3',
+              fillOpacity: 0.7
+            }),
+            onEachFeature: (feature, layerEl) => {
+              layerEl.on({
+                mouseover: e => {
+                  const lyr = e.target;
+                  lyr.setStyle({
+                    weight: 3,
+                    color: '#666',
+                    dashArray: '',
+                    fillOpacity: 0.7
+                  });
+                  lyr.bringToFront();
+                  info.update({
+                    name: feature.properties['lsoa11'] || feature.properties['name'] || 'Area',
+                    value: feature.properties[property]
+                  }, name);
+                },
+                mouseout: e => {
+                  layer.resetStyle(e.target);
+                  info.update();
+                }
+              });
+              layerEl.bindPopup(
+                `<strong>${feature.properties['lsoa11'] || feature.properties['name'] || 'Area'}</strong><br/>` +
+                `${name}: <strong>${feature.properties[property]}</strong> µg/m³`
+              );
+            }
+          });
+          overlays[name] = layer;
+
+          if (idx === 0) {
+            layer.addTo(map); // show first layer by default
+          }
+        });
+
+        L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+
+        // Fit map to data
+        const firstLayer = overlays[Object.keys(overlays)[0]];
+        if (firstLayer) {
+          map.fitBounds(firstLayer.getBounds());
+        }
+      })
+      .catch(err => {
+        console.error('Failed to load GeoJSON', err);
+        alert('Unable to load the air‑pollution GeoJSON file. Please check the path and try again.');
+      });
+  </script>
+</body>
+</html>
