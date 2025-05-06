@@ -30,7 +30,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 ---
 
-## (/assets/images/BCP Transport.png) Transport
+## <img src="/assets/images/BCP Transport.png" alt="FoE bus" height="50"> Transport
 
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
@@ -44,7 +44,7 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 
 ---
 
-## (/assets/images/BCP Warm Homes.png) Homes
+## <img src="/assets/images/BCP Warm Homes.png" alt="FoE bus" height="50"> Homes
 
 Information on housing energy efficiency, retrofit needs, and environmental performance.
 
