@@ -36,6 +36,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
   [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
 ---
+
 <!-- TRANSPORT HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/BCP Transport.png"
@@ -92,7 +93,7 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
        alt="FoE oak leaf"
        height="60"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
-  Energy
+  Nature
 </h2>
 
 Datasets focusing on biodiversity, habitat quality, green spaces, and ecological networks.
@@ -101,6 +102,7 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
   
    [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
 ---
 
 <!-- POLLUTION HEADING WITH ICON -->
