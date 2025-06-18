@@ -35,6 +35,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
   
   [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
+
 ---
 
 <!-- TRANSPORT HEADING WITH ICON -->
@@ -125,7 +126,7 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
 
-  [View air pollution map](/maps/air-pollution-map-template.html){: .button }
+  <!-- [View air pollution map](/maps/air-pollution-map-template.html){: .button } -->
 
 ---
 
