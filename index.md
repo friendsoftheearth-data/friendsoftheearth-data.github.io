@@ -9,7 +9,14 @@ title: Friends of the Earth Open Data Portal
 
 Friends of the Earth is committed to making environmental data accessible to researchers, advocates, policymakers, and the public. Our open data portal provides free access to geospatial datasets that can help inform environmental action and policy decisions.
 
-## Get Started
+<!-- GET STARTED HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Our published data sets
+</h2>
 
 [Browse All Datasets](/datasets){: .button }  <!-- [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button } -->
 
@@ -30,9 +37,14 @@ Visualizations and data showing priority areas for onshore renewable, outside of
 
 [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
-## How Our Data Is Used
-
-![Data Uses Illustration](/assets/images/data-uses-placeholder.jpg)
+<!-- GOW OUR DATA IS USED HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  How are data is used
+</h2>
 
 Our open datasets support:
 - Academic research on environmental impacts
@@ -40,11 +52,25 @@ Our open datasets support:
 - Policy development for sustainable solutions
 - Public education on environmental issues
 
-## Latest Updates
+<!-- LATEST UPDATES HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Latest updates
+</h2>
 
 - **April 2025**: First version of this site published - please bear with us as we get this site looking smarter and containing more datasets for download!
 
-## Connect With Us
+<!-- Contact with us HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Contact with us
+</h2>
 
 Have questions about our data or need assistance? [Contact our data team](mailto:data@foe.co.uk) for support.
 
