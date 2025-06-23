@@ -122,9 +122,14 @@ Mapping of air and water quality, industrial sites, and environmental justice in
   Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
   <!-- [View Dataset](#){: .button } -->
-  And you can download air pollution data for NO2 and PM2.5 by LSOA below. It's a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps:
+  And you can download air pollution data for NO2 and PM2.5 by LSOA11 below:
+    - We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
+    - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
 
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
+
+  [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button }
+
 
 
 ---
