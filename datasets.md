@@ -35,7 +35,9 @@ Datasets related to energy production, renewable energy potential, grid infrastr
   
   [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
 
+
 ---
+
 <!-- TRANSPORT HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/BCP Transport.png"
@@ -92,7 +94,7 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
        alt="FoE oak leaf"
        height="60"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
-  Energy
+  Nature
 </h2>
 
 Datasets focusing on biodiversity, habitat quality, green spaces, and ecological networks.
@@ -101,13 +103,14 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
   
    [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
 ---
 
 <!-- POLLUTION HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/car.png"
        alt="FoE car"
-       height="60"
+       height="50"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
   Pollution
 </h2>
@@ -123,11 +126,17 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
 
-  [View air pollution map](/maps/air-pollution-map-template.html){: .button }
 
 ---
 
-## Climate Risks/Extreme weather
+<!-- ## Climate risks and extreme weather -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="50"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Climate risks and extreme weather
+</h2>
 
 Mapping of locations most at risks from extreme weather and flooding.
 
