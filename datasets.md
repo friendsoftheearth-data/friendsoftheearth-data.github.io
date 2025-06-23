@@ -124,12 +124,12 @@ Mapping of air and water quality, industrial sites, and environmental justice in
   <!-- [View Dataset](#){: .button } -->
   And you can download air pollution data for NO2 and PM2.5 by LSOA11 below:
     - We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
-    - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
-
+      
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
+      
+    - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.  
 
   [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button }
-
 
 
 ---
