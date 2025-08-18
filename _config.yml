@@ -21,7 +21,10 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-
+kramdown:
+  parse_block_html: true   # lets Kramdown process headings inside HTML blocks
+  toc_levels: 2..4         # choose the levels you want in the TOC
+  
 # Navigation menu links
 header_pages:
   - datasets.md
