@@ -155,6 +155,166 @@ We have analysed 'Properties at risk of flooding from rivers and seas' data publ
   
   - Westminster Constituencies 2024: [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button }
 
+
+---
+layout: default
+title: Datasets
+permalink: /datasets/
+---
+
+[← Back to Home](/)
+
+# Browse All Datasets
+
+Explore and download datasets grouped by environmental themes.
+
+---
+
+<!-- ENERGY HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/BCP Green Jobs.png"
+       alt="FoE Green Jobs"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Energy
+</h2>
+
+Datasets related to renewable energy potential and exclusion layers showing why we have exclude certain areas of the country.
+
+- **Onshore renewable Energy: Priority Areas for Wind and Solar**
+  
+  [View Map](/maps/renewables_map.html){: .button }  [Download Data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
+
+- **Onshore renewable Energy: Exclusion Areas for Wind**
+  
+  [View Map](/maps/wind_exclusions_map.html){: .button }  [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
+
+- **Onshore renewable Energy: Exclusion Areas for Solar**
+  
+  [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
+
+
+---
+
+<!-- TRANSPORT HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/BCP Transport.png"
+       alt="FoE Bus"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Transport
+</h2>
+
+Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
+
+**Bus Service Frequency 2010-2023 by LSOA**
+
+  Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
+
+  [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
+
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
+---
+
+<!-- HOMES HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/BCP Warm Homes.png"
+       alt="FoE Bus"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Homes
+</h2>
+
+Information on housing energy efficiency, insulation needs, and energy crisis hotspots.
+
+**Home Energy Efficiency Ratings by LSOA**
+  
+   [Coming soon, we hope!]
+   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
+###Insulation recommendations from EPC data by LSOA
+    
+   [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
+###Energy Crisis Hotspots
+Neighbourhoods across England and Wales where low incomes meet high energy costs.  
+  [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
+---
+
+<!-- NATURE HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Oak Leaf copy.png"
+       alt="FoE oak leaf"
+       height="60"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Nature
+</h2>
+
+Datasets focusing on tree cover and green spaces.
+
+**Summer tree canopy cover by LSOA**
+  
+   [Coming soon, we hope!]
+  <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+
+---
+
+<!-- POLLUTION HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/car.png"
+       alt="FoE car"
+       height="50"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Pollution
+</h2>
+
+Mapping of air pollution and water issues, industrial sites, and environmental justice indicators [when complete].
+
+  
+---
+
+<!-- ## Climate risks and extreme weather -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="50"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Climate risks and extreme weather
+</h2>
+
+Mapping of locations most at risks from extreme weather, including flooding and heatwaves.
+
+**Properties at risk of flooding**
+
+We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
+  
+  - Lower Super Output Areas (LSOA) 2021: [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button }
+
+ 
+  - Local Authorities: [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button }
+
+  
+  - Westminster Constituencies 2024: [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button }
+
+ 
+ 
+**Heat risk MSOAs**
+  
+We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries
+
+ See our webpages for further info, including the methodology and data sources for the analysis:
+ [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
+   
+ Download the heat data by MSOA level here: [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button }
+
+---
+
+If you’d like to request additional datasets or contribute to this portal, [contact our data team](mailto:data@foe.co.uk).
+
  
 ---
 
