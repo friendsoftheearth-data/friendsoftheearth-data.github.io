@@ -157,7 +157,7 @@ We have analysed 'Properties at risk of flooding from rivers and seas' data publ
 
  
  
-**Heat risk MSOAs**
+<!-- **Heat risk MSOAs**
   
 We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries
 
@@ -165,7 +165,7 @@ We’ve identified the areas in England most exposed to extreme heat using satel
  [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
    
  Download the heat data by MSOA level here: [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button }
-
+-->
  
 ---
 
