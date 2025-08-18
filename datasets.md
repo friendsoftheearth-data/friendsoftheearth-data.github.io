@@ -10,12 +10,9 @@ permalink: /datasets/
 
 Explore and download datasets grouped by environmental themes.
 
-[Energy](#energy-section)
-
 ---
 
 <!-- ENERGY HEADING WITH ICON -->
-<a name="energy-section"></a>
 <h2>
 <img src="/assets/images/BCP Green Jobs.png"
 alt="FoE Green Jobs"
