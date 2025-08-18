@@ -8,7 +8,7 @@ permalink: /datasets
 
 # Browse All Datasets
 
-Explore and download open geospatial datasets grouped by key environmental themes. Each category contains spatial data that supports policy, research, and community action.
+Explore and download datasets grouped by environmental themes.
 
 ---
 
@@ -21,7 +21,7 @@ Explore and download open geospatial datasets grouped by key environmental theme
   Energy
 </h2>
 
-Datasets related to energy production, renewable energy potential, grid infrastructure, and energy justice.
+Datasets related to renewable energy potential and exclusion layers showing why we have exclude certain areas of the country.
 
 - **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
@@ -49,7 +49,7 @@ Datasets related to energy production, renewable energy potential, grid infrastr
 
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
-- **Bus Service Frequency 2010-2023 by LSOA**
+**Bus Service Frequency 2010-2023 by LSOA**
 
   Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
 
@@ -68,21 +68,20 @@ Spatial data on transport infrastructure, emissions, public transport access, an
   Homes
 </h2>
 
-Information on housing energy efficiency, retrofit needs, and environmental performance.
+Information on housing energy efficiency, insulation needs, and energy crisis hotspots.
 
-- **Home Energy Efficiency Ratings by LSOA**
+**Home Energy Efficiency Ratings by LSOA**
   
    [Coming soon, we hope!]
    <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
-- **Insulation recommnendations from EPC data by LSOA**
+**Insulation recommendations from EPC data by LSOA**
     
    [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
-
-- **Energy Crisis Hotspots**
-  
+**Energy Crisis Hotspots**
+Neighbourhoods across England and Wales where low incomes meet high energy costs.  
   [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
@@ -97,7 +96,7 @@ Information on housing energy efficiency, retrofit needs, and environmental perf
   Nature
 </h2>
 
-Datasets focusing on biodiversity, habitat quality, green spaces, and ecological networks.
+Datasets focusing on tree cover and green spaces.
 
 - **Summer tree canopy cover by LSOA**
   
@@ -115,23 +114,22 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
   Pollution
 </h2>
 
-Mapping of air and water quality, industrial sites, and environmental justice indicators.
+Mapping of air pollution and water issues, industrial sites, and environmental justice indicators [when complete].
 
-- **Air Pollution levels by LSOA**
+**Air Pollution in England and Wales by LSOA**
  
-  Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
+Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
-  <!-- [View Dataset](#){: .button } -->
-  And you can download air pollution data for NO2 and PM2.5 by LSOA11 below:
-    - We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
+You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
+- We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
       
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
       
-    - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.  
+- We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
 
   [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button }
 
-
+  
 ---
 
 <!-- ## Climate risks and extreme weather -->
@@ -145,13 +143,21 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
 Mapping of locations most at risks from extreme weather and flooding.
 
-- **Properties at risk of flooding by Constituency**
-  We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
+**Properties at risk of flooding**
+
+We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
+  
   - Lower Super Output Areas (LSOA) 2021: [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button }
+
+ 
   - Local Authorities: [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button }
+
+  
   - Westminster Constituencies 2024: [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button }
 
-- **Heat risk LSOAs**
+ 
+ 
+**Heat risk MSOAs**
   
   [Coming soon! We are currently analysing Land Surface Temperature data and how to make it available aggregated to LSOA level. Watch this space!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
