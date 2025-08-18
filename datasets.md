@@ -117,18 +117,18 @@ Datasets focusing on biodiversity, habitat quality, green spaces, and ecological
 
 Mapping of air and water quality, industrial sites, and environmental justice indicators.
 
-- **Air Pollution levels by LSOA**
+**Air Pollution levels by LSOA**
  
-  Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
+Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
-  <!-- [View Dataset](#){: .button } -->
-  And you can download air pollution data for NO2 and PM2.5 by LSOA11 below:
-    - We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
+You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
+- We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
       
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
       
 - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
-<!--   [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button } -->
+
+[Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button }
 
 
 ---
@@ -144,8 +144,8 @@ Mapping of air and water quality, industrial sites, and environmental justice in
 
 Mapping of locations most at risks from extreme weather and flooding.
 
-- **Properties at risk of flooding by Constituency**
-  We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
+**Properties at risk of flooding**
+We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
   
   - Lower Super Output Areas (LSOA) 2021: [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button }
 
