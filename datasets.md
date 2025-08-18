@@ -141,7 +141,7 @@ You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
   Climate risks and extreme weather
 </h2>
 
-Mapping of locations most at risks from extreme weather and flooding.
+Mapping of locations most at risks from extreme weather, including flooding and heatwaves.
 
 ### Properties at risk of flooding
 
