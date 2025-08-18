@@ -4,7 +4,7 @@ title: Datasets
 permalink: /datasets/
 ---
 
-[← Back to Home](/)
+[← Back to Home]({{ '/' | relative_url }})
 
 # Browse All Datasets
 
@@ -25,7 +25,7 @@ Datasets related to renewable energy potential and exclusion layers showing why 
 
 - **Onshore renewable Energy: Priority Areas for Wind and Solar**
   
-  [View Map](/maps/renewables_map.html){: .button }  [Download Data (gpkg)]([#](/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
+  [View Map](/maps/renewables_map.html){: .button }  [Download Data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
 
 - **Onshore renewable Energy: Exclusion Areas for Wind**
   
