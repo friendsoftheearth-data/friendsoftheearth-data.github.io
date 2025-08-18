@@ -4,7 +4,7 @@ title: Datasets
 permalink: /datasets/
 ---
 
-[← Back to Home](/)
+[← Back to Home]{{ '/' | relative_url }}
 
 # Browse All Datasets
 
