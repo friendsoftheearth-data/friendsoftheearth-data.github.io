@@ -49,7 +49,7 @@ Datasets related to renewable energy potential and exclusion layers showing why 
 
 Spatial data on transport infrastructure, emissions, public transport access, and active travel opportunities.
 
-**Bus Service Frequency 2010-2023 by LSOA**
+### Bus Service Frequency 2010-2023 by LSOA
 
   Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
 
@@ -70,17 +70,17 @@ Spatial data on transport infrastructure, emissions, public transport access, an
 
 Information on housing energy efficiency, insulation needs, and energy crisis hotspots.
 
-**Home Energy Efficiency Ratings by LSOA**
+### Home Energy Efficiency Ratings by LSOA
   
    [Coming soon, we hope!]
    <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
-**Insulation recommendations from EPC data by LSOA**
+### Insulation recommendations from EPC data by LSOA
     
    [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
-**Energy Crisis Hotspots**
+### Energy Crisis Hotspots
 Neighbourhoods across England and Wales where low incomes meet high energy costs.  
   [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
@@ -98,7 +98,7 @@ Neighbourhoods across England and Wales where low incomes meet high energy costs
 
 Datasets focusing on tree cover and green spaces.
 
-- **Summer tree canopy cover by LSOA**
+### Summer tree canopy cover by LSOA
   
    [Coming soon, we hope!]
   <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
@@ -116,7 +116,7 @@ Datasets focusing on tree cover and green spaces.
 
 Mapping of air pollution and water issues, industrial sites, and environmental justice indicators [when complete].
 
-**Air Pollution in England and Wales by LSOA**
+### Air Pollution in England and Wales by LSOA
  
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
   
@@ -143,7 +143,7 @@ You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
 
 Mapping of locations most at risks from extreme weather and flooding.
 
-**Properties at risk of flooding**
+### Properties at risk of flooding
 
 We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
   
@@ -157,7 +157,7 @@ We have analysed 'Properties at risk of flooding from rivers and seas' data publ
 
  
  
-**Heat risk MSOAs**
+### Heat risk MSOAs
   
 We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries
 
