@@ -10,8 +10,7 @@ permalink: /datasets/
 
 Explore and download datasets grouped by environmental themes.
 
-[Energy](#Energy)
-[Energy (custom)](#energy-section)
+[Energy](#energy-section)
 
 ---
 
