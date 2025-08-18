@@ -4,15 +4,19 @@ title: Datasets
 permalink: /datasets/
 ---
 
-[← Back to Home]{{ '/' | relative_url }}
+[← Back to Home](/)
 
 # Browse All Datasets
 
 Explore and download datasets grouped by environmental themes.
 
+[Energy](#Energy)
+[Energy (custom)](#energy-section)
+
 ---
 
 <!-- ENERGY HEADING WITH ICON -->
+<a name="energy-section"></a>
 <h2>
 <img src="/assets/images/BCP Green Jobs.png"
 alt="FoE Green Jobs"
