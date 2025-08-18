@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Datasets
-permalink: /datasets
+permalink: /datasets/
 ---
 
 [← Back to Home](/)
