@@ -8,7 +8,7 @@ permalink: /datasets
 
 # Browse All Datasets
 
-Explore and download open geospatial datasets grouped by key environmental themes. Each category contains spatial data that supports policy, research, and community action.
+Explore and download open datasets and maps grouped by environmental themes.
 
 ---
 
@@ -127,7 +127,7 @@ Mapping of air and water quality, industrial sites, and environmental justice in
       
   [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button }
       
-<!-- - We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.  -->
+- We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
 <!--   [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button } -->
 
 
