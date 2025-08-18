@@ -9,6 +9,7 @@ permalink: /datasets/
 # Browse All Datasets
 
 Explore and download datasets grouped by environmental themes.
+[Energy](#energy-section)
 
 ---
 
@@ -20,6 +21,7 @@ height="60"
 align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Energy
 </h2>
+<a name="energy-section" /a>
 
 Datasets related to renewable energy potential and exclusion layers showing why we have exclude certain areas of the country.
 
