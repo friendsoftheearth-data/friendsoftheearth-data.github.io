@@ -10,13 +10,15 @@ permalink: /datasets/
 
 Explore and download datasets grouped by environmental themes.
 
-{:.no_toc}
-
-- TOC
-{:toc}
+- [Energy](#energy-section)
+- [Transport](#transport-section)
+- [Homes](#homes-section)
+- [Nature](#nature-section)
+- [Pollution](#pollution-section)
+- [Climate risks and extreme weather](#climate-section)
 
 ---
-
+<a name="energy-section"></a>
 <!-- ENERGY HEADING WITH ICON -->
 <h2 id="Energy">
 <img src="/assets/images/BCP Green Jobs.png"
@@ -44,6 +46,7 @@ Datasets related to renewable energy potential and exclusion layers showing why 
 ---
 
 <!-- TRANSPORT HEADING WITH ICON -->
+<a name="transport-section"></a>
 <h2 id="Transport">
 <img src="/assets/images/BCP Transport.png"
 alt="FoE Bus"
@@ -65,6 +68,7 @@ Coming soon, we hope! Meanwhile, check out our decline in bus service story whic
 ---
 
 <!-- HOMES HEADING WITH ICON -->
+<a name="homes-section"></a>
 <h2 id="Homes">
 <img src="/assets/images/BCP Warm Homes.png"
 alt="FoE Bus"
@@ -93,6 +97,7 @@ Neighbourhoods across England and Wales where low incomes meet high energy costs
 ---
 
 <!-- NATURE HEADING WITH ICON -->
+<a name="nature-section"></a>
 <h2 id="Nature">
 <img src="/assets/images/Oak Leaf copy.png"
 alt="FoE oak leaf"
@@ -111,6 +116,7 @@ Datasets focusing on tree cover and green spaces.
 ---
 
 <!-- POLLUTION HEADING WITH ICON -->
+<a name="pollution-section"></a>
 <h2 id="Pollution">
 <img src="/assets/images/car.png"
 alt="FoE car"
@@ -138,6 +144,7 @@ You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
 ---
 
 <!-- ## Climate risks and extreme weather -->
+<a name="climate-section"></a>
 <h2 id="Climate risks and extreme weather">
 <img src="/assets/images/Watch_Transparent_green.png"
 alt="FoE Watch"
