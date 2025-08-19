@@ -39,9 +39,9 @@ The exclusion maps are experimental and slow to load, so only use on a laptop wi
 
 | **Data set**                                                | **Download data (GPKG)** | **Link**    |
 | :-----------------------------------------------------------| :----------: | :---------: |
-| Onshore renewable Energy: Priority Areas for Wind and Solar | [Download data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button .button-small} | [View Map](https://mapst.ac/foe/onshore-renewables-england){: .button .button-small } |
-| Onshore renewable Energy: Exclusion Areas for Wind          | [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button .button-small } | [View Map](/maps/wind_exclusions_map.html){: .button .button-small }  |
-| Onshore renewable Energy: Exclusion Areas for Solar         | [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button .button-small } | (Not available) |
+| Onshore renewable Energy: Priority Areas for Wind and Solar | [Download priority areas for wind and solar data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button .button--small} | [View Map](https://mapst.ac/foe/onshore-renewables-england){: .button .button--small } |
+| Onshore renewable Energy: Exclusion Areas for Wind          | [Download exclusion areas for wind data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button .button--small } | [View solar exclusions map](/maps/wind_exclusions_map.html){: .button .button--small }  |
+| Onshore renewable Energy: Exclusion Areas for Solar         | [Download exclusion areas for solar data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button .button--small } | (Not available) |
 
 ---
 
