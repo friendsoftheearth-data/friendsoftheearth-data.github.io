@@ -3,9 +3,7 @@ layout: default
 title: Friends of the Earth Open Data Portal
 ---
 
-# Welcome to the Friends of the Earth Open Data Portal
-
-## Environmental Data for Research and Action
+# Environmental data to support climate action and social justice
 
 Well-targeted data can be a powerful approach to identify where and what action is needed to address the environmental crisis and related social justice issues, and to create the pressure for political and policy change at all levels. 
 
@@ -14,7 +12,7 @@ Friends of the Earth uses environmental data to increase the impact of our campa
 We are committed to making environmental data accessible to other activists, researchers, advocates, policymakers, and the public. Our open data portal provides free access to data that can help inform environmental action and policy decisions.
 
 
-<!-- GET STARTED HEADING WITH ICON -->
+<!-- ## GET STARTED HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/Watch_Transparent_green.png"
        alt="FoE Watch"
@@ -25,7 +23,14 @@ We are committed to making environmental data accessible to other activists, res
 
 [Browse All Datasets](/datasets){: .button }  <!-- [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button } -->
 
-## Featured Datasets
+<!-- ## Featured datasets HEADING WITH ICON -->
+<h2>
+  <img src="/assets/images/Watch_Transparent_green.png"
+       alt="FoE Watch"
+       height="40"
+       align="absmiddle">   <!-- keeps it centred on the text baseline -->
+  Featured datasets
+</h2>
 
 ### Heat risk MSOAs
 
@@ -36,13 +41,13 @@ See our webpages for further info, including the methodology and data sources fo
    
 Download the heat data by MSOA level here: [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--medium }
 
-<!-- HOW OUR DATA IS USED HEADING WITH ICON -->
+<!-- ## HOW OUR DATA IS USED HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/Watch_Transparent_green.png"
        alt="FoE Watch"
        height="40"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
-  How are data is used
+  How our data is used
 </h2>
 
 We publish these data sets with the aim of supporting:
@@ -51,7 +56,7 @@ We publish these data sets with the aim of supporting:
 - Public education on environmental issues
 - Academic research on environmental impacts
 
-<!-- LATEST UPDATES HEADING WITH ICON -->
+<!-- ## LATEST UPDATES HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/Watch_Transparent_green.png"
        alt="FoE Watch"
@@ -64,13 +69,13 @@ We publish these data sets with the aim of supporting:
 - **June 2025**: Data sets on air pollution and flooding added.
 - **April 2025**: First version of this site published - please bear with us as we get this site looking smarter and containing more datasets for download!
 
-<!-- Contact with us HEADING WITH ICON -->
+<!-- Contact us HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/Watch_Transparent_green.png"
        alt="FoE Watch"
        height="40"
        align="absmiddle">   <!-- keeps it centred on the text baseline -->
-  Contact with us
+  Contact us
 </h2>
 
 Have questions about our data or need assistance? [Contact our data team](mailto:data@foe.co.uk) for support.
