@@ -6,7 +6,7 @@ permalink: /datasets/
 
 [← Back to Home](/)
 
-# Browse All Datasets
+# Environmental datasets
 
 Explore and download datasets grouped by environmental themes.
 
@@ -37,9 +37,9 @@ The data was used to inform this research piece: [Release our wind: Tremendous r
 
 The exclusion maps are experimental and slow to load, so only use on a laptop with a good internet connection.
 
-| **Data set**                                                | **Download data (GPKG)** | **Link**    |
+| **Data set**                                                | **Download data (GPKG)** | **Interactive maps (links)**    |
 | :-----------------------------------------------------------| :----------: | :---------: |
-| Onshore renewable Energy: Priority Areas for Wind and Solar | [Download priority areas for wind and solar data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button .button--small} | [View Map](https://mapst.ac/foe/onshore-renewables-england){: .button .button--small } |
+| Onshore renewable Energy: Priority Areas for Wind and Solar | [Download priority areas for wind and solar data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button .button--small} | [View prioirity areas map](https://mapst.ac/foe/onshore-renewables-england){: .button .button--small } |
 | Onshore renewable Energy: Exclusion Areas for Wind          | [Download exclusion areas for wind data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button .button--small } | [View solar exclusions map](/maps/wind_exclusions_map.html){: .button .button--small }  |
 | Onshore renewable Energy: Exclusion Areas for Solar         | [Download exclusion areas for solar data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button .button--small } | (Not available) |
 
@@ -168,7 +168,7 @@ We have analysed 'Properties at risk of flooding from rivers and seas' data publ
 
 ### Heat risk MSOAs
 
-We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries
+We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
 
  See our webpages for further info, including the methodology and data sources for the analysis:
  [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
