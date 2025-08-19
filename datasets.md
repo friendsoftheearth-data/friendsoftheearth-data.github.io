@@ -84,7 +84,7 @@ Information on housing energy efficiency, insulation needs, and energy crisis ho
 Date: Covers EPC data up to April 2025
 
 | Data set | Download link (all csv files) |
-| -------- | ----------------------------- |
+| :------- | :---------------------------: |
 | Energy efficiency of homes: EPC band by MSOA21 | [Download EPC data by MSOA21 (csv)](/datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small } |
 | Energy efficiency of homes: EPC band by Local authority | [Download EPC data by Local Authority (csv)](/datasets/epcs/epc-bands-by-oslaua-April25.csv){: .button .button--small } |
 | Energy efficiency of homes: EPC band by Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](/atasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small } |
@@ -94,7 +94,7 @@ Date: Covers EPC data up to April 2025
 Date: Covers EPC data up to April 2025
 
 | Data set | Download link (all csv files) |
-| -------- | ----------------------------- |
+| :------- | :---------------------------: |
 | EPC insulation recommendations by MSOA21 | [Download EPC insulation recommendations by MSOA21 (csv)](/datasets/epcs/epc-ins-recommendations-by-msoa21-April25.csv){: .button .button--small } |
 | EPC insulation recommendations by Local authority | [Download EPC insulation recommendations by Local authority (csv)](/datasets/epcs/epc-ins-recommendations-by-oslaua-April25.csv){: .button .button--small } |
 | EPC insulation recommendations by Westminster Constituency  | [Download EPC insulation recommendations by Constituency (csv)](/datasets/epcs/epc-ins-recommendations-by-pcon24-April25.csv){: .button .button--small } |
@@ -142,14 +142,14 @@ Mapping of air pollution and water issues, industrial sites, and environmental j
 
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
-You can download air pollution data for NO2 and PM2.5 by LSOA11 below. The data is represents a 3 year average for 2021 to 2023.
+You can download air pollution data for NO<sub>2</sub> and PM<sub>2.5</sub> by LSOA11 below. The data is represents a 3 year average for 2021 to 2023.
 
 We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
 
 We expect to update the data in late 2025, when we will also publish the data using 2021 LSOA boundaries. 
 
 | Data set | Download link |
-| -------- | ------------- |
+| :------- | :-----------: |
 | Air pollution data at LSOA11: NO2/PM2.5 2021-23 (3yr average): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
 | Air pollution data at LSOA11: NO2/PM2.5 2021-23 (3yr average): geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
 
