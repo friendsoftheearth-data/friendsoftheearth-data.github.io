@@ -81,7 +81,7 @@ Information on housing energy efficiency, insulation needs, and energy crisis ho
 
 ### Domestic Energy Performance Certificate (EPC) data for England and Wales: Energy efficiency ratings
 
-Home Energy Efficiency Ratings by MSOA21
+<!-- Home Energy Efficiency Ratings by MSOA21
 | Data set | Download link (all csv files) |
 | -------- | ------- |
 | Energy efficiency of homes by EPC band: MSOA21 | [Download EPC data by MSOA21 (csv)](datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small} |
@@ -95,7 +95,7 @@ Home Energy Efficiency Ratings by MSOA21
 | EPC insulation recommendations by MSOA21 | [Download EPC insulation recommendations by MSOA21 (csv)](datasets/epcs/epc-ins-recommendations-by-msoa21-April25.csv){: .button .button--small} |
 | EPC insulation recommendations by Local authority | [Download EPC insulation recommendations by Local authority (csv)](datasets/epcs/epc-ins-recommendations-by-oslaua-April25.csv){: .button .button--small} |
 | EPC insulation recommendations by Westminster Constituency  | [Download EPC insulation recommendations by Constituency (csv)](datasets/epcs/epc-ins-recommendations-by-pcon24-April25.csv){: .button .button--small} |
-
+-->
 
 ### Energy Crisis Hotspots
 Neighbourhoods across England and Wales where low incomes meet high energy costs.  
