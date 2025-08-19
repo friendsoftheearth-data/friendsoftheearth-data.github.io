@@ -161,21 +161,11 @@ Mapping of locations most at risks from extreme weather and flooding.
 
 We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
 
-| :------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Geography (England and Wales)**                 | **Download**                                                                                                                          |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-|                                                   |                                                                                                                                       |
-| Lower Super Output Areas (LSOA) 2021              | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button }             |
-|                                                   |                                                                                                                                       |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-|                                                   |                                                                                                                                       |
-| Westminster Constituencies 2024                   | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button }     |
-|                                                   |                                                                                                                                       |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-|                                                   |                                                                                                                                       |
-| Local Authorities                                 | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button }  |
-|                                                   |                                                                                                                                       |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Geography (England and Wales)**                 | **Download**                                                                                                                                |
+| :------------------------------------------------ | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+| Lower Super Output Areas (LSOA) 2021              | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button-small }             |
+| Westminster Constituencies 2024                   | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button-small }     |
+| Local Authorities                                 | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button-small }  |
 
 
 ### Heat risk MSOAs
