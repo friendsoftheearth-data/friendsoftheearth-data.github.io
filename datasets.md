@@ -81,6 +81,8 @@ Information on housing energy efficiency, insulation needs, and energy crisis ho
 
 ### Domestic Energy Performance Certificate (EPC) data for England and Wales: Energy efficiency ratings
 
+Date: Covers EPC data up to April 2025
+
 | Data set | Download link (all csv files) |
 | -------- | ----------------------------- |
 | Energy efficiency of homes: EPC band by MSOA21 | [Download EPC data by MSOA21 (csv)](/datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small } |
@@ -88,6 +90,8 @@ Information on housing energy efficiency, insulation needs, and energy crisis ho
 | Energy efficiency of homes: EPC band by Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](/atasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small } |
 
 ### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
+
+Date: Covers EPC data up to April 2025
 
 | Data set | Download link (all csv files) |
 | -------- | ----------------------------- |
@@ -138,15 +142,16 @@ Mapping of air pollution and water issues, industrial sites, and environmental j
 
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
-You can download air pollution data for NO2 and PM2.5 by LSOA11 below:
-- We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps.
+You can download air pollution data for NO~2~ and PM~2.5~ by LSOA11 below. The data is represents a 3 year average for 2021 to 2023.
 
-  [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--medium }
+We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
 
-- We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
+We expect to update the data in late 2025, when we will also publish the data using 2021 LSOA boundaries. 
 
-  [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--medium }
-
+| Data set | Download link |
+| -------- | ------------- |
+| Air pollution data at LSOA11: NO~2~/PM~2.5~ 2021-23 (3yr average): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
+| Air pollution data at LSOA11: NO~2~/PM~2.5~ 2021-23 (3yr average): geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
 
 ---
 
@@ -166,22 +171,25 @@ Mapping of locations most at risks from extreme weather and flooding.
 
 We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
 
-| **Geography (England and Wales)**     | **Download**                                                                                                                                         |
+| **Geography (England and Wales)**     | **Download link**                                                                                                                                         |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
 | Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
 | Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  |
 
 
-### Heat risk MSOAs
+### Heat risk MSOAs in England
 
-We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
+We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature captured during the 2022 heatwaves. Within these most exposed neighbourhoods, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
 
- See our webpages for further info, including the methodology and data sources for the analysis:
+See our webpages for further info, including the methodology and data sources for the analysis:
  [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
-   
- Download the heat data by MSOA level here: [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--medium }
 
+Download the heat data by MSOA level here:
+
+| Data set | Download link |
+| -------- | ------------- |
+| Heat risk MSOAs neighbourhoods in England | [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--small } |
  
 ---
 
