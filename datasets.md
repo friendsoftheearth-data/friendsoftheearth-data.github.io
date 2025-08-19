@@ -28,22 +28,20 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Energy
 </h2>
 
-Datasets related to renewable energy potential and exclusion layers showing why we have exclude certain areas of the country.
 
 ### Onshore renewable energy potential
 
-- **Onshore renewable Energy: Priority Areas for Wind and Solar**
+Datasets containing the outputs of our onshore renewable energy modelling that map the priority areas for potential onshore renewable energy installations. And the exclusion layers which show which areas of the country were excluded from this mapping and why.
 
-[View Map](/maps/renewables_map.html){: .button }  [Download Data (gpkg)]([#](/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button }
+The data was used to inform this research piece: [Release our wind: Tremendous renewable energy potential in England](https://friendsoftheearth.uk/climate/release-our-wind-tremendous-renewable-energy-potential-england)
 
-- **Onshore renewable Energy: Exclusion Areas for Wind**
+The exclusion maps are experimental and slow to load, so only use on a laptop with a good internet connection.
 
-[View Map](/maps/wind_exclusions_map.html){: .button }  [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button }
-
-- **Onshore renewable Energy: Exclusion Areas for Solar**
-
-[Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button }
-
+| **Data set**                                                | **Download data (GPKG)** | **Link**    |
+| :-----------------------------------------------------------| :----------: | :---------: |
+| Onshore renewable Energy: Priority Areas for Wind and Solar | [Download data (gpkg)]((/datasets/friends-of-earth-onshore-renewables.gpkg)){: .button .button-small} | [View Map](https://mapst.ac/foe/onshore-renewables-england){: .button .button-small } |
+| Onshore renewable Energy: Exclusion Areas for Wind          | [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-wind-simplified-small.gpkg){: .button .button-small } | [View Map](/maps/wind_exclusions_map.html){: .button .button-small }  |
+| Onshore renewable Energy: Exclusion Areas for Solar         | [Download Data (gpkg)](/datasets/onshore-renewables-exclusions-solar-simplified-small.gpkg){: .button .button-small } | (Not available) |
 
 ---
 
@@ -161,11 +159,11 @@ Mapping of locations most at risks from extreme weather and flooding.
 
 We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
 
-| **Geography (England and Wales)**                 | **Download**                                                                                                                                         |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Lower Super Output Areas (LSOA) 2021              | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
-| Westminster Constituencies 2024                   | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
-| Local Authorities                                 | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  |
+| **Geography (England and Wales)**     | **Download**                                                                                                                                         |
+| :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
+| Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
+| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  |
 
 
 ### Heat risk MSOAs
