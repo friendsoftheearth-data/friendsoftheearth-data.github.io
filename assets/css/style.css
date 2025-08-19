@@ -126,6 +126,23 @@ button:hover, .button:hover {
     transform: translateY(-2px);
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;      /* makes single-grid borders */
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid #1e234d;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+thead th {
+  color: #1e234d;                 /* your dark text color */
+  font-weight: 700;
+}
 
 .legend {
   font-family: 'Libre Franklin', sans-serif;
