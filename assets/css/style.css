@@ -112,23 +112,17 @@ button, .button {
     transition: all 0.3s ease;
 }
 
+.button--medium {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;    
+}
+
+.button--small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.95rem;    
+}
+
 button:hover, .button:hover {
-    background-color: #094839; /* Slightly darker hover */
-    transform: translateY(-2px);
-}
-
-button-small, .button-small {
-    background-color: #61bdaa;
-    color: #1e234d;
-    border: none;
-    padding: 0.25rem rem 0.75rem;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button-small:hover, .button-small:hover {
     background-color: #094839; /* Slightly darker hover */
     transform: translateY(-2px);
 }
