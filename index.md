@@ -7,7 +7,12 @@ title: Friends of the Earth Open Data Portal
 
 ## Environmental Data for Research and Action
 
-Friends of the Earth is committed to making environmental data accessible to researchers, advocates, policymakers, and the public. Our open data portal provides free access to geospatial datasets that can help inform environmental action and policy decisions.
+Well-targeted data can be a powerful approach to identify where and what action is needed to address the environmental crisis and related social justice issues, and to create the pressure for political and policy change at all levels. 
+
+Friends of the Earth uses environmental data to increase the impact of our campaigns and support activists. 
+
+We are committed to making environmental data accessible to other activists, researchers, advocates, policymakers, and the public. Our open data portal provides free access to data that can help inform environmental action and policy decisions.
+
 
 <!-- GET STARTED HEADING WITH ICON -->
 <h2>
@@ -20,24 +25,18 @@ Friends of the Earth is committed to making environmental data accessible to res
 
 [Browse All Datasets](/datasets){: .button }  <!-- [Explore Interactive Maps](/maps){: .button }  [Learn About Our Methods](/methodology){: .button } -->
 
-<!-- TO ADD LATER ## Featured Datasets
+## Featured Datasets
 
-### Onshore renewable energy: priority areas
-Visualizations and data showing priority areas for onshore renewable, outside of nature, wildlife, heritage, infrastructure and other planning constraint locations.  
+### Heat risk MSOAs
 
-[View Dataset](#){: .button }  [Download Data](#){: .button }
+We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature from the 2022 heatwaves. Within these, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries
 
-### Index of Multiple Environmental Degredation
-[Coming soon] 
+See our webpages for further info, including the methodology and data sources for the analysis:
+[Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
+   
+Download the heat data by MSOA level here: [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--medium }
 
-[View Dataset](#){: .button }  [Download Data](#){: .button }
-
-### Air pollution (NO2 and PM2.5) by LSOA
-[Coming soon] 
-
-[View Dataset](#){: .button }  [Download Data](#){: .button } -->
-
-<!-- GOW OUR DATA IS USED HEADING WITH ICON -->
+<!-- HOW OUR DATA IS USED HEADING WITH ICON -->
 <h2>
   <img src="/assets/images/Watch_Transparent_green.png"
        alt="FoE Watch"
@@ -46,11 +45,11 @@ Visualizations and data showing priority areas for onshore renewable, outside of
   How are data is used
 </h2>
 
-Our open datasets support:
-- Academic research on environmental impacts
+We publish these data sets with the aim of supporting:
 - Community advocacy for environmental justice
 - Policy development for sustainable solutions
 - Public education on environmental issues
+- Academic research on environmental impacts
 
 <!-- LATEST UPDATES HEADING WITH ICON -->
 <h2>
@@ -61,6 +60,8 @@ Our open datasets support:
   Latest updates
 </h2>
 
+- **August 2025**: More data sets added (extreme heat risk), improvements made to the site.
+- **June 2025**: Data sets on air pollution and flooding added.
 - **April 2025**: First version of this site published - please bear with us as we get this site looking smarter and containing more datasets for download!
 
 <!-- Contact with us HEADING WITH ICON -->
