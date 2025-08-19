@@ -59,7 +59,7 @@ Spatial data on covering transport infrastructure, emissions, public transport a
 
 ### Bus Service Frequency 2010-2023 by LSOA
 
-Coming soon, we hope! Meanwhile, check out our decline in bus service story which includes an interactive map:
+Data coming soon...! Meanwhile, check out our decline in bus service story which includes an interactive map:
 
 [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
 
@@ -79,19 +79,27 @@ Homes
 
 Information on housing energy efficiency, insulation needs, and energy crisis hotspots.
 
-### Home Energy Efficiency Ratings by LSOA
+### Domestic Energy Performance Certificate (EPC) data for England and Wales: Energy efficiency ratings
 
-[Coming soon, we hope!]
-<!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+Home Energy Efficiency Ratings by MSOA21
+| Data set | Download link (all csv files) |
+| -------- | ------- |
+| Energy efficiency of homes by EPC band: MSOA21 | [Download EPC data by MSOA21 (csv)](datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small} |
+| Energy efficiency of homes by EPC band: Local authority | [Download EPC data by Local Authority (csv)](datasets/epcs/epc-bands-by-oslaua-April25.csv){: .button .button--small} |
+| Energy efficiency of homes by EPC band: Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](datasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small} |
 
-### Insulation recommendations from EPC data by LSOA
+### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
 
-[Coming soon, we hope!]
-<!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+| Data set | Download link (all csv files) |
+| -------- | ------- |
+| EPC insulation recommendations by MSOA21 | [Download EPC insulation recommendations by MSOA21 (csv)](datasets/epcs/epc-ins-recommendations-by-msoa21-April25.csv){: .button .button--small} |
+| EPC insulation recommendations by Local authority | [Download EPC insulation recommendations by Local authority (csv)](datasets/epcs/epc-ins-recommendations-by-oslaua-April25.csv){: .button .button--small} |
+| EPC insulation recommendations by Westminster Constituency  | [Download EPC insulation recommendations by Constituency (csv)](datasets/epcs/epc-ins-recommendations-by-pcon24-April25.csv){: .button .button--small} |
+
 
 ### Energy Crisis Hotspots
 Neighbourhoods across England and Wales where low incomes meet high energy costs.  
-[Coming soon, we hope!]
+[Data coming soon...]
 <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
@@ -110,7 +118,7 @@ Datasets focusing on tree cover and green spaces.
 
 ### Summer tree canopy cover by LSOA
 
-[Coming soon, we hope!]
+[Data coming soon...]
 <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
