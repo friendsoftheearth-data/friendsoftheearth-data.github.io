@@ -150,8 +150,8 @@ We expect to update the data in late 2025, when we will also publish the data us
 
 | Data set | Download link |
 | :------- | :-----------: |
-| Air pollution data at LSOA11: NO2/PM2.5 2021-23 (3yr average): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
-| Air pollution data at LSOA11: NO2/PM2.5 2021-23 (3yr average): geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
+| Air pollution data at LSOA11 - 3yr average (2021-23): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
+| Air pollution data at LSOA11 - 3yr average (2021-23): Geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
 
 ---
 
@@ -171,7 +171,7 @@ Mapping of locations most at risks from extreme weather and flooding.
 
 We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
 
-| **Geography (England and Wales)**     | **Download link**                                                                                                                                         |
+| **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
 | Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
