@@ -140,7 +140,7 @@ Mapping of air pollution and water issues, industrial sites, and environmental j
 
 ### Air Pollution in England and Wales by LSOA
 
-<!--
+
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
 You can download air pollution data for NO2 and PM2.5 by LSOA11 below. The data is represents a 3 year average for 2021 to 2023.
@@ -149,6 +149,7 @@ We've made the data available as a csv file which can be opened in Excel or in G
 
 We expect to update the data in late 2025, when we will also publish the data using 2021 LSOA boundaries. 
 
+<!--
 | Data set | Download link |
 | :------- | :-----------: |
 | Air pollution data at LSOA11 - 3yr average (2021-23): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
