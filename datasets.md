@@ -149,12 +149,10 @@ We've made the data available as a csv file which can be opened in Excel or in G
 
 We expect to update the data in late 2025, when we will also publish the data using 2021 LSOA boundaries. 
 
-<!--
 | Data set | Download link |
 | :------- | :-----------: |
 | Air pollution data at LSOA11 - 3yr average (2021-23): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
 | Air pollution data at LSOA11 - 3yr average (2021-23): Geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
--->
 
 ---
 
