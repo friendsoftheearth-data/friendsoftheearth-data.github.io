@@ -144,6 +144,14 @@ thead th {
   font-weight: 700;
 }
 
+hr {
+  border: none;               /* remove the default thin border */
+  height: 3px;                /* thickness of the line */
+  background-color: #1e234d;  /* your dark brand color */
+  margin: 2.5rem 0 1.25rem;   /* extra space above, normal below */
+  opacity: 1;                 /* some themes lower <hr> opacity */
+}
+
 .legend {
   font-family: 'Libre Franklin', sans-serif;
   color: #1e234d; /* brand color */
