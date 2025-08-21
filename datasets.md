@@ -83,11 +83,15 @@ Information on housing energy efficiency, insulation needs, and energy crisis ho
 
 Date: Covers EPC data up to April 2025
 
+<!-- 
+
 | Data set | Download link (all csv files) |
 | :------- | :---------------------------: |
 | Energy efficiency of homes: EPC band by MSOA21 | [Download EPC data by MSOA21 (csv)](/datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small } |
 | Energy efficiency of homes: EPC band by Local authority | [Download EPC data by Local Authority (csv)](/datasets/epcs/epc-bands-by-oslaua-April25.csv){: .button .button--small } |
 | Energy efficiency of homes: EPC band by Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](/datasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small } |
+
+-->
 
 ### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
 
