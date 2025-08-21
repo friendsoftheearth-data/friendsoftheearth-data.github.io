@@ -3,7 +3,7 @@ title: Friends of the Earth Open Data Portal
 description: Access to environmental GIS data and spatial analysis from Friends of the Earth
 email: data@foe.co.uk
 baseurl: "" # Leave empty for organization GitHub Pages
-url: "https://foe-ewni.github.io"
+url: "https://friendsoftheearth-data.github.io"
 
 # Social media links (optional)
 twitter_username: friends_earth
