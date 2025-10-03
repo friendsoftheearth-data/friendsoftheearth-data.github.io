@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Datasets
+title: Friends of the Earth: Datasets
 permalink: /datasets/
 ---
 
@@ -31,11 +31,11 @@ Energy
 
 ### Onshore renewable energy potential
 
-Datasets containing the outputs of our onshore renewable energy modelling that map the priority areas for potential onshore renewable energy installations. And the exclusion layers which show which areas of the country were excluded from this mapping and why.
+These datasets contain the outputs of our onshore renewable energy modelling, which maps the priority areas for potential onshore renewable energy installations. They also include the exclusion layers showing which areas of the country were excluded from this mapping and why.
 
-The data was used to inform this research piece: [Release our wind: Tremendous renewable energy potential in England](https://friendsoftheearth.uk/climate/release-our-wind-tremendous-renewable-energy-potential-england)
+The data was used to inform this research:  [Release our wind: Tremendous renewable energy potential in England](https://friendsoftheearth.uk/climate/release-our-wind-tremendous-renewable-energy-potential-england)
 
-The exclusion maps are experimental and slow to load, so only use on a laptop with a good internet connection.
+The exclusion maps are experimental and slow to load, so we recommend using a laptop with a good internet connection.
 
 | **Data set**                                                | **Download data (GPKG)** | **Interactive maps (links)**    |
 | :-----------------------------------------------------------| :----------: | :---------: |
@@ -55,11 +55,11 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Transport
 </h2>
 
-Spatial data on covering transport infrastructure, emissions, public transport access, and active travel [when complete!].
+These datasets will contain spatial data covering transport infrastructure, emissions, public transport access and active travel (when complete).
 
-### Bus Service Frequency 2010-2023 by LSOA
+### Bus service frequency 2010-2023 by Lower Layer Super Output Area (LSOA)
 
-Data coming soon...! Meanwhile, check out our decline in bus service story which includes an interactive map:
+Data coming soon. In the meantime, check out our story on the decline in bus services, which includes an interactive map:
 
 [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
 
@@ -77,11 +77,11 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Homes
 </h2>
 
-Information on housing energy efficiency, insulation needs, and energy crisis hotspots.
+These datasets contain info on housing energy efficiency, insulation needs and energy crisis hotspots.
 
 ### Domestic Energy Performance Certificate (EPC) data for England and Wales: Energy efficiency ratings
 
-Date: Covers EPC data up to April 2025
+Date: covers EPC data up to April 2025
 
 | Data set | Download link (all csv files) |
 | :------- | :---------------------------: |
@@ -92,7 +92,7 @@ Date: Covers EPC data up to April 2025
 
 ### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
 
-Date: Covers EPC data up to April 2025
+Date: covers EPC data up to April 2025
 
 | Data set | Download link (all csv files) |
 | :------- | :---------------------------: |
@@ -102,8 +102,9 @@ Date: Covers EPC data up to April 2025
 
 
 ### Energy Crisis Hotspots
-Neighbourhoods across England and Wales where low incomes meet high energy costs.  
-[Data coming soon...]
+
+These are neighbourhoods across England and Wales where low incomes meet high energy costs. Data coming soon.
+
 <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
@@ -118,11 +119,11 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Nature
 </h2>
 
-Datasets focusing on tree cover and green spaces.
+These datasets will focus on tree cover and green spaces.
 
 ### Summer tree canopy cover by LSOA
 
-[Data coming soon...]
+Data coming soon.
 <!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
 
 ---
@@ -137,18 +138,18 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Pollution
 </h2>
 
-Mapping of air pollution and water issues, industrial sites, and environmental justice indicators [when complete].
+These datasets will cover air pollution and water issues, industrial sites and environmental justice indicators (when complete).
 
 ### Air Pollution in England and Wales by LSOA
 
 
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
-You can download air pollution data for NO2 and PM2.5 by LSOA11 below. The data is represents a 3 year average for 2021 to 2023.
+You can download air pollution data for nitrogen dioxide (NO2) and particulate matter (PM2.5) by 2011 LSOAs below. The data represents a 3-year average for 2021 to 2023.
 
-We've made the data available as a csv file which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We've also added a geopackage download, which can be opened directly in GIS software. Note: this uses 'Super Generalised' LSOA boundaries to reduce file size, but may not have the level of detail you want.
+We’ve made the data available as a csv file, which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We’ve also added a GeoPackage download, which can be opened directly in GIS software. Note: this uses “Super Generalised” LSOA boundaries to reduce the file size but may not have the level of detail you want.
 
-We expect to update the data in late 2025, when we will also publish the data using 2021 LSOA boundaries. 
+We expect to update the data in late 2025, when we’ll also publish the data using 2021 LSOA boundaries.
 
 | Data set | Download link |
 | :------- | :-----------: |
@@ -167,11 +168,11 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Climate risks and extreme weather
 </h2>
 
-Mapping of locations most at risks from extreme weather and flooding.
+These datasets map locations most at risks from extreme weather.
 
 ### Properties at risk of flooding
 
-We have analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. These area available for download here:
+We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -182,10 +183,9 @@ We have analysed 'Properties at risk of flooding from rivers and seas' data publ
 
 ### Heat risk MSOAs in England
 
-We’ve identified the areas in England most exposed to extreme heat using satelitte measured land surface temperature (LST) and modelled air temperature captured during the 2022 heatwaves. Within these most exposed neighbourhoods, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
+We’ve identified the areas in England most exposed to extreme heat using satellite-measured land surface temperature (LST) and modelled air temperature captured during the 2022 heatwaves. Within these most exposed neighbourhoods, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
 
-See our webpages for further info, including the methodology and data sources for the analysis:
- [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
+See our research for further info, including the methodology and data sources for the analysis: [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
 
 Download the heat data by MSOA level here:
 
