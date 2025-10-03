@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Friends of the Earth: Datasets
+title: Friends of the Earth - Datasets
 permalink: /datasets/
 ---
 
