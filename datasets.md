@@ -35,7 +35,7 @@ These datasets contain the outputs of our onshore renewable energy modelling, wh
 
 The data was used to inform this research:  [Release our wind: Tremendous renewable energy potential in England](https://friendsoftheearth.uk/climate/release-our-wind-tremendous-renewable-energy-potential-england)
 
-The exclusion maps are experimental and slow to load, so we recommend using a laptop with a good internet connection.
+The exclusion maps are experimental and slow to load, so we recommend using a laptop with a good internet connection for best performance.
 
 | **Data set**                                                | **Download data (GPKG)** | **Interactive maps (links)**    |
 | :-----------------------------------------------------------| :----------: | :---------: |
