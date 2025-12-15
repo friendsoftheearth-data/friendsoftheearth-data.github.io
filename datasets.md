@@ -10,12 +10,38 @@ permalink: /datasets/
 
 Explore and download datasets grouped by environmental themes.
 
+- [Local environment data](#local-env-data-section)
 - [Energy](#energy-section)
 - [Transport](#transport-section)
 - [Homes](#homes-section)
 - [Nature](#nature-section)
 - [Pollution](#pollution-section)
 - [Climate risks and extreme weather](#climate-section)
+
+---
+<a name="local-env-data-section"></a>
+<!-- LOC ENV DATA HEADING WITH ICON -->
+<h2 id="Local environmental data">
+<img src="/assets/images/Oak Leaf copy.png"
+alt="FoE Local Env Data"
+height="60"
+align="absmiddle">   <!-- keeps it centred on the text baseline -->
+Local environmental data
+</h2>
+
+### Local environmental data tool - data sets
+
+We have a [Local environment data tool](https://groups.friendsoftheearth.uk/local-environment-data), which provides local environmental data for all Local authorities, Westminster Constituencies and Mayoral regions across England and Wales.
+
+The tool allows users to enter a postcode and choose to explore local data by local authority, constituency or - if applicable - mayoral region.
+
+The data that underpins the tool is available for download below for all geographical areas included in the tool.
+
+| Local environmental dataset | Download link (xlsx files) |
+| :------- | :---------------------------: |
+| Local authority local environment data | [Download local authority (xlsx)](/datasets/local-data/FoE-local-env-data-LAD-2025.xlsx){: .button .button--small } |
+| Westminster constituency local environment data | [Download constituency (xlsx)](/datasets/local-data/FoE-local-env-data-PCON-2025.xlsx){: .button .button--small } |
+| Mayoral region local environment data | [Download mayoral region (xlsx)](/datasets/local-data/FoE-local-env-data-MAYORAL-2025.xlsx){: .button .button--small } |
 
 ---
 <a name="energy-section"></a>
@@ -27,7 +53,6 @@ height="60"
 align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Energy
 </h2>
-
 
 ### Onshore renewable energy potential
 
