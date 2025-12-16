@@ -65,7 +65,8 @@ We publish these data sets with the aim of supporting:
   Latest updates
 </h2>
 
-- **August 2025**: more data sets added (high-heat neighbourhoods), improvements made to the site.
+- **December 2025**: local environmental data tools xlsx downloads added (for local authorities and mayoral regions)
+- **August 2025**: more data sets added (high-heat neighbourhoods); improvements made to the site.
 - **June 2025**: datasets on air pollution and flooding added.
 - **April 2025**: first version of this site published - please bear with us as we get this site looking smarter and containing more datasets for download!
 
