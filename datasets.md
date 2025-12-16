@@ -40,6 +40,7 @@ The data that underpins the tool is available for download below for all geograp
 | Local environmental dataset | Download link (xlsx files) |
 | :------- | :---------------------------: |
 | Local authority local environment data | [Download local authority (xlsx)](/datasets/local-data/FoE-local-env-data-LAD-2025.xlsx){: .button .button--small } |
+
 <!-- | Westminster constituency local environment data | [Download constituency (xlsx)](/datasets/local-data/FoE-local-env-data-PCON-2025.xlsx){: .button .button--small } | -->
 <!-- | Mayoral region local environment data | [Download mayoral region (xlsx)](/datasets/local-data/FoE-local-env-data-MAYORAL-2025.xlsx){: .button .button--small } | -->
 
