@@ -140,7 +140,8 @@ th, td {
 }
 
 thead th {
-  color: #1e234d;                 /* your dark text color */
+  background-color: #1e234d;                 /* your dark text color */
+  color: #f4f6fa;  
   font-weight: 700;
 }
 
