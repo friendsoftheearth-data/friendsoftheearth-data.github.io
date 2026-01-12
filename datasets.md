@@ -83,7 +83,7 @@ Transport
 
 When this section is complete, these datasets will contain spatial data covering transport infrastructure, emissions, public transport access and active travel (when complete).
 
-### Bus service frequency 2010-2023 by Lower Layer Super Output Area (LSOA)
+### Bus service frequency 2010-2023: Geographical summaries and Neighbourhood data (LSOA)
 
 Data below reports on the daytime average trips per hour (TPH) between 6am-10pm. A spreadsheet provides aggregated summaries of this data for the following geographical areas:
  - English regions and Wales
