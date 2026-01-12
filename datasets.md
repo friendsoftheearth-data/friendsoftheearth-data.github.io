@@ -81,15 +81,24 @@ align="absmiddle">   <!-- keeps it centred on the text baseline -->
 Transport
 </h2>
 
-These datasets will contain spatial data covering transport infrastructure, emissions, public transport access and active travel (when complete).
+When this section is complete, these datasets will contain spatial data covering transport infrastructure, emissions, public transport access and active travel (when complete).
 
 ### Bus service frequency 2010-2023 by Lower Layer Super Output Area (LSOA)
 
-Data coming soon. In the meantime, check out our story on the decline in bus services, which includes an interactive map:
+Data below reports on the daytime average trips per hour (TPH) between 6am-10pm. A spreadsheet provides aggregated summaries of this data for the following geographical areas:
+ - English regions and Wales
+ - Transport authorities
+ - Local authorities
+ - Westminster constituencies
 
-[How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
+Also included is a download link to the data at neighbourhood-level (LSOA11) detailing the daytime average trips per hour (TPH) in each LSOA in 2010 and in 2023 and the changes in services during that time period.
 
-<!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+This data was used to inform our story on the decline in bus services, which includes an interactive map: [How Britains bus services have drastically declined](https://policy.friendsoftheearth.uk/insight/how-britains-bus-services-have-drastically-declined){: target="_blank rel = "noopener"}
+
+| **Data set**     | **Download link**                                                                                                                                    |
+| :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Summary of bus trip services (2010/2023) by region, authorities and constituencies  | [Download bustrip trends: geographical summaries (xlsx)](/datasets/transport/bustrip-trends-by-region-authority-constituency-download.xlsx){: .button .button--small }             |
+| Neighbourhood (LSOA11) bus service frequency data (2010/2023) | [Bus services trends LSOA11 download (csv)](/datasets/transport/bustrip-trends-lsoa11.csv){: .button .button--small }  |
 
 ---
 
