@@ -180,7 +180,8 @@ These datasets will cover air pollution and water issues, industrial sites and e
 
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
-You can download air pollution data for nitrogen dioxide (NO2) and particulate matter (PM2.5) by LSOAs below. Our previous work presented a 3-year average for 2021 to 2023 at LSOA 2011 boundaries. Our latest update (October 2025) presents 2022 to 2024 3-year averaged annual pollution data for the updated LSOA 2021 boundaries.
+#### LSOA neighbourhood-level air pollution data
+You can download air pollution data for **nitrogen dioxide (NO2)** and **particulate matter (PM2.5)** by LSOAs below. Our previous work presented a 3-year average for 2021 to 2023 at LSOA 2011 boundaries. Our latest update (October 2025) presents 2022 to 2024 3-year averaged annual pollution data for the updated LSOA 2021 boundaries.
 
 We’ve made the data available as csv files, which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We’ve also added a GeoPackage download, which can be opened directly in GIS software. Note: this uses “Super Generalised” LSOA boundaries to reduce the file size but may not have the level of detail you want.
 
@@ -191,7 +192,8 @@ We’ve made the data available as csv files, which can be opened in Excel or in
 | Air pollution data at LSOA21 - 3yr average (2022-24): csv | [Download LSOA21 air pollution data (csv)](/datasets/air-pollution/airpollution-202224-lsoa21.csv){: .button .button--small } |
 | Air pollution data at LSOA21 - 3yr average (2022-24): Geopackage | [Download LSOA21 air pollution data (Geopackage)](/datasets/air-pollution/airpollution-202224-lsoa21.gpkg){: .button .button--small } |
 
-We've also summarised this data by Wales and English Regions, Local authority districts and Westminster Constituencies, counting the number of LSOA neighbourhoods in each region that are above World Health Organisation (WHO) guidelines and twice WHO guidelines, and including statistics on schools, child population, car ownership and ethnic minority population in neighbours which exceed these thresholds. This geographical summary data can be downloaded below.
+#### Air pollution data summarised by regions, local authorities and constituencies
+We've also summarised this data by **Wales and English Regions**, **Local authority districts** and **Westminster Constituencies**, counting the number of LSOA neighbourhoods in each region that are above World Health Organisation (WHO) guidelines and twice WHO guidelines, and including statistics on schools, child population, car ownership and ethnic minority population in neighbours which exceed these thresholds. This geographical summary data can be downloaded below.
 
 | Data set | Download link |
 | :------- | :-----------: |
