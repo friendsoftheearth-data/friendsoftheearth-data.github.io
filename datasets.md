@@ -191,6 +191,12 @@ We’ve made the data available as csv files, which can be opened in Excel or in
 | Air pollution data at LSOA21 - 3yr average (2022-24): csv | [Download LSOA21 air pollution data (csv)](/datasets/air-pollution/airpollution-202224-lsoa21.csv){: .button .button--small } |
 | Air pollution data at LSOA21 - 3yr average (2022-24): Geopackage | [Download LSOA21 air pollution data (Geopackage)](/datasets/air-pollution/airpollution-202224-lsoa21.gpkg){: .button .button--small } |
 
+We've also summarised this data by Wales and English Regions, Local authority districts and Westminster Constituencies, counting the number of LSOA neighbourhoods in each region that are above World Health Organisation (WHO) guidelines and twice WHO guidelines, and including statistics on schools, child population, car ownership and ethnic minority population in neighbours which exceed these thresholds. This geographical summary data can be downloaded below.
+
+| Data set | Download link |
+| :------- | :-----------: |
+| Air pollution: Geographical summaries of high pollution neighbourhoods, 3yr average (2022-24) | [Download air pollution geographical summary data (XLSX)](/datasets/air-pollution/FoE-air-pollution-geography-summaries-202224.xlsx){: .button .button--small } |
+
 ---
 
 <!-- ## Climate risks and extreme weather -->
