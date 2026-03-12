@@ -215,14 +215,15 @@ These datasets map locations most at risks from extreme weather.
 
 ### Properties at risk of flooding
 
-We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
+In process of being updated. Meanwhile, here is our latest data story for flooding risk in England: [Is flooding in England getting worse?](https://policy.friendsoftheearth.uk/insight/flooding-england-getting-worse){: target="_blank" rel=noopener}
+
+<!-- We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
 | Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
-| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  |
-
+| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  | -->
 
 ### Heat risk MSOAs in England
 
