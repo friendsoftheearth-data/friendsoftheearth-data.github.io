@@ -215,15 +215,22 @@ These datasets map locations most at risks from extreme weather.
 
 ### Properties at risk of flooding
 
-In process of being updated. Meanwhile, here is our latest data story for flooding risk in England: [Is flooding in England getting worse?](https://policy.friendsoftheearth.uk/insight/flooding-england-getting-worse){: target="_blank" rel=noopener}
+In February 2026, we published a data story for flooding risk in England: [Is flooding in England getting worse?](https://policy.friendsoftheearth.uk/insight/flooding-england-getting-worse){: target="_blank" rel=noopener}.
 
-<!-- We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
+For this research, we analysed and identified properties at risk of flooding from rivers and seas, and properties at risk of flooding from surface water (i.e. flash flooding), using two separate flood risk extent maps published by the Environment Agency and property locations. We then estimated which of these properties were domestic (i.e. homes) and the population at risk and identified neighbourhoods with a high proportion of homes at risk. Finally, we joined socio-demographic data to identify which of the high risk flooding neighbourhoods are also likely to be the least resilient to preparing, coping with and recovering from flooding.
+
+This data was mapped at LSOA21 neighbourhoods. You can download this data below to make your own maps using GIS software. We've used 'Super-Generalised' LSOA boundaries files to make the geopakage download to keep the file size manageable. (If you want higher resolution maps, we'd suggest downloading the csv file and joining to full extent LSOA21 boundaries available for download from the ONS Geoportal.)
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
-| Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
-| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  | -->
+| Flood risk data at LSOA21 - CSV download  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/FoE-flooding-risk-lsoa21.csv){: .button .button--small }             |
+| Flood risk data at LSOA21 - GPKG download       | [Properties at risk of flooding: LSOA21 (GPKG)](/datasets/flooding/FoE-flooding-risk-lsoa21.gpkg){: .button .button--small }     |
+
+We have also summarised neighbourhood and flooding risk statistics by English region, Mayoral regions, local authorities and Westminster constituencies. YOu can download this in a spreadsheet below. 
+
+| **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
+| :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Geographical summaries of flooding risk  | [Flooding risk summary (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
 
 ### Heat risk MSOAs in England
 
