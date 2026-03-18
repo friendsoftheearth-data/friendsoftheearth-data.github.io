@@ -180,7 +180,8 @@ These datasets will cover air pollution and water issues, industrial sites and e
 
 Our air pollution data analysis story includes an interactive map: [Which neighbourhoods have the worst air pollution](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-have-worst-air-pollution){: target="_blank" rel=noopener}
 
-You can download air pollution data for nitrogen dioxide (NO2) and particulate matter (PM2.5) by LSOAs below. Our previous work presented a 3-year average for 2021 to 2023 at LSOA 2011 boundaries. Our latest update (October 2025) presents 2022 to 2024 3-year averaged annual pollution data for the updated LSOA 2021 boundaries.
+#### LSOA neighbourhood-level air pollution data
+You can download air pollution data for **nitrogen dioxide (NO2)** and **particulate matter (PM2.5)** by LSOAs below. Our previous work presented a 3-year average for 2021 to 2023 at LSOA 2011 boundaries. Our latest update (October 2025) presents 2022 to 2024 3-year averaged annual pollution data for the updated LSOA 2021 boundaries.
 
 We’ve made the data available as csv files, which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We’ve also added a GeoPackage download, which can be opened directly in GIS software. Note: this uses “Super Generalised” LSOA boundaries to reduce the file size but may not have the level of detail you want.
 
@@ -190,6 +191,13 @@ We’ve made the data available as csv files, which can be opened in Excel or in
 | Air pollution data at LSOA11 - 3yr average (2021-23): Geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
 | Air pollution data at LSOA21 - 3yr average (2022-24): csv | [Download LSOA21 air pollution data (csv)](/datasets/air-pollution/airpollution-202224-lsoa21.csv){: .button .button--small } |
 | Air pollution data at LSOA21 - 3yr average (2022-24): Geopackage | [Download LSOA21 air pollution data (Geopackage)](/datasets/air-pollution/airpollution-202224-lsoa21.gpkg){: .button .button--small } |
+
+#### Air pollution data summarised by regions, local authorities and constituencies
+We've also summarised this data by **Wales and English Regions**, **Local authority districts** and **Westminster Constituencies**, counting the number of LSOA neighbourhoods in each region that are above World Health Organisation (WHO) guidelines and twice WHO guidelines, and including statistics on schools, child population, car ownership and ethnic minority population in neighbours which exceed these thresholds. This geographical summary data can be downloaded below.
+
+| Data set | Download link |
+| :------- | :-----------: |
+| Air pollution: Geographical summaries of high pollution neighbourhoods, 3yr average (2022-24) | [Download air pollution geographical summary data (XLSX)](/datasets/air-pollution/FoE-air-pollution-geography-summaries-202224.xlsx){: .button .button--small } |
 
 ---
 
@@ -207,14 +215,15 @@ These datasets map locations most at risks from extreme weather.
 
 ### Properties at risk of flooding
 
-We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
+In process of being updated. Meanwhile, here is our latest data story for flooding risk in England: [Is flooding in England getting worse?](https://policy.friendsoftheearth.uk/insight/flooding-england-getting-worse){: target="_blank" rel=noopener}
+
+<!-- We've analysed 'Properties at risk of flooding from rivers and seas' data published by the Environment Agency and aggregated these to different levels of geography. 
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Lower Super Output Areas (LSOA) 2021  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/lsoa21-properties-flooding-rivers-seas.csv){: .button .button--small }             |
 | Westminster Constituencies 2024       | [Properties at risk of flooding: Constituencies (csv)](/datasets/flooding/pcon24-properties-flooding-rivers-seas.csv){: .button .button--small }     |
-| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  |
-
+| Local Authorities                     | [Properties at risk of flooding: Local Authorities (csv)](/datasets/flooding/oslaua-properties-flooding-rivers-seas.csv){: .button .button--small }  | -->
 
 ### Heat risk MSOAs in England
 
