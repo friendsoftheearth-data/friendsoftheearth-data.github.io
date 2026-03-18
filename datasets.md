@@ -230,7 +230,7 @@ We have also summarised neighbourhood and flooding risk statistics by English re
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Geographical summaries of flooding risk  | [Flooding risk summary (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
+| Geographical summaries of flooding risk  | [Flooding risk geographical summaries (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
 
 ### Heat risk MSOAs in England
 
