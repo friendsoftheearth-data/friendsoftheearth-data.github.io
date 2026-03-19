@@ -226,11 +226,11 @@ This data was mapped at LSOA21 neighbourhoods. You can download this data below 
 | Flood risk data at LSOA21 - CSV download  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/FoE-flooding-risk-lsoa21.csv){: .button .button--small }             |
 | Flood risk data at LSOA21 - GPKG download       | [Properties at risk of flooding: LSOA21 (GPKG)](/datasets/flooding/FoE-flooding-risk-lsoa21.gpkg){: .button .button--small }     |
 
-We have also summarised neighbourhood and flooding risk statistics by English region, Mayoral regions, local authorities and Westminster constituencies. YOu can download this in a spreadsheet below. 
+We have also summarised neighbourhood and flooding risk statistics by English region, Mayoral regions, local authorities and Westminster constituencies. This can be downloaded in a spreadsheet using the link below. 
 
 | **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Geographical summaries of flooding risk  | [Flooding risk summary (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
+| Geographical summaries of flooding risk  | [Flooding risk geographical summaries (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
 
 ### Heat risk MSOAs in England
 
@@ -242,7 +242,14 @@ Download the heat data by MSOA level here:
 
 | Data set | Download link |
 | -------- | ------------- |
-| Heat risk MSOAs neighbourhoods in England | [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--small } |
+| Heat risk MSOAs neighbourhoods in England (csv) | [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--small } |
+| Heat risk MSOAs neighbourhoods in England (gpkg) | [Heat risk MSOAs neighbourhoods in England (gpkg) - TO FOLLOW] |
+
+We've also summarised some of the heat risk stats by English region, local authority and westminster constituency. This can be downloaded in a spreadsheet using the link below.
+
+| Data set | Download link |
+| -------- | ------------- |
+| Heat risk geographical summaries (xlsx)| [Heat risk geographical summaries (xlsx)](/datasets/heat/FoE-high-heat-risk-geography-summaries.xlsx){: .button .button--small } |
  
 ---
 
