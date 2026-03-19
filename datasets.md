@@ -213,37 +213,37 @@ Climate risks and extreme weather
 
 These datasets map locations most at risks from extreme weather.
 
-### Properties at risk of flooding
+### Flood risk in England
 
 In February 2026, we published a data story for flooding risk in England: [Is flooding in England getting worse?](https://policy.friendsoftheearth.uk/insight/flooding-england-getting-worse){: target="_blank" rel=noopener}.
 
-For this research, we analysed and identified properties at risk of flooding from rivers and seas, and properties at risk of flooding from surface water (i.e. flash flooding), using two separate flood risk extent maps published by the Environment Agency and property locations. We then estimated which of these properties were domestic (i.e. homes) and the population at risk and identified neighbourhoods with a high proportion of homes at risk. Finally, we joined socio-demographic data to identify which of the high risk flooding neighbourhoods are also likely to be the least resilient to preparing, coping with and recovering from flooding.
+For this research, we analysed and identified properties at risk of flooding from rivers and seas, and properties at risk of flooding from surface water (i.e. flash flooding), using two separate flood risk extent maps published by the Environment Agency and property locations. We then estimated which of these properties were domestic (i.e. homes) and the population at risk and identified neighbourhoods with a high proportion of homes at risk. Finally, we joined socio-demographic data to identify which of the high flood risk neighbourhoods are also likely to be the least resilient to preparing, coping with and recovering from flooding.
 
-This data was mapped at LSOA21 neighbourhoods. You can download this data below to make your own maps using GIS software. We've used 'Super-Generalised' LSOA boundaries files to make the geopakage download to keep the file size manageable. (If you want higher resolution maps, we'd suggest downloading the csv file and joining to full extent LSOA21 boundaries available for download from the ONS Geoportal.)
+This data was mapped at LSOA21 neighbourhoods. You can download this data below as a csv file or geopackage to make your own maps using GIS software. For the geopackage, we've used 'Super-Generalised' LSOA boundaries files to keep the file size manageable. (If you want higher resolution maps, we'd suggest downloading the csv file and joining to full extent LSOA21 boundaries available for download from the ONS Geoportal.)
 
-| **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
+| **Data set**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Flood risk data at LSOA21 - CSV download  | [Properties at risk of flooding: LSOA21 (csv)](/datasets/flooding/FoE-flooding-risk-lsoa21.csv){: .button .button--small }             |
 | Flood risk data at LSOA21 - GPKG download       | [Properties at risk of flooding: LSOA21 (GPKG)](/datasets/flooding/FoE-flooding-risk-lsoa21.gpkg){: .button .button--small }     |
 
 We have also summarised neighbourhood and flooding risk statistics by English region, Mayoral regions, local authorities and Westminster constituencies. This can be downloaded in a spreadsheet using the link below. 
 
-| **Geography (England and Wales)**     | **Download link**                                                                                                                                    |
+| **Data set**     | **Download link**                                                                                                                                    |
 | :-------------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Geographical summaries of flooding risk  | [Flooding risk geographical summaries (xlsx)](/datasets/flooding/FoE-floodrisk-geography-summary.xlsx){: .button .button--small }             |
 
-### Heat risk MSOAs in England
+### Heat risk and enhanced exposure in England
 
-We’ve identified the areas in England most exposed to extreme heat using satellite-measured land surface temperature (LST) and modelled air temperature captured during the 2022 heatwaves. Within these most exposed neighbourhoods, we’ve also counted the number of care homes, nurseries and hospitals. The data was aggregated to 2021 MSOA boundaries.
+We’ve identified the areas in England most exposed to extreme heat using satellite-measured land surface temperature (LST) and modelled air temperature captured during the 2022 heatwaves. Within these most exposed neighbourhoods, we’ve collected data on the number of care homes, nurseries and hospitals. We've also combined this with joined socio-demographic data to identify which of the high heat neighbourhoods are also the least likely to be able to preparing, be most impacted (e.g. in terms of health) and to recover from heatwaves. The data was aggregated to 2021 MSOA boundaries.
 
 See our research for further info, including the methodology and data sources for the analysis: [Which neighbourhoods are most vulnerable to heatwaves](https://policy.friendsoftheearth.uk/insight/which-neighbourhoods-are-most-vulnerable-heatwaves){: target="_blank" rel=noopener}
 
-Download the heat data by MSOA level here:
+Download the heat data by MSOA level below, as a csv file or a geopackage to make your own maps using GIS software. For the geopackage, we've used 'Super-Generalised' MSOA boundaries files to keep the file size manageable. (If you want higher resolution maps, we'd suggest downloading the csv file and joining to full extent MSOA21 boundaries available for download from the ONS Geoportal.)
 
 | Data set | Download link |
 | -------- | ------------- |
-| Heat risk MSOAs neighbourhoods in England (csv) | [Heat risk MSOAs neighbourhoods in England (csv)](/datasets/heat/heat-risk-MSOA21.csv){: .button .button--small } |
-| Heat risk MSOAs neighbourhoods in England (gpkg) | [Heat risk MSOAs neighbourhoods in England (gpkg) - TO FOLLOW] |
+| Heat risk MSOAs neighbourhoods in England - CSV download | [Heat risk England MSOA21 (csv)](/datasets/heat/FoE-heat-risk-msoa21.csv){: .button .button--small } |
+| Heat risk MSOAs neighbourhoods in England - GPKG download | [Heat risk England MSOA21 (gpkg)](/datasets/heat/FoE-heat-risk-msoa21.gpkg){: .button .button--small } |
 
 We've also summarised some of the heat risk stats by English region, local authority and westminster constituency. This can be downloaded in a spreadsheet using the link below.
 
