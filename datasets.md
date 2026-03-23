@@ -117,7 +117,7 @@ These datasets contain info on housing energy efficiency, insulation needs and e
 
 ### Domestic Energy Performance Certificate (EPC) data for England and Wales: Energy efficiency ratings
 
-Date: covers EPC data up to April 2025
+Date: covers EPC data up to April 2025. Update to December 2025 coming shortly...
 
 | Data set | Download link (all csv files) |
 | :------- | :---------------------------: |
@@ -128,7 +128,7 @@ Date: covers EPC data up to April 2025
 
 ### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
 
-Date: covers EPC data up to April 2025
+Date: covers EPC data up to April 2025. Update to December 2025 coming shortly...
 
 | Data set | Download link (all csv files) |
 | :------- | :---------------------------: |
