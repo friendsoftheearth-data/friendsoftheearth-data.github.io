@@ -55,11 +55,11 @@
   legend.onAdd = function () {
     const container = L.DomUtil.create('div', 'legend');
     container.innerHTML = `
-      <strong>Energy crisis hotspots</strong><br>
-      Areas with higher levels of energy crisis risk.
+      <strong>Energy Crisis Hotspots 2025</strong><br>
+      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, forecast energy prices for July 2025 onwards, and income data. For more details see here
       <div class="legend-item">
         <span class="legend-color" style="background:#ed6132"></span>
-        <span>Hotspot areas</span>
+        <span>Energy crisis hotspot</span>
       </div>
       <hr>
       <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
@@ -87,19 +87,40 @@
     return p.energy_crisis_hotspot === 'Energy crisis hotspot';
   }
 
+  
+  function formatPounds(x) {
+    if (x === null || x === undefined || x === '') return 'Not available';
+    const num = Number(x);
+    if (isNaN(num)) return x;
+    return '£' + num.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+  }
+
+  function formatPercentFromProportion(x) {
+    if (x === null || x === undefined || x === '') return 'Not available';
+    const num = Number(x);
+    if (isNaN(num)) return x;
+    const pct = num * 100;
+    return pct.toFixed(1) + '%';
+  }
+
   function popupHotspot(feature, layer) {
     const p = feature.properties || {};
 
     const name = p.name || p.lsoa21nm || 'Energy crisis hotspot';
 
-    const currentBill = p.energy_bill_current ?? 'Not available';
-    const futureBill = p.energy_bill_future ?? 'Not available';
+    const currentBill = formatPounds(p.energy_bill_current);
+    const futureBill = formatPounds(p.energy_bill_future);
     const imdIncome = p.imd_income_decile ?? 'Not available';
-    const epcIneff = p.epcs_DEFG_pct ?? 'Not available';
+    const epcIneff = formatPercentFromProportion(p.epcs_DEFG_pct);
+
+    const lsoa = p.lsoa21 ?? 'Not available';
+    const msoaName = p.msoa_name ?? 'Not available';
 
     const html = `
       <strong>${name}</strong><br>
+      ${lsoa} in ${msoaName}<br>
       <br>
+    
       Current average energy bill (£): ${currentBill}<br>
       Projected average energy bill (£): ${futureBill}<br>
       IMD income decile (1 = most deprived): ${imdIncome}<br>
