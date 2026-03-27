@@ -59,14 +59,12 @@ legend.onAdd = function () {
       <strong>Energy crisis hotspots 2025</strong>
       <button id="legend-toggle" style="margin-left:8px; cursor:pointer;">−</button>
     </div>
-    <div id="legend-content">
-      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, forecast energy prices for July 2025 onwards, and income data. For more details see <a href="/some-detail-page">here</a>
-      <div class="legend-item">
+    <div id="legend-content" style="margin-top:8px;">
+      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, forecast energy prices for July 2025 onwards, and income data. For more details see <a href="/some-detail-page">here</a>.
+      <div class="legend-item" style="margin-top:8px;">
         <span class="legend-color" style="background:#ed6132"></span>
-        <span>Hotspot areas</span>
-      </div>
-      <hr>
-      <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
+        <span>Energy crisis hotspots</span>
+      </div>      
     </div>
   `;
   return container;
@@ -118,7 +116,7 @@ setTimeout(() => {
     if (x === null || x === undefined || x === '') return 'Not available';
     const num = Number(x);
     if (isNaN(num)) return x;
-    const pct = num * 100;
+    const pct = Math.round(num * 100);
     return pct.toFixed(1) + '%';
   }
 
