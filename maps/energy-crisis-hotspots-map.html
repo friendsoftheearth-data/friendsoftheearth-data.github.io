@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Energy crisis hotspots</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+  
   <!-- External stylesheet (ours) -->
   <link rel="stylesheet" href="/assets/css/style.css">
   <!-- Leaflet styles -->
@@ -117,7 +121,7 @@ setTimeout(() => {
     const num = Number(x);
     if (isNaN(num)) return x;
     const pct = Math.round(num * 100);
-    return pct.toFixed(1) + '%';
+    return pct + '%';
   }
 
   function popupHotspot(feature, layer) {
