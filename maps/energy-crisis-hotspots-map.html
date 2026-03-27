@@ -50,25 +50,44 @@
     preferCanvas: true
   }).setView([54, -2.5], 6);
 
-  const legend = L.control({ position: 'topright' });
+const legend = L.control({ position: 'topright' });
 
-  legend.onAdd = function () {
-    const container = L.DomUtil.create('div', 'legend');
-    container.innerHTML = `
-      <strong>Energy Crisis Hotspots 2025</strong><br>
-      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, forecast energy prices for July 2025 onwards, and income data. For more details see here
+legend.onAdd = function () {
+  const container = L.DomUtil.create('div', 'legend');
+  container.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <strong>Energy crisis hotspots 2025</strong>
+      <button id="legend-toggle" style="margin-left:8px; cursor:pointer;">−</button>
+    </div>
+    <div id="legend-content">
+      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, forecast energy prices for July 2025 onwards, and income data. For more details see <a href="/some-detail-page">here</a>
       <div class="legend-item">
         <span class="legend-color" style="background:#ed6132"></span>
-        <span>Energy crisis hotspot</span>
+        <span>Hotspot areas</span>
       </div>
       <hr>
       <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
-    `;
-    return container;
-  };
+    </div>
+  `;
+  return container;
+};
 
-  legend.addTo(map);
+legend.addTo(map);
 
+// Wait for legend button to exist
+setTimeout(() => {
+  const btn = document.getElementById('legend-toggle');
+  const content = document.getElementById('legend-content');
+
+  if (btn && content) {
+    btn.addEventListener('click', () => {
+      const isHidden = content.style.display === 'none';
+      content.style.display = isHidden ? 'block' : 'none';
+      btn.textContent = isHidden ? '−' : '+';
+    });
+  }
+}, 0);
+  
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors & Carto',
     subdomains: 'abcd',
@@ -114,7 +133,7 @@
     const epcIneff = formatPercentFromProportion(p.epcs_DEFG_pct);
 
     const lsoa = p.lsoa21 ?? 'Not available';
-    const msoaName = p.msoa_name ?? 'Not available';
+    const msoaName = p.msoa21_name ?? 'Not available';
 
     const html = `
       <strong>${name}</strong><br>
