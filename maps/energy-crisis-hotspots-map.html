@@ -81,11 +81,31 @@
     fillOpacity: 0.7
   };
 
+  // Only keep features where energy_crisis_hotspot == 'Energy crisis hotspot'
+  function hotspotFilter(feature) {
+    const p = feature.properties || {};
+    return p.energy_crisis_hotspot === 'Energy crisis hotspot';
+  }
+
   function popupHotspot(feature, layer) {
     const p = feature.properties || {};
+
     const name = p.name || p.lsoa21nm || 'Energy crisis hotspot';
-    let html = `<strong>${name}</strong><br>
-    Area identified as an energy crisis hotspot.`;
+
+    const currentBill = p.energy_bill_current ?? 'Not available';
+    const futureBill = p.energy_bill_future ?? 'Not available';
+    const imdIncome = p.imd_income_decile ?? 'Not available';
+    const epcIneff = p.epcs_DEFG_pct ?? 'Not available';
+
+    const html = `
+      <strong>${name}</strong><br>
+      <br>
+      Current average energy bill (£): ${currentBill}<br>
+      Projected average energy bill (£): ${futureBill}<br>
+      IMD income decile (1 = most deprived): ${imdIncome}<br>
+      Inefficient homes (%): ${epcIneff}
+    `;
+
     layer.bindPopup(html);
   }
 
@@ -96,6 +116,7 @@
     .then(data => {
       hotspotLayer = L.geoJSON(data, {
         style: hotspotStyle,
+        filter: hotspotFilter,
         onEachFeature: popupHotspot
       }).addTo(map);
     });
