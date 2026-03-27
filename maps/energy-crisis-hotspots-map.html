@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Energy crisis hotspots</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- External stylesheet (ours) -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- Leaflet styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body, html { margin: 0; padding: 0; }
+    #map { height: 100vh; }
+
+    .legend {
+      background: #f4f6fa;
+      padding: 1em;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #1e234d;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', {
+    preferCanvas: true
+  }).setView([54, -2.5], 6);
+
+  const legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <strong>Energy crisis hotspots</strong><br>
+      Areas with higher levels of energy crisis risk.
+      <div class="legend-item">
+        <span class="legend-color" style="background:#ed6132"></span>
+        <span>Hotspot areas</span>
+      </div>
+      <hr>
+      <a href="/datasets" style="display:block; margin-top:8px; text-align:right; font-size:0.85rem;">Back to datasets</a>
+    `;
+    return container;
+  };
+
+  legend.addTo(map);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors & Carto',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  const hotspotStyle = {
+    color: '#ed6132',
+    weight: 0,
+    fillOpacity: 0.7
+  };
+
+  function popupHotspot(feature, layer) {
+    const p = feature.properties || {};
+    const name = p.name || p.lsoa21nm || 'Energy crisis hotspot';
+    let html = `<strong>${name}</strong><br>
+    Area identified as an energy crisis hotspot.`;
+    layer.bindPopup(html);
+  }
+
+  let hotspotLayer;
+
+  fetch('/datasets/energy/energy-crisis-hotspots-lsoa21.geojson')
+    .then(res => res.json())
+    .then(data => {
+      hotspotLayer = L.geoJSON(data, {
+        style: hotspotStyle,
+        onEachFeature: popupHotspot
+      }).addTo(map);
+    });
+</script>
+
+</body>
+</html>
