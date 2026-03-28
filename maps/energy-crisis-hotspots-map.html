@@ -85,7 +85,10 @@ setTimeout(() => {
     btn.addEventListener('click', () => {
       const isHidden = content.style.display === 'none';
       content.style.display = isHidden ? 'block' : 'none';
-      btn.textContent = isHidden ? '−' : '+';
+      //Original version
+      //btn.textContent = isHidden ? '−' : '+';
+      // ▲ when content is visible, ▼ when hidden
+      btn.textContent = isHidden ? '▲' : '▼';
     });
   }
 }, 0);
