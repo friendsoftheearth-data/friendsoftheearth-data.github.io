@@ -158,8 +158,8 @@ hr.hr-thin {
   height: 0.5px;                /* thickness of the line */
   background-color: #1e234d !important;  /* your dark brand color */
   color: #1e234d !important;
-  margin: 1.5rem 0 1.5rem;   /* extra space above, normal below */
-  opacity: 1;                 /* some themes lower <hr> opacity */
+  margin: 0.75rem 0 0.75rem;   /* less space */
+  opacity: 0.8;                 /* lower opacity */
 }
 
 .legend {
