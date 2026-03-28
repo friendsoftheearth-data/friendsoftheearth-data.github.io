@@ -156,8 +156,8 @@ hr {
 hr.hr-thin {
   border: none;               /* remove the default thin border */
   height: 0.5px;                /* thickness of the line */
-  background-color: #1e234d;  /* your dark brand color */
-  color: #1e234d;
+  background-color: #1e234d !important;  /* your dark brand color */
+  color: #1e234d !important;
   margin: 1.5rem 0 1.5rem;   /* extra space above, normal below */
   opacity: 1;                 /* some themes lower <hr> opacity */
 }
