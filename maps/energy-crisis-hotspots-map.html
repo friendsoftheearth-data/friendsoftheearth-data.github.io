@@ -86,9 +86,9 @@ setTimeout(() => {
       const isHidden = content.style.display === 'none';
       content.style.display = isHidden ? 'block' : 'none';
       //Original version
-      //btn.textContent = isHidden ? '−' : '+';
+      btn.textContent = isHidden ? '−' : '+';
       // ▲ when content is visible, ▼ when hidden
-      btn.textContent = isHidden ? '▲' : '▼';
+      // btn.textContent = isHidden ? '▲' : '▼';
     });
   }
 }, 0);
