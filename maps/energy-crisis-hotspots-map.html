@@ -200,6 +200,7 @@
       ladLayer = L.geoJSON(data, {
         style: ladStyle,
         onEachFeature: popupLAD
+      });
       // ensure hotspot polygons stay visually on top when both are on
       if (hotspotLayer) {
         hotspotLayer.bringToFront();
