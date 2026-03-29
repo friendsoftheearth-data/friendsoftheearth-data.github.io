@@ -167,6 +167,13 @@ hr.hr-thin {
   color: #1e234d; /* brand color */
 }
 
+.lad-label {
+  color: #1e234d;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: 0 0 3px rgba(255,255,255,0.8);
+}
+
 .leaflet-popup-content {
   font-family: 'Libre Franklin', sans-serif;
   color: #1e234d;
