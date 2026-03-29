@@ -121,7 +121,7 @@
   // LAD boundary style (dashed dark line)
   const ladStyle = {
     color: '#1e234d',
-    weight: 2,
+    weight: 1,
     dashArray: '4 4',
     fillOpacity: 0
   };
@@ -180,12 +180,7 @@
     layer.bindPopup(`<strong>${name}</strong>`);
   }
 
-  const ladLabelStyle = {
-    className: 'lad-label'
-  };
-
   let ladLayer;
-  let ladLabelLayer = L.layerGroup(); // note: not added to map yet
   let hotspotLayer;
 
   fetch('/datasets/energy/energy-crisis-hotspots-lsoa21.geojson')
@@ -205,78 +200,26 @@
       ladLayer = L.geoJSON(data, {
         style: ladStyle,
         onEachFeature: popupLAD
-      });
-
-      // Labels layer (toggleable along with boundaries)
-      L.geoJSON(data, {
-        onEachFeature: function (feature, layer) {
-          const p = feature.properties || {};
-          const name = p.local_authority ?? '';
-
-          if (!name) return;
-
-          const bounds = layer.getBounds();
-          const center = bounds.getCenter();
-
-          const label = L.marker(center, {
-            icon: L.divIcon({
-              html: name,
-              className: 'lad-label',
-              iconSize: null
-            })
-          });
-
-          ladLabelLayer.addLayer(label);
-        }
-      });
-      // Neither ladLayer nor ladLabelLayer is added yet; checkbox controls it
+      // ensure hotspot polygons stay visually on top when both are on
+      if (hotspotLayer) {
+        hotspotLayer.bringToFront();
+      }
     });
-
-  // LAD toggle (boundaries + labels together)
+  
+  // LAD toggle
   setTimeout(() => {
     const ladToggle = document.getElementById('toggle-lad');
     if (ladToggle) {
       ladToggle.addEventListener('change', (e) => {
-        if (!ladLayer || !ladLabelLayer) return;
+        if (!ladLayer) return;
         if (e.target.checked) {
           ladLayer.addTo(map);
-          ladLabelLayer.addTo(map);
         } else {
           map.removeLayer(ladLayer);
-          map.removeLayer(ladLabelLayer);
         }
       });
     }
   }, 0);
-
-function updateLadLabelSize() {
-  const z = map.getZoom();
-  let size;
-
-  // More aggressive scaling: very small when zoomed out
-  if (z <= 5) {
-    size = 0.2;      // very small at national scale
-  } else if (z <= 6) {
-    size = 0.35;
-  } else if (z <= 7) {
-    size = 0.5;
-  } else if (z <= 8) {
-    size = 0.7;
-  } else if (z <= 10) {
-    size = 0.85;
-  } else {
-    size = 1;      // largest at close zoom
-  }
-
-  const labels = document.getElementsByClassName('lad-label');
-  for (let i = 0; i < labels.length; i++) {
-    labels[i].style.fontSize = size + 'rem';
-  }
-}
-
-// run once initially
-map.on('load', updateLadLabelSize);
-map.on('zoomend', updateLadLabelSize);
   
 </script>
 
