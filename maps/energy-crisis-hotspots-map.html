@@ -42,6 +42,15 @@
       border-radius: 2px;
       border: 1px solid #ccc;
     }
+
+    /* LAD label styling */
+    .lad-label {
+      color: #1e234d;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-shadow: 0 0 3px rgba(255,255,255,0.8);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -54,46 +63,48 @@
     preferCanvas: true
   }).setView([54, -2.5], 6);
 
-const legend = L.control({ position: 'topright' });
+  const legend = L.control({ position: 'topright' });
 
-legend.onAdd = function () {
-  const container = L.DomUtil.create('div', 'legend');
-  container.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <strong>Energy crisis hotspots 2025</strong>
-      <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
-    </div>
-    <div id="legend-content" style="margin-top:8px;">
-      Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, 2025 energy prices and income deprivation data. Predicted energy bills for 2026 have also been estimated. For more details see <a href="/some-detail-page">here</a>.
-      <hr class="hr-thin">
-      <div class="legend-item" style="margin-top:8px;">
-        <span class="legend-color" style="background:#ed6132"></span>
-        <span>Energy crisis hotspots</span>        
-      </div>      
-      <hr class="hr-thin">
-    </div>
-  `;
-  return container;
-};
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Energy crisis hotspots 2025</strong>
+        <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
+      </div>
+      <div id="legend-content" style="margin-top:8px;">
+        Friends of the Earth has identified the neighbourhoods where high energy bills intersect with low incomes, based on energy consumption data, 2025 energy prices and income deprivation data. Predicted energy bills for 2026 have also been estimated. For more details see <a href="/some-detail-page">here</a>.
+        <hr class="hr-thin">
+        <div class="legend-item" style="margin-top:8px;">
+          <span class="legend-color" style="background:#ed6132"></span>
+          <span>Energy crisis hotspots</span>        
+        </div>
+        <div class="legend-item" style="margin-top:8px;">
+          <input type="checkbox" id="toggle-lad" />
+          <span class="legend-color" style="background:transparent; border:2px dashed #1e234d;"></span>
+          <label for="toggle-lad">Local authority boundaries</label>
+        </div>
+        <hr class="hr-thin">
+      </div>
+    `;
+    return container;
+  };
 
-legend.addTo(map);
+  legend.addTo(map);
 
-// Wait for legend button to exist
-setTimeout(() => {
-  const btn = document.getElementById('legend-toggle');
-  const content = document.getElementById('legend-content');
+  // Wait for legend button to exist
+  setTimeout(() => {
+    const btn = document.getElementById('legend-toggle');
+    const content = document.getElementById('legend-content');
 
-  if (btn && content) {
-    btn.addEventListener('click', () => {
-      const isHidden = content.style.display === 'none';
-      content.style.display = isHidden ? 'block' : 'none';
-      //Original version
-      btn.textContent = isHidden ? '−' : '+';
-      // ▲ when content is visible, ▼ when hidden
-      // btn.textContent = isHidden ? '▲' : '▼';
-    });
-  }
-}, 0);
+    if (btn && content) {
+      btn.addEventListener('click', () => {
+        const isHidden = content.style.display === 'none';
+        content.style.display = isHidden ? 'block' : 'none';
+        btn.textContent = isHidden ? '−' : '+';
+      });
+    }
+  }, 0);
   
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors & Carto',
@@ -107,13 +118,20 @@ setTimeout(() => {
     fillOpacity: 0.7
   };
 
+  // LAD boundary style (dashed dark line)
+  const ladStyle = {
+    color: '#1e234d',
+    weight: 2,
+    dashArray: '4 4',
+    fillOpacity: 0
+  };
+
   // Only keep features where energy_crisis_hotspot == 'Energy crisis hotspot'
   function hotspotFilter(feature) {
     const p = feature.properties || {};
     return p.energy_crisis_hotspot === 'Energy crisis hotspot';
   }
 
-  
   function formatPounds(x) {
     if (x === null || x === undefined || x === '') return 'Not available';
     const num = Number(x);
@@ -146,7 +164,6 @@ setTimeout(() => {
       <strong>${name}</strong><br>
       ${lsoa} in ${msoaName}<br>
       <br>
-    
       Current average energy bill (£): ${currentBill}<br>
       Projected average energy bill (£): ${futureBill}<br>
       IMD income decile (1 = most deprived): ${imdIncome}<br>
@@ -156,6 +173,19 @@ setTimeout(() => {
     layer.bindPopup(html);
   }
 
+  // LAD popup
+  function popupLAD(feature, layer) {
+    const p = feature.properties || {};
+    const name = p.local_authority ?? 'Local authority';
+    layer.bindPopup(`<strong>${name}</strong>`);
+  }
+
+  const ladLabelStyle = {
+    className: 'lad-label'
+  };
+
+  let ladLayer;
+  let ladLabelLayer = L.layerGroup(); // note: not added to map yet
   let hotspotLayer;
 
   fetch('/datasets/energy/energy-crisis-hotspots-lsoa21.geojson')
@@ -167,6 +197,57 @@ setTimeout(() => {
         onEachFeature: popupHotspot
       }).addTo(map);
     });
+
+  fetch('/datasets/energy/lad-boundaries.geojson')
+    .then(res => res.json())
+    .then(data => {
+      // Boundaries layer (toggleable)
+      ladLayer = L.geoJSON(data, {
+        style: ladStyle,
+        onEachFeature: popupLAD
+      });
+
+      // Labels layer (toggleable along with boundaries)
+      L.geoJSON(data, {
+        onEachFeature: function (feature, layer) {
+          const p = feature.properties || {};
+          const name = p.local_authority ?? '';
+
+          if (!name) return;
+
+          const bounds = layer.getBounds();
+          const center = bounds.getCenter();
+
+          const label = L.marker(center, {
+            icon: L.divIcon({
+              html: name,
+              className: 'lad-label',
+              iconSize: null
+            })
+          });
+
+          ladLabelLayer.addLayer(label);
+        }
+      });
+      // Neither ladLayer nor ladLabelLayer is added yet; checkbox controls it
+    });
+
+  // LAD toggle (boundaries + labels together)
+  setTimeout(() => {
+    const ladToggle = document.getElementById('toggle-lad');
+    if (ladToggle) {
+      ladToggle.addEventListener('change', (e) => {
+        if (!ladLayer || !ladLabelLayer) return;
+        if (e.target.checked) {
+          ladLayer.addTo(map);
+          ladLabelLayer.addTo(map);
+        } else {
+          map.removeLayer(ladLayer);
+          map.removeLayer(ladLabelLayer);
+        }
+      });
+    }
+  }, 0);
 </script>
 
 </body>
