@@ -253,14 +253,19 @@ function updateLadLabelSize() {
   const z = map.getZoom();
   let size;
 
-  if (z <= 6) {
-    size = 0.6;   // small when zoomed out
+  // More aggressive scaling: very small when zoomed out
+  if (z <= 5) {
+    size = 0.2;      // very small at national scale
+  } else if (z <= 6) {
+    size = 0.35;
+  } else if (z <= 7) {
+    size = 0.5;
   } else if (z <= 8) {
-    size = 0.75;
+    size = 0.7;
   } else if (z <= 10) {
-    size = 0.9;
+    size = 0.85;
   } else {
-    size = 1.1;   // largest when zoomed in
+    size = 1;      // largest at close zoom
   }
 
   const labels = document.getElementsByClassName('lad-label');
