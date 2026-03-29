@@ -248,6 +248,31 @@
       });
     }
   }, 0);
+
+function updateLadLabelSize() {
+  const z = map.getZoom();
+  let size;
+
+  if (z <= 6) {
+    size = 0.6;   // small when zoomed out
+  } else if (z <= 8) {
+    size = 0.75;
+  } else if (z <= 10) {
+    size = 0.9;
+  } else {
+    size = 1.1;   // largest when zoomed in
+  }
+
+  const labels = document.getElementsByClassName('lad-label');
+  for (let i = 0; i < labels.length; i++) {
+    labels[i].style.fontSize = size + 'rem';
+  }
+}
+
+// run once initially
+map.on('load', updateLadLabelSize);
+map.on('zoomend', updateLadLabelSize);
+  
 </script>
 
 </body>
