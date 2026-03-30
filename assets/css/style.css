@@ -167,6 +167,51 @@ hr.hr-thin {
   color: #1e234d; /* brand color */
 }
 
+/* Toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: .2s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+/* checked state */
+.switch input:checked + .slider {
+  background-color: #1e234d; /* or #61bdaa to match your brand */
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
 .leaflet-popup-content {
   font-family: 'Libre Franklin', sans-serif;
   color: #1e234d;
