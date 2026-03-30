@@ -145,7 +145,7 @@ You can download the GIS data or view the map we've made with this data on the l
 
 | **Data set**                                                | **Download GIS data** | **Interactive maps (links)**    |
 | :-----------------------------------------------------------| :----------: | :---------: |
-| Energy crisis hotspots (2026)          | [Download energy crisis hotspots data (geojson)](/datasets/energy/energy-crisis-hotspots-lsoa21.gpkg){: .button .button--small } | [View energy crisis hotspot map](/maps/energy-crisis-hotspots-map.html){: .button .button--small }  |
+| Energy crisis hotspots (2026)          | [Download energy crisis hotspots data (GPKG)](/datasets/energy/energy-crisis-hotspots-lsoa21.gpkg){: .button .button--small } | [View energy crisis hotspot map](/maps/energy-crisis-hotspots-map.html){: .button .button--small }  |
 
 ---
 
