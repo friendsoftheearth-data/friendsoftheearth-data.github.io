@@ -144,7 +144,7 @@
     color: '#1e234d',
     weight: 0,      // no visible stroke for the clickable layer
     fillOpacity: 0, // invisible; we rely only on click area
-    interactive: true
+    interactive: false
   };
 
   // Only keep features where energy_crisis_hotspot == 'Energy crisis hotspot'
@@ -202,17 +202,17 @@
   }
 
   // LAD popup
-  function popupLAD(feature, layer) {
+  function popupLAD(feature) {
     const p = feature.properties || {};
     const name = p.local_authority ?? 'Local authority';
-
+  
     const echNeighbourhoods = formatNumber(p.ech_lsoa_n);
     const ehcHomes = formatNumber(p.ech_homes_n);
     const ehcAverageBill = formatPounds(p.ech_average_bill);
     const ehcFutureBill = formatPounds(p.ech_future_bill);
     const ehcIneff = formatPercentFromProportion(p.ech_epc_inefficient_pct);
-
-    const html = `
+  
+    return `
       <strong>${name}</strong><br>
       <br>
       Energy crisis hotspots (neighbourhoods): ${echNeighbourhoods}<br>
@@ -222,16 +222,42 @@
       Average predicted bill in hotspots (£): ${ehcFutureBill}<br>
       Poorly insulated homes in hotspots (%): ${ehcIneff}
     `;
-          
-    // layer.bindPopup(`<strong>${name}</strong>`);
-    layer.bindPopup(html);
-    
   }
 
   let ladBoundaryLayer;
   let ladClickLayer;
   let hotspotLayer;
 
+  map.on('click', (e) => {
+    // If a hotspot popup is already open, do nothing (hotspot wins)
+    if (map._popup && map._popup._isOpen) {
+      return;
+    }
+  
+    if (!ladClickLayer) return;
+  
+    const latlng = e.latlng;
+    let foundFeature = null;
+  
+    ladClickLayer.eachLayer((layer) => {
+      if (foundFeature) return; // already found one
+  
+      if (layer.getBounds && layer.getBounds().contains(latlng)) {
+        // For complex polygons, you might want a proper point-in-polygon test,
+        // but bounds check is a good, fast approximation.
+        foundFeature = layer.feature;
+      }
+    });
+  
+    if (foundFeature) {
+      const html = popupLAD(foundFeature);
+      L.popup()
+        .setLatLng(latlng)
+        .setContent(html)
+        .openOn(map);
+    }
+  });
+  
   fetch('/datasets/energy/energy-crisis-hotspots-lsoa21.geojson')
     .then(res => res.json())
     .then(data => {
@@ -253,7 +279,7 @@
       // Invisible clickable polygons in default overlay pane
       ladClickLayer = L.geoJSON(data, {
         style: ladClickStyle,
-        onEachFeature: popupLAD
+        // onEachFeature: popupLAD
       });
 
       // Make sure hotspots are on top for clicks if already loaded
