@@ -139,9 +139,13 @@ Date: covers EPC data up to April 2025. Update to December 2025 coming shortly..
 
 ### Energy Crisis Hotspots
 
-These are neighbourhoods across England and Wales where low incomes meet high energy costs. Data coming soon.
+These are neighbourhoods across England and Wales where low incomes meet high energy costs.
 
-<!-- [View Dataset](#){: .button }  [Download Data](#){: .button } -->
+You can download the GIS data or view the map we've made with this data on the links below.
+
+| **Data set**                                                | **Download GIS data** | **Interactive maps (links)**    |
+| :-----------------------------------------------------------| :----------: | :---------: |
+| Energy crisis hotspots (2026)          | [Download energy crisis hotspots data (geojson)](/datasets/energy-crisis-hotspots-lsoa21.geojson){: .button .button--small } | [View energy crisis hotspot map](/maps/energy-crisis-hotspots-map.html){: .button .button--small }  |
 
 ---
 
