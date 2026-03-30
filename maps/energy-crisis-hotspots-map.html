@@ -191,6 +191,11 @@
         filter: hotspotFilter,
         onEachFeature: popupHotspot
       }).addTo(map);
+
+      // If LAD is already loaded and on the map, keep hotspots on top
+    if (ladLayer && map.hasLayer(ladLayer)) {
+      hotspotLayer.bringToFront();
+    }
     });
 
   fetch('/datasets/energy/lad-boundaries.geojson')
@@ -215,6 +220,9 @@
         if (!ladLayer) return;
         if (e.target.checked) {
           ladLayer.addTo(map);
+          if (hotspotLayer) {
+          hotspotLayer.bringToFront();   // ensure hotspots sit above LAD
+          }
         } else {
           map.removeLayer(ladLayer);
         }
