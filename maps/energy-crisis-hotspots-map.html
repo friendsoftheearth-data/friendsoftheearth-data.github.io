@@ -254,7 +254,12 @@
       ladClickLayer = L.geoJSON(data, {
         style: ladClickStyle,
         onEachFeature: popupLAD
-    });
+      });
+
+      // Make sure hotspots are on top for clicks if already loaded
+      if (hotspotLayer) {
+        hotspotLayer.bringToFront();
+      }
   });
   
   // LAD toggle
@@ -264,9 +269,9 @@
       ladToggle.addEventListener('change', (e) => {
         if (!ladBoundaryLayer || !ladClickLayer) return;
         if (e.target.checked) {
-          ladBoundaryLayer.addTo(map); // visible lines above
-          ladClickLayer.addTo(map);    // invisible clickable polygons below
-          if (hotspotLayer) hotspotLayer.bringToFront(); // hotspot popups win
+          ladBoundaryLayer.addTo(map);
+          ladClickLayer.addTo(map);
+          if (hotspotLayer) hotspotLayer.bringToFront();
         } else {
           map.removeLayer(ladBoundaryLayer);
           map.removeLayer(ladClickLayer);
