@@ -83,7 +83,7 @@
         <div class="legend-item" style="margin-top:8px;">
           <input type="checkbox" id="toggle-lad" />
           <span class="legend-color" style="background:transparent; border:2px dashed #1e234d;"></span>
-          <label for="toggle-lad">Local authorities</label>
+          <label for="toggle-lad">Local authority (summary data)</label>
         </div>
         <hr class="hr-thin">
       </div>
@@ -142,6 +142,13 @@
     return '£' + num.toLocaleString('en-GB', { maximumFractionDigits: 0 });
   }
 
+  function formatNumber(x) {
+    if (x === null || x === undefined || x === '') return 'Not available';
+    const num = Number(x);
+    if (isNaN(num)) return x;
+    return num.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+  }
+
   function formatPercentFromProportion(x) {
     if (x === null || x === undefined || x === '') return 'Not available';
     const num = Number(x);
@@ -180,7 +187,24 @@
   function popupLAD(feature, layer) {
     const p = feature.properties || {};
     const name = p.local_authority ?? 'Local authority';
-    layer.bindPopup(`<strong>${name}</strong>`);
+
+    const echNeighbourhoods = formatNumber(p.ech_lsoa_n);
+    const ehcHomes = formatNumber(p.ech_homes_n);
+    const ehcAverageBill = formatPounds(p.ech_average_bill);
+    const ehcIneff = formatPercentFromProportion(p.ech_epc_inefficient_pct);
+
+    const html = `
+      <strong>${name}</strong><br>
+      <br>
+      Energy crisis hotspots (no.): ${echNeighbourhoods}<br>
+      Homes in Energy crisis hotspots (no.): ${ehcHomes}<br>
+      Average bill in energy crisis hotspots (£): ${ehcAverageBill}<br>
+      Poorly insulated homes in energy crisis hotspots (%): ${ehcIneff}
+    `;
+          
+    // layer.bindPopup(`<strong>${name}</strong>`);
+    layer.bindPopup(html);
+    
   }
 
   let ladLayer;
@@ -201,7 +225,7 @@
     }
     });
 
-  fetch('/datasets/energy/lad-boundaries.geojson')
+  fetch('/datasets/energy/energy-crisis-hotspots-lad25.geojson')
     .then(res => res.json())
     .then(data => {
       // Boundaries layer (toggleable)
