@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Energy crisis hotspots</title>
+  <title>Energy crisis hotspots map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
@@ -196,10 +196,10 @@
     const html = `
       <strong>${name}</strong><br>
       <br>
-      Energy crisis hotspots (no.): ${echNeighbourhoods}<br>
-      Homes in Energy crisis hotspots (no.): ${ehcHomes}<br>
-      Average bill in energy crisis hotspots (£): ${ehcAverageBill}<br>
-      Poorly insulated homes in energy crisis hotspots (%): ${ehcIneff}
+      Energy crisis hotspots (neighbourhoods): ${echNeighbourhoods}<br>
+      Homes in Energy crisis hotspots: ${ehcHomes}<br>
+      Average bill in hotspots (£): ${ehcAverageBill}<br>
+      Poorly insulated homes in hotspots (%): ${ehcIneff}
     `;
           
     // layer.bindPopup(`<strong>${name}</strong>`);
