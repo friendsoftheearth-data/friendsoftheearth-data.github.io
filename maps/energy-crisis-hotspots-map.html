@@ -191,14 +191,17 @@
     const echNeighbourhoods = formatNumber(p.ech_lsoa_n);
     const ehcHomes = formatNumber(p.ech_homes_n);
     const ehcAverageBill = formatPounds(p.ech_average_bill);
+    const ehcFutureBill = formatPounds(p.ech_future_bill);
     const ehcIneff = formatPercentFromProportion(p.ech_epc_inefficient_pct);
 
     const html = `
       <strong>${name}</strong><br>
       <br>
       Energy crisis hotspots (neighbourhoods): ${echNeighbourhoods}<br>
-      Homes in Energy crisis hotspots: ${ehcHomes}<br>
+      <br>
+      Homes in energy crisis hotspots: ${ehcHomes}<br>
       Average bill in hotspots (£): ${ehcAverageBill}<br>
+      Average predicted bill in hotspots (£): ${ehcFutureBill}<br>
       Poorly insulated homes in hotspots (%): ${ehcIneff}
     `;
           
