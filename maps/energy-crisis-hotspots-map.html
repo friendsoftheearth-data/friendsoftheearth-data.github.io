@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,16 +59,11 @@
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
   const map = L.map('map', {
     preferCanvas: true
   }).setView([53, -2.5], 7); // initial zoom was 6
 
-  // Pane for LAD boundary lines (above overlays)
-  map.createPane('lad-boundary-pane');
-  map.getPane('lad-boundary-pane').style.zIndex = 450; // higher than overlayPane (default 400)
-  
   const legend = L.control({ position: 'topright' });
 
   legend.onAdd = function () {
@@ -91,7 +87,7 @@
             <span class="slider"></span>
           </label>
           <span class="legend-color" style="background:transparent; border:2px dashed #1e234d;"></span>
-          <label for="toggle-lad">Local authority boundaries</label>
+          <label for="toggle-lad">Local authority (summary data)</label>
         </div>
         <hr class="hr-thin">
       </div>
@@ -129,22 +125,12 @@
     opacity: 1            // opacity of the stroke
   };
 
-  // LAD boundary line style (non-interactive, on its own pane)
-  const ladBoundaryStyle = {
-    pane: 'lad-boundary-pane',
+  // LAD boundary style (dashed dark line)
+  const ladStyle = {
     color: '#1e234d',
-    weight: 1,
+    weight: 1.5,
     dashArray: '4 4',
-    fillOpacity: 0,
-    interactive: false
-  };
-  
-  // LAD clickable polygon style (same geometry, lower z-order)
-  const ladClickStyle = {
-    color: '#1e234d',
-    weight: 0,      // no visible stroke for the clickable layer
-    fillOpacity: 0, // invisible; we rely only on click area
-    interactive: false
+    fillOpacity: 0
   };
 
   // Only keep features where energy_crisis_hotspot == 'Energy crisis hotspot'
@@ -202,17 +188,17 @@
   }
 
   // LAD popup
-  function popupLAD(feature) {
+  function popupLAD(feature, layer) {
     const p = feature.properties || {};
     const name = p.local_authority ?? 'Local authority';
-  
+
     const echNeighbourhoods = formatNumber(p.ech_lsoa_n);
     const ehcHomes = formatNumber(p.ech_homes_n);
     const ehcAverageBill = formatPounds(p.ech_average_bill);
     const ehcFutureBill = formatPounds(p.ech_future_bill);
     const ehcIneff = formatPercentFromProportion(p.ech_epc_inefficient_pct);
-  
-    return `
+
+    const html = `
       <strong>${name}</strong><br>
       <br>
       Energy crisis hotspots (neighbourhoods): ${echNeighbourhoods}<br>
@@ -222,42 +208,15 @@
       Average predicted bill in hotspots (£): ${ehcFutureBill}<br>
       Poorly insulated homes in hotspots (%): ${ehcIneff}
     `;
+          
+    // layer.bindPopup(`<strong>${name}</strong>`);
+    layer.bindPopup(html);
+    
   }
 
-  let ladBoundaryLayer;
-  let ladClickLayer;
+  let ladLayer;
   let hotspotLayer;
 
-  map.on('click', (e) => {
-    // If a hotspot popup is already open, do nothing (hotspot wins)
-    if (map._popup && map._popup._isOpen) {
-      return;
-    }
-  
-    if (!ladClickLayer) return;
-  
-    const latlng = e.latlng;
-    let foundFeature = null;
-  
-    ladClickLayer.eachLayer((layer) => {
-      if (foundFeature) return; // already found one
-  
-      if (layer.getBounds && layer.getBounds().contains(latlng)) {
-        // For complex polygons, you might want a proper point-in-polygon test,
-        // but bounds check is a good, fast approximation.
-        foundFeature = layer.feature;
-      }
-    });
-  
-    if (foundFeature) {
-      const html = popupLAD(foundFeature);
-      L.popup()
-        .setLatLng(latlng)
-        .setContent(html)
-        .openOn(map);
-    }
-  });
-  
   fetch('/datasets/energy/energy-crisis-hotspots-lsoa21.geojson')
     .then(res => res.json())
     .then(data => {
@@ -266,41 +225,40 @@
         filter: hotspotFilter,
         onEachFeature: popupHotspot
       }).addTo(map);
-  });
+
+      // If LAD is already loaded and on the map, keep hotspots on top
+    if (ladLayer && map.hasLayer(ladLayer)) {
+      hotspotLayer.bringToFront();
+    }
+    });
 
   fetch('/datasets/energy/energy-crisis-hotspots-lad25.geojson')
     .then(res => res.json())
     .then(data => {
-      // Visible boundary lines, non-interactive, in high-zIndex pane
-      ladBoundaryLayer = L.geoJSON(data, {
-        style: ladBoundaryStyle
+      // Boundaries layer (toggleable)
+      ladLayer = L.geoJSON(data, {
+        style: ladStyle,
+        onEachFeature: popupLAD
       });
-  
-      // Invisible clickable polygons in default overlay pane
-      ladClickLayer = L.geoJSON(data, {
-        style: ladClickStyle,
-        // onEachFeature: popupLAD
-      });
-
-      // Make sure hotspots are on top for clicks if already loaded
+      // ensure hotspot polygons stay visually on top when both are on
       if (hotspotLayer) {
         hotspotLayer.bringToFront();
       }
-  });
+    });
   
   // LAD toggle
   setTimeout(() => {
     const ladToggle = document.getElementById('toggle-lad');
     if (ladToggle) {
       ladToggle.addEventListener('change', (e) => {
-        if (!ladBoundaryLayer || !ladClickLayer) return;
+        if (!ladLayer) return;
         if (e.target.checked) {
-          ladBoundaryLayer.addTo(map);
-          ladClickLayer.addTo(map);
-          if (hotspotLayer) hotspotLayer.bringToFront();
+          ladLayer.addTo(map);
+          if (hotspotLayer) {
+          hotspotLayer.bringToFront();   // ensure hotspots sit above LAD
+          }
         } else {
-          map.removeLayer(ladBoundaryLayer);
-          map.removeLayer(ladClickLayer);
+          map.removeLayer(ladLayer);
         }
       });
     }
