@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "office-postcode-locations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::27700" } },
+"features": [
+{ "type": "Feature", "properties": { "pcds": "B5 5TH", "dointr": 198001, "doterm": null, "lsoa21": "E01033561", "foe_office": "Birmingham", "id": 1 }, "geometry": { "type": "Point", "coordinates": [ 407530.0, 286612.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "BN1 1YR", "dointr": 199405, "doterm": null, "lsoa21": "E01016969", "foe_office": "Brighton", "id": 2 }, "geometry": { "type": "Point", "coordinates": [ 531001.0, 104574.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "BS1 6BX", "dointr": 198803, "doterm": null, "lsoa21": "E01033903", "foe_office": "Bristol", "id": 3 }, "geometry": { "type": "Point", "coordinates": [ 359221.0, 172885.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "CF11 9LJ", "dointr": 199906, "doterm": null, "lsoa21": "W01001861", "foe_office": "Cardiff", "id": 4 }, "geometry": { "type": "Point", "coordinates": [ 317381.0, 176779.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "LS1 2BH", "dointr": 198001, "doterm": null, "lsoa21": "E01033008", "foe_office": "Leeds", "id": 5 }, "geometry": { "type": "Point", "coordinates": [ 429780.0, 433742.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "M4 1LE", "dointr": 198001, "doterm": null, "lsoa21": "E01034129", "foe_office": "Manchester", "id": 6 }, "geometry": { "type": "Point", "coordinates": [ 384563.0, 398539.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "SW9 0HP", "dointr": 198001, "doterm": null, "lsoa21": "E01003186", "foe_office": "London", "id": 7 }, "geometry": { "type": "Point", "coordinates": [ 530806.0, 176927.0 ] } },
+{ "type": "Feature", "properties": { "pcds": "BT1 1RD", "dointr": 198412, "doterm": null, "lsoa21": "N21000251", "foe_office": "Belfast", "id": 8 }, "geometry": { "type": "Point", "coordinates": [ 146302.975498918036465, 529871.635448985267431 ] } }
+]
+}

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Friends of the Earth – Staff & Office Locations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { margin: 0; padding: 0; font-family: sans-serif; }
+    #map { height: 100vh; }
+
+    /* ── Legend panel ── */
+    .legend {
+      background: #f4f6fa;
+      padding: 1em;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #1e234d;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      border-radius: 6px;
+      min-width: 220px;
+      max-width: 300px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+
+    .legend-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .legend-section {
+      margin-top: 10px;
+    }
+
+    .legend-section-title {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #555c7a;
+      margin-bottom: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      gap: 7px;
+    }
+
+    .legend-swatch {
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .legend-swatch.square {
+      border-radius: 2px;
+    }
+
+    .legend-swatch.building {
+      border-radius: 2px;
+      background: #1e234d !important;
+    }
+
+    hr.legend-hr {
+      border: none;
+      border-top: 1px solid #d0d4e8;
+      margin: 8px 0;
+    }
+
+    /* ── Layer selector tabs ── */
+    .layer-tabs {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .layer-tab {
+      padding: 3px 9px;
+      border-radius: 12px;
+      border: 1.5px solid #1e234d;
+      background: transparent;
+      color: #1e234d;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .layer-tab.active {
+      background: #1e234d;
+      color: #fff;
+    }
+
+    .layer-tab:hover:not(.active) {
+      background: #e8eaf5;
+    }
+
+    /* ── Toggle switches ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .toggle-label {
+      font-size: 0.82rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Gradient bar for distance legend */
+    .gradient-bar {
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(to right, #2c7bb6, #ffffbf, #d7191c);
+      margin-top: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .gradient-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: #555c7a;
+      margin-top: 2px;
+    }
+
+    /* Collapse button */
+    .legend-collapse-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #1e234d;
+      padding: 0 0 0 8px;
+      line-height: 1;
+    }
+
+    .legend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ── Popup styles ── */
+    .popup-content strong { font-size: 0.9rem; }
+    .popup-content table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 0.8rem; }
+    .popup-content td { padding: 2px 4px; }
+    .popup-content td:first-child { color: #555c7a; white-space: nowrap; padding-right: 8px; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // ── Map setup ──────────────────────────────────────────────
+  const map = L.map('map', { preferCanvas: true }).setView([53.5, -2.5], 6);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors & Carto',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
+
+  // ── Colour palettes ────────────────────────────────────────
+
+  // 8 office colours (distinct, colourblind-friendlier set)
+  const OFFICE_COLOURS = {
+    'Bristol':    '#e6194b',
+    'London':     '#3cb44b',
+    'Cardiff':    '#4363d8',
+    'Manchester': '#f58231',
+    'Leeds':      '#911eb4',
+    'Birmingham': '#42d4f4',
+    'Newcastle':  '#f032e6',
+    'Edinburgh':  '#bfef45',
+  };
+  const OFFICE_FALLBACK = '#aaaaaa';
+
+  function officeColour(name) {
+    if (!name) return OFFICE_FALLBACK;
+    for (const key of Object.keys(OFFICE_COLOURS)) {
+      if (name.toLowerCase().includes(key.toLowerCase())) return OFFICE_COLOURS[key];
+    }
+    return OFFICE_FALLBACK;
+  }
+
+  // Distance colour: blue → yellow → red spectrum
+  function distanceColour(km) {
+    if (km === null || km === undefined || isNaN(km)) return '#cccccc';
+    // Cap at 200km for spectrum
+    const t = Math.min(km, 200) / 200;
+    // 3-stop: blue(0) → yellow(0.5) → red(1)
+    let r, g, b;
+    if (t < 0.5) {
+      const s = t * 2;
+      r = Math.round(44  + s * (255 - 44));
+      g = Math.round(123 + s * (255 - 123));
+      b = Math.round(182 + s * (191 - 182));
+    } else {
+      const s = (t - 0.5) * 2;
+      r = Math.round(255 + s * (215 - 255));
+      g = Math.round(255 + s * (25  - 255));
+      b = Math.round(191 + s * (28  - 191));
+    }
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // Flag colours
+  const FLAG_COLOURS = {
+    'Within 10miles':      '#2c9e4a',
+    'Further than 10miles':'#c0392b',
+  };
+  function flagColour(flag) {
+    return FLAG_COLOURS[flag] || '#888888';
+  }
+
+  // ── Layer state ───────────────────────────────────────────
+  let officeLayer  = null;
+  let staffLayers  = { office: null, distance: null, flag: null };
+  let activeStaffMode = 'office'; // 'office' | 'distance' | 'flag' | 'none'
+  let officesVisible  = true;
+  let staffVisible    = true;
+
+  // ── Office icon ───────────────────────────────────────────
+  function buildingIcon() {
+    return L.divIcon({
+      className: '',
+      html: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26">
+        <rect x="2" y="6" width="18" height="18" rx="2" fill="#1e234d" stroke="#fff" stroke-width="1.5"/>
+        <rect x="5" y="10" width="4" height="4" rx="0.5" fill="#fff" opacity="0.8"/>
+        <rect x="13" y="10" width="4" height="4" rx="0.5" fill="#fff" opacity="0.8"/>
+        <rect x="8" y="16" width="6" height="8" rx="0.5" fill="#fff" opacity="0.8"/>
+        <polygon points="11,0 0,8 22,8" fill="#1e234d" stroke="#fff" stroke-width="1"/>
+      </svg>`,
+      iconSize: [22, 26],
+      iconAnchor: [11, 26],
+      popupAnchor: [0, -26]
+    });
+  }
+
+  // ── Staff circle marker factory ───────────────────────────
+  function staffMarker(latlng, colour) {
+    return L.circleMarker(latlng, {
+      radius: 5,
+      fillColor: colour,
+      color: '#fff',
+      weight: 1,
+      fillOpacity: 0.85,
+      opacity: 1
+    });
+  }
+
+  // ── Popups ────────────────────────────────────────────────
+  function officePopup(feature) {
+    const p = feature.properties || {};
+    const name = p.name || p.office_name || p.foe_office || 'FoE Office';
+    return `<div class="popup-content"><strong>🏢 ${name}</strong></div>`;
+  }
+
+  function staffPopup(feature) {
+    const p = feature.properties || {};
+    const rows = [
+      ['Nearest office', p.foe_office || '–'],
+      ['Distance (km)', p.distance_to_nearest_km !== undefined ? Number(p.distance_to_nearest_km).toFixed(1) : '–'],
+      ['10-mile flag', p.nearest_office_flag || '–'],
+    ];
+    return `<div class="popup-content">
+      <strong>Staff location</strong>
+      <table>${rows.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+    </div>`;
+  }
+
+  // ── Build staff layer for a given colour mode ─────────────
+  function buildStaffLayer(data, mode) {
+    return L.geoJSON(data, {
+      pointToLayer(feature, latlng) {
+        const p = feature.properties || {};
+        let colour;
+        if (mode === 'office')   colour = officeColour(p.foe_office);
+        if (mode === 'distance') colour = distanceColour(p.distance_to_nearest_km);
+        if (mode === 'flag')     colour = flagColour(p.nearest_office_flag);
+        return staffMarker(latlng, colour || '#888');
+      },
+      onEachFeature(feature, layer) {
+        layer.bindPopup(staffPopup(feature));
+      }
+    });
+  }
+
+  // ── Fetch and build layers ────────────────────────────────
+  let staffGeoJSON = null;
+
+  fetch('/datasets/foe/office-postcode-locations.geojson')
+    .then(r => r.json())
+    .then(data => {
+      officeLayer = L.geoJSON(data, {
+        pointToLayer(feature, latlng) {
+          return L.marker(latlng, { icon: buildingIcon() });
+        },
+        onEachFeature(feature, layer) {
+          layer.bindPopup(officePopup(feature));
+        }
+      }).addTo(map);
+
+      // Detect actual office names from data
+      const names = new Set();
+      data.features.forEach(f => {
+        const n = (f.properties || {}).foe_office || (f.properties || {}).name || (f.properties || {}).office_name;
+        if (n) names.add(n);
+      });
+      buildOfficeLegend([...names]);
+    })
+    .catch(err => console.warn('Could not load office GeoJSON:', err));
+
+  fetch('/datasets/foe/staff-postcode-locations.geojson')
+    .then(r => r.json())
+    .then(data => {
+      staffGeoJSON = data;
+
+      // Build all three layers (only active one shown)
+      staffLayers.office   = buildStaffLayer(data, 'office');
+      staffLayers.distance = buildStaffLayer(data, 'distance');
+      staffLayers.flag     = buildStaffLayer(data, 'flag');
+
+      // Show default (office) layer
+      if (staffVisible) staffLayers[activeStaffMode].addTo(map);
+
+      // Bring office markers to front
+      if (officeLayer) officeLayer.bringToFront();
+
+      // Detect unique office names and flag values for legend
+      const offices = new Set();
+      const flags   = new Set();
+      let maxDist   = 0;
+      data.features.forEach(f => {
+        const p = f.properties || {};
+        if (p.foe_office) offices.add(p.foe_office);
+        if (p.nearest_office_flag) flags.add(p.nearest_office_flag);
+        if (p.distance_to_nearest_km) maxDist = Math.max(maxDist, Number(p.distance_to_nearest_km));
+      });
+
+      buildStaffLegend([...offices], [...flags], maxDist);
+    })
+    .catch(err => console.warn('Could not load staff GeoJSON:', err));
+
+  // ── Legend ────────────────────────────────────────────────
+  const legend = L.control({ position: 'topright' });
+  legend.onAdd = function() {
+    const div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = `
+      <div class="legend-header">
+        <span class="legend-title">FoE Staff &amp; Offices</span>
+        <button class="legend-collapse-btn" id="legend-toggle-btn" title="Toggle legend">−</button>
+      </div>
+      <div id="legend-body">
+        <hr class="legend-hr">
+
+        <!-- Offices toggle -->
+        <div class="toggle-row">
+          <label class="switch" style="flex-shrink:0">
+            <input type="checkbox" id="toggle-offices" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label" for="toggle-offices">
+            <span style="display:inline-block;width:13px;height:13px;background:#1e234d;border-radius:2px;vertical-align:middle;margin-right:5px;"></span>
+            Office locations
+          </span>
+        </div>
+
+        <!-- Staff toggle -->
+        <div class="toggle-row">
+          <label class="switch" style="flex-shrink:0">
+            <input type="checkbox" id="toggle-staff" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label" for="toggle-staff">
+            Staff locations
+          </span>
+        </div>
+
+        <hr class="legend-hr">
+
+        <!-- Staff layer mode tabs -->
+        <div id="staff-tab-section">
+          <div class="legend-section-title">Staff colour mode</div>
+          <div class="layer-tabs">
+            <button class="layer-tab active" data-mode="office">Nearest office</button>
+            <button class="layer-tab" data-mode="distance">Distance</button>
+            <button class="layer-tab" data-mode="flag">10-mile flag</button>
+          </div>
+        </div>
+
+        <hr class="legend-hr">
+
+        <!-- Dynamic legend content injected by JS -->
+        <div id="legend-dynamic"></div>
+      </div>
+    `;
+
+    // Prevent map interactions when clicking legend
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+    return div;
+  };
+  legend.addTo(map);
+
+  // ── Post-render wiring ────────────────────────────────────
+  setTimeout(() => {
+    // Collapse toggle
+    const collapseBtn = document.getElementById('legend-toggle-btn');
+    const legendBody  = document.getElementById('legend-body');
+    if (collapseBtn && legendBody) {
+      collapseBtn.addEventListener('click', () => {
+        const hidden = legendBody.style.display === 'none';
+        legendBody.style.display = hidden ? 'block' : 'none';
+        collapseBtn.textContent = hidden ? '−' : '+';
+      });
+    }
+
+    // Offices toggle
+    document.getElementById('toggle-offices')?.addEventListener('change', e => {
+      if (!officeLayer) return;
+      if (e.target.checked) { officeLayer.addTo(map); officeLayer.bringToFront(); }
+      else map.removeLayer(officeLayer);
+      officesVisible = e.target.checked;
+    });
+
+    // Staff visibility toggle
+    document.getElementById('toggle-staff')?.addEventListener('change', e => {
+      staffVisible = e.target.checked;
+      const tabSection = document.getElementById('staff-tab-section');
+      if (tabSection) tabSection.style.opacity = staffVisible ? '1' : '0.4';
+      const currentLayer = staffLayers[activeStaffMode];
+      if (staffVisible) {
+        if (currentLayer && !map.hasLayer(currentLayer)) currentLayer.addTo(map);
+      } else {
+        Object.values(staffLayers).forEach(l => { if (l && map.hasLayer(l)) map.removeLayer(l); });
+      }
+      if (officeLayer) officeLayer.bringToFront();
+    });
+
+    // Staff mode tabs
+    document.querySelectorAll('.layer-tab[data-mode]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!staffVisible) return;
+
+        document.querySelectorAll('.layer-tab[data-mode]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const prevMode = activeStaffMode;
+        activeStaffMode = btn.dataset.mode;
+
+        // Swap layers
+        if (staffLayers[prevMode] && map.hasLayer(staffLayers[prevMode])) {
+          map.removeLayer(staffLayers[prevMode]);
+        }
+        if (staffLayers[activeStaffMode]) {
+          staffLayers[activeStaffMode].addTo(map);
+        }
+        if (officeLayer && map.hasLayer(officeLayer)) officeLayer.bringToFront();
+
+        // Update legend
+        updateLegendForMode(activeStaffMode);
+      });
+    });
+
+  }, 100);
+
+  // ── Legend content builders ───────────────────────────────
+  let _officeNames  = [];
+  let _flagValues   = [];
+  let _maxDist      = 150;
+
+  function buildOfficeLegend(names) {
+    // Fill in any missing names with fallback colours
+    _officeNames = names.length ? names : Object.keys(OFFICE_COLOURS);
+    updateLegendForMode(activeStaffMode);
+  }
+
+  function buildStaffLegend(offices, flags, maxDist) {
+    if (offices.length) _officeNames = offices;
+    if (flags.length)   _flagValues  = flags;
+    _maxDist = maxDist || 150;
+    updateLegendForMode(activeStaffMode);
+  }
+
+  function updateLegendForMode(mode) {
+    const el = document.getElementById('legend-dynamic');
+    if (!el) return;
+
+    if (mode === 'office') {
+      const names = _officeNames.length ? _officeNames : Object.keys(OFFICE_COLOURS);
+      el.innerHTML = `
+        <div class="legend-section-title">Nearest office</div>
+        ${names.map(n => `
+          <div class="legend-item">
+            <span class="legend-swatch" style="background:${officeColour(n)}"></span>
+            <span>${n}</span>
+          </div>`).join('')}
+      `;
+    } else if (mode === 'distance') {
+      const maxLabel = _maxDist > 0 ? Math.round(_maxDist) + ' km' : '200 km';
+      el.innerHTML = `
+        <div class="legend-section-title">Distance to nearest office</div>
+        <div class="gradient-bar"></div>
+        <div class="gradient-labels">
+          <span>0 km</span>
+          <span>${maxLabel}</span>
+        </div>
+      `;
+    } else if (mode === 'flag') {
+      const flags = _flagValues.length ? _flagValues : Object.keys(FLAG_COLOURS);
+      el.innerHTML = `
+        <div class="legend-section-title">10-mile flag</div>
+        ${flags.map(f => `
+          <div class="legend-item">
+            <span class="legend-swatch" style="background:${flagColour(f)}"></span>
+            <span>${f}</span>
+          </div>`).join('')}
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
