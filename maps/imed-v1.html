@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IMED decile map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+
+  <!-- External stylesheet (ours) -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Leaflet styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+    }
+
+    .legend {
+      background: #f4f6fa;
+      padding: 1em;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #1e234d;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      flex: 0 0 16px;
+    }
+
+    .popup-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .popup-table td {
+      padding: 4px 0;
+      vertical-align: top;
+    }
+
+    .popup-table td:first-child {
+      padding-right: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map', {
+    preferCanvas: true
+  }).setView([53, -2.5], 7);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors & Carto',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
+
+  function getDecileColor(decile) {
+    const value = Number(decile);
+
+    const colors = {
+      1: '#d73027',
+      2: '#f46d43',
+      3: '#fdae61',
+      4: '#fee08b',
+      5: '#fff7bc',
+      6: '#d9ef8b',
+      7: '#a6d96a',
+      8: '#66bd63',
+      9: '#1a9850',
+      10: '#006837'
+    };
+
+    return colors[value] || '#bdbdbd';
+  }
+
+  function formatDecile(value) {
+    if (value === null || value === undefined || value === '') return 'Not available';
+    const num = Number(value);
+    return Number.isNaN(num) ? value : num;
+  }
+
+  function layerStyle(feature) {
+    const p = feature.properties || {};
+    return {
+      fillColor: getDecileColor(p.imed_decile),
+      color: '#f4f6fa',
+      weight: 1.5,
+      fillOpacity: 0.78,
+      opacity: 0.35
+    };
+  }
+
+  function popupContent(feature, layer) {
+    const p = feature.properties || {};
+    const name =
+      p.name ||
+      p.lsoa21nm ||
+      p.lsoa_name ||
+      p.lad_name ||
+      p.local_authority ||
+      'Area';
+
+    const html = `
+      <strong>${name}</strong>
+      <table class="popup-table">
+        <tr>
+          <td>Pollution decile</td>
+          <td>${formatDecile(p.pollution_decile_imed)}</td>
+        </tr>
+        <tr>
+          <td>Nature decile</td>
+          <td>${formatDecile(p.nature_decile_imed)}</td>
+        </tr>
+        <tr>
+          <td>Climate decile</td>
+          <td>${formatDecile(p.climate_decile_imed)}</td>
+        </tr>
+        <tr>
+          <td><strong>IMED decile</strong></td>
+          <td><strong>${formatDecile(p.imed_decile)}</strong></td>
+        </tr>
+      </table>
+    `;
+
+    layer.bindPopup(html);
+  }
+
+  const legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>IMED decile</strong>
+        <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
+      </div>
+      <div id="legend-content" style="margin-top:8px;">
+        This map shows IMED deciles from 1 to 10, coloured from red (1) to green (10).
+        <hr class="hr-thin">
+        <div class="legend-item"><span class="legend-color" style="background:#d73027"></span><span>1</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#f46d43"></span><span>2</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#fdae61"></span><span>3</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#fee08b"></span><span>4</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#fff7bc"></span><span>5</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#d9ef8b"></span><span>6</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#a6d96a"></span><span>7</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#66bd63"></span><span>8</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#1a9850"></span><span>9</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#006837"></span><span>10</span></div>
+      </div>
+    `;
+    return container;
+  };
+
+  legend.addTo(map);
+
+  setTimeout(() => {
+    const btn = document.getElementById('legend-toggle');
+    const content = document.getElementById('legend-content');
+
+    if (btn && content) {
+      btn.addEventListener('click', () => {
+        const isHidden = content.style.display === 'none';
+        content.style.display = isHidden ? 'block' : 'none';
+        btn.textContent = isHidden ? '−' : '+';
+      });
+    }
+  }, 0);
+
+  fetch('/datasets/imed/imed-v1.geojson')
+    .then(res => res.json())
+    .then(data => {
+      const geojsonLayer = L.geoJSON(data, {
+        style: layerStyle,
+        onEachFeature: popupContent
+      }).addTo(map);
+
+      map.fitBounds(geojsonLayer.getBounds(), {
+        padding: [20, 20]
+      });
+    })
+    .catch(err => {
+      console.error('Error loading GeoJSON:', err);
+    });
+</script>
+
+</body>
+</html>
