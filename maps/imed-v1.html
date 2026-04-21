@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IMED decile map</title>
+  <title>IMED version 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
@@ -51,23 +51,7 @@
       border: 1px solid #ccc;
       flex: 0 0 16px;
     }
-
-    .popup-table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 8px;
-      font-size: 0.9rem;
-    }
-
-    .popup-table td {
-      padding: 4px 0;
-      vertical-align: top;
-    }
-
-    .popup-table td:first-child {
-      padding-right: 12px;
-    }
-  </style>
+    </style>
 </head>
 <body>
 
@@ -89,16 +73,16 @@
     const value = Number(decile);
 
     const colors = {
-      1: '#d73027',
-      2: '#f46d43',
-      3: '#fdae61',
-      4: '#fee08b',
-      5: '#fff7bc',
-      6: '#d9ef8b',
-      7: '#a6d96a',
-      8: '#66bd63',
-      9: '#1a9850',
-      10: '#006837'
+      1: '#ed6132',
+      2: '#f08654',
+      3: '#f4ad78',
+      4: '#f7d099',
+      5: '#faf5bb',
+      6: '#dcd8b3',
+      7: '#bedbab',
+      8: '#84c29c',
+      9: '#48a88c',
+      10: '#098d7b'
     };
 
     return colors[value] || '#bdbdbd';
@@ -114,47 +98,26 @@
     const p = feature.properties || {};
     return {
       fillColor: getDecileColor(p.imed_decile),
-      color: '#f4f6fa',
-      weight: 1.5,
-      fillOpacity: 0.78,
-      opacity: 0.35
+      stroke: false,
+      fillOpacity: 0.8
     };
   }
 
   function popupContent(feature, layer) {
-    const p = feature.properties || {};
-    const name =
-      p.name ||
-      p.lsoa21nm ||
-      p.lsoa_name ||
-      p.lad_name ||
-      p.local_authority ||
-      'Area';
+  const p = feature.properties || {};
+  const name = p.lsoa11 || 'Area';
 
-    const html = `
-      <strong>${name}</strong>
-      <table class="popup-table">
-        <tr>
-          <td>Pollution decile</td>
-          <td>${formatDecile(p.pollution_decile_imed)}</td>
-        </tr>
-        <tr>
-          <td>Nature decile</td>
-          <td>${formatDecile(p.nature_decile_imed)}</td>
-        </tr>
-        <tr>
-          <td>Climate decile</td>
-          <td>${formatDecile(p.climate_decile_imed)}</td>
-        </tr>
-        <tr>
-          <td><strong>IMED decile</strong></td>
-          <td><strong>${formatDecile(p.imed_decile)}</strong></td>
-        </tr>
-      </table>
-    `;
+  const html = `
+    <strong>${name}</strong><br>
+    <br>
+    Pollution decile: ${formatDecile(p.pollution_decile_imed)}<br>
+    Nature decile: ${formatDecile(p.nature_decile_imed)}<br>
+    Climate decile: ${formatDecile(p.climate_decile_imed)}<br>
+    IMED decile: ${formatDecile(p.imed_decile)}
+  `;
 
-    layer.bindPopup(html);
-  }
+  layer.bindPopup(html);
+}
 
   const legend = L.control({ position: 'topright' });
 
@@ -162,22 +125,22 @@
     const container = L.DomUtil.create('div', 'legend');
     container.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <strong>IMED decile</strong>
+        <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
         <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
       </div>
       <div id="legend-content" style="margin-top:8px;">
-        This map shows IMED deciles from 1 to 10, coloured from red (1) to green (10).
+        This map shows IMED deciles from 1 to 10, where 1 represents the most environmentally deprived neighbourhoods, and 10 the least deprived. The IMED brings together six datasets across three domains: pollution (air quality, noise pollution), nature (greenspace and tree cover), and climate extremes (flood risk and extreme heat). More details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
         <hr class="hr-thin">
-        <div class="legend-item"><span class="legend-color" style="background:#d73027"></span><span>1</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#f46d43"></span><span>2</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#fdae61"></span><span>3</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#fee08b"></span><span>4</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#fff7bc"></span><span>5</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#d9ef8b"></span><span>6</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#a6d96a"></span><span>7</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#66bd63"></span><span>8</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#1a9850"></span><span>9</span></div>
-        <div class="legend-item"><span class="legend-color" style="background:#006837"></span><span>10</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#ed6132"></span><span>1</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#f08654"></span><span>2</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#f4ad78"></span><span>3</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#f7d099"></span><span>4</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#faf5bb"></span><span>5</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#dcd8b3"></span><span>6</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#bedbab"></span><span>7</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#84c29c"></span><span>8</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#48a88c"></span><span>9</span></div>
+        <div class="legend-item"><span class="legend-color" style="background:#098d7b"></span><span>10</span></div>
       </div>
     `;
     return container;
