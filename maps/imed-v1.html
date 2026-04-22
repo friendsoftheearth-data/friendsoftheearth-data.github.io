@@ -63,11 +63,22 @@
     preferCanvas: true
   }).setView([53, -2.5], 6);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors & Carto',
-    subdomains: 'abcd',
-    maxZoom: 18
-  }).addTo(map);
+ map.createPane('labels');
+map.getPane('labels').style.zIndex = 650;
+map.getPane('labels').style.pointerEvents = 'none';
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap contributors, © CARTO',
+  subdomains: 'abcd',
+  maxZoom: 20
+}).addTo(map);
+
+const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+  pane: 'labels',
+  attribution: '© OpenStreetMap contributors, © CARTO',
+  subdomains: 'abcd',
+  maxZoom: 20
+});
 
   function getDecileColor(decile) {
     const value = Number(decile);
@@ -173,6 +184,8 @@
         onEachFeature: popupContent
       }).addTo(map);
 
+      labelsOnly.addTo(map);
+      
       map.fitBounds(geojsonLayer.getBounds(), {
         padding: [20, 20]
       });
