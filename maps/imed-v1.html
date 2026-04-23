@@ -263,21 +263,22 @@ async function findPostcode() {
         <br>
         <hr class="hr-thin">
         <div class="postcode-search">
-          label for="postcode-input"><strong>Find a postcode</strong></label><br>
-          <input
-            id="postcode-input"
-            type="text"
-            placeholder="e.g. SW1A 1AA"
-            aria-label="Enter an England postcode"
-            style="width: 100%; margin-top: 6px; padding: 6px 8px; box-sizing: border-box;"
-          >
-          <button
-            id="postcode-go"
-            class="button button--small"
-            style="margin-top: 8px;"
-          >
-            Go
-          </button>
+          <label for="postcode-input"><strong>Enter your postcode to show statistics in your neighbourhood</strong></label><br>
+          <div class="postcode-row">
+            <input
+              id="postcode-input"
+              type="text"
+              placeholder="e.g. SW1A 1AA"
+              aria-label="Enter a UK postcode"
+            >
+            <button
+              id="postcode-go"
+              class="button button--small"
+              type="button"
+            >
+              Go
+            </button>
+          </div>
           <div id="postcode-message" style="margin-top: 8px; font-size: 0.85rem;"></div>
         </div>
         <hr class="hr-thin">
