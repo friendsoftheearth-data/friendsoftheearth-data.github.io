@@ -224,7 +224,7 @@ hr.hr-thin {
   font-weight: 600;
 }
 
-// postcode button features
+/* postcode button features */
 .postcode-row {
   display: flex;
   gap: 8px;
@@ -237,6 +237,12 @@ hr.hr-thin {
   min-width: 0;
   padding: 6px 8px;
   box-sizing: border-box;
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d;
+}
+
+.postcode-row input::placeholder {
+  font-family: 'Libre Franklin', sans-serif;
 }
 
 .postcode-row button {
