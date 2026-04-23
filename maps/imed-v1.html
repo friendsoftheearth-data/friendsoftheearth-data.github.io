@@ -14,6 +14,9 @@
   <!-- Leaflet styles -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+  <!-- turf library load for postcode lookup -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+  
   <style>
     body, html {
       margin: 0;
@@ -166,7 +169,82 @@ function onEachFeature(feature, layer) {
   });
 }
 
-  // 4. LEGEND DETAILS
+// POSTCODE SEARCH FUNCTIONS
+async function findPostcode() {
+  const input = document.getElementById('postcode-input');
+  const message = document.getElementById('postcode-message');
+
+  if (!input || !message) return;
+
+  const postcode = input.value.trim();
+
+  if (!postcode) {
+    message.textContent = 'Please enter a postcode.';
+    return;
+  }
+
+  message.textContent = 'Searching...';
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
+    const res = await fetch(url, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Geocoding request failed');
+    }
+
+    const results = await res.json();
+
+    if (!results.length) {
+      message.textContent = 'Postcode not found.';
+      return;
+    }
+
+    const result = results[0];
+    const lat = parseFloat(result.lat);
+    const lon = parseFloat(result.lon);
+
+    map.flyTo([lat, lon], 13, {
+      duration: 1.2
+    });
+
+    const point = turf.point([lon, lat]);
+
+    let matchedLayer = null;
+
+    geojsonLayer.eachLayer(layer => {
+      if (matchedLayer) return;
+
+      const feature = layer.feature;
+      if (!feature || !feature.geometry) return;
+
+      const isInside = turf.booleanPointInPolygon(point, feature);
+
+      if (isInside) {
+        matchedLayer = layer;
+      }
+    });
+
+    if (matchedLayer) {
+      setTimeout(() => {
+        matchedLayer.openPopup([lat, lon]);
+      }, 900);
+      message.textContent = '';
+    } else {
+      message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
+    }
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = 'Sorry, something went wrong with the postcode search.';
+  }
+}
+  
+  // 4. LEGEND
   const legend = L.control({ position: 'topright' });
 
   legend.onAdd = function () {
@@ -182,6 +260,26 @@ function onEachFeature(feature, layer) {
         The IMED brings together six datasets across three domains: pollution (air quality, noise pollution), nature (greenspace and tree cover), and climate extremes (flood risk and extreme heat).
         <br><br>
         More details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
+        <br>
+        <hr class="hr-thin">
+        <div class="postcode-search">
+          label for="postcode-input"><strong>Find a postcode</strong></label><br>
+          <input
+            id="postcode-input"
+            type="text"
+            placeholder="e.g. SW1A 1AA"
+            aria-label="Enter an England postcode"
+            style="width: 100%; margin-top: 6px; padding: 6px 8px; box-sizing: border-box;"
+          >
+          <button
+            id="postcode-go"
+            class="button button--small"
+            style="margin-top: 8px;"
+          >
+            Go
+          </button>
+          <div id="postcode-message" style="margin-top: 8px; font-size: 0.85rem;"></div>
+        </div>
         <hr class="hr-thin">
         <div class="legend-item"><span class="legend-color" style="background:#ed6132"></span><span>1 - most environmentally deprived</span></div>
         <div class="legend-item"><span class="legend-color" style="background:#f08251"></span><span>2</span></div>
@@ -211,6 +309,23 @@ function onEachFeature(feature, layer) {
         btn.textContent = isHidden ? '−' : '+';
       });
     }
+
+    const postcodeInput = document.getElementById('postcode-input');
+    const postcodeGo = document.getElementById('postcode-go');
+
+    if (postcodeGo) {
+      postcodeGo.addEventListener('click', findPostcode);
+    }
+
+    if (postcodeInput) {
+      postcodeInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          findPostcode();
+        }
+      });
+    }
+    
   }, 0);
 
 
