@@ -126,7 +126,7 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
   function popupContent(feature, layer) {
   const p = feature.properties || {};
   const lsoaCode = p.lsoa11 || 'Area';
-  const msoaName = p.msoa_name ?? 'Not available';
+  const msoaName = p.msoa11_name ?? 'Not available';
 
   const html = `
     <strong>LSOA code: ${lsoaCode}</strong><br>
