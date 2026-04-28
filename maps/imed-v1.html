@@ -133,7 +133,7 @@ function popupContent(feature, layer) {
   const html = `
     <div class="popup-card">
       <div class="popup-title">LSOA code: ${lsoaCode}</div>
-      ${name ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
+      ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
       <div class="popup-grid">
         <div class="popup-label">IMED decile</div>
         <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
