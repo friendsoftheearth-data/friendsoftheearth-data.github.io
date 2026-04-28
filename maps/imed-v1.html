@@ -135,16 +135,16 @@ function popupContent(feature, layer) {
       <div class="popup-title">LSOA code: <strong>${lsoaCode}</strong></div>
       ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
       <div class="popup-grid">
-        <div class="popup-label">IMED decile</div>
+        <div class="popup-label">IMED decile:</div>
         <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
 
-        <div class="popup-label">Pollution decile</div>
+        <div class="popup-label">Pollution decile:</div>
         <div class="popup-value">${formatDecile(p.pollution_decile_imed)}</div>
 
-        <div class="popup-label">Nature deficit decile</div>
+        <div class="popup-label">Nature deficit decile:</div>
         <div class="popup-value">${formatDecile(p.nature_decile_imed)}</div>
 
-        <div class="popup-label">Climate risk decile</div>
+        <div class="popup-label">Climate risk decile:</div>
         <div class="popup-value">${formatDecile(p.climate_decile_imed)}</div>
       </div>
     </div>
