@@ -87,7 +87,7 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
   maxZoom: 20
 });
 
-// 2. DEFINE HELPER FUNCTIONS
+// 2. DEFINE HELPER FUNCTIONS AND POPUP
   
   function getDecileColor(decile) {
     const value = Number(decile);
@@ -136,8 +136,8 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
     <br>
     IMED decile: ${formatDecile(p.imed_decile)}<br><br>
     Pollution decile: ${formatDecile(p.pollution_decile_imed)}<br>
-    Nature decile: ${formatDecile(p.nature_decile_imed)}<br>
-    Climate decile: ${formatDecile(p.climate_decile_imed)}
+    Nature deficit decile: ${formatDecile(p.nature_decile_imed)}<br>
+    Climate risks decile: ${formatDecile(p.climate_decile_imed)}
   `;
 
   layer.bindPopup(html);
