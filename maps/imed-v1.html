@@ -125,24 +125,35 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
     };
   }
 
-  function popupContent(feature, layer) {
+function popupContent(feature, layer) {
   const p = feature.properties || {};
   const lsoaCode = p.lsoa11 || 'Area';
   const msoaName = p.msoa11_name ?? 'Not available';
 
   const html = `
-    <strong>LSOA code: ${lsoaCode}</strong><br>
-    in <strong>${msoaName}</strong><br>
-    <br>
-    IMED decile: ${formatDecile(p.imed_decile)}<br><br>
-    Pollution decile: ${formatDecile(p.pollution_decile_imed)}<br>
-    Nature deficit decile: ${formatDecile(p.nature_decile_imed)}<br>
-    Climate risks decile: ${formatDecile(p.climate_decile_imed)}
+    <div class="popup-card">
+      <div class="popup-title">LSOA code: ${lsoaCode}</div>
+      ${name ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
+      <div class="popup-grid">
+        <div class="popup-label">IMED decile</div>
+        <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
+
+        <div class="popup-label">Pollution decile</div>
+        <div class="popup-value">${formatDecile(p.pollution_decile_imed)}</div>
+
+        <div class="popup-label">Nature decile</div>
+        <div class="popup-value">${formatDecile(p.nature_decile_imed)}</div>
+
+        <div class="popup-label">Climate decile</div>
+        <div class="popup-value">${formatDecile(p.climate_decile_imed)}</div>
+      </div>
+    </div>
   `;
 
   layer.bindPopup(html);
 }
 
+  
 // 3. HOVER BEHAVIOUR FUNCTIONS
 let geojsonLayer;
 
