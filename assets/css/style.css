@@ -212,16 +212,65 @@ hr.hr-thin {
   transform: translateX(16px);
 }
 
+/* POPUP STYLING */
+.popup-card {
+  min-width: 240px;
+  color: #1e234d;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.popup-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.popup-subtitle {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  color: #3d456f;
+}
+
+.popup-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 12px;
+  row-gap: 6px;
+  align-items: start;
+}
+
+.popup-label {
+  color: #4a5278;
+}
+
+.popup-value {
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.popup-value--primary {
+  font-weight: 700;
+  color: #1e234d;
+}
+
 .leaflet-popup-content {
   font-family: 'Libre Franklin', sans-serif;
   color: #1e234d;
   font-size: 0.95rem;
   line-height: 1.4;
+  margin: 14px 16px;
 }
 
 .leaflet-popup-content strong {
   color: #1e234d;
   font-weight: 600;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 16px;
 }
 
 /* postcode button features */
