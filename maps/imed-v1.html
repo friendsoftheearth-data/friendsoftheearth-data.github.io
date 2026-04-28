@@ -135,16 +135,16 @@ function popupContent(feature, layer) {
       <div class="popup-title">LSOA code: <strong>${lsoaCode}</strong></div>
       ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
       <div class="popup-grid">
-        <div class="popup-label">IMED decile:</div>
+        <div class="popup-label">IMED score (out of 10; 1 = most deprived):</div>
         <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
 
-        <div class="popup-label">Pollution decile:</div>
+        <div class="popup-label">Pollution score:</div>
         <div class="popup-value">${formatDecile(p.pollution_decile_imed)}</div>
 
-        <div class="popup-label">Nature deficit decile:</div>
+        <div class="popup-label">Nature deficit score:</div>
         <div class="popup-value">${formatDecile(p.nature_decile_imed)}</div>
 
-        <div class="popup-label">Climate risk decile:</div>
+        <div class="popup-label">Climate risk score:</div>
         <div class="popup-value">${formatDecile(p.climate_decile_imed)}</div>
       </div>
     </div>
@@ -269,11 +269,11 @@ async function findPostcode() {
         <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
       </div>
       <div id="legend-content" style="margin-top:8px;">
-        This map shows IMED deciles from 1 to 10, where 1 represents the most environmentally deprived neighbourhoods, and 10 the least deprived.
+        This map shows the most environmentally deprived neighbourhoods on a scale of 1 - 10, where 1 is the most deprived and 10 is the least.
         <br><br>
-        The IMED brings together six datasets across three domains: pollution (air quality, noise pollution), nature (greenspace and tree cover), and climate extremes (flood risk and extreme heat).
+        The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat). Click on a neighbourhood to show these underlying scores.
         <br><br>
-        More details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
+        Further details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
         <br>
         <hr class="hr-thin">
         <div class="postcode-search">
