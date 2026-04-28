@@ -233,6 +233,12 @@ hr.hr-thin {
   font-weight: 500;
 }
 
+.popup-note {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #1e234d;
+}
+
 .popup-grid {
   display: grid;
   grid-template-columns: max-content max-content;
