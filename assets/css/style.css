@@ -162,9 +162,48 @@ hr.hr-thin {
   opacity: 0.8;                 /* lower opacity */
 }
 
+/* LEGEND FEATURES */
 .legend {
   font-family: 'Libre Franklin', sans-serif;
   color: #1e234d; /* brand color */
+}
+
+.legend-scale {
+  margin-top: 10px;
+}
+
+.legend-bar {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0;
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+}
+
+.legend-bar span {
+  display: block;
+  height: 100%;
+}
+
+.legend-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: #1e234d;
+}
+
+.legend-scale-labels span:first-child {
+  text-align: left;
+}
+
+.legend-scale-labels span:last-child {
+  text-align: right;
 }
 
 /* Toggle switch */
