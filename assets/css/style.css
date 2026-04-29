@@ -206,6 +206,8 @@ hr.hr-thin {
   font-size: 0.8rem;
   line-height: 1.25;
   color: #1e234d;
+  position: relative;
+  top: 0.03em;
 }
 
 .legend-scale-labels span:first-child {
