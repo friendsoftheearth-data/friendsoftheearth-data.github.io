@@ -194,14 +194,7 @@ hr.hr-thin {
   color: #1e234d;
 }
 
-.legend-bar span-accessible {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 0.72rem;
-  line-height: 1;
-  font-weight: 500;
+.legend-bar .legend-bar-accessible {
   color: #f4f6fa;
 }
 
