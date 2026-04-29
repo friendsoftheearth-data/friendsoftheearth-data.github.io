@@ -37,19 +37,19 @@ The tool allows users to enter a postcode and choose to explore local data by lo
 
 The data that underpins the tool is available for download below for all geographical areas included in the tool.
 
-| Local environmental dataset | Download link (xlsx files) |
-| :------- | :---------------------------: |
-| Local authority local environment data | [Download local authority data (xlsx)](/datasets/local-data/FoE-local-env-data-LAD-2026.xlsx){: .button .button--small } |
-| Mayoral region local environment data | [Download mayoral region data (xlsx)](/datasets/local-data/FoE-local-env-data-MAYORAL-2026.xlsx){: .button .button--small } |
-| Westminster Constituency local environment data | [Download Constituency data (xlsx)](/datasets/local-data/FoE-local-env-data-CONSTITUENCY-2026.xlsx){: .button .button--small } |
+| Local environmental dataset | Download link (xlsx files) | Data licence |
+| :------- | :---------------------------: |:-----: |
+| Local authority local environment data | [Download local authority data (xlsx)](/datasets/local-data/FoE-local-env-data-LAD-2026.xlsx){: .button .button--small }  | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Mayoral region local environment data | [Download mayoral region data (xlsx)](/datasets/local-data/FoE-local-env-data-MAYORAL-2026.xlsx){: .button .button--small }  | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Westminster Constituency local environment data | [Download Constituency data (xlsx)](/datasets/local-data/FoE-local-env-data-CONSTITUENCY-2026.xlsx){: .button .button--small }  | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
 
 **Ward briefings and Ward-level data**
 
 We are in the process of producing a series of 3-page pdf briefings for all Electoral Wards in England. These will be available for download from our website in June 2026 using a postcode search and via our Google Drive site. Links to follow when the briefings are ready. Meanwhile, you can download the environmental data using in the briefings for every Ward in England below.
 
-| Local environmental dataset | Download link (xlsx files) |
-| :------- | :---------------------------: |
-| Ward-level local environment data | [Download Ward data (xlsx)](/datasets/local-data/Ward-local-env-data-April26-v2.xlsx){: .button .button--small } |
+| Local environmental dataset | Download link (xlsx files) | Data licence |
+| :------- | :---------------------------: | :------------------------: |
+| Ward-level local environment data | [Download Ward data (xlsx)](/datasets/local-data/Ward-local-env-data-April26-v2.xlsx){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
 
 ---
 <a name="energy-section"></a>
@@ -125,11 +125,11 @@ These datasets contain info on housing energy efficiency, insulation needs and e
 
 Date: covers EPC data up to April 2025. Update to December 2025 coming shortly...
 
-| Data set | Download link (all csv files) |
-| :------- | :---------------------------: |
-| Energy efficiency of homes: EPC band by MSOA21 | [Download EPC data by MSOA21 (csv)](/datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small } |
-| Energy efficiency of homes: EPC band by Local authority | [Download EPC data by Local Authority (csv)](/datasets/epcs/epc-bands-by-oslaua-April25.csv){: .button .button--small } |
-| Energy efficiency of homes: EPC band by Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](/datasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small } | 
+| Data set | Download link (all csv files) | Licence |
+| :------- | :---------------------------: | :-----: |
+| Energy efficiency of homes: EPC band by MSOA21 | [Download EPC data by MSOA21 (csv)](/datasets/epcs/epc-bands-by-msoa21-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Energy efficiency of homes: EPC band by Local authority | [Download EPC data by Local Authority (csv)](/datasets/epcs/epc-bands-by-oslaua-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Energy efficiency of homes: EPC band by Westminster Constituency | [Download EPC data by Westminster Constituency (csv)](/datasets/epcs/epc-bands-by-pcon24-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
 
 
 ### Domestic insulation recommendations from Energy Performance Certificate (EPC) data for England and Wales
