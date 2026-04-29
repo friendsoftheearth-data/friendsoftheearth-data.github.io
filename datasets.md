@@ -136,11 +136,11 @@ Date: covers EPC data up to April 2025. Update to December 2025 coming shortly..
 
 Date: covers EPC data up to April 2025. Update to December 2025 coming shortly...
 
-| Data set | Download link (all csv files) |
-| :------- | :---------------------------: |
-| EPC insulation recommendations by MSOA21 | [Download EPC insulation recommendations by MSOA21 (csv)](/datasets/epcs/epc-ins-recommendations-by-msoa21-April25.csv){: .button .button--small } |
-| EPC insulation recommendations by Local authority | [Download EPC insulation recommendations by Local authority (csv)](/datasets/epcs/epc-ins-recommendations-by-oslaua-April25.csv){: .button .button--small } |
-| EPC insulation recommendations by Westminster Constituency  | [Download EPC insulation recommendations by Constituency (csv)](/datasets/epcs/epc-ins-recommendations-by-pcon24-April25.csv){: .button .button--small } |
+| Data set | Download link (all csv files) | Licence |
+| :------- | :---------------------------: | :-----: |
+| EPC insulation recommendations by MSOA21 | [Download EPC insulation recommendations by MSOA21 (csv)](/datasets/epcs/epc-ins-recommendations-by-msoa21-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| EPC insulation recommendations by Local authority | [Download EPC insulation recommendations by Local authority (csv)](/datasets/epcs/epc-ins-recommendations-by-oslaua-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| EPC insulation recommendations by Westminster Constituency  | [Download EPC insulation recommendations by Constituency (csv)](/datasets/epcs/epc-ins-recommendations-by-pcon24-April25.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
 
 
 ### Energy Crisis Hotspots
@@ -196,12 +196,12 @@ You can download air pollution data for **nitrogen dioxide (NO2)** and **particu
 
 We’ve made the data available as csv files, which can be opened in Excel or in GIS software and joined to LSOA boundaries to make your own maps. We’ve also added a GeoPackage download, which can be opened directly in GIS software. Note: this uses “Super Generalised” LSOA boundaries to reduce the file size but may not have the level of detail you want.
 
-| Data set | Download link |
-| :------- | :-----------: |
-| Air pollution data at LSOA11 - 3yr average (2021-23): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } |
-| Air pollution data at LSOA11 - 3yr average (2021-23): Geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } |
-| Air pollution data at LSOA21 - 3yr average (2022-24): csv | [Download LSOA21 air pollution data (csv)](/datasets/air-pollution/airpollution-202224-lsoa21.csv){: .button .button--small } |
-| Air pollution data at LSOA21 - 3yr average (2022-24): Geopackage | [Download LSOA21 air pollution data (Geopackage)](/datasets/air-pollution/airpollution-202224-lsoa21.gpkg){: .button .button--small } |
+| Data set | Download link | Licence |
+| :------- | :-----------: | :-----: |
+| Air pollution data at LSOA11 - 3yr average (2021-23): csv | [Download LSOA air pollution data (csv)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Air pollution data at LSOA11 - 3yr average (2021-23): Geopackage | [Download LSOA air pollution data (Geopackage)](/datasets/air-pollution/air-pollution-lsoa11-2021-23.gpkg){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Air pollution data at LSOA21 - 3yr average (2022-24): csv | [Download LSOA21 air pollution data (csv)](/datasets/air-pollution/airpollution-202224-lsoa21.csv){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Air pollution data at LSOA21 - 3yr average (2022-24): Geopackage | [Download LSOA21 air pollution data (Geopackage)](/datasets/air-pollution/airpollution-202224-lsoa21.gpkg){: .button .button--small } | Contains public sector information licensed under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
 
 #### Air pollution data summarised by regions, local authorities and constituencies
 We've also summarised this data by **Wales and English Regions**, **Local authority districts** and **Westminster Constituencies**, counting the number of LSOA neighbourhoods in each region that are above World Health Organisation (WHO) guidelines and twice WHO guidelines, and including statistics on schools, child population, car ownership and ethnic minority population in neighbours which exceed these thresholds. This geographical summary data can be downloaded below.
