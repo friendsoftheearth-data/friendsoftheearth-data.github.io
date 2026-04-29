@@ -45,11 +45,11 @@ The data that underpins the tool is available for download below for all geograp
 
 **Ward briefings and Ward-level data**
 
-We are in the process of producing a series of 3-page pdf briefings for all Electoral Wards in England. These will be available for download from our website in June 2026 using a postcode search and via our googledrive site. Links to follow when the briefings are ready. Meanwhile, you can download the environmental data using in the briefings for every Ward in England below.
+We are in the process of producing a series of 3-page pdf briefings for all Electoral Wards in England. These will be available for download from our website in June 2026 using a postcode search and via our Google Drive site. Links to follow when the briefings are ready. Meanwhile, you can download the environmental data using in the briefings for every Ward in England below.
 
 | Local environmental dataset | Download link (xlsx files) |
 | :------- | :---------------------------: |
-| Ward-level local environment data | [Download Ward data (xlsx)](/datasets/local-data/Ward-local-env-data-April26-v2.xlsx){: .button .button--small } | -->
+| Ward-level local environment data | [Download Ward data (xlsx)](/datasets/local-data/Ward-local-env-data-April26-v2.xlsx){: .button .button--small } |
 
 ---
 <a name="energy-section"></a>
