@@ -192,6 +192,8 @@ hr.hr-thin {
   line-height: 1;
   font-weight: 500;
   color: #1e234d;
+  position: relative;
+  top: 0.03em;
 }
 
 .legend-bar .legend-bar-accessible {
@@ -206,8 +208,6 @@ hr.hr-thin {
   font-size: 0.8rem;
   line-height: 1.25;
   color: #1e234d;
-  position: relative;
-  top: 0.08em;
 }
 
 .legend-scale-labels span:first-child {
