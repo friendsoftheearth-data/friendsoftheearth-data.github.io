@@ -183,7 +183,7 @@ hr.hr-thin {
   border: 1px solid #cfcfcf;
 }
 
-.legend-bar span {
+.legend-bar > span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,7 +191,7 @@ hr.hr-thin {
   color: #1e234d;
 }
 
-.legend-bar .legend-bar-accessible {
+.legend-bar > span.legend-bar-accessible .legend-number {
   color: #f4f6fa;
 }
 
