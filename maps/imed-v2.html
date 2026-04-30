@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IMED version 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+
+  <!-- External stylesheet (ours) -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Leaflet styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- turf library load for postcode lookup -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+  
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+    }
+
+    .legend {
+      background: #f4f6fa;
+      padding: 1em;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #1e234d;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      border-radius: 4px;
+      min-width: 200px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      flex: 0 0 16px;
+    }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<script>
+  
+  // 1. CREATE MAP AND BASEMAP
+  const map = L.map('map', {
+    preferCanvas: true
+    }).setView([53, -2.5], 6);
+
+   map.createPane('labels');
+   map.getPane('labels').style.zIndex = 650;
+   map.getPane('labels').style.pointerEvents = 'none';
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap contributors, © CARTO',
+  subdomains: 'abcd',
+  maxZoom: 20
+}).addTo(map);
+
+const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+  pane: 'labels',
+  attribution: '© OpenStreetMap contributors, © CARTO',
+  subdomains: 'abcd',
+  maxZoom: 20
+});
+
+// 2. DEFINE HELPER FUNCTIONS AND POPUP
+  
+  function getDecileColor(decile) {
+    const value = Number(decile);
+  
+    const colors = {
+      1: '#ed6132',
+      2: '#f08251',
+      3: '#f3a672',
+      4: '#f6c690',
+      5: '#f9e6ad',
+      6: '#dee9b4',
+      7: '#a9d2a6',
+      8: '#76bc98',
+      9: '#40a58a',
+      10: '#098d7b'
+    };
+  
+    return colors[value] || '#bdbdbd';
+  }
+
+  function formatDecile(value) {
+    if (value === null || value === undefined || value === '') return 'Not available';
+    const num = Number(value);
+    return Number.isNaN(num) ? value : num;
+  }
+
+  function layerStyle(feature) {
+    const p = feature.properties || {};
+    return {
+      fillColor: getDecileColor(p.imed_popcentroid_score),
+      color: '#f3a672',
+      weight: 0.3,
+      opacity: 0.5,
+      fillOpacity: 0.8
+    };
+  }
+
+function popupContent(feature, layer) {
+  const p = feature.properties || {};
+  const lsoaCode = p.LSOA21CD || 'Area';
+  const msoaName = p.msoa11_name ?? 'Not available';
+
+  const html = `
+    <div class="popup-card">
+      <div class="popup-title">LSOA code: <strong>${lsoaCode}</strong></div>
+      ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
+      <div class="popup-note">LSOA scores (1 - 10; 1 = most deprived)</div>
+      <div class="popup-grid">
+        <div class="popup-label">IMED overall score:</div>
+        <div class="popup-value popup-value--primary">${formatDecile(p.imed_popcentroid_score)}</div>
+      </div>
+    </div>
+  `;
+
+  layer.bindPopup(html);
+}
+  
+// 3. HOVER BEHAVIOUR FUNCTIONS
+let geojsonLayer;
+
+function highlightFeature(e) {
+  const layer = e.target;
+  layer.setStyle({
+    stroke: true,
+    color: '#ffffff',
+    weight: 2,
+    opacity: 0.9,
+    fillOpacity: 0.95
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+}
+
+function resetHighlight(e) {
+  geojsonLayer.resetStyle(e.target);
+}
+
+function onEachFeature(feature, layer) {
+  popupContent(feature, layer);
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight
+  });
+}
+
+// POSTCODE SEARCH FUNCTIONS
+async function findPostcode() {
+  const input = document.getElementById('postcode-input');
+  const message = document.getElementById('postcode-message');
+
+  if (!input || !message) return;
+
+  const postcode = input.value.trim();
+
+  if (!postcode) {
+    message.textContent = 'Please enter a postcode.';
+    return;
+  }
+
+  message.textContent = 'Searching...';
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
+    const res = await fetch(url, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Geocoding request failed');
+    }
+
+    const results = await res.json();
+
+    if (!results.length) {
+      message.textContent = 'Postcode not found.';
+      return;
+    }
+
+    const result = results[0];
+    const lat = parseFloat(result.lat);
+    const lon = parseFloat(result.lon);
+
+    map.flyTo([lat, lon], 13, {
+      duration: 1.2
+    });
+
+    const point = turf.point([lon, lat]);
+
+    let matchedLayer = null;
+
+    geojsonLayer.eachLayer(layer => {
+      if (matchedLayer) return;
+
+      const feature = layer.feature;
+      if (!feature || !feature.geometry) return;
+
+      const isInside = turf.booleanPointInPolygon(point, feature);
+
+      if (isInside) {
+        matchedLayer = layer;
+      }
+    });
+
+    if (matchedLayer) {
+      setTimeout(() => {
+        matchedLayer.openPopup([lat, lon]);
+      }, 900);
+      message.textContent = '';
+    } else {
+      message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
+    }
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = 'Sorry, something went wrong with the postcode search.';
+  }
+}
+  
+  // 4. LEGEND
+  const legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
+        <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
+      </div>
+      <div id="legend-content" style="margin-top:8px;">
+        This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 1 is the most deprived and 10 is the least.
+        <br><br>
+        The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat). Click on a neighbourhood to show these underlying scores.
+        <br><br>
+        Further details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
+        <br>
+        <hr class="hr-thin">
+        <div class="legend-scale">
+          <div class="legend-bar">
+            <span style="background:#ed6132"><span class="legend-number">1</span></span>
+            <span style="background:#f08251"><span class="legend-number">2</span></span>
+            <span style="background:#f3a672"><span class="legend-number">3</span></span>
+            <span style="background:#f6c690"><span class="legend-number">4</span></span>
+            <span style="background:#f9e6ad"><span class="legend-number">5</span></span>
+            <span style="background:#dee9b4"><span class="legend-number">6</span></span>
+            <span style="background:#a9d2a6"><span class="legend-number">7</span></span>
+            <span style="background:#76bc98"><span class="legend-number">8</span></span>
+            <span class="legend-bar-accessible" style="background:#40a58a"><span class="legend-number">9</span></span>
+            <span class="legend-bar-accessible" style="background:#098d7b"><span class="legend-number">10</span></span>
+          </div>
+          <div class="legend-scale-labels">
+            <span>Most environmentally deprived</span>
+            <span>Least environmentally deprived</span>
+          </div>
+        </div>
+        <hr class="hr-thin">
+        <div class="postcode-search">
+          <label for="postcode-input"><strong>Enter your postcode to show statistics in your neighbourhood</strong></label><br>
+          <div class="postcode-row">
+            <input
+              id="postcode-input"
+              type="text"
+              placeholder="e.g. SW1A 1AA"
+              aria-label="Enter a UK postcode"
+            >
+            <button
+              id="postcode-go"
+              class="button button--small"
+              type="button"
+            >
+              Go
+            </button>
+          </div>
+          <div id="postcode-message" style="margin-top: 8px; font-size: 0.85rem;"></div>
+        </div>
+      </div>
+    `;
+    return container;
+  };
+
+  legend.addTo(map);
+
+  setTimeout(() => {
+    const btn = document.getElementById('legend-toggle');
+    const content = document.getElementById('legend-content');
+
+    if (btn && content) {
+      btn.addEventListener('click', () => {
+        const isHidden = content.style.display === 'none';
+        content.style.display = isHidden ? 'block' : 'none';
+        btn.textContent = isHidden ? '−' : '+';
+      });
+    }
+
+    const postcodeInput = document.getElementById('postcode-input');
+    const postcodeGo = document.getElementById('postcode-go');
+
+    if (postcodeGo) {
+      postcodeGo.addEventListener('click', findPostcode);
+    }
+
+    if (postcodeInput) {
+      postcodeInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          findPostcode();
+        }
+      });
+    }
+    
+  }, 0);
+
+
+  // 5. LOAD MAIN CHLOROPLETH DATA AND ACTIVATE OTHER MAP FEATURES
+  fetch('/datasets/imed/imed-v2.geojson')
+    .then(res => res.json())
+    .then(data => {
+      geojsonLayer = L.geoJSON(data, {
+        style: layerStyle,
+        onEachFeature: onEachFeature
+      }).addTo(map);
+
+      labelsOnly.addTo(map);
+      
+      map.fitBounds(geojsonLayer.getBounds(), {
+        padding: [20, 20]
+      });
+    })
+    .catch(err => {
+      console.error('Error loading GeoJSON:', err);
+    });
+</script>
+
+</body>
+</html>
