@@ -128,13 +128,13 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
 function popupContent(feature, layer) {
   const p = feature.properties || {};
   const lsoaCode = p.LSOA21CD || 'Area';
-  const msoaName = p.msoa11_name ?? 'Not available';
+  const msoaName = p.msoa21_name ?? 'Not available';
 
   const html = `
     <div class="popup-card">
       <div class="popup-title">LSOA code: <strong>${lsoaCode}</strong></div>
       ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
-      <div class="popup-note">LSOA scores (1 - 10; 1 = most deprived)</div>
+      <div class="popup-note">LSOA scores (1 - 10; 10 = most deprived)</div>
       <div class="popup-grid">
         <div class="popup-label">IMED overall score:</div>
         <div class="popup-value popup-value--primary">${formatDecile(p.imed_popcentroid_score)}</div>
