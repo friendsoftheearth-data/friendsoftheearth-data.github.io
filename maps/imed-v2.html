@@ -117,7 +117,7 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
   function layerStyle(feature) {
     const p = feature.properties || {};
     return {
-      fillColor: getDecileColor(p.imed_popcentroid_score),
+      fillColor: getDecileColor(p.imed_popweighted_decile),
       color: '#f3a672',
       weight: 0.3,
       opacity: 0.5,
@@ -136,7 +136,7 @@ function popupContent(feature, layer) {
       ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
       <div class="popup-grid">
         <div class="popup-label">IMED overall score:</div>
-        <div class="popup-value popup-value--primary">${formatDecile(p.imed_popcentroid_score)}</div>
+        <div class="popup-value popup-value--primary">${formatDecile(p.imed_popweighted_decile)}</div>
       </div>
       <div class="popup-note">(LSOA scores: 1 to 10; 10 = most deprived)</div>
     </div>
