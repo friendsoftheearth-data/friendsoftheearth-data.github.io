@@ -66,7 +66,7 @@
   // 1. CREATE MAP AND BASEMAP
   const map = L.map('map', {
     preferCanvas: true
-  }).setView([53, -2.5], 8);
+  }).setView([53, -2.5], 7);
 
   map.createPane('labels');
   map.getPane('labels').style.zIndex = 650;
@@ -432,19 +432,7 @@
 
   // Update layers when zooming
   map.on('zoomend', updateLayerByZoom);
-
-  // Once low layer is loaded, fit bounds (fallback to high if low fails)
-  loadLow()
-    .then(() => {
-      if (lowLayer) {
-        map.fitBounds(lowLayer.getBounds(), { padding: [20, 20] });
-      }
-    })
-    .catch(() => {
-      if (highLayer) {
-        map.fitBounds(highLayer.getBounds(), { padding: [20, 20] });
-      }
-    });
+  
 </script>
 
 </body>
