@@ -195,7 +195,7 @@
 
   function loadLow() {
     if (lowLoaded) return Promise.resolve();
-    return fetch('/datasets/imed-v2-low.geojson')
+    return fetch('/datasets/imed/imed-v2-low.geojson')
       .then(res => res.json())
       .then(data => {
         lowLayer = L.geoJSON(data, {
@@ -209,7 +209,7 @@
 
   function loadHigh() {
     if (highLoaded) return Promise.resolve();
-    return fetch('/datasets/imed-v2-high.geojson')
+    return fetch('/datasets/imed/imed-v2-high.geojson')
       .then(res => res.json())
       .then(data => {
         highLayer = L.geoJSON(data, {
