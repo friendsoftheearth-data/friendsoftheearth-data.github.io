@@ -143,8 +143,8 @@ function popupContent(feature, layer) {
         <div class="popup-value popup-value">${formatDecile(p.nature_decile)}</div>
         <div class="popup-label">Climate risk score:</div>
         <div class="popup-value popup-value">${formatDecile(p.climaterisk_decile)}</div>
+        <div class="popup-label">(Scores are 1 to 10; 10 = most deprived)</div>
       </div>
-      <div class="popup-label">(Scores are 1 to 10; 10 = most deprived)</div>
     </div>
   `;
 
@@ -161,7 +161,7 @@ function highlightFeature(e) {
     color: '#ffffff',
     weight: 2,
     opacity: 0.9,
-    fillOpacity: 0.95
+    fillOpacity: 0.75
   });
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
