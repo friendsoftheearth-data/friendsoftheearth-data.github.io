@@ -121,7 +121,7 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
       color: '#f3a672',
       weight: 0.3,
       opacity: 0.5,
-      fillOpacity: 0.8
+      fillOpacity: 0.7
     };
   }
 
@@ -132,13 +132,19 @@ function popupContent(feature, layer) {
 
   const html = `
     <div class="popup-card">
-      <div class="popup-title">LSOA code: <strong>${lsoaCode}</strong></div>
+      <div class="popup-title">Neighbourhood code: <strong>${lsoaCode}</strong></div>
       ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
       <div class="popup-grid">
         <div class="popup-label">IMED overall score:</div>
-        <div class="popup-value popup-value--primary">${formatDecile(p.imed_popweighted_decile)}</div>
+        <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
+        <div class="popup-label">Pollution score:</div>
+        <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
+        <div class="popup-label">Nature deficit score:</div>
+        <div class="popup-value popup-value">${formatDecile(p.nature_decile)}</div>
+        <div class="popup-label">Climate risk score:</div>
+        <div class="popup-value popup-value">${formatDecile(p.climaterisk_decile)}</div>
       </div>
-      <div class="popup-note">(LSOA scores: 1 to 10; 10 = most deprived)</div>
+      <div class="popup-note">(Scores are 1 to 10; 10 = most deprived)</div>
     </div>
   `;
 
