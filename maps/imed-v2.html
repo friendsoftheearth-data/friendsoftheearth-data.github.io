@@ -54,7 +54,7 @@
       border: 1px solid #ccc;
       flex: 0 0 16px;
     }
-    </style>
+  </style>
 </head>
 <body>
 
@@ -62,32 +62,30 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-
 <script>
-  
   // 1. CREATE MAP AND BASEMAP
   const map = L.map('map', {
     preferCanvas: true
-    }).setView([53, -2.5], 6);
+  }).setView([53, -2.5], 6);
 
-   map.createPane('labels');
-   map.getPane('labels').style.zIndex = 650;
-   map.getPane('labels').style.pointerEvents = 'none';
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-  attribution: '© CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022)',
-  subdomains: 'abcd',
-  maxZoom: 20
-}).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '© CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022)',
+    subdomains: 'abcd',
+    maxZoom: 20
+  }).addTo(map);
 
-const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-  pane: 'labels',
-  attribution: '© OpenStreetMap contributors, © CARTO',
-  subdomains: 'abcd',
-  maxZoom: 20
-});
+  const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+    pane: 'labels',
+    attribution: '© OpenStreetMap contributors, © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 20
+  });
 
-// 2. DEFINE HELPER FUNCTIONS AND POPUP
+  // 2. DEFINE HELPER FUNCTIONS AND POPUP
   
   function getDecileColor(decile) {
     const value = Number(decile);
@@ -125,136 +123,211 @@ const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_lab
     };
   }
 
-function popupContent(feature, layer) {
-  const p = feature.properties || {};
-  const lsoaCode = p.LSOA21CD || 'Area';
-  const msoaName = p.msoa21_name ?? 'Not available';
+  function popupContent(feature, layer) {
+    const p = feature.properties || {};
+    const lsoaCode = p.LSOA21CD || 'Area';
+    const msoaName = p.msoa21_name ?? 'Not available';
 
-  const html = `
-    <div class="popup-card">
-      <div class="popup-title">Neighbourhood code: <strong>${lsoaCode}</strong></div>
-      ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
-      <div class="popup-grid">
-        <div class="popup-label">IMED overall score:</div>
-        <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
-        <div class="popup-label">Pollution score:</div>
-        <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
-        <div class="popup-label">Nature deficit score:</div>
-        <div class="popup-value popup-value">${formatDecile(p.nature_decile)}</div>
-        <div class="popup-label">Climate risk score:</div>
-        <div class="popup-value popup-value">${formatDecile(p.climaterisk_decile)}</div>
-        <div class="popup-label">(Scores are 1 to 10; 10 = most deprived)</div>
+    const html = `
+      <div class="popup-card">
+        <div class="popup-title">Neighbourhood code: <strong>${lsoaCode}</strong></div>
+        ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
+        <div class="popup-grid">
+          <div class="popup-label">IMED overall score:</div>
+          <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
+          <div class="popup-label">Pollution score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
+          <div class="popup-label">Nature deficit score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.nature_decile)}</div>
+          <div class="popup-label">Climate risk score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.climaterisk_decile)}</div>
+          <div class="popup-label">(Scores are 1 to 10; 10 = most deprived)</div>
+        </div>
       </div>
-    </div>
-  `;
+    `;
 
-  layer.bindPopup(html);
-}
+    layer.bindPopup(html);
+  }
   
-// 3. HOVER BEHAVIOUR FUNCTIONS
-let geojsonLayer;
+  // 3. HOVER BEHAVIOUR FUNCTIONS
 
-function highlightFeature(e) {
-  const layer = e.target;
-  layer.setStyle({
-    stroke: true,
-    color: '#ffffff',
-    weight: 2,
-    opacity: 0.9,
-    fillOpacity: 0.75
-  });
+  // keep a reference to "the layer currently used for postcode search & highlight"
+  let geojsonLayer = null;
 
-  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-    layer.bringToFront();
-  }
-}
-
-function resetHighlight(e) {
-  geojsonLayer.resetStyle(e.target);
-}
-
-function onEachFeature(feature, layer) {
-  popupContent(feature, layer);
-  layer.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight
-  });
-}
-
-// POSTCODE SEARCH FUNCTIONS
-async function findPostcode() {
-  const input = document.getElementById('postcode-input');
-  const message = document.getElementById('postcode-message');
-
-  if (!input || !message) return;
-
-  const postcode = input.value.trim();
-
-  if (!postcode) {
-    message.textContent = 'Please enter a postcode.';
-    return;
-  }
-
-  message.textContent = 'Searching...';
-
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
-    const res = await fetch(url, {
-      headers: {
-        'Accept': 'application/json'
-      }
+  function highlightFeature(e) {
+    const layer = e.target;
+    layer.setStyle({
+      stroke: true,
+      color: '#ffffff',
+      weight: 2,
+      opacity: 0.9,
+      fillOpacity: 0.75
     });
 
-    if (!res.ok) {
-      throw new Error('Geocoding request failed');
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
     }
+  }
 
-    const results = await res.json();
+  function resetHighlight(e) {
+    if (geojsonLayer) {
+      geojsonLayer.resetStyle(e.target);
+    }
+  }
 
-    if (!results.length) {
-      message.textContent = 'Postcode not found.';
+  function onEachFeature(feature, layer) {
+    popupContent(feature, layer);
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight
+    });
+  }
+
+  // 3b. DUAL-RESOLUTION LAYERS
+
+  let lowLayer = null;
+  let highLayer = null;
+  let lowLoaded = false;
+  let highLoaded = false;
+
+  // choose a zoom threshold for swap; adjust if needed
+  const switchZoom = 6;
+
+  function loadLow() {
+    if (lowLoaded) return Promise.resolve();
+    return fetch('/datasets/imed-v2-low.geojson')
+      .then(res => res.json())
+      .then(data => {
+        lowLayer = L.geoJSON(data, {
+          style: layerStyle,
+          onEachFeature: onEachFeature
+        });
+        lowLoaded = true;
+      })
+      .catch(err => console.error('Error loading low-res GeoJSON:', err));
+  }
+
+  function loadHigh() {
+    if (highLoaded) return Promise.resolve();
+    return fetch('/datasets/imed-v2-high.geojson')
+      .then(res => res.json())
+      .then(data => {
+        highLayer = L.geoJSON(data, {
+          style: layerStyle,
+          onEachFeature: onEachFeature
+        });
+        highLoaded = true;
+      })
+      .catch(err => console.error('Error loading high-res GeoJSON:', err));
+  }
+
+  function updateLayerByZoom() {
+    const z = map.getZoom();
+
+    if (z < switchZoom) {
+      // use low-res layer
+      loadLow().then(() => {
+        if (highLayer && map.hasLayer(highLayer)) {
+          map.removeLayer(highLayer);
+        }
+        if (lowLayer && !map.hasLayer(lowLayer)) {
+          lowLayer.addTo(map);
+        }
+        geojsonLayer = lowLayer;
+      });
+    } else {
+      // use high-res layer
+      loadHigh().then(() => {
+        if (lowLayer && map.hasLayer(lowLayer)) {
+          map.removeLayer(lowLayer);
+        }
+        if (highLayer && !map.hasLayer(highLayer)) {
+          highLayer.addTo(map);
+        }
+        geojsonLayer = highLayer;
+      });
+    }
+  }
+
+  // POSTCODE SEARCH FUNCTIONS
+  async function findPostcode() {
+    const input = document.getElementById('postcode-input');
+    const message = document.getElementById('postcode-message');
+
+    if (!input || !message) return;
+
+    const postcode = input.value.trim();
+
+    if (!postcode) {
+      message.textContent = 'Please enter a postcode.';
       return;
     }
 
-    const result = results[0];
-    const lat = parseFloat(result.lat);
-    const lon = parseFloat(result.lon);
+    message.textContent = 'Searching...';
 
-    map.flyTo([lat, lon], 13, {
-      duration: 1.2
-    });
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
+      const res = await fetch(url, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-    const point = turf.point([lon, lat]);
-
-    let matchedLayer = null;
-
-    geojsonLayer.eachLayer(layer => {
-      if (matchedLayer) return;
-
-      const feature = layer.feature;
-      if (!feature || !feature.geometry) return;
-
-      const isInside = turf.booleanPointInPolygon(point, feature);
-
-      if (isInside) {
-        matchedLayer = layer;
+      if (!res.ok) {
+        throw new Error('Geocoding request failed');
       }
-    });
 
-    if (matchedLayer) {
-      setTimeout(() => {
-        matchedLayer.openPopup([lat, lon]);
-      }, 900);
-      message.textContent = '';
-    } else {
-      message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
+      const results = await res.json();
+
+      if (!results.length) {
+        message.textContent = 'Postcode not found.';
+        return;
+      }
+
+      const result = results[0];
+      const lat = parseFloat(result.lat);
+      const lon = parseFloat(result.lon);
+
+      map.flyTo([lat, lon], 13, {
+        duration: 1.2
+      });
+
+      const point = turf.point([lon, lat]);
+
+      let matchedLayer = null;
+
+      if (!geojsonLayer) {
+        message.textContent = 'Map data not yet loaded.';
+        return;
+      }
+
+      geojsonLayer.eachLayer(layer => {
+        if (matchedLayer) return;
+
+        const feature = layer.feature;
+        if (!feature || !feature.geometry) return;
+
+        const isInside = turf.booleanPointInPolygon(point, feature);
+
+        if (isInside) {
+          matchedLayer = layer;
+        }
+      });
+
+      if (matchedLayer) {
+        setTimeout(() => {
+          matchedLayer.openPopup([lat, lon]);
+        }, 900);
+        message.textContent = '';
+      } else {
+        message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
+      }
+
+    } catch (error) {
+      console.error(error);
+      message.textContent = 'Sorry, something went wrong with the postcode search.';
     }
-
-  } catch (error) {
-    console.error(error);
-    message.textContent = 'Sorry, something went wrong with the postcode search.';
   }
-}
   
   // 4. LEGEND
   const legend = L.control({ position: 'topright' });
@@ -349,24 +422,28 @@ async function findPostcode() {
     
   }, 0);
 
+  // 5. INITIAL LOAD + ZOOM HANDLER
 
-  // 5. LOAD MAIN CHLOROPLETH DATA AND ACTIVATE OTHER MAP FEATURES
-  fetch('/datasets/imed/imed-v2.geojson')
-    .then(res => res.json())
-    .then(data => {
-      geojsonLayer = L.geoJSON(data, {
-        style: layerStyle,
-        onEachFeature: onEachFeature
-      }).addTo(map);
+  // Load initial layer based on starting zoom
+  updateLayerByZoom();
 
-      labelsOnly.addTo(map);
-      
-      map.fitBounds(geojsonLayer.getBounds(), {
-        padding: [20, 20]
-      });
+  // Keep labels above data
+  labelsOnly.addTo(map);
+
+  // Update layers when zooming
+  map.on('zoomend', updateLayerByZoom);
+
+  // Once low layer is loaded, fit bounds (fallback to high if low fails)
+  loadLow()
+    .then(() => {
+      if (lowLayer) {
+        map.fitBounds(lowLayer.getBounds(), { padding: [20, 20] });
+      }
     })
-    .catch(err => {
-      console.error('Error loading GeoJSON:', err);
+    .catch(() => {
+      if (highLayer) {
+        map.fitBounds(highLayer.getBounds(), { padding: [20, 20] });
+      }
     });
 </script>
 
