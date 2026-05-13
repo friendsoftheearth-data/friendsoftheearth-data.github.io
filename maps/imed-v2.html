@@ -151,7 +151,6 @@
   
   // 3. HOVER BEHAVIOUR FUNCTIONS
 
-  // keep a reference to "the layer currently used for postcode search & highlight"
   let geojsonLayer = null;
 
   function highlightFeature(e) {
@@ -187,65 +186,92 @@
 
   let lowLayer = null;
   let highLayer = null;
-  let lowLoaded = false;
-  let highLoaded = false;
 
-  // choose a zoom threshold for swap; adjust if needed
+  let lowLayerPromise = null;
+  let highLayerPromise = null;
+
   const switchZoom = 13;
+  let layerUpdateToken = 0;
 
   function loadLow() {
-    if (lowLoaded) return Promise.resolve();
-    return fetch('/datasets/imed/imed-v2-low.geojson')
+    if (lowLayer) return Promise.resolve(lowLayer);
+    if (lowLayerPromise) return lowLayerPromise;
+
+    lowLayerPromise = fetch('/datasets/imed/imed-v2-low.geojson')
       .then(res => res.json())
       .then(data => {
         lowLayer = L.geoJSON(data, {
           style: layerStyle,
           onEachFeature: onEachFeature
         });
-        lowLoaded = true;
+        return lowLayer;
       })
-      .catch(err => console.error('Error loading low-res GeoJSON:', err));
+      .catch(err => {
+        console.error('Error loading low-res GeoJSON:', err);
+        throw err;
+      });
+
+    return lowLayerPromise;
   }
 
   function loadHigh() {
-    if (highLoaded) return Promise.resolve();
-    return fetch('/datasets/imed/imed-v2-high.geojson')
+    if (highLayer) return Promise.resolve(highLayer);
+    if (highLayerPromise) return highLayerPromise;
+
+    highLayerPromise = fetch('/datasets/imed/imed-v2-high.geojson')
       .then(res => res.json())
       .then(data => {
         highLayer = L.geoJSON(data, {
           style: layerStyle,
           onEachFeature: onEachFeature
         });
-        highLoaded = true;
+        return highLayer;
       })
-      .catch(err => console.error('Error loading high-res GeoJSON:', err));
+      .catch(err => {
+        console.error('Error loading high-res GeoJSON:', err);
+        throw err;
+      });
+
+    return highLayerPromise;
   }
 
-  function updateLayerByZoom() {
+  function removeDataLayers() {
+    if (lowLayer && map.hasLayer(lowLayer)) {
+      map.removeLayer(lowLayer);
+    }
+    if (highLayer && map.hasLayer(highLayer)) {
+      map.removeLayer(highLayer);
+    }
+  }
+
+  async function updateLayerByZoom() {
+    const myToken = ++layerUpdateToken;
     const z = map.getZoom();
 
-    if (z < switchZoom) {
-      // use low-res layer
-      loadLow().then(() => {
-        if (highLayer && map.hasLayer(highLayer)) {
-          map.removeLayer(highLayer);
+    try {
+      if (z < switchZoom) {
+        const layer = await loadLow();
+
+        if (myToken !== layerUpdateToken) return;
+
+        removeDataLayers();
+        if (!map.hasLayer(layer)) {
+          layer.addTo(map);
         }
-        if (lowLayer && !map.hasLayer(lowLayer)) {
-          lowLayer.addTo(map);
+        geojsonLayer = layer;
+      } else {
+        const layer = await loadHigh();
+
+        if (myToken !== layerUpdateToken) return;
+
+        removeDataLayers();
+        if (!map.hasLayer(layer)) {
+          layer.addTo(map);
         }
-        geojsonLayer = lowLayer;
-      });
-    } else {
-      // use high-res layer
-      loadHigh().then(() => {
-        if (lowLayer && map.hasLayer(lowLayer)) {
-          map.removeLayer(lowLayer);
-        }
-        if (highLayer && !map.hasLayer(highLayer)) {
-          highLayer.addTo(map);
-        }
-        geojsonLayer = highLayer;
-      });
+        geojsonLayer = layer;
+      }
+    } catch (err) {
+      console.error('Error updating layer by zoom:', err);
     }
   }
 
@@ -292,8 +318,13 @@
         duration: 1.2
       });
 
-      const point = turf.point([lon, lat]);
+      await new Promise(resolve => {
+        map.once('moveend', resolve);
+      });
 
+      await updateLayerByZoom();
+
+      const point = turf.point([lon, lat]);
       let matchedLayer = null;
 
       if (!geojsonLayer) {
@@ -315,9 +346,7 @@
       });
 
       if (matchedLayer) {
-        setTimeout(() => {
-          matchedLayer.openPopup([lat, lon]);
-        }, 900);
+        matchedLayer.openPopup([lat, lon]);
         message.textContent = '';
       } else {
         message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
@@ -424,7 +453,6 @@
 
   // 5. INITIAL LOAD + ZOOM HANDLER
 
-  // Load initial layer based on starting zoom
   updateLayerByZoom();
 
   // Keep labels above data
@@ -432,7 +460,6 @@
 
   // Update layers when zooming
   map.on('zoomend', updateLayerByZoom);
-  
 </script>
 
 </body>
