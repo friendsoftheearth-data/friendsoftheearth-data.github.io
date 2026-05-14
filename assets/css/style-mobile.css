@@ -378,149 +378,195 @@ hr.hr-thin {
 }
 
 
-:root {
-  --map-ui-shadow: 0 10px 30px rgba(30, 35, 77, 0.16);
-  --map-ui-border: rgba(30, 35, 77, 0.12);
+/* IMED map responsive controls */
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-html, body {
-  height: 100%;
+.map-page,
+.map-wrapper {
+  position: relative;
 }
 
 #map {
-  height: 100dvh;
+  height: 100vh;
+  width: 100%;
 }
 
-.map-ui-toggle {
-  position: fixed;
-  right: 12px;
-  bottom: max(12px, env(safe-area-inset-bottom));
-  z-index: 1001;
-  min-height: 44px;
-  padding: 0.8rem 1rem;
-  border-radius: 999px;
-  box-shadow: var(--map-ui-shadow);
-}
-
-.legend-sheet {
-  position: fixed;
-  inset: auto 0 0 0;
-  z-index: 1002;
+.legend,
+.postcode-search-control {
   background: #f4f6fa;
   color: #1e234d;
-  border-radius: 18px 18px 0 0;
-  box-shadow: 0 -8px 32px rgba(30, 35, 77, 0.22);
-  border-top: 1px solid var(--map-ui-border);
-  padding: 0.75rem 1rem calc(1rem + env(safe-area-inset-bottom));
-  max-height: min(75dvh, 36rem);
-  overflow: auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
-.legend-sheet__header {
+.legend {
+  padding: 1em;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  min-width: 200px;
+  max-width: 320px;
+  max-height: min(72vh, 700px);
+  overflow: hidden;
+  position: relative;
+}
+
+.legend-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
 }
 
-.legend-sheet__header h2 {
-  margin: 0;
-  font-size: 1.1rem;
+.legend-title {
+  font-weight: 700;
+  margin-right: auto;
 }
 
-.legend-sheet__close {
+#legend-toggle {
+  margin-left: 8px;
   min-width: 44px;
   min-height: 44px;
-  border-radius: 999px;
-  background: transparent;
-  color: #1e234d;
-  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0.35rem 0.75rem;
 }
 
-.legend-sheet__body .postcode-row {
+#legend-content {
+  margin-top: 8px;
+  max-height: calc(min(72vh, 700px) - 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.35rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legend-item {
   display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  flex: 0 0 16px;
+}
+
+.postcode-search-control {
+  padding: 0.9rem;
+  width: min(320px, calc(100vw - 2rem));
+}
+
+.postcode-search-control h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.postcode-search-form {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.5rem;
 }
 
-.legend-sheet__body .postcode-row input {
-  flex: 1 1 auto;
+.postcode-search-form input {
+  flex: 1 1 160px;
   min-width: 0;
+  border: 1px solid #c8ceda;
+  border-radius: 4px;
+  padding: 0.65rem 0.75rem;
+  background: #ffffff;
+  color: #1e234d;
 }
 
-.leaflet-control-container .legend {
-  border-radius: 14px;
-  box-shadow: var(--map-ui-shadow);
-  border: 1px solid var(--map-ui-border);
+.postcode-search-form button {
+  flex: 0 0 auto;
+  min-height: 44px;
 }
 
-.leaflet-popup-content-wrapper {
-  border-radius: 14px;
+#postcode-message {
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+  font-size: 0.9rem;
 }
 
-.leaflet-popup-content {
-  margin: 12px 14px;
-}
-
-.popup-card {
-  min-width: 220px;
+.legend.is-minimised #legend-content {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  .leaflet-top.leaflet-right,
   .leaflet-top.leaflet-left,
-  .leaflet-top.leaflet-right {
-    top: max(10px, env(safe-area-inset-top));
+  .leaflet-bottom.leaflet-right,
+  .leaflet-bottom.leaflet-left {
+    inset: 0;
+    pointer-events: none;
   }
 
   .leaflet-control {
-    margin: 8px !important;
+    float: none;
+    clear: none;
+    margin: 0;
+    pointer-events: auto;
   }
 
-  .leaflet-control-zoom a,
-  .leaflet-bar a {
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
-    font-size: 1.2rem;
+  .leaflet-top.leaflet-left .postcode-search-wrapper {
+    position: absolute;
+    top: max(0.75rem, env(safe-area-inset-top));
+    left: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    justify-content: center;
   }
 
-  .legend {
-    display: none;
+  .leaflet-top.leaflet-left .postcode-search-control {
+    width: min(420px, calc(100vw - 1.5rem));
   }
 
-  .legend-sheet__body {
-    font-size: 0.95rem;
-    line-height: 1.45;
+  .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: center;
   }
 
-  .legend-sheet__body .postcode-search,
-  .legend-sheet__body input,
-  .legend-sheet__body button {
-    width: 100%;
+  .leaflet-bottom.leaflet-left .legend {
+    width: min(420px, calc(100vw - 1.5rem));
     max-width: none;
+    max-height: min(62vh, 420px);
+    border-radius: 14px 14px 0 0;
+    transition: transform 0.25s ease;
   }
 
-  .legend-sheet__body input,
-  .legend-sheet__body button {
-    min-height: 44px;
-    font-size: 16px;
+  .leaflet-bottom.leaflet-left .legend.is-minimised {
+    transform: translateY(calc(100% - 56px));
   }
 
-  .legend-sheet__body .postcode-row button {
-    width: auto;
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .leaflet-popup-content {
-    min-width: min(72vw, 280px);
+  .leaflet-bottom.leaflet-left .legend #legend-content {
+    max-height: calc(min(62vh, 420px) - 64px);
   }
 }
 
 @media (min-width: 769px) {
-  .map-ui-toggle,
-  .legend-sheet {
+  .leaflet-top.leaflet-left .postcode-search-wrapper {
     display: none;
+  }
+
+  .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
+    display: none;
+  }
+
+  .leaflet-top.leaflet-right .legend {
+    width: 320px;
   }
 }
