@@ -43,6 +43,29 @@
       max-width: 320px;
     }
 
+
+    .legend-box__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .legend-toggle-btn {
+      min-width: 36px;
+      min-height: 36px;
+      padding: 0;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-size: 1.1rem;
+    }
+
+    .legend-box__content {
+      margin-top: 8px;
+    }
     .legend-bar {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
@@ -603,8 +626,11 @@
     legend.onAdd = function () {
       const container = L.DomUtil.create('div', 'legend-box desktop-only');
       container.innerHTML = `
-        <div><strong>Index of Multiple Environmental Deprivation (IMED)</strong></div>
-        <div style="margin-top:8px;">
+        <div class="legend-box__header">
+          <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
+          <button id="desktop-legend-toggle" class="button button--small legend-toggle-btn" type="button" aria-expanded="true" aria-controls="desktop-legend-content">−</button>
+        </div>
+        <div id="desktop-legend-content" class="legend-box__content">
           This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 10 is the most deprived and 1 is the least.
           <br><br>
           The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat), and takes account of where people live and their proximity to these environmental hazards in each neighbourhood.
@@ -652,6 +678,8 @@
       const mobileGo = document.getElementById('mobile-postcode-go');
       const mobileToggle = document.getElementById('mobile-map-key-toggle');
       const legendClose = document.getElementById('legend-close');
+      const desktopLegendToggle = document.getElementById('desktop-legend-toggle');
+      const desktopLegendContent = document.getElementById('desktop-legend-content');
 
       if (desktopGo) desktopGo.addEventListener('click', () => findPostcode('desktop'));
       if (desktopInput) desktopInput.addEventListener('keydown', e => {
@@ -670,13 +698,31 @@
       });
 
       if (mobileToggle) {
-        mobileToggle.addEventListener('click', () => {
+        mobileToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           const open = mobileToggle.getAttribute('aria-expanded') === 'true';
           open ? closeLegendSheet() : openLegendSheet();
         });
       }
 
-      if (legendClose) legendClose.addEventListener('click', closeLegendSheet);
+      if (legendClose) {
+        legendClose.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeLegendSheet();
+        });
+      }
+
+      if (desktopLegendToggle && desktopLegendContent) {
+        desktopLegendToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isHidden = desktopLegendContent.style.display === 'none';
+          desktopLegendContent.style.display = isHidden ? 'block' : 'none';
+          desktopLegendToggle.textContent = isHidden ? '−' : '+';
+          desktopLegendToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+      }
     }, 0);
   </script>
 </body>
