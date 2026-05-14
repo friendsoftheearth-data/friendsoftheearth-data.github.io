@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IMED map Mobile test</title>
+  <title>IMED neighbourhood map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
@@ -10,7 +10,7 @@
 
   <!-- External stylesheet (ours) -->
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/style-mobile.css">
+  <link rel="stylesheet" href="/assets/css/style-mobile-fixed.css">
 
   <!-- Leaflet styles -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -59,7 +59,7 @@
 </head>
 <body>
 
-<button class="map-ui-toggle" id="legend-toggle" type="button" aria-expanded="false" aria-controls="legend-sheet">Map key</button>
+<button class="map-ui-toggle" id="mobile-map-key-toggle" type="button" aria-expanded="false" aria-controls="legend-sheet">Map key</button>
 <div class="legend-sheet" id="legend-sheet" hidden>
   <div class="legend-sheet__header">
     <h2>Map key</h2>
@@ -302,9 +302,9 @@
     }
   }
 
-  function openLegendSheet() {
+    function openLegendSheet() {
     const panel = document.getElementById('legend-sheet');
-    const toggle = document.getElementById('legend-toggle');
+    const toggle = document.getElementById('mobile-map-key-toggle');
     if (!panel || !toggle) return;
     panel.hidden = false;
     panel.classList.add('is-open');
@@ -313,17 +313,45 @@
 
   function closeLegendSheet() {
     const panel = document.getElementById('legend-sheet');
-    const toggle = document.getElementById('legend-toggle');
+    const toggle = document.getElementById('mobile-map-key-toggle');
     if (!panel || !toggle) return;
     panel.classList.remove('is-open');
     panel.hidden = true;
     toggle.setAttribute('aria-expanded', 'false');
   }
 
+  function syncMobileLegendContent() {
+    if (!isMobile) return;
+    const desktopLegendContent = document.getElementById('legend-content');
+    const mobileLegendContent = document.getElementById('legend-content-mobile');
+    if (!desktopLegendContent || !mobileLegendContent) return;
+
+    mobileLegendContent.innerHTML = desktopLegendContent.innerHTML;
+
+    const mobileInput = mobileLegendContent.querySelector('#postcode-input');
+    const mobileGo = mobileLegendContent.querySelector('#postcode-go');
+
+    if (mobileGo) {
+      mobileGo.addEventListener('click', findPostcode);
+    }
+
+    if (mobileInput) {
+      mobileInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          findPostcode();
+        }
+      });
+    }
+  }
+
   // POSTCODE SEARCH FUNCTIONS
   async function findPostcode() {
-    const input = document.getElementById('postcode-input');
-    const message = document.getElementById('postcode-message');
+    const panel = document.getElementById('legend-sheet');
+    const useMobile = isMobile && panel && !panel.hidden;
+    const scope = useMobile ? document.getElementById('legend-content-mobile') : document;
+    const input = scope ? scope.querySelector('#postcode-input') : null;
+    const message = scope ? scope.querySelector('#postcode-message') : null;
 
     if (!input || !message) return;
 
@@ -496,6 +524,31 @@
     
   }, 0);
 
+  setTimeout(() => {
+    syncMobileLegendContent();
+
+    const mobileToggle = document.getElementById('mobile-map-key-toggle');
+    const closeBtn = document.getElementById('legend-close');
+    const panel = document.getElementById('legend-sheet');
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        const open = mobileToggle.getAttribute('aria-expanded') === 'true';
+        open ? closeLegendSheet() : openLegendSheet();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeLegendSheet);
+    }
+
+    if (panel) {
+      panel.addEventListener('click', (e) => {
+        if (e.target === panel) closeLegendSheet();
+      });
+    }
+  }, 0);
+
   // 5. INITIAL LOAD + ZOOM HANDLER
 
   updateLayerByZoom();
@@ -509,23 +562,3 @@
 
 </body>
 </html>
-
-<script>
-(function(){
-  const toggle = document.getElementById('legend-toggle');
-  const closeBtn = document.getElementById('legend-close');
-  const panel = document.getElementById('legend-sheet');
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      open ? closeLegendSheet() : openLegendSheet();
-    });
-  }
-  if (closeBtn) closeBtn.addEventListener('click', closeLegendSheet);
-  if (panel) {
-    panel.addEventListener('click', (e) => {
-      if (e.target === panel) closeLegendSheet();
-    });
-  }
-})();
-</script>
