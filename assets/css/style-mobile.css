@@ -378,15 +378,14 @@ hr.hr-thin {
 }
 
 
-/* IMED map responsive controls */
+/* Map page base */
 html, body {
   margin: 0;
   padding: 0;
 }
 
-.map-page,
-.map-wrapper {
-  position: relative;
+body.map-page {
+  background-color: #f4f6fa;
 }
 
 #map {
@@ -394,6 +393,49 @@ html, body {
   width: 100%;
 }
 
+/* Popup styling pulled into mobile map stylesheet */
+.popup-card {
+  min-width: 220px;
+}
+
+.popup-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1e234d;
+  margin-bottom: 0.25rem;
+}
+
+.popup-subtitle {
+  font-size: 0.9rem;
+  color: #1e234d;
+  opacity: 0.8;
+  margin-bottom: 0.6rem;
+}
+
+.popup-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 0.75rem;
+  align-items: start;
+}
+
+.popup-label {
+  font-size: 0.9rem;
+  color: #1e234d;
+}
+
+.popup-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e234d;
+  text-align: right;
+}
+
+.popup-value--primary {
+  color: #094839;
+}
+
+/* Legend and postcode search styling */
 .legend,
 .postcode-search-control {
   background: #f4f6fa;
@@ -425,7 +467,7 @@ html, body {
   margin-right: auto;
 }
 
-#legend-toggle {
+.legend-toggle {
   margin-left: 8px;
   min-width: 44px;
   min-height: 44px;
@@ -436,7 +478,7 @@ html, body {
   padding: 0.35rem 0.75rem;
 }
 
-#legend-content {
+.legend-content {
   margin-top: 8px;
   max-height: calc(min(72vh, 700px) - 60px);
   overflow-y: auto;
@@ -445,19 +487,44 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-.legend-item {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
+.legend-scale {
+  margin-top: 0.75rem;
 }
 
-.legend-color {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  border-radius: 2px;
-  border: 1px solid #ccc;
-  flex: 0 0 16px;
+.legend-bar {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #d9dde6;
+}
+
+.legend-bar span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+}
+
+.legend-number {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1e234d;
+}
+
+.legend-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: #1e234d;
+}
+
+.hr-thin {
+  height: 1px;
+  margin: 1rem 0;
+  background-color: #d9dde6;
 }
 
 .postcode-search-control {
@@ -477,7 +544,8 @@ html, body {
   gap: 0.5rem;
 }
 
-.postcode-search-form input {
+.postcode-search-form input,
+#postcode-input {
   flex: 1 1 160px;
   min-width: 0;
   border: 1px solid #c8ceda;
@@ -487,7 +555,8 @@ html, body {
   color: #1e234d;
 }
 
-.postcode-search-form button {
+.postcode-search-form button,
+#postcode-search-button {
   flex: 0 0 auto;
   min-height: 44px;
 }
@@ -498,26 +567,12 @@ html, body {
   font-size: 0.9rem;
 }
 
-.legend.is-minimised #legend-content {
+.legend.is-minimised .legend-content {
   display: none;
 }
 
+/* Mobile positioning */
 @media (max-width: 768px) {
-  .leaflet-top.leaflet-right,
-  .leaflet-top.leaflet-left,
-  .leaflet-bottom.leaflet-right,
-  .leaflet-bottom.leaflet-left {
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .leaflet-control {
-    float: none;
-    clear: none;
-    margin: 0;
-    pointer-events: auto;
-  }
-
   .leaflet-top.leaflet-left .postcode-search-wrapper {
     position: absolute;
     top: max(0.75rem, env(safe-area-inset-top));
@@ -525,6 +580,7 @@ html, body {
     right: 0.75rem;
     display: flex;
     justify-content: center;
+    z-index: 1000;
   }
 
   .leaflet-top.leaflet-left .postcode-search-control {
@@ -538,6 +594,7 @@ html, body {
     bottom: max(0.75rem, env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
+    z-index: 1000;
   }
 
   .leaflet-bottom.leaflet-left .legend {
@@ -552,21 +609,22 @@ html, body {
     transform: translateY(calc(100% - 56px));
   }
 
-  .leaflet-bottom.leaflet-left .legend #legend-content {
+  .leaflet-bottom.leaflet-left .legend .legend-content {
     max-height: calc(min(62vh, 420px) - 64px);
+  }
+
+  .leaflet-top.leaflet-right .legend-desktop-wrapper {
+    display: none;
   }
 }
 
+/* Desktop-only wrappers */
 @media (min-width: 769px) {
-  .leaflet-top.leaflet-left .postcode-search-wrapper {
+  .legend-mobile-wrapper {
     display: none;
   }
 
-  .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
+  .postcode-search-wrapper {
     display: none;
-  }
-
-  .leaflet-top.leaflet-right .legend {
-    width: 320px;
   }
 }
