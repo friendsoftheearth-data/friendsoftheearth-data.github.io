@@ -1,0 +1,505 @@
+@import "{{ site.theme }}";
+
+/* Import Libre Franklin font */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
+/* Base Styles */
+body {
+    background-color: #f4f6fa;
+    color: #1e234d;
+    font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner Styles */
+.hero {
+    background-color: #1e234d;
+    color: #f4f6fa;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+/* Base link style */
+a {
+  color: #61bdaa;
+  text-decoration: underline; /* or none if you prefer */
+  font-weight: 600;
+}
+
+/* Link hover style */
+a:hover {
+  color: #094839; /* example accent color */
+  text-decoration: underline;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: #f4f6fa;
+    margin-bottom: 0.5rem;
+    font-weight: 800; /* Project name in bold */
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: #f4f6fa;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.hero-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+}
+
+.site-logo {
+    max-height: 200px;
+    width: auto;
+}
+
+/* Content Styling */
+.content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+h1, h2, h3 {
+    color: #1e234d;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    padding-bottom: 0.5rem;
+}
+
+p, li {
+    color: #1e234d;
+    font-size: 1.1rem;
+}
+
+.secondary-text {
+    color: #1e234d;
+    opacity: 0.7;
+}
+
+.site-footer {
+    background-color: #f4f6fa;
+    color: #1e234d;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.95rem;
+    border-top: 1px solid #ddd;
+    margin-top: 3rem;
+}
+
+/* Buttons */
+button, .button {
+    background-color: #61bdaa;
+    color: #1e234d;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button--medium {
+    padding: 0.5rem 1rem;
+}
+
+.button--small {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;    
+}
+
+button:hover, .button:hover {
+    background-color: #094839; /* Slightly darker hover */
+    transform: translateY(-2px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;      /* makes single-grid borders */
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid #1e234d;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+thead th {
+  background-color: #1e234d;                 /* your dark text color */
+  color: #f4f6fa;  
+  font-weight: 700;
+}
+
+hr {
+  border: none;               /* remove the default thin border */
+  height: 3px;                /* thickness of the line */
+  background-color: #1e234d;  /* your dark brand color */
+  margin: 2.5rem 0 1.25rem;   /* extra space above, normal below */
+  opacity: 1;                 /* some themes lower <hr> opacity */
+}
+
+hr.hr-thin {
+  border: none;               /* remove the default thin border */
+  height: 0.5px;                /* thickness of the line */
+  background-color: #1e234d !important;  /* your dark brand color */
+  color: #1e234d !important;
+  margin: 0.75rem 0 0.75rem;   /* less space */
+  opacity: 0.8;                 /* lower opacity */
+}
+
+/* LEGEND FEATURES */
+.legend {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d; /* brand color */
+}
+
+.legend-scale {
+  margin-top: 10px;
+}
+
+.legend-bar {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0;
+  width: 100%;
+  height: 22px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+}
+
+.legend-bar > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #1e234d;
+}
+
+.legend-bar > span.legend-bar-accessible .legend-number {
+  color: #f4f6fa;
+}
+
+.legend-number {
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 500;
+  position: relative;
+  top: 0.03em;
+}
+
+.legend-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: #1e234d;
+}
+
+.legend-scale-labels span:first-child {
+  text-align: left;
+}
+
+.legend-scale-labels span:last-child {
+  text-align: right;
+}
+
+/* Toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: .2s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+/* checked state */
+.switch input:checked + .slider {
+  background-color: #1e234d; /* or #61bdaa to match your brand */
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+/* POPUP STYLING */
+.popup-card {
+  min-width: 220px;
+  color: #1e234d;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.popup-title {
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.popup-subtitle {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  color: #1e234d;
+  font-weight: 500;
+}
+
+.popup-note {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #1e234d;
+}
+
+.popup-grid {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 8px;
+  row-gap: 6px;
+  align-items: baseline;
+  justify-content: start;
+}
+
+.popup-label {
+  color: #1e234d;
+}
+
+.popup-value {
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  color: #1e234d;
+}
+
+.popup-value--primary {
+  font-weight: 600;
+  color: #1e234d;
+  line-height: 1.35;
+}
+
+.leaflet-popup-content {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 14px 16px;
+}
+
+.leaflet-popup-content strong {
+  color: #1e234d;
+  font-weight: 600;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 16px;
+}
+
+/* postcode button features */
+.postcode-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.postcode-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  font-family: 'Libre Franklin', sans-serif;
+  color: #1e234d;
+}
+
+.postcode-row input::placeholder {
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.postcode-row button {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    .banner p {
+        font-size: 1.1rem;
+    }
+
+    .content {
+        padding: 0 1rem;
+    }
+}
+
+
+:root {
+  --map-ui-shadow: 0 10px 30px rgba(30, 35, 77, 0.16);
+  --map-ui-border: rgba(30, 35, 77, 0.12);
+}
+
+html, body {
+  height: 100%;
+}
+
+#map {
+  height: 100dvh;
+}
+
+.map-ui-toggle {
+  position: fixed;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 1001;
+  min-height: 44px;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--map-ui-shadow);
+}
+
+.legend-sheet {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1002;
+  background: #f4f6fa;
+  color: #1e234d;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -8px 32px rgba(30, 35, 77, 0.22);
+  border-top: 1px solid var(--map-ui-border);
+  padding: 0.75rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  max-height: min(55dvh, 28rem);
+  overflow: auto;
+}
+
+.legend-sheet__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.legend-sheet__header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.legend-sheet__close {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+  background: transparent;
+  color: #1e234d;
+  font-size: 1.4rem;
+}
+
+.leaflet-control-container .legend {
+  border-radius: 14px;
+  box-shadow: var(--map-ui-shadow);
+  border: 1px solid var(--map-ui-border);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.popup-card {
+  min-width: 220px;
+}
+
+@media (max-width: 768px) {
+  .leaflet-top.leaflet-left,
+  .leaflet-top.leaflet-right {
+    top: max(10px, env(safe-area-inset-top));
+  }
+
+  .leaflet-control {
+    margin: 8px !important;
+  }
+
+  .leaflet-control-zoom a,
+  .leaflet-bar a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .legend {
+    display: none;
+  }
+
+  .postcode-search,
+  .leaflet-control-custom {
+    width: calc(100vw - 16px);
+    max-width: none;
+  }
+
+  .postcode-search input,
+  .postcode-search button,
+  .leaflet-control-custom input,
+  .leaflet-control-custom button {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .leaflet-popup-content {
+    min-width: min(72vw, 280px);
+  }
+}
+
+@media (min-width: 769px) {
+  .map-ui-toggle,
+  .legend-sheet {
+    display: none;
+  }
+}
