@@ -16,8 +16,6 @@
 
   <!-- turf library load for postcode lookup -->
   <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
-  
-
 </head>
 <body class="map-page">
 
@@ -49,10 +47,8 @@
   });
 
   // 2. DEFINE HELPER FUNCTIONS AND POPUP
-  
   function getDecileColor(decile) {
     const value = Number(decile);
-  
     const colors = {
       10: '#ed6132',
       9:  '#f08251',
@@ -65,7 +61,6 @@
       2:  '#40a58a',
       1:  '#098d7b'
     };
-  
     return colors[value] || '#bdbdbd';
   }
 
@@ -111,9 +106,8 @@
 
     layer.bindPopup(html);
   }
-  
-  // 3. HOVER BEHAVIOUR FUNCTIONS
 
+  // 3. HOVER BEHAVIOUR FUNCTIONS
   let geojsonLayer = null;
 
   function highlightFeature(e) {
@@ -146,13 +140,10 @@
   }
 
   // 3b. DUAL-RESOLUTION LAYERS
-
   let lowLayer = null;
   let highLayer = null;
-
   let lowLayerPromise = null;
   let highLayerPromise = null;
-
   const switchZoom = 13;
   let layerUpdateToken = 0;
 
@@ -214,9 +205,7 @@
     try {
       if (z < switchZoom) {
         const layer = await loadLow();
-
         if (myToken !== layerUpdateToken) return;
-
         removeDataLayers();
         if (!map.hasLayer(layer)) {
           layer.addTo(map);
@@ -224,9 +213,7 @@
         geojsonLayer = layer;
       } else {
         const layer = await loadHigh();
-
         if (myToken !== layerUpdateToken) return;
-
         removeDataLayers();
         if (!map.hasLayer(layer)) {
           layer.addTo(map);
@@ -297,12 +284,9 @@
 
       geojsonLayer.eachLayer(layer => {
         if (matchedLayer) return;
-
         const feature = layer.feature;
         if (!feature || !feature.geometry) return;
-
         const isInside = turf.booleanPointInPolygon(point, feature);
-
         if (isInside) {
           matchedLayer = layer;
         }
@@ -314,24 +298,42 @@
       } else {
         message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
       }
-
     } catch (error) {
       console.error(error);
       message.textContent = 'Sorry, something went wrong with the postcode search.';
     }
   }
-  
-  // 4. LEGEND
-  const legend = L.control({ position: 'topright' });
 
-  legend.onAdd = function () {
-    const container = L.DomUtil.create('div', 'legend');
+  // 4. SEARCH CONTROL AND LEGEND
+  const searchControl = L.control({ position: 'topleft' });
+
+  searchControl.onAdd = function () {
+    const wrapper = L.DomUtil.create('div', 'postcode-search-wrapper');
+    const container = L.DomUtil.create('div', 'postcode-search-control', wrapper);
     container.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
-        <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
+      <h3>Search by postcode</h3>
+      <div class="postcode-search-form">
+        <input type="text" id="postcode-input" placeholder="Enter postcode" aria-label="Enter postcode">
+        <button id="postcode-search-button" type="button" class="button button--small">Search</button>
       </div>
-      <div id="legend-content" style="margin-top:8px;">
+      <div id="postcode-message" aria-live="polite"></div>
+    `;
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  };
+
+  const desktopLegend = L.control({ position: 'topright' });
+  const mobileLegend = L.control({ position: 'bottomleft' });
+
+  function createLegendMarkup() {
+    return `
+      <div class="legend-header">
+        <div class="legend-title">Index of Multiple Environmental Deprivation (IMED)</div>
+        <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
+      </div>
+      <div class="legend-content">
         This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 10 is the most deprived and 1 is the least.
         <br><br>
         The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat), and takes account of where people live and their proximity to these environmental hazards in each neighbourhood.
@@ -350,78 +352,82 @@
             <span style="background:#f6c690"><span class="legend-number">7</span></span>
             <span style="background:#f3a672"><span class="legend-number">8</span></span>
             <span style="background:#f08251"><span class="legend-number">9</span></span>
-            <span style="background:#ed6132"><span class="legend-number">10</span></span>  
+            <span style="background:#ed6132"><span class="legend-number">10</span></span>
           </div>
           <div class="legend-scale-labels">
             <span>Least environmentally deprived</span>
             <span>Most environmentally deprived</span>
           </div>
         </div>
-        <hr class="hr-thin">
-        <div class="postcode-search">
-          <label for="postcode-input"><strong>Enter your postcode to show statistics in your neighbourhood</strong></label><br>
-          <div class="postcode-row">
-            <input
-              id="postcode-input"
-              type="text"
-              placeholder="e.g. SW1A 1AA"
-              aria-label="Enter a UK postcode"
-            >
-            <button
-              id="postcode-go"
-              class="button button--small"
-              type="button"
-            >
-              Go
-            </button>
-          </div>
-          <div id="postcode-message" style="margin-top: 8px; font-size: 0.85rem;"></div>
-        </div>
       </div>
     `;
-    return container;
-  };
+  }
 
-  legend.addTo(map);
+  function buildLegend(wrapperClass, startMinimised = false) {
+    const wrapper = L.DomUtil.create('div', wrapperClass);
+    const container = L.DomUtil.create('div', 'legend', wrapper);
 
-  setTimeout(() => {
-    const btn = document.getElementById('legend-toggle');
-    const content = document.getElementById('legend-content');
-
-    if (btn && content) {
-      btn.addEventListener('click', () => {
-        const isHidden = content.style.display === 'none';
-        content.style.display = isHidden ? 'block' : 'none';
-        btn.textContent = isHidden ? '−' : '+';
-      });
+    if (startMinimised) {
+      container.classList.add('is-minimised');
     }
 
-    const postcodeInput = document.getElementById('postcode-input');
-    const postcodeGo = document.getElementById('postcode-go');
+    container.innerHTML = createLegendMarkup();
 
-    if (postcodeGo) {
-      postcodeGo.addEventListener('click', findPostcode);
+    const toggleBtn = container.querySelector('.legend-toggle');
+    const content = container.querySelector('.legend-content');
+
+    function syncLegendState() {
+      const isMinimised = container.classList.contains('is-minimised');
+      toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
+      toggleBtn.textContent = isMinimised ? '+' : '−';
+      content.style.display = isMinimised ? 'none' : 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      container.classList.toggle('is-minimised');
+      syncLegendState();
+    });
+
+    syncLegendState();
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  }
+
+  desktopLegend.onAdd = function () {
+    return buildLegend('legend-desktop-wrapper', false);
+  };
+
+  mobileLegend.onAdd = function () {
+    return buildLegend('legend-mobile-wrapper', true);
+  };
+
+  searchControl.addTo(map);
+  desktopLegend.addTo(map);
+  mobileLegend.addTo(map);
+
+  setTimeout(() => {
+    const searchButton = document.getElementById('postcode-search-button');
+    const postcodeInput = document.getElementById('postcode-input');
+
+    if (searchButton) {
+      searchButton.addEventListener('click', findPostcode);
     }
 
     if (postcodeInput) {
-      postcodeInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
+      postcodeInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
           findPostcode();
         }
       });
     }
-    
   }, 0);
 
   // 5. INITIAL LOAD + ZOOM HANDLER
-
   updateLayerByZoom();
-
-  // Keep labels above data
   labelsOnly.addTo(map);
-
-  // Update layers when zooming
   map.on('zoomend', updateLayerByZoom);
 </script>
 
