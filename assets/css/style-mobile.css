@@ -412,7 +412,7 @@ html, body {
   box-shadow: 0 -8px 32px rgba(30, 35, 77, 0.22);
   border-top: 1px solid var(--map-ui-border);
   padding: 0.75rem 1rem calc(1rem + env(safe-area-inset-bottom));
-  max-height: min(55dvh, 28rem);
+  max-height: min(75dvh, 36rem);
   overflow: auto;
 }
 
@@ -436,6 +436,17 @@ html, body {
   background: transparent;
   color: #1e234d;
   font-size: 1.4rem;
+}
+
+.legend-sheet__body .postcode-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.legend-sheet__body .postcode-row input {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .leaflet-control-container .legend {
@@ -478,18 +489,28 @@ html, body {
     display: none;
   }
 
-  .postcode-search,
-  .leaflet-control-custom {
-    width: calc(100vw - 16px);
+  .legend-sheet__body {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .legend-sheet__body .postcode-search,
+  .legend-sheet__body input,
+  .legend-sheet__body button {
+    width: 100%;
     max-width: none;
   }
 
-  .postcode-search input,
-  .postcode-search button,
-  .leaflet-control-custom input,
-  .leaflet-control-custom button {
+  .legend-sheet__body input,
+  .legend-sheet__body button {
     min-height: 44px;
     font-size: 16px;
+  }
+
+  .legend-sheet__body .postcode-row button {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
   .leaflet-popup-content {
