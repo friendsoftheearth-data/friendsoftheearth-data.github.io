@@ -4,726 +4,426 @@
   <meta charset="UTF-8">
   <title>IMED neighbourhood map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+
+  <!-- External stylesheet (ours) -->
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Leaflet styles -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- turf library load for postcode lookup -->
   <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #f4f6fa;
-    }
+  
 
-    body {
-      font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #1e234d;
-    }
-
-    #map {
-      width: 100%;
-      height: 100vh;
-      height: 100dvh;
-    }
-
-    .desktop-only { display: block; }
-    .mobile-only { display: none; }
-
-    .legend-box {
-      background: #f4f6fa;
-      padding: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      color: #1e234d;
-      box-shadow: 0 10px 24px rgba(30,35,77,0.16);
-      border-radius: 12px;
-      border: 1px solid rgba(30,35,77,0.12);
-      min-width: 240px;
-      max-width: 320px;
-    }
-
-
-    .legend-box__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .legend-toggle-btn {
-      min-width: 36px;
-      min-height: 36px;
-      padding: 0;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      font-size: 1.1rem;
-    }
-
-    .legend-box__content {
-      margin-top: 8px;
-    }
-    .legend-bar {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 0.75rem 0 0.5rem;
-      border: 1px solid rgba(30,35,77,0.12);
-    }
-
-    .legend-bar > span {
-      min-height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #1e234d;
-    }
-
-    .legend-scale-labels {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.82rem;
-      line-height: 1.3;
-    }
-
-    .legend-divider {
-      border: 0;
-      height: 1px;
-      background: rgba(30,35,77,0.15);
-      margin: 0.9rem 0;
-    }
-
-    .desktop-postcode-search label,
-    .mobile-search-bar label {
-      display: block;
-      margin-bottom: 0.45rem;
-      font-weight: 700;
-    }
-
-    .postcode-row {
-      display: flex;
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .postcode-row input {
-      flex: 1 1 auto;
-      min-width: 0;
-      min-height: 42px;
-      border: 1px solid rgba(30,35,77,0.2);
-      border-radius: 8px;
-      padding: 0 12px;
-      font-size: 16px;
-      background: #fff;
-      color: #1e234d;
-    }
-
-    .postcode-row button {
-      flex: 0 0 auto;
-      min-height: 42px;
-      white-space: nowrap;
-    }
-
-    .postcode-message {
-      margin-top: 8px;
-      font-size: 0.85rem;
-    }
-
-    .mobile-search-bar {
-      position: fixed;
-      top: max(12px, env(safe-area-inset-top));
-      left: 12px;
-      right: 12px;
-      z-index: 1000;
-      display: none;
-      background: rgba(244,246,250,0.96);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(30,35,77,0.12);
-      border-radius: 14px;
-      box-shadow: 0 10px 24px rgba(30,35,77,0.16);
-      padding: 10px;
-    }
-
-    .mobile-search-bar .postcode-row {
-      margin-top: 0;
-    }
-
-    .map-ui-toggle {
-      position: fixed;
-      right: 12px;
-      bottom: max(12px, env(safe-area-inset-bottom));
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0.8rem 1rem;
-      border-radius: 999px;
-      box-shadow: 0 10px 24px rgba(30,35,77,0.16);
-    }
-
-    .legend-sheet {
-      position: fixed;
-      inset: auto 0 0 0;
-      z-index: 1001;
-      display: none;
-      background: #f4f6fa;
-      color: #1e234d;
-      border-radius: 18px 18px 0 0;
-      box-shadow: 0 -8px 32px rgba(30,35,77,0.22);
-      border-top: 1px solid rgba(30,35,77,0.12);
-      padding: 0.75rem 1rem calc(1rem + env(safe-area-inset-bottom));
-      max-height: min(75dvh, 40rem);
-      overflow: auto;
-    }
-
-    .legend-sheet.is-open { display: block; }
-
-    .legend-sheet__handle {
-      width: 48px;
-      height: 5px;
-      background: rgba(30,35,77,0.2);
-      border-radius: 999px;
-      margin: 0 auto 12px;
-    }
-
-    .legend-sheet__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .legend-sheet__header h2 {
-      margin: 0;
-      font-size: 1.05rem;
-      line-height: 1.2;
-    }
-
-    .legend-sheet__close {
-      min-width: 44px;
-      min-height: 44px;
-      border: none;
-      border-radius: 999px;
-      background: transparent;
-      color: #1e234d;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .legend-sheet p {
-      margin: 0 0 0.9rem;
-      font-size: 0.96rem;
-      line-height: 1.45;
-    }
-
-    .leaflet-popup-content-wrapper {
-      border-radius: 14px;
-    }
-
-    .leaflet-popup-content {
-      margin: 12px 14px;
-      min-width: 220px;
-    }
-
-    .popup-card {
-      min-width: 220px;
-    }
-
-    .popup-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .popup-subtitle {
-      font-size: 0.88rem;
-      opacity: 0.82;
-      margin-bottom: 10px;
-    }
-
-    .popup-grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 6px 10px;
-      align-items: start;
-      font-size: 0.92rem;
-    }
-
-    .popup-label { font-weight: 500; }
-    .popup-value { font-weight: 700; }
-    .popup-value--primary { color: #094839; }
-    .popup-note {
-      grid-column: 1 / -1;
-      font-size: 0.8rem;
-      opacity: 0.8;
-      margin-top: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .desktop-only { display: none !important; }
-      .mobile-only { display: block !important; }
-      .mobile-search-bar { display: block; }
-      .map-ui-toggle { display: inline-flex; }
-
-      .leaflet-top.leaflet-right .leaflet-control {
-        display: none;
-      }
-
-      .leaflet-top.leaflet-left,
-      .leaflet-top.leaflet-right {
-        top: calc(max(12px, env(safe-area-inset-top)) + 86px);
-      }
-
-      .leaflet-control {
-        margin: 8px !important;
-      }
-
-      .leaflet-control-zoom a,
-      .leaflet-bar a {
-        width: 44px;
-        height: 44px;
-        line-height: 44px;
-        font-size: 1.2rem;
-      }
-
-      .leaflet-popup-content {
-        min-width: min(78vw, 280px);
-      }
-
-      .popup-grid {
-        font-size: 0.88rem;
-        gap: 5px 8px;
-      }
-    }
-  </style>
 </head>
-<body>
-  <div class="mobile-search-bar mobile-only" role="search" aria-label="Postcode search">
-    <label for="mobile-postcode-input">Enter your postcode to show statistics in your neighbourhood</label>
-    <div class="postcode-row">
-      <input id="mobile-postcode-input" type="text" placeholder="e.g. SW1A 1AA" aria-label="Enter a UK postcode">
-      <button id="mobile-postcode-go" class="button" type="button">Go</button>
-    </div>
-    <div id="mobile-postcode-message" class="postcode-message"></div>
-  </div>
+<body class="map-page">
 
-  <button class="map-ui-toggle mobile-only" id="mobile-map-key-toggle" type="button" aria-expanded="false" aria-controls="legend-sheet">Map key</button>
+<div id="map"></div>
 
-  <div class="legend-sheet mobile-only" id="legend-sheet" hidden>
-    <div class="legend-sheet__handle" aria-hidden="true"></div>
-    <div class="legend-sheet__header">
-      <h2>Map key</h2>
-      <button class="legend-sheet__close" id="legend-close" type="button" aria-label="Close map key">×</button>
-    </div>
-    <p>This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 10 is the most deprived and 1 is the least.</p>
-    <p>The IMED combines data on pollution, nature deficit and climate extremes, and reflects where people live and their proximity to environmental hazards in each neighbourhood.</p>
-    <p><a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">Further details on the analysis and methodology</a>.</p>
-    <hr class="legend-divider">
-    <div class="legend-bar" aria-label="IMED scale from 1 least deprived to 10 most deprived">
-      <span style="background:#098d7b">1</span>
-      <span style="background:#40a58a">2</span>
-      <span style="background:#76bc98">3</span>
-      <span style="background:#a9d2a6">4</span>
-      <span style="background:#dee9b4">5</span>
-      <span style="background:#f9e6ad">6</span>
-      <span style="background:#f6c690">7</span>
-      <span style="background:#f3a672">8</span>
-      <span style="background:#f08251">9</span>
-      <span style="background:#ed6132">10</span>
-    </div>
-    <div class="legend-scale-labels">
-      <span>Least environmentally deprived</span>
-      <span>Most environmentally deprived</span>
-    </div>
-  </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <div id="map"></div>
+<script>
+  // 1. CREATE MAP AND BASEMAP
+  const map = L.map('map', {
+    preferCanvas: true
+  }).setView([53, -2.5], 7);
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
 
-    const map = L.map('map', { preferCanvas: true }).setView([53, -2.5], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '© CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022)',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
 
-    map.createPane('labels');
-    map.getPane('labels').style.zIndex = 650;
-    map.getPane('labels').style.pointerEvents = 'none';
+  const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+    pane: 'labels',
+    attribution: '© OpenStreetMap contributors, © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 18
+  });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '© CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022)',
-      subdomains: 'abcd',
-      maxZoom: 18
-    }).addTo(map);
+  // 2. DEFINE HELPER FUNCTIONS AND POPUP
+  
+  function getDecileColor(decile) {
+    const value = Number(decile);
+  
+    const colors = {
+      10: '#ed6132',
+      9:  '#f08251',
+      8:  '#f3a672',
+      7:  '#f6c690',
+      6:  '#f9e6ad',
+      5:  '#dee9b4',
+      4:  '#a9d2a6',
+      3:  '#76bc98',
+      2:  '#40a58a',
+      1:  '#098d7b'
+    };
+  
+    return colors[value] || '#bdbdbd';
+  }
 
-    const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-      pane: 'labels',
-      attribution: '© OpenStreetMap contributors, © CARTO',
-      subdomains: 'abcd',
-      maxZoom: 18
+  function formatDecile(value) {
+    if (value === null || value === undefined || value === '') return 'Not available';
+    const num = Number(value);
+    return Number.isNaN(num) ? value : num;
+  }
+
+  function layerStyle(feature) {
+    const p = feature.properties || {};
+    return {
+      fillColor: getDecileColor(p.imed_decile),
+      color: '#f3a672',
+      weight: 0.3,
+      opacity: 0.5,
+      fillOpacity: 0.6
+    };
+  }
+
+  function popupContent(feature, layer) {
+    const p = feature.properties || {};
+    const lsoaCode = p.LSOA21CD || 'Area';
+    const msoaName = p.msoa21_name ?? 'Not available';
+
+    const html = `
+      <div class="popup-card">
+        <div class="popup-title">Neighbourhood: <strong>${lsoaCode}</strong></div>
+        ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
+        <div class="popup-grid">
+          <div class="popup-label">IMED overall score:</div>
+          <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
+          <div class="popup-label">Pollution score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
+          <div class="popup-label">Nature deficit score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.nature_decile)}</div>
+          <div class="popup-label">Climate risk score:</div>
+          <div class="popup-value popup-value">${formatDecile(p.climaterisk_decile)}</div>
+          <div class="popup-label">(Scores are 1 to 10; 10 = most deprived)</div>
+        </div>
+      </div>
+    `;
+
+    layer.bindPopup(html);
+  }
+  
+  // 3. HOVER BEHAVIOUR FUNCTIONS
+
+  let geojsonLayer = null;
+
+  function highlightFeature(e) {
+    const layer = e.target;
+    layer.setStyle({
+      stroke: true,
+      color: '#ffffff',
+      weight: 2,
+      opacity: 0.9,
+      fillOpacity: 0.75
     });
 
-    function getDecileColor(decile) {
-      const value = Number(decile);
-      const colors = {
-        10: '#ed6132', 9: '#f08251', 8: '#f3a672', 7: '#f6c690', 6: '#f9e6ad',
-        5: '#dee9b4', 4: '#a9d2a6', 3: '#76bc98', 2: '#40a58a', 1: '#098d7b'
-      };
-      return colors[value] || '#bdbdbd';
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
     }
+  }
 
-    function formatDecile(value) {
-      if (value === null || value === undefined || value === '') return 'Not available';
-      const num = Number(value);
-      return Number.isNaN(num) ? value : num;
+  function resetHighlight(e) {
+    if (geojsonLayer) {
+      geojsonLayer.resetStyle(e.target);
     }
+  }
 
-    function layerStyle(feature) {
-      const p = feature.properties || {};
-      return {
-        fillColor: getDecileColor(p.imed_decile),
-        color: '#d98b66',
-        weight: isMobile ? 0.8 : 0.45,
-        opacity: isMobile ? 0.85 : 0.55,
-        fillOpacity: isMobile ? 0.72 : 0.6
-      };
-    }
+  function onEachFeature(feature, layer) {
+    popupContent(feature, layer);
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight
+    });
+  }
 
-    function popupContent(feature, layer) {
-      const p = feature.properties || {};
-      const lsoaCode = p.LSOA21CD || 'Area';
-      const msoaName = p.msoa21_name ?? 'Not available';
+  // 3b. DUAL-RESOLUTION LAYERS
 
-      const mobileHtml = `
-        <div class="popup-card popup-card--mobile">
-          <div class="popup-title">${lsoaCode}</div>
-          ${msoaName ? `<div class="popup-subtitle">${msoaName}</div>` : ''}
-          <div class="popup-grid">
-            <div class="popup-label">IMED</div>
-            <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
-            <div class="popup-label">Pollution</div>
-            <div class="popup-value">${formatDecile(p.pollution_decile)}</div>
-            <div class="popup-label">Nature</div>
-            <div class="popup-value">${formatDecile(p.nature_decile)}</div>
-            <div class="popup-note">Scores run from 1 to 10, with 10 most deprived.</div>
-          </div>
-        </div>`;
+  let lowLayer = null;
+  let highLayer = null;
 
-      const desktopHtml = `
-        <div class="popup-card">
-          <div class="popup-title">Neighbourhood: <strong>${lsoaCode}</strong></div>
-          ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
-          <div class="popup-grid">
-            <div class="popup-label">IMED overall score:</div>
-            <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
-            <div class="popup-label">Pollution score:</div>
-            <div class="popup-value">${formatDecile(p.pollution_decile)}</div>
-            <div class="popup-label">Nature deficit score:</div>
-            <div class="popup-value">${formatDecile(p.nature_decile)}</div>
-            <div class="popup-label">Climate risk score:</div>
-            <div class="popup-value">${formatDecile(p.climaterisk_decile)}</div>
-            <div class="popup-note">Scores are 1 to 10; 10 = most deprived.</div>
-          </div>
-        </div>`;
+  let lowLayerPromise = null;
+  let highLayerPromise = null;
 
-      layer.bindPopup(isMobile ? mobileHtml : desktopHtml);
-    }
+  const switchZoom = 13;
+  let layerUpdateToken = 0;
 
-    let geojsonLayer = null;
-    let lowLayer = null;
-    let highLayer = null;
-    let lowLayerPromise = null;
-    let highLayerPromise = null;
-    const switchZoom = 13;
-    let layerUpdateToken = 0;
+  function loadLow() {
+    if (lowLayer) return Promise.resolve(lowLayer);
+    if (lowLayerPromise) return lowLayerPromise;
 
-    function highlightFeature(e) {
-      const layer = e.target;
-      layer.setStyle({
-        stroke: true,
-        color: '#ffffff',
-        weight: 2,
-        opacity: 0.9,
-        fillOpacity: 0.78
-      });
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-      }
-    }
-
-    function resetHighlight(e) {
-      if (geojsonLayer) geojsonLayer.resetStyle(e.target);
-    }
-
-    function openLegendSheet() {
-      const panel = document.getElementById('legend-sheet');
-      const toggle = document.getElementById('mobile-map-key-toggle');
-      if (!panel || !toggle) return;
-      panel.hidden = false;
-      panel.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeLegendSheet() {
-      const panel = document.getElementById('legend-sheet');
-      const toggle = document.getElementById('mobile-map-key-toggle');
-      if (!panel || !toggle) return;
-      panel.hidden = true;
-      panel.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    function onEachFeature(feature, layer) {
-      popupContent(feature, layer);
-
-      if (!isMobile) {
-        layer.on({ mouseover: highlightFeature, mouseout: resetHighlight });
-      }
-
-      layer.on('click', function() {
-        highlightFeature({ target: layer });
-        if (isMobile) closeLegendSheet();
-      });
-
-      layer.on('popupclose', function() {
-        if (geojsonLayer) geojsonLayer.resetStyle(layer);
-      });
-    }
-
-    function loadLow() {
-      if (lowLayer) return Promise.resolve(lowLayer);
-      if (lowLayerPromise) return lowLayerPromise;
-      lowLayerPromise = fetch('/datasets/imed/imed-v2-low.geojson')
-        .then(res => res.json())
-        .then(data => {
-          lowLayer = L.geoJSON(data, { style: layerStyle, onEachFeature: onEachFeature });
-          return lowLayer;
-        })
-        .catch(err => {
-          console.error('Error loading low-res GeoJSON:', err);
-          throw err;
+    lowLayerPromise = fetch('/datasets/imed/imed-v2-low.geojson')
+      .then(res => res.json())
+      .then(data => {
+        lowLayer = L.geoJSON(data, {
+          style: layerStyle,
+          onEachFeature: onEachFeature
         });
-      return lowLayerPromise;
-    }
+        return lowLayer;
+      })
+      .catch(err => {
+        console.error('Error loading low-res GeoJSON:', err);
+        throw err;
+      });
 
-    function loadHigh() {
-      if (highLayer) return Promise.resolve(highLayer);
-      if (highLayerPromise) return highLayerPromise;
-      highLayerPromise = fetch('/datasets/imed/imed-v2-high.geojson')
-        .then(res => res.json())
-        .then(data => {
-          highLayer = L.geoJSON(data, { style: layerStyle, onEachFeature: onEachFeature });
-          return highLayer;
-        })
-        .catch(err => {
-          console.error('Error loading high-res GeoJSON:', err);
-          throw err;
+    return lowLayerPromise;
+  }
+
+  function loadHigh() {
+    if (highLayer) return Promise.resolve(highLayer);
+    if (highLayerPromise) return highLayerPromise;
+
+    highLayerPromise = fetch('/datasets/imed/imed-v2-high.geojson')
+      .then(res => res.json())
+      .then(data => {
+        highLayer = L.geoJSON(data, {
+          style: layerStyle,
+          onEachFeature: onEachFeature
         });
-      return highLayerPromise;
-    }
+        return highLayer;
+      })
+      .catch(err => {
+        console.error('Error loading high-res GeoJSON:', err);
+        throw err;
+      });
 
-    function removeDataLayers() {
-      if (lowLayer && map.hasLayer(lowLayer)) map.removeLayer(lowLayer);
-      if (highLayer && map.hasLayer(highLayer)) map.removeLayer(highLayer);
-    }
+    return highLayerPromise;
+  }
 
-    async function updateLayerByZoom() {
-      const myToken = ++layerUpdateToken;
-      const z = map.getZoom();
-      try {
-        if (z < switchZoom) {
-          const layer = await loadLow();
-          if (myToken !== layerUpdateToken) return;
-          removeDataLayers();
-          if (!map.hasLayer(layer)) layer.addTo(map);
-          geojsonLayer = layer;
-        } else {
-          const layer = await loadHigh();
-          if (myToken !== layerUpdateToken) return;
-          removeDataLayers();
-          if (!map.hasLayer(layer)) layer.addTo(map);
-          geojsonLayer = layer;
+  function removeDataLayers() {
+    if (lowLayer && map.hasLayer(lowLayer)) {
+      map.removeLayer(lowLayer);
+    }
+    if (highLayer && map.hasLayer(highLayer)) {
+      map.removeLayer(highLayer);
+    }
+  }
+
+  async function updateLayerByZoom() {
+    const myToken = ++layerUpdateToken;
+    const z = map.getZoom();
+
+    try {
+      if (z < switchZoom) {
+        const layer = await loadLow();
+
+        if (myToken !== layerUpdateToken) return;
+
+        removeDataLayers();
+        if (!map.hasLayer(layer)) {
+          layer.addTo(map);
         }
-      } catch (err) {
-        console.error('Error updating layer by zoom:', err);
+        geojsonLayer = layer;
+      } else {
+        const layer = await loadHigh();
+
+        if (myToken !== layerUpdateToken) return;
+
+        removeDataLayers();
+        if (!map.hasLayer(layer)) {
+          layer.addTo(map);
+        }
+        geojsonLayer = layer;
       }
+    } catch (err) {
+      console.error('Error updating layer by zoom:', err);
+    }
+  }
+
+  // POSTCODE SEARCH FUNCTIONS
+  async function findPostcode() {
+    const input = document.getElementById('postcode-input');
+    const message = document.getElementById('postcode-message');
+
+    if (!input || !message) return;
+
+    const postcode = input.value.trim();
+
+    if (!postcode) {
+      message.textContent = 'Please enter a postcode.';
+      return;
     }
 
-    async function findPostcode(source = 'desktop') {
-      const input = source === 'mobile'
-        ? document.getElementById('mobile-postcode-input')
-        : document.getElementById('desktop-postcode-input');
-      const message = source === 'mobile'
-        ? document.getElementById('mobile-postcode-message')
-        : document.getElementById('desktop-postcode-message');
+    message.textContent = 'Searching...';
 
-      if (!input || !message) return;
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
+      const res = await fetch(url, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-      const postcode = input.value.trim();
-      if (!postcode) {
-        message.textContent = 'Please enter a postcode.';
+      if (!res.ok) {
+        throw new Error('Geocoding request failed');
+      }
+
+      const results = await res.json();
+
+      if (!results.length) {
+        message.textContent = 'Postcode not found.';
         return;
       }
 
-      message.textContent = 'Searching...';
+      const result = results[0];
+      const lat = parseFloat(result.lat);
+      const lon = parseFloat(result.lon);
 
-      try {
-        const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
-        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-        if (!res.ok) throw new Error('Geocoding request failed');
+      map.flyTo([lat, lon], 13, {
+        duration: 1.2
+      });
 
-        const results = await res.json();
-        if (!results.length) {
-          message.textContent = 'Postcode not found.';
-          return;
-        }
+      await new Promise(resolve => {
+        map.once('moveend', resolve);
+      });
 
-        const result = results[0];
-        const lat = parseFloat(result.lat);
-        const lon = parseFloat(result.lon);
+      await updateLayerByZoom();
 
-        map.flyTo([lat, lon], 13, { duration: 1.2 });
-        await new Promise(resolve => map.once('moveend', resolve));
-        await updateLayerByZoom();
+      const point = turf.point([lon, lat]);
+      let matchedLayer = null;
 
-        const point = turf.point([lon, lat]);
-        let matchedLayer = null;
-
-        if (!geojsonLayer) {
-          message.textContent = 'Map data not yet loaded.';
-          return;
-        }
-
-        geojsonLayer.eachLayer(layer => {
-          if (matchedLayer) return;
-          const feature = layer.feature;
-          if (!feature || !feature.geometry) return;
-          if (turf.booleanPointInPolygon(point, feature)) matchedLayer = layer;
-        });
-
-        if (matchedLayer) {
-          matchedLayer.openPopup([lat, lon]);
-          message.textContent = '';
-          if (source === 'mobile') closeLegendSheet();
-        } else {
-          message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
-        }
-      } catch (error) {
-        console.error(error);
-        message.textContent = 'Sorry, something went wrong with the postcode search.';
+      if (!geojsonLayer) {
+        message.textContent = 'Map data not yet loaded.';
+        return;
       }
-    }
 
-    const legend = L.control({ position: 'topright' });
-    legend.onAdd = function () {
-      const container = L.DomUtil.create('div', 'legend-box desktop-only');
-      container.innerHTML = `
-        <div class="legend-box__header">
-          <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
-          <button id="desktop-legend-toggle" class="button button--small legend-toggle-btn" type="button" aria-expanded="true" aria-controls="desktop-legend-content">−</button>
-        </div>
-        <div id="desktop-legend-content" class="legend-box__content">
-          This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 10 is the most deprived and 1 is the least.
-          <br><br>
-          The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat), and takes account of where people live and their proximity to these environmental hazards in each neighbourhood.
-          <br><br>
-          Further details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
-          <hr class="legend-divider">
+      geojsonLayer.eachLayer(layer => {
+        if (matchedLayer) return;
+
+        const feature = layer.feature;
+        if (!feature || !feature.geometry) return;
+
+        const isInside = turf.booleanPointInPolygon(point, feature);
+
+        if (isInside) {
+          matchedLayer = layer;
+        }
+      });
+
+      if (matchedLayer) {
+        matchedLayer.openPopup([lat, lon]);
+        message.textContent = '';
+      } else {
+        message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
+      }
+
+    } catch (error) {
+      console.error(error);
+      message.textContent = 'Sorry, something went wrong with the postcode search.';
+    }
+  }
+  
+  // 4. LEGEND
+  const legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function () {
+    const container = L.DomUtil.create('div', 'legend');
+    container.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Index of Multiple Environmental Deprivation (IMED)</strong>
+        <button id="legend-toggle" class="button button--small" style="margin-left:8px;">−</button>
+      </div>
+      <div id="legend-content" style="margin-top:8px;">
+        This map shows the most environmentally deprived neighbourhoods on a scale of 1 to 10, where 10 is the most deprived and 1 is the least.
+        <br><br>
+        The IMED combines data on pollution (air quality, noise pollution), nature deficit (lack of greenspace and tree cover), and climate extremes (flood risk and extreme heat), and takes account of where people live and their proximity to these environmental hazards in each neighbourhood.
+        <br><br>
+        Further details on the analysis and methodology can be found <a href="https://friendsoftheearth.uk/about/environmental-justice-protecting-people-and-planet" target="_blank" rel="noopener noreferrer">here</a>.
+        <br>
+        <hr class="hr-thin">
+        <div class="legend-scale">
           <div class="legend-bar">
-            <span style="background:#098d7b">1</span>
-            <span style="background:#40a58a">2</span>
-            <span style="background:#76bc98">3</span>
-            <span style="background:#a9d2a6">4</span>
-            <span style="background:#dee9b4">5</span>
-            <span style="background:#f9e6ad">6</span>
-            <span style="background:#f6c690">7</span>
-            <span style="background:#f3a672">8</span>
-            <span style="background:#f08251">9</span>
-            <span style="background:#ed6132">10</span>
+            <span class="legend-bar-accessible" style="background:#098d7b"><span class="legend-number">1</span></span>
+            <span class="legend-bar-accessible" style="background:#40a58a"><span class="legend-number">2</span></span>
+            <span style="background:#76bc98"><span class="legend-number">3</span></span>
+            <span style="background:#a9d2a6"><span class="legend-number">4</span></span>
+            <span style="background:#dee9b4"><span class="legend-number">5</span></span>
+            <span style="background:#f9e6ad"><span class="legend-number">6</span></span>
+            <span style="background:#f6c690"><span class="legend-number">7</span></span>
+            <span style="background:#f3a672"><span class="legend-number">8</span></span>
+            <span style="background:#f08251"><span class="legend-number">9</span></span>
+            <span style="background:#ed6132"><span class="legend-number">10</span></span>  
           </div>
           <div class="legend-scale-labels">
             <span>Least environmentally deprived</span>
             <span>Most environmentally deprived</span>
           </div>
-          <hr class="legend-divider">
-          <div class="desktop-postcode-search">
-            <label for="desktop-postcode-input">Enter your postcode to show statistics in your neighbourhood</label>
-            <div class="postcode-row">
-              <input id="desktop-postcode-input" type="text" placeholder="e.g. SW1A 1AA" aria-label="Enter a UK postcode">
-              <button id="desktop-postcode-go" class="button button--small" type="button">Go</button>
-            </div>
-            <div id="desktop-postcode-message" class="postcode-message"></div>
+        </div>
+        <hr class="hr-thin">
+        <div class="postcode-search">
+          <label for="postcode-input"><strong>Enter your postcode to show statistics in your neighbourhood</strong></label><br>
+          <div class="postcode-row">
+            <input
+              id="postcode-input"
+              type="text"
+              placeholder="e.g. SW1A 1AA"
+              aria-label="Enter a UK postcode"
+            >
+            <button
+              id="postcode-go"
+              class="button button--small"
+              type="button"
+            >
+              Go
+            </button>
           </div>
-        </div>`;
-      return container;
-    };
+          <div id="postcode-message" style="margin-top: 8px; font-size: 0.85rem;"></div>
+        </div>
+      </div>
+    `;
+    return container;
+  };
 
-    legend.addTo(map);
-    labelsOnly.addTo(map);
-    updateLayerByZoom();
-    map.on('zoomend', updateLayerByZoom);
+  legend.addTo(map);
 
-    setTimeout(() => {
-      const desktopInput = document.getElementById('desktop-postcode-input');
-      const desktopGo = document.getElementById('desktop-postcode-go');
-      const mobileInput = document.getElementById('mobile-postcode-input');
-      const mobileGo = document.getElementById('mobile-postcode-go');
-      const mobileToggle = document.getElementById('mobile-map-key-toggle');
-      const legendClose = document.getElementById('legend-close');
-      const desktopLegendToggle = document.getElementById('desktop-legend-toggle');
-      const desktopLegendContent = document.getElementById('desktop-legend-content');
+  setTimeout(() => {
+    const btn = document.getElementById('legend-toggle');
+    const content = document.getElementById('legend-content');
 
-      if (desktopGo) desktopGo.addEventListener('click', () => findPostcode('desktop'));
-      if (desktopInput) desktopInput.addEventListener('keydown', e => {
+    if (btn && content) {
+      btn.addEventListener('click', () => {
+        const isHidden = content.style.display === 'none';
+        content.style.display = isHidden ? 'block' : 'none';
+        btn.textContent = isHidden ? '−' : '+';
+      });
+    }
+
+    const postcodeInput = document.getElementById('postcode-input');
+    const postcodeGo = document.getElementById('postcode-go');
+
+    if (postcodeGo) {
+      postcodeGo.addEventListener('click', findPostcode);
+    }
+
+    if (postcodeInput) {
+      postcodeInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          findPostcode('desktop');
+          findPostcode();
         }
       });
+    }
+    
+  }, 0);
 
-      if (mobileGo) mobileGo.addEventListener('click', () => findPostcode('mobile'));
-      if (mobileInput) mobileInput.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          findPostcode('mobile');
-        }
-      });
+  // 5. INITIAL LOAD + ZOOM HANDLER
 
-      if (mobileToggle) {
-        mobileToggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const open = mobileToggle.getAttribute('aria-expanded') === 'true';
-          open ? closeLegendSheet() : openLegendSheet();
-        });
-      }
+  updateLayerByZoom();
 
-      if (legendClose) {
-        legendClose.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          closeLegendSheet();
-        });
-      }
+  // Keep labels above data
+  labelsOnly.addTo(map);
 
-      if (desktopLegendToggle && desktopLegendContent) {
-        desktopLegendToggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          const isHidden = desktopLegendContent.style.display === 'none';
-          desktopLegendContent.style.display = isHidden ? 'block' : 'none';
-          desktopLegendToggle.textContent = isHidden ? '−' : '+';
-          desktopLegendToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-        });
-      }
-    }, 0);
-  </script>
+  // Update layers when zooming
+  map.on('zoomend', updateLayerByZoom);
+</script>
+
 </body>
 </html>
