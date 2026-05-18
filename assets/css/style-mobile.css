@@ -628,3 +628,108 @@ body.map-page {
     display: none;
   }
 }
+
+
+/* Prevent Leaflet controls from clipping on mobile */
+.leaflet-top,
+.leaflet-bottom {
+  width: 100%;
+}
+
+.leaflet-left,
+.leaflet-right {
+  pointer-events: none;
+}
+
+.leaflet-left .leaflet-control,
+.leaflet-right .leaflet-control {
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .leaflet-top.leaflet-left,
+  .leaflet-bottom.leaflet-left,
+  .leaflet-bottom.leaflet-right,
+  .leaflet-top.leaflet-right {
+    left: 0;
+    right: 0;
+  }
+
+  .leaflet-top.leaflet-left .postcode-search-wrapper,
+  .leaflet-bottom.leaflet-left .legend-mobile-wrapper,
+  .leaflet-bottom.leaflet-right .attribution-wrapper {
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    margin: 0;
+    width: auto;
+  }
+
+  .leaflet-top.leaflet-left .postcode-search-wrapper {
+    top: max(0.75rem, env(safe-area-inset-top));
+    justify-content: stretch;
+  }
+
+  .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
+    bottom: max(4.5rem, calc(env(safe-area-inset-bottom) + 4rem));
+    justify-content: stretch;
+  }
+
+  .leaflet-bottom.leaflet-right .attribution-wrapper {
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: stretch;
+  }
+
+  .leaflet-top.leaflet-left .postcode-search-control,
+  .leaflet-bottom.leaflet-left .legend,
+  .leaflet-bottom.leaflet-right .map-attribution {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Hide default Leaflet attribution box because we use our own collapsible one */
+.leaflet-control-attribution {
+  display: none;
+}
+
+.map-attribution {
+  background: #f4f6fa;
+  color: #1e234d;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  max-width: 320px;
+}
+
+.attribution-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.attribution-title {
+  font-weight: 700;
+}
+
+.attribution-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0.35rem 0.75rem;
+}
+
+.attribution-content {
+  margin-top: 0.5rem;
+}
+
+.map-attribution.is-minimised .attribution-content {
+  display: none;
+}
