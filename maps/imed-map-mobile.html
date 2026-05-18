@@ -81,7 +81,7 @@
     };
   }
 
-  function popupContent(feature, layer) {
+ function popupContent(feature, layer) {
     const p = feature.properties || {};
     const lsoaCode = p.LSOA21CD || 'Area';
     const msoaName = p.msoa21_name ?? 'Not available';
@@ -104,7 +104,9 @@
       </div>
     `;
 
-    layer.bindPopup(html);
+    layer.bindPopup(html, {
+      autoPan: false
+    });
   }
 
   // 3. HOVER BEHAVIOUR FUNCTIONS
@@ -133,13 +135,22 @@
 
   function onEachFeature(feature, layer) {
     popupContent(feature, layer);
+
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight,
       click: function () {
-      const center = layer.getBounds().getCenter();
-      layer.openPopup(center);
-    }
+        const center = layer.getBounds().getCenter();
+
+        map.panTo(center, {
+          animate: true,
+          duration: 0.5
+        });
+
+        map.once('moveend', function () {
+          layer.openPopup(center);
+        });
+      }
     });
   }
 
@@ -476,26 +487,6 @@
   updateLayerByZoom();
   labelsOnly.addTo(map);
   map.on('zoomend', updateLayerByZoom);
-
-  map.on('popupopen', function (e) {
-      const popup = e.popup;
-      const popupEl = popup.getElement();
-  
-      if (!popupEl) return;
-  
-      const latlng = popup.getLatLng();
-      const px = map.project(latlng);
-  
-      const popupHeight = popupEl.offsetHeight || 0;
-      const popupWidth = popupEl.offsetWidth || 0;
-  
-      px.y -= popupHeight / 2;
-      px.x += popupWidth / 2 - 20; // optional small horizontal tweak
-  
-      map.panTo(map.unproject(px), {
-        animate: true
-      });
-    });
   
   // 6. COLLAPSIBLE ATTRIBUTION CONTROL
   map.attributionControl.setPrefix(false);
