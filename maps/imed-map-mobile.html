@@ -226,9 +226,13 @@
   }
 
   // POSTCODE SEARCH FUNCTIONS
-  async function findPostcode() {
-    const input = document.getElementById('postcode-input');
-    const message = document.getElementById('postcode-message');
+    async function findPostcode(mode = 'mobile') {
+    const input = document.getElementById(
+      mode === 'desktop' ? 'desktop-postcode-input' : 'postcode-input'
+    );
+    const message = document.getElementById(
+      mode === 'desktop' ? 'desktop-postcode-message' : 'postcode-message'
+    );
 
     if (!input || !message) return;
 
@@ -244,14 +248,10 @@
     try {
       const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q=${encodeURIComponent(postcode)}`;
       const res = await fetch(url, {
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
 
-      if (!res.ok) {
-        throw new Error('Geocoding request failed');
-      }
+      if (!res.ok) throw new Error('Geocoding request failed');
 
       const results = await res.json();
 
@@ -264,14 +264,9 @@
       const lat = parseFloat(result.lat);
       const lon = parseFloat(result.lon);
 
-      map.flyTo([lat, lon], 13, {
-        duration: 1.2
-      });
+      map.flyTo([lat, lon], 13, { duration: 1.2 });
 
-      await new Promise(resolve => {
-        map.once('moveend', resolve);
-      });
-
+      await new Promise(resolve => map.once('moveend', resolve));
       await updateLayerByZoom();
 
       const point = turf.point([lon, lat]);
@@ -286,8 +281,7 @@
         if (matchedLayer) return;
         const feature = layer.feature;
         if (!feature || !feature.geometry) return;
-        const isInside = turf.booleanPointInPolygon(point, feature);
-        if (isInside) {
+        if (turf.booleanPointInPolygon(point, feature)) {
           matchedLayer = layer;
         }
       });
@@ -349,7 +343,7 @@
   const desktopLegend = L.control({ position: 'topright' });
   const mobileLegend = L.control({ position: 'bottomleft' });
 
-  function createLegendMarkup() {
+    function createLegendMarkup(isDesktop = false) {
     return `
       <div class="legend-header">
         <div class="legend-title">Index of Multiple Environmental Deprivation (IMED)</div>
@@ -381,11 +375,23 @@
             <span>Most environmentally deprived</span>
           </div>
         </div>
+
+        ${isDesktop ? `
+          <hr class="hr-thin">
+          <div class="legend-postcode-search">
+            <div class="legend-postcode-title">Enter your postcode to show statistics in your neighbourhood</div>
+            <div class="legend-postcode-form">
+              <input type="text" id="desktop-postcode-input" placeholder="e.g. SW1A 1AA" aria-label="Enter postcode">
+              <button id="desktop-postcode-search-button" type="button" class="button button--small">Go</button>
+            </div>
+            <div id="desktop-postcode-message" aria-live="polite"></div>
+          </div>
+        ` : ''}
       </div>
     `;
   }
 
-  function buildLegend(wrapperClass, startMinimised = false) {
+    function buildLegend(wrapperClass, startMinimised = false, isDesktop = false) {
     const wrapper = L.DomUtil.create('div', wrapperClass);
     const container = L.DomUtil.create('div', 'legend', wrapper);
 
@@ -393,7 +399,7 @@
       container.classList.add('is-minimised');
     }
 
-    container.innerHTML = createLegendMarkup();
+    container.innerHTML = createLegendMarkup(isDesktop);
 
     const toggleBtn = container.querySelector('.legend-toggle');
     const content = container.querySelector('.legend-content');
@@ -418,11 +424,11 @@
   }
 
   desktopLegend.onAdd = function () {
-    return buildLegend('legend-desktop-wrapper', false);
+    return buildLegend('legend-desktop-wrapper', false, true);
   };
 
   mobileLegend.onAdd = function () {
-    return buildLegend('legend-mobile-wrapper', true);
+    return buildLegend('legend-mobile-wrapper', true, false);
   };
 
   searchControl.addTo(map);
@@ -430,18 +436,33 @@
   mobileLegend.addTo(map);
 
   setTimeout(() => {
-    const searchButton = document.getElementById('postcode-search-button');
-    const postcodeInput = document.getElementById('postcode-input');
+    const mobileSearchButton = document.getElementById('postcode-search-button');
+    const mobilePostcodeInput = document.getElementById('postcode-input');
+    const desktopSearchButton = document.getElementById('desktop-postcode-search-button');
+    const desktopPostcodeInput = document.getElementById('desktop-postcode-input');
 
-    if (searchButton) {
-      searchButton.addEventListener('click', findPostcode);
+    if (mobileSearchButton) {
+      mobileSearchButton.addEventListener('click', () => findPostcode('mobile'));
     }
 
-    if (postcodeInput) {
-      postcodeInput.addEventListener('keydown', (event) => {
+    if (mobilePostcodeInput) {
+      mobilePostcodeInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           event.preventDefault();
-          findPostcode();
+          findPostcode('mobile');
+        }
+      });
+    }
+
+    if (desktopSearchButton) {
+      desktopSearchButton.addEventListener('click', () => findPostcode('desktop'));
+    }
+
+    if (desktopPostcodeInput) {
+      desktopPostcodeInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          findPostcode('desktop');
         }
       });
     }
