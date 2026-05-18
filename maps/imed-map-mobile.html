@@ -26,7 +26,8 @@
 <script>
   // 1. CREATE MAP AND BASEMAP
   const map = L.map('map', {
-    preferCanvas: true
+    preferCanvas: true,
+    maxZoom: 14
   }).setView([53, -2.5], 7);
 
   map.createPane('labels');
@@ -91,7 +92,7 @@
         <div class="popup-title">Neighbourhood: <strong>${lsoaCode}</strong></div>
         ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
         <div class="popup-grid">
-          <div class="popup-label">Environmental deprivation score:</div>
+          <div class="popup-label"><strong>Environmental deprivation score:</strong></div>
           <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
           <div class="popup-label">Pollution score:</div>
           <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
