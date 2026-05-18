@@ -429,6 +429,49 @@
   updateLayerByZoom();
   labelsOnly.addTo(map);
   map.on('zoomend', updateLayerByZoom);
+
+  // 6. COLLAPSIBLE ATTRIBUTION CONTROL
+  map.attributionControl.setPrefix(false);
+
+  const attributionControl = L.control({ position: 'bottomright' });
+
+  attributionControl.onAdd = function () {
+    const wrapper = L.DomUtil.create('div', 'attribution-wrapper');
+    const container = L.DomUtil.create('div', 'map-attribution is-minimised', wrapper);
+
+    container.innerHTML = `
+      <div class="attribution-header">
+        <div class="attribution-title">Map credits</div>
+        <button type="button" class="button button--small attribution-toggle" aria-expanded="false">+</button>
+      </div>
+      <div class="attribution-content">
+        © CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022). © OpenStreetMap contributors.
+      </div>
+    `;
+
+    const toggleBtn = container.querySelector('.attribution-toggle');
+    const content = container.querySelector('.attribution-content');
+
+    function syncAttributionState() {
+      const isMinimised = container.classList.contains('is-minimised');
+      toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
+      toggleBtn.textContent = isMinimised ? '+' : '−';
+      content.style.display = isMinimised ? 'none' : 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      container.classList.toggle('is-minimised');
+      syncAttributionState();
+    });
+
+    syncAttributionState();
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  };
+
+  attributionControl.addTo(map);
 </script>
 
 </body>
