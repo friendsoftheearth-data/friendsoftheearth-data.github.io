@@ -135,7 +135,7 @@
     popupContent(feature, layer);
     layer.on({
       mouseover: highlightFeature,
-      mouseout: resetHighlight
+      mouseout: resetHighlight,
       click: function () {
       const center = layer.getBounds().getCenter();
       layer.openPopup(center);
