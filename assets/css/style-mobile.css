@@ -570,7 +570,7 @@ hr.hr-thin,
   }
 
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
-    bottom: max(5.25rem, calc(env(safe-area-inset-bottom) + 4rem));
+    bottom: max(4rem, calc(env(safe-area-inset-bottom) + 4rem));
     display: flex;
     justify-content: stretch;
     z-index: 1000;
