@@ -285,19 +285,17 @@ hr.hr-thin,
 }
 
 .popup-title {
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 400;
   line-height: 1.3;
-  margin-bottom: 0.25rem;
-  color: #1e234d;
+  margin-bottom: 4px;
 }
 
 .popup-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.35;
-  margin-bottom: 0.6rem;
+  margin-bottom: 12px;
   color: #1e234d;
-  opacity: 0.8;
+  font-weight: 500;
 }
 
 .popup-note {
@@ -308,27 +306,28 @@ hr.hr-thin,
 
 .popup-grid {
   display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 0.75rem;
-  row-gap: 0.35rem;
-  align-items: start;
+  grid-template-columns: max-content max-content;
+  column-gap: 8px;
+  row-gap: 6px;
+  align-items: baseline;
+  justify-content: start;
 }
 
 .popup-label {
-  font-size: 0.9rem;
   color: #1e234d;
 }
 
 .popup-value {
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-align: right;
+  font-weight: 500;
+  text-align: left;
   white-space: nowrap;
   color: #1e234d;
 }
 
 .popup-value--primary {
-  color: #094839;
+  font-weight: 600;
+  color: #1e234d;
+  line-height: 1.35;
 }
 
 .leaflet-popup-content {
