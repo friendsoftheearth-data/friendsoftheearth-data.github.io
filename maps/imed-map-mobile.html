@@ -307,17 +307,39 @@
   // 4. SEARCH CONTROL AND LEGEND
   const searchControl = L.control({ position: 'topleft' });
 
-  searchControl.onAdd = function () {
+    searchControl.onAdd = function () {
     const wrapper = L.DomUtil.create('div', 'postcode-search-wrapper');
     const container = L.DomUtil.create('div', 'postcode-search-control', wrapper);
     container.innerHTML = `
-      <h3>Search by postcode</h3>
-      <div class="postcode-search-form">
-        <input type="text" id="postcode-input" placeholder="Enter postcode" aria-label="Enter postcode">
-        <button id="postcode-search-button" type="button" class="button button--small">Search</button>
+      <div class="postcode-search-header">
+        <h3>Search by postcode</h3>
+        <button type="button" class="button button--small postcode-toggle" aria-expanded="true">−</button>
       </div>
-      <div id="postcode-message" aria-live="polite"></div>
+      <div class="postcode-search-content">
+        <div class="postcode-search-form">
+          <input type="text" id="postcode-input" placeholder="Enter postcode" aria-label="Enter postcode">
+          <button id="postcode-search-button" type="button" class="button button--small">Search</button>
+        </div>
+        <div id="postcode-message" aria-live="polite"></div>
+      </div>
     `;
+
+    const toggleBtn = container.querySelector('.postcode-toggle');
+    const content = container.querySelector('.postcode-search-content');
+
+    function syncPostcodeState() {
+      const isMinimised = container.classList.contains('is-minimised');
+      toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
+      toggleBtn.textContent = isMinimised ? '+' : '−';
+      content.style.display = isMinimised ? 'none' : 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      container.classList.toggle('is-minimised');
+      syncPostcodeState();
+    });
+
+    syncPostcodeState();
 
     L.DomEvent.disableClickPropagation(container);
     L.DomEvent.disableScrollPropagation(container);
