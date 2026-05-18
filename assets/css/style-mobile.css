@@ -634,3 +634,41 @@ hr.hr-thin,
     display: none;
   }
 }
+
+.legend-postcode-search {
+  margin-top: 0.75rem;
+}
+
+.legend-postcode-title {
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.legend-postcode-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.legend-postcode-form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid #c8ceda;
+  border-radius: 4px;
+  padding: 0.65rem 0.75rem;
+  background: #ffffff;
+  color: #1e234d;
+  box-sizing: border-box;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.legend-postcode-form button {
+  flex: 0 0 auto;
+}
+
+#desktop-postcode-message {
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+}
