@@ -136,6 +136,10 @@
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight
+      click: function () {
+      const center = layer.getBounds().getCenter();
+      layer.openPopup(center);
+    }
     });
   }
 
@@ -473,6 +477,26 @@
   labelsOnly.addTo(map);
   map.on('zoomend', updateLayerByZoom);
 
+  map.on('popupopen', function (e) {
+      const popup = e.popup;
+      const popupEl = popup.getElement();
+  
+      if (!popupEl) return;
+  
+      const latlng = popup.getLatLng();
+      const px = map.project(latlng);
+  
+      const popupHeight = popupEl.offsetHeight || 0;
+      const popupWidth = popupEl.offsetWidth || 0;
+  
+      px.y -= popupHeight / 2;
+      px.x += popupWidth / 2 - 20; // optional small horizontal tweak
+  
+      map.panTo(map.unproject(px), {
+        animate: true
+      });
+    });
+  
   // 6. COLLAPSIBLE ATTRIBUTION CONTROL
   map.attributionControl.setPrefix(false);
 
