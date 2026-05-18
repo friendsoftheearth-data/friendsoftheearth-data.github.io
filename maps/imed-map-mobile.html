@@ -91,7 +91,7 @@
         <div class="popup-title">Neighbourhood: <strong>${lsoaCode}</strong></div>
         ${msoaName ? `<div class="popup-subtitle">in ${msoaName}</div>` : ''}
         <div class="popup-grid">
-          <div class="popup-label">IMED overall score:</div>
+          <div class="popup-label">Environmental deprivation score:</div>
           <div class="popup-value popup-value--primary">${formatDecile(p.imed_decile)}</div>
           <div class="popup-label">Pollution score:</div>
           <div class="popup-value popup-value">${formatDecile(p.pollution_decile)}</div>
@@ -172,7 +172,7 @@
     if (highLayer) return Promise.resolve(highLayer);
     if (highLayerPromise) return highLayerPromise;
 
-    highLayerPromise = fetch('/datasets/imed/imed-v2-high.geojson')
+    highLayerPromise = fetch('/datasets/imed/imed-v2-low.geojson')
       .then(res => res.json())
       .then(data => {
         highLayer = L.geoJSON(data, {
