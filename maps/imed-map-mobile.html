@@ -27,7 +27,7 @@
   // 1. CREATE MAP AND BASEMAP
   const map = L.map('map', {
     preferCanvas: true,
-    maxZoom: 14
+    maxZoom: 15
   }).setView([53, -2.5], 7);
 
   map.createPane('labels');
@@ -160,7 +160,7 @@
   let highLayer = null;
   let lowLayerPromise = null;
   let highLayerPromise = null;
-  const switchZoom = 13;
+  const switchZoom = 16;
   let layerUpdateToken = 0;
 
   function loadLow() {
@@ -214,12 +214,19 @@
     }
   }
 
+  let currentResolution = null;
+  
   async function updateLayerByZoom() {
     const myToken = ++layerUpdateToken;
     const z = map.getZoom();
-
+    const targetResolution = z < switchZoom ? 'low' : 'high';
+  
+    if (targetResolution === currentResolution) {
+      return;
+    }
+  
     try {
-      if (z < switchZoom) {
+      if (targetResolution === 'low') {
         const layer = await loadLow();
         if (myToken !== layerUpdateToken) return;
         removeDataLayers();
@@ -227,6 +234,7 @@
           layer.addTo(map);
         }
         geojsonLayer = layer;
+        currentResolution = 'low';
       } else {
         const layer = await loadHigh();
         if (myToken !== layerUpdateToken) return;
@@ -235,12 +243,13 @@
           layer.addTo(map);
         }
         geojsonLayer = layer;
+        currentResolution = 'high';
       }
     } catch (err) {
       console.error('Error updating layer by zoom:', err);
     }
   }
-
+  
   // POSTCODE SEARCH FUNCTIONS
     async function findPostcode(mode = 'mobile') {
     const input = document.getElementById(
