@@ -235,7 +235,7 @@ hr.hr-thin,
   grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 0;
   width: 100%;
-  min-height: 36px;
+  min-height: 22px;
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid #d9dde6;
