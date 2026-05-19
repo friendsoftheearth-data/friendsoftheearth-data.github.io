@@ -631,6 +631,26 @@ hr.hr-thin,
     font-size: 0.82rem;
     line-height: 1.25;
   }
+
+  .leaflet-popup-content-wrapper {
+    max-width: 90vw;    /* keep popup within viewport width on phones */
+  }
+
+  .leaflet-popup-content {
+    max-height: 60vh;   /* limit vertical size on phones */
+    overflow-y: auto;   /* scroll inside popup if content is long */
+  }
+  
+}
+
+/* Constrain postcode lookup search control for small screens*/
+@media (max-width: 480px) {
+  .postcode-search-control {
+    padding: 0.4rem 0.6rem;
+  }
+  .postcode-search-header {
+    margin-bottom: 0.25rem;
+  }
 }
 
 @media (min-width: 769px) {
