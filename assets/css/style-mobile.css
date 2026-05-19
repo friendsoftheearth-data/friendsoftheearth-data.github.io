@@ -578,7 +578,7 @@ hr.hr-thin,
   }
 
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
-    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(5.0rem + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: stretch;
     z-index: 1000;
