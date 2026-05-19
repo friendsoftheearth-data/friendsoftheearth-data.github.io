@@ -578,7 +578,7 @@ hr.hr-thin,
   }
 
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
-    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: stretch;
     z-index: 1000;
@@ -588,6 +588,7 @@ hr.hr-thin,
     bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: stretch;
+    z-index: 999;
   }
 
   .leaflet-top.leaflet-left .postcode-search-control,
