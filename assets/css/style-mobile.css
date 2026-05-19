@@ -564,10 +564,11 @@ hr.hr-thin,
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper,
   .leaflet-bottom.leaflet-right .attribution-wrapper {
     position: absolute;
-    left: 0.75rem;
-    right: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 1.5rem);     /* full viewport width minus side padding */
+    max-width: 600px;                 /* optional safety cap */
     margin: 0;
-    width: auto;
   }
 
   .leaflet-top.leaflet-left .postcode-search-wrapper {
