@@ -430,6 +430,8 @@ hr.hr-thin,
   color: #1e234d;
   box-sizing: border-box;
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 #postcode-input::placeholder {
@@ -690,6 +692,8 @@ hr.hr-thin,
   color: #1e234d;
   box-sizing: border-box;
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .legend-postcode-form button {
