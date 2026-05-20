@@ -425,7 +425,7 @@ hr.hr-thin,
   min-width: 0;
   border: 1px solid #c8ceda;
   border-radius: 4px;
-  padding: 0.65rem 0.75rem;
+  padding: 0.5rem 0.65rem;
   background: #ffffff;
   color: #1e234d;
   box-sizing: border-box;
@@ -441,7 +441,7 @@ hr.hr-thin,
 .postcode-search-form button,
 #postcode-search-button {
   flex: 0 0 auto;
-  min-height: 44px;
+  min-height: 34px;
 }
 
 #postcode-message {
