@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +12,8 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map', { preferCanvas: true, maxZoom: 12 });
+    const map = L.map('map', { preferCanvas: true, maxZoom: 12 }).setView([53.5, -2.5], 6);
+
     map.createPane('labels');
     map.getPane('labels').style.zIndex = 650;
     map.getPane('labels').style.pointerEvents = 'none';
@@ -58,7 +59,7 @@
     let geojsonLayer = null;
     let activeLayerKey = 'bills';
     let breaksByLayer = {};
-    let lastHighlightedLayer = null;
+    let hasFittedBounds = false;
 
     function isValidNumber(value) {
       return value !== null && value !== undefined && value !== '' && !Number.isNaN(Number(value));
@@ -71,6 +72,7 @@
         .sort((a, b) => a - b);
 
       if (!sorted.length) return [];
+
       const breaks = [sorted[0]];
       for (let i = 1; i < classes; i += 1) {
         const index = Math.min(sorted.length - 1, Math.ceil((i * sorted.length) / classes) - 1);
@@ -85,6 +87,7 @@
       const numeric = Number(value);
       const breaks = breaksByLayer[config.key] || [];
       if (breaks.length < 2) return config.palette[config.palette.length - 1];
+
       for (let i = 1; i < breaks.length; i += 1) {
         if (numeric <= breaks[i]) return config.palette[i - 1];
       }
@@ -95,9 +98,11 @@
       if (value === null || value === undefined || value === '') return 'Not available';
       const numeric = Number(value);
       if (!Number.isFinite(numeric)) return String(value);
+
       if (options.thousands) {
         return numeric.toLocaleString('en-GB');
       }
+
       return numeric.toLocaleString('en-GB', {
         minimumFractionDigits: options.decimals ?? 0,
         maximumFractionDigits: options.decimals ?? 1
@@ -138,7 +143,6 @@
 
     function highlightFeature(e) {
       const layer = e.target;
-      lastHighlightedLayer = layer;
       layer.setStyle({
         color: '#1e234d',
         weight: 2,
@@ -171,25 +175,10 @@
       });
     }
 
-    function renderLayer() {
-      if (!geojsonData) return;
-      if (geojsonLayer && map.hasLayer(geojsonLayer)) {
-        map.removeLayer(geojsonLayer);
-      }
-      geojsonLayer = L.geoJSON(geojsonData, {
-        style: layerStyle,
-        onEachFeature
-      }).addTo(map);
-      if (geojsonLayer.getBounds().isValid()) {
-        map.fitBounds(geojsonLayer.getBounds(), { padding: [20, 20] });
-      }
-      updateLegendScale();
-    }
-
     function getLegendBarHtml(config) {
       return config.palette.map((color, idx) => {
         const accessibleClass = idx >= 3 ? ' legend-bar-accessible' : '';
-        return `<span class="${accessibleClass.trim()}" style="background:${color}"></span>`;
+        return `<span class="${accessibleClass.trim()}" style="background:${color}; grid-column: span 2;"></span>`;
       }).join('');
     }
 
@@ -198,18 +187,52 @@
       return value.toLocaleString('en-GB', { maximumFractionDigits: 1 });
     }
 
-    function updateLegendScale() {
+    function updateLegendContent() {
       const config = layerConfigs[activeLayerKey];
       const breaks = breaksByLayer[config.key] || [];
-      const scaleEl = document.getElementById('legend-scale');
-      if (!scaleEl) return;
       const min = breaks.length ? formatBreakLabel(breaks[0]) : 'NA';
       const max = breaks.length ? formatBreakLabel(breaks[breaks.length - 1]) : 'NA';
-      scaleEl.innerHTML = `
-        <div class="legend-scale">
-          <div class="legend-bar">${getLegendBarHtml(config)}</div>
-          <div class="legend-scale-labels"><span>${min}</span><span>${max}</span></div>
-        </div>`;
+
+      document.querySelectorAll('.legend').forEach(container => {
+        const description = container.querySelector('.legend-layer-description');
+        const scale = container.querySelector('.legend-scale-host');
+
+        if (description) {
+          description.textContent = config.description;
+        }
+
+        if (scale) {
+          scale.innerHTML = `
+            <div class="legend-scale">
+              <div class="legend-bar">${getLegendBarHtml(config)}</div>
+              <div class="legend-scale-labels"><span>${min}</span><span>${max}</span></div>
+            </div>`;
+        }
+
+        container.querySelectorAll('input[name="layer-toggle"]').forEach(input => {
+          input.checked = input.value === activeLayerKey;
+        });
+      });
+    }
+
+    function renderLayer(options = {}) {
+      if (!geojsonData) return;
+
+      if (geojsonLayer && map.hasLayer(geojsonLayer)) {
+        map.removeLayer(geojsonLayer);
+      }
+
+      geojsonLayer = L.geoJSON(geojsonData, {
+        style: layerStyle,
+        onEachFeature
+      }).addTo(map);
+
+      if (options.fitBounds && !hasFittedBounds && geojsonLayer.getBounds().isValid()) {
+        map.fitBounds(geojsonLayer.getBounds(), { padding: [20, 20] });
+        hasFittedBounds = true;
+      }
+
+      updateLegendContent();
     }
 
     function createLegendMarkup() {
@@ -222,21 +245,21 @@
           <p>Description placeholder text.</p>
           <hr class="hr-thin" />
           <form class="layer-toggle-group" aria-label="Map layers">
-            <label class="layer-toggle-option">
+            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
               <input type="radio" name="layer-toggle" value="bills" checked />
               <span>Water bills</span>
             </label>
-            <label class="layer-toggle-option">
+            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
               <input type="radio" name="layer-toggle" value="sewage" />
               <span>Sewage pollution</span>
             </label>
-            <label class="layer-toggle-option">
+            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem;">
               <input type="radio" name="layer-toggle" value="river" />
               <span>River pollution</span>
             </label>
           </form>
-          <div id="legend-layer-description" class="secondary-text" style="margin-top:0.75rem;"></div>
-          <div id="legend-scale"></div>
+          <div class="legend-layer-description secondary-text" style="margin-top:0.75rem;"></div>
+          <div class="legend-scale-host"></div>
         </div>`;
     }
 
@@ -249,21 +272,12 @@
       const toggleBtn = container.querySelector('.legend-toggle');
       const content = container.querySelector('.legend-content');
       const radios = container.querySelectorAll('input[name="layer-toggle"]');
-      const description = container.querySelector('#legend-layer-description');
 
       function syncLegendState() {
         const isMinimised = container.classList.contains('is-minimised');
         toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
         toggleBtn.textContent = isMinimised ? '+' : '−';
         content.style.display = isMinimised ? 'none' : 'block';
-      }
-
-      function syncLayerControls() {
-        radios.forEach(radio => {
-          radio.checked = radio.value === activeLayerKey;
-        });
-        const config = layerConfigs[activeLayerKey];
-        description.textContent = config.description;
       }
 
       toggleBtn.addEventListener('click', function () {
@@ -273,34 +287,16 @@
 
       radios.forEach(radio => {
         radio.addEventListener('change', function () {
-          if (radio.checked) {
-            activeLayerKey = radio.value;
-            document.querySelectorAll('input[name="layer-toggle"]').forEach(el => {
-              el.checked = el.value === activeLayerKey;
-            });
-            renderLayer();
-            syncAllLegendDescriptions();
-          }
+          if (!radio.checked) return;
+          activeLayerKey = radio.value;
+          renderLayer({ fitBounds: false });
         });
       });
 
       syncLegendState();
-      syncLayerControls();
-      container.dataset.legendReady = 'true';
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
       return wrapper;
-    }
-
-    function syncAllLegendDescriptions() {
-      document.querySelectorAll('.legend').forEach(container => {
-        const desc = container.querySelector('#legend-layer-description');
-        if (desc) desc.textContent = layerConfigs[activeLayerKey].description;
-        container.querySelectorAll('input[name="layer-toggle"]').forEach(el => {
-          el.checked = el.value === activeLayerKey;
-        });
-      });
-      updateLegendScale();
     }
 
     const desktopLegend = L.control({ position: 'topright' });
@@ -324,18 +320,22 @@
           <button type="button" class="button button--small attribution-toggle" aria-expanded="false">+</button>
         </div>
         <div class="attribution-content">CARTO; Contains public sector information licensed under the Open Government Licence v3.0; OS data Crown copyright and database right 2022. OpenStreetMap contributors.</div>`;
+
       const toggleBtn = container.querySelector('.attribution-toggle');
       const content = container.querySelector('.attribution-content');
+
       function syncState() {
         const isMinimised = container.classList.contains('is-minimised');
         toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
         toggleBtn.textContent = isMinimised ? '+' : '−';
         content.style.display = isMinimised ? 'none' : 'block';
       }
+
       toggleBtn.addEventListener('click', function () {
         container.classList.toggle('is-minimised');
         syncState();
       });
+
       syncState();
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
@@ -355,18 +355,16 @@
         breaksByLayer[config.key] = getQuantileBreaks(values, 5);
       });
 
-      renderLayer();
       labelsOnly.addTo(map);
       desktopLegend.addTo(map);
       mobileLegend.addTo(map);
       map.attributionControl.setPrefix(false);
       attributionControl.addTo(map);
-      syncAllLegendDescriptions();
+      renderLayer({ fitBounds: true });
     }
 
     initialise().catch(error => {
       console.error(error);
-      map.setView([53.5, -2.5], 6);
       labelsOnly.addTo(map);
     });
   </script>
