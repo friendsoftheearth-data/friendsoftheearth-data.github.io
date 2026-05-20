@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Water companies: bills and pollution</title>
-  <link rel="stylesheet" href="assets/css/style-mobile.css" />
+  <link rel="stylesheet" href="/assets/css/style-mobile.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body class="map-page">
@@ -343,7 +343,7 @@
     };
 
     async function initialise() {
-      const response = await fetch('datasets/water/watercompany-bills-pollution-stats.geojson');
+      const response = await fetch('/datasets/water/watercompany-bills-pollution-stats.geojson');
       if (!response.ok) throw new Error('Unable to load GeoJSON');
       geojsonData = await response.json();
 
