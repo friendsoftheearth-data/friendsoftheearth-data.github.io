@@ -188,12 +188,8 @@
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: function () {
-          const center = layer.getBounds().getCenter();
-          map.panTo(center, { animate: true, duration: 0.5 });
-          map.once('moveend', function () {
-            layer.openPopup(center);
-          });
-        }
+          layer.openPopup();
+          }
       });
     }
 
