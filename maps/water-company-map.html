@@ -267,22 +267,33 @@
           <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
         </div>
         <div class="legend-content">
-          <p>Description placeholder text.</p>
+          Data on recent water bill rises, sewage pollution, poor ecological classification of rivers, bathing water status and recent pollution incidents/warnings by water supply and sewerage company (WASC) in England and Wales.
+          <br><br>
+          See <a href="https://action.friendsoftheearth.uk/target/clean-water-now" target="_blank" rel="noopener noreferrer">here</a> for more info on our Water Bill Reform Campaign/to sign our petition demanding clean water now.
           <hr class="hr-thin" />
           <form class="layer-toggle-group" aria-label="Map layers">
-            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <input type="radio" name="layer-toggle" value="bills" checked />
-              <span>Water bills</span>
-            </label>
-            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
-              <input type="radio" name="layer-toggle" value="sewage" />
-              <span>Sewage pollution</span>
-            </label>
-            <label class="layer-toggle-option" style="display:flex; align-items:center; gap:0.5rem;">
-              <input type="radio" name="layer-toggle" value="river" />
-              <span>River pollution</span>
-            </label>
-          </form>
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
+            <span>Water bills</span>
+            <span class="switch">
+              <input type="checkbox" name="layer-toggle" value="bills" checked />
+              <span class="slider"></span>
+            </span>
+          </label>
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
+            <span>Sewage pollution</span>
+            <span class="switch">
+              <input type="checkbox" name="layer-toggle" value="sewage" />
+              <span class="slider"></span>
+            </span>
+          </label>
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem;">
+            <span>River pollution</span>
+            <span class="switch">
+              <input type="checkbox" name="layer-toggle" value="river" />
+              <span class="slider"></span>
+            </span>
+          </label>
+        </form>
           <div class="legend-layer-description secondary-text" style="margin-top:0.75rem;"></div>
           <div class="legend-scale-host"></div>
         </div>`;
@@ -296,7 +307,7 @@
 
       const toggleBtn = container.querySelector('.legend-toggle');
       const content = container.querySelector('.legend-content');
-      const radios = container.querySelectorAll('input[name="layer-toggle"]');
+      const toggles = container.querySelectorAll('input[name="layer-toggle"]');
 
       function syncLegendState() {
         const isMinimised = container.classList.contains('is-minimised');
@@ -310,14 +321,21 @@
         syncLegendState();
       });
 
-      radios.forEach(radio => {
-        radio.addEventListener('change', function () {
-          if (!radio.checked) return;
-          activeLayerKey = radio.value;
+      toggles.forEach(toggle => {
+        toggle.addEventListener('change', function () {
+          if (!toggle.checked) {
+            toggle.checked = true;
+            return;
+          }
+          activeLayerKey = toggle.value;
+          document.querySelectorAll('.legend').forEach(legend => {
+            legend.querySelectorAll('input[name="layer-toggle"]').forEach(input => {
+              input.checked = input.value === activeLayerKey;
+            });
+          });
           renderLayer({ fitBounds: false });
         });
       });
-
       syncLegendState();
       L.DomEvent.disableClickPropagation(container);
       L.DomEvent.disableScrollPropagation(container);
