@@ -43,8 +43,8 @@
     const layerConfigs = {
       bills: {
         key: 'bills',
-        label: 'Water bills',
-        description: 'Increase 2024–2027 (%)',
+        label: 'Water bill increases',
+        description: 'Increase between 2024/25 and 2026/27 (%)',
         field: 'change_2025_27_pct',
         isProportion: true,
         palette: ['#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#cb181d']
@@ -52,7 +52,7 @@
       sewage: {
         key: 'sewage',
         label: 'Sewage pollution',
-        description: 'Average spill duration per outlet (2025)',
+        description: 'Average spill duration per outlet in hours (2025)',
         field: 'overflows_mean_duration_per_outlet_2025',
         isProportion: false,
         palette: ['#feedde', '#fdbe85', '#fd8d3c', '#e6550d', '#a63603']
@@ -60,7 +60,7 @@
       river: {
         key: 'river',
         label: 'River pollution',
-        description: 'Ecological condition less than good (%)',
+        description: 'Rivers where ecological condition is below Good (%)',
         field: 'ecological_class_less_than_good_pct',
         isProportion: true,
         palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
@@ -137,15 +137,15 @@
         <div class="popup-card">
           <div class="popup-title"><strong>${p.water_company ?? 'Not available'}</strong></div>
           <div class="popup-grid">
-            <div class="popup-label">Water bills: increase (%)</div>
+            <div class="popup-label">Water bills increase (%)</div>
             <div class="popup-value">${formatPercentFromProportion(p.change_2025_27_pct)}</div>
-            <div class="popup-label">Sewage spill duration per outlet (hrs)</div>
+            <div class="popup-label">Sewage spills: Avg per outlet (hrs)</div>
             <div class="popup-value">${formatValue(p.overflows_mean_duration_per_outlet_2025)}</div>
-            <div class="popup-label">Rivers: Ecology less than good (%)</div>
+            <div class="popup-label">Rivers ecology: Less than good (%)</div>
             <div class="popup-value">${formatPercentFromProportion(p.ecological_class_less_than_good_pct)}</div>
             <div class="popup-label">Bathing waters: Less than good (%)</div>
             <div class="popup-value">${formatPercentFromProportion(p.bathing_poor_sufficient_2023_pct)}</div>
-            <div class="popup-label">Bathing waters: Incidents/warnings</div>
+            <div class="popup-label">Bathing waters: Pollution events (no.)</div>
             <div class="popup-value">${formatValue(p.bathing_incidents_warnings_total, { thousands: true })}</div>
           </div>
         </div>`;
