@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>Water companies: bills and pollution</title>
-  <link rel="stylesheet" href="/assets/css/style-mobile.css" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+
+  <!-- External stylesheet (ours) -->
+  <link rel="stylesheet" href="/assets/css/style-mobile.css">
+
+  <!-- Leaflet styles -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
 </head>
 <body class="map-page">
   <div id="map"></div>
@@ -36,7 +45,8 @@
         key: 'bills',
         label: 'Water bills',
         description: 'Increase 2024–2027 (%)',
-        field: 'changes_2025_27_pct',
+        field: 'change_2025_27_pct',
+        isProportion: true,
         palette: ['#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#cb181d']
       },
       sewage: {
@@ -44,6 +54,7 @@
         label: 'Sewage pollution',
         description: 'Average spill duration per outlet (2025)',
         field: 'overflows_mean_duration_per_outlet_2025',
+        isProportion: false,
         palette: ['#feedde', '#fdbe85', '#fd8d3c', '#e6550d', '#a63603']
       },
       river: {
@@ -51,6 +62,7 @@
         label: 'River pollution',
         description: 'Ecological condition less than good (%)',
         field: 'ecological_class_less_than_good_pct',
+        isProportion: true,
         palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
       }
     };
@@ -109,21 +121,31 @@
       });
     }
 
+    function formatPercentFromProportion(x, decimals = 0) {
+      if (x === null || x === undefined || x === '') return 'Not available';
+      const num = Number(x);
+      if (!Number.isFinite(num)) return String(x);
+      return (num * 100).toLocaleString('en-GB', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      }) + '%';
+    }
+    
     function popupContent(feature) {
       const p = feature.properties || {};
       return `
         <div class="popup-card">
           <div class="popup-title"><strong>${p.water_company ?? 'Not available'}</strong></div>
           <div class="popup-grid">
-            <div class="popup-label"><strong>Water bills: increase 2024–2027 (%)</strong></div>
-            <div class="popup-value popup-value--primary">${formatValue(p.changes_2025_27_pct)}</div>
-            <div class="popup-label">Sewage pollution: Avg spill duration per outlet (2025)</div>
+            <div class="popup-label">Water bills: increase (%)</div>
+            <div class="popup-value">${formatPercentFromProportion(p.change_2025_27_pct)}</div>
+            <div class="popup-label">Sewage spill duration per outlet (hrs)</div>
             <div class="popup-value">${formatValue(p.overflows_mean_duration_per_outlet_2025)}</div>
-            <div class="popup-label">River pollution: Ecological condition less than good (%)</div>
-            <div class="popup-value">${formatValue(p.ecological_class_less_than_good_pct)}</div>
+            <div class="popup-label">Rivers: Ecology less than good (%)</div>
+            <div class="popup-value">${formatPercentFromProportion(p.ecological_class_less_than_good_pct)}</div>
             <div class="popup-label">Bathing waters: Less than good (%)</div>
-            <div class="popup-value">${formatValue(p.bathing_poor_sufficient_2023_pct)}</div>
-            <div class="popup-label">Bathing waters: pollution incidents/warnings</div>
+            <div class="popup-value">${formatPercentFromProportion(p.bathing_poor_sufficient_2023_pct)}</div>
+            <div class="popup-label">Bathing waters: Incidents/warnings</div>
             <div class="popup-value">${formatValue(p.bathing_incidents_warnings_total, { thousands: true })}</div>
           </div>
         </div>`;
@@ -182,16 +204,19 @@
       }).join('');
     }
 
-    function formatBreakLabel(value) {
+    function formatBreakLabel(value, config) {
       if (!Number.isFinite(value)) return 'NA';
+      if (config.isProportion) {
+        return formatPercentFromProportion(value);
+      }
       return value.toLocaleString('en-GB', { maximumFractionDigits: 1 });
     }
 
     function updateLegendContent() {
       const config = layerConfigs[activeLayerKey];
       const breaks = breaksByLayer[config.key] || [];
-      const min = breaks.length ? formatBreakLabel(breaks[0]) : 'NA';
-      const max = breaks.length ? formatBreakLabel(breaks[breaks.length - 1]) : 'NA';
+      const min = breaks.length ? formatBreakLabel(breaks[0], config) : 'NA';
+      const max = breaks.length ? formatBreakLabel(breaks[breaks.length - 1], config) : 'NA';
 
       document.querySelectorAll('.legend').forEach(container => {
         const description = container.querySelector('.legend-layer-description');
