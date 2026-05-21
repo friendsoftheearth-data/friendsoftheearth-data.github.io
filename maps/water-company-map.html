@@ -253,7 +253,7 @@
       }).addTo(map);
 
       if (options.fitBounds && !hasFittedBounds && geojsonLayer.getBounds().isValid()) {
-        map.fitBounds(geojsonLayer.getBounds(), { padding: [20, 20] });
+        map.fitBounds(geojsonLayer.getBounds(), { padding: [5, 5] });
         hasFittedBounds = true;
       }
 
