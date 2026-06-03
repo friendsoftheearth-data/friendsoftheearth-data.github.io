@@ -3,713 +3,705 @@
 
 /* Base styles */
 html, body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 }
 
 body {
-  background-color: #f4f6fa;
-  color: #1e234d;
-  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
+background-color: #f4f6fa;
+color: #1e234d;
+font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+line-height: 1.6;
 }
 
 body.map-page {
-  background-color: #f4f6fa;
+background-color: #f4f6fa;
 }
 
 a {
-  color: #61bdaa;
-  text-decoration: underline;
-  font-weight: 600;
+color: #61bdaa;
+text-decoration: underline;
+font-weight: 600;
 }
 
 a:hover {
-  color: #094839;
-  text-decoration: underline;
+color: #094839;
+text-decoration: underline;
 }
 
 h1, h2, h3 {
-  color: #1e234d;
-  font-family: 'Libre Franklin', sans-serif;
+color: #1e234d;
+font-family: 'Libre Franklin', sans-serif;
 }
 
 h2 {
-  font-size: 1.75rem;
-  margin-top: 2.5rem;
-  padding-bottom: 0.5rem;
+font-size: 1.75rem;
+margin-top: 2.5rem;
+padding-bottom: 0.5rem;
 }
 
 p, li {
-  color: #1e234d;
-  font-size: 1.1rem;
+color: #1e234d;
+font-size: 1.1rem;
 }
 
 .secondary-text {
-  color: #1e234d;
-  opacity: 0.7;
+color: #1e234d;
+opacity: 0.7;
 }
 
 /* Banner styles */
 .hero {
-  background-color: #1e234d;
-  color: #f4f6fa;
-  padding: 3rem 2rem;
-  text-align: center;
+background-color: #1e234d;
+color: #f4f6fa;
+padding: 3rem 2rem;
+text-align: center;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  color: #f4f6fa;
-  margin-bottom: 0.5rem;
-  font-weight: 800;
+font-size: 2.5rem;
+color: #f4f6fa;
+margin-bottom: 0.5rem;
+font-weight: 800;
 }
 
 .hero p {
-  font-size: 1.25rem;
-  color: #f4f6fa;
-  opacity: 0.9;
-  font-weight: 400;
+font-size: 1.25rem;
+color: #f4f6fa;
+opacity: 0.9;
+font-weight: 400;
 }
 
 .hero-header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: left;
+display: flex;
+align-items: center;
+gap: 1.5rem;
+flex-wrap: wrap;
+justify-content: center;
+text-align: left;
 }
 
 .site-logo {
-  max-height: 200px;
-  width: auto;
+max-height: 200px;
+width: auto;
 }
 
 /* Layout content */
 .content {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+max-width: 1200px;
+margin: 2rem auto;
+padding: 0 2rem;
 }
 
 .site-footer {
-  background-color: #f4f6fa;
-  color: #1e234d;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 0.95rem;
-  border-top: 1px solid #ddd;
-  margin-top: 3rem;
+background-color: #f4f6fa;
+color: #1e234d;
+text-align: center;
+padding: 1.5rem 1rem;
+font-size: 0.95rem;
+border-top: 1px solid #ddd;
+margin-top: 3rem;
 }
 
 /* Buttons */
 button, .button {
-  background-color: #61bdaa;
-  color: #1e234d;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+background-color: #61bdaa;
+color: #1e234d;
+border: none;
+padding: 0.75rem 1.5rem;
+font-weight: 600;
+border-radius: 4px;
+cursor: pointer;
+transition: all 0.3s ease;
 }
 
 .button--medium {
-  padding: 0.5rem 1rem;
+padding: 0.5rem 1rem;
 }
 
 .button--small {
-  padding: 0.3rem 0.6rem;
-  font-size: 0.9rem;
+padding: 0.3rem 0.6rem;
+font-size: 0.9rem;
 }
 
 button:hover, .button:hover {
-  background-color: #094839;
-  transform: translateY(-2px);
+background-color: #094839;
+transform: translateY(-2px);
 }
 
 /* Tables and rules */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
+width: 100%;
+border-collapse: collapse;
+margin: 1rem 0;
 }
 
 th, td {
-  border: 1px solid #1e234d;
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  vertical-align: middle;
+border: 1px solid #1e234d;
+padding: 0.5rem 0.75rem;
+text-align: left;
+vertical-align: middle;
 }
 
 thead th {
-  background-color: #1e234d;
-  color: #f4f6fa;
-  font-weight: 700;
+background-color: #1e234d;
+color: #f4f6fa;
+font-weight: 700;
 }
 
 hr {
-  border: none;
-  height: 3px;
-  background-color: #1e234d;
-  margin: 2.5rem 0 1.25rem;
-  opacity: 1;
+border: none;
+height: 3px;
+background-color: #1e234d;
+margin: 2.5rem 0 1.25rem;
+opacity: 1;
 }
 
 hr.hr-thin,
 .hr-thin {
-  border: none;
-  height: 1px;
-  background-color: #d9dde6;
-  color: #d9dde6;
-  margin: 1rem 0;
-  opacity: 1;
+border: none;
+height: 1px;
+background-color: #d9dde6;
+color: #d9dde6;
+margin: 1rem 0;
+opacity: 1;
 }
 
-/* Map base */
+/* Map base – keep for desktop and as a general fallback */
 #map {
-  height: 100vh;
-  width: 100%;
+height: 100vh;
+width: 100%;
+}
+
+/* Mobile override – only applies on small screens */
+@media (max-width: 768px) {
+#map {
+height: 100dvh; /* dynamic viewport on modern browsers */
+height: 100svh; /* Safari small viewport as fallback */
+}
 }
 
 /* Legend */
 .legend {
-  background: #f4f6fa;
-  color: #1e234d;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  font-family: 'Libre Franklin', sans-serif;
-  padding: 1em;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  min-width: 200px;
-  max-width: 320px;
-  max-height: min(72vh, 700px);
-  overflow: hidden;
-  position: relative;
+background: #f4f6fa;
+color: #1e234d;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+border-radius: 4px;
+font-family: 'Libre Franklin', sans-serif;
+padding: 1em;
+font-size: 0.9rem;
+line-height: 1.4;
+min-width: 200px;
+max-width: 320px;
+max-height: min(72vh, 700px);
+overflow: hidden;
+position: relative;
 }
 
 .legend-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 0.75rem;
 }
 
 .legend-title {
-  font-weight: 700;
-  margin-right: auto;
+font-weight: 700;
+margin-right: auto;
 }
 
 .legend-toggle {
-  margin-left: 8px;
-  min-width: 24px;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0.15rem 0.35rem;
+margin-left: 8px;
+min-width: 24px;
+min-height: 24px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+padding: 0.15rem 0.35rem;
 }
 
 .legend-content {
-  margin-top: 8px;
-  max-height: calc(min(72vh, 700px) - 60px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 0.35rem;
-  -webkit-overflow-scrolling: touch;
+margin-top: 8px;
+max-height: calc(min(72vh, 700px) - 60px);
+overflow-y: auto;
+overflow-x: hidden;
+padding-right: 0.35rem;
+-webkit-overflow-scrolling: touch;
 }
 
 .legend.is-minimised .legend-content {
-  display: none;
+display: none;
 }
 
 .legend-scale {
-  margin-top: 0.75rem;
+margin-top: 0.75rem;
 }
 
 .legend-bar {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 0;
-  width: 100%;
-  min-height: 22px;
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid #d9dde6;
+display: grid;
+grid-template-columns: repeat(10, minmax(0, 1fr));
+gap: 0;
+width: 100%;
+min-height: 22px;
+border-radius: 4px;
+overflow: hidden;
+border: 1px solid #d9dde6;
 }
 
 .legend-bar > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #1e234d;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #1e234d;
 }
 
 .legend-bar > span.legend-bar-accessible .legend-number {
-  color: #f4f6fa;
+color: #f4f6fa;
 }
 
 .legend-number {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #1e234d;
-  line-height: 1;
+font-size: 0.78rem;
+font-weight: 700;
+color: #1e234d;
+line-height: 1;
 }
 
 .legend-scale-labels {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.4rem;
-  font-size: 0.78rem;
-  line-height: 1.25;
-  color: #1e234d;
+display: flex;
+justify-content: space-between;
+gap: 1rem;
+margin-top: 0.4rem;
+font-size: 0.78rem;
+line-height: 1.25;
+color: #1e234d;
 }
 
 .legend-scale-labels span:first-child {
-  text-align: left;
+text-align: left;
 }
 
 .legend-scale-labels span:last-child {
-  text-align: right;
+text-align: right;
 }
 
 /* Popup styling */
 .popup-card {
-  min-width: 220px;
-  color: #1e234d;
-  font-family: 'Libre Franklin', sans-serif;
+min-width: 220px;
+color: #1e234d;
+font-family: 'Libre Franklin', sans-serif;
 }
 
 .popup-title {
-  font-weight: 400;
-  line-height: 1.3;
-  margin-bottom: 4px;
+font-weight: 400;
+line-height: 1.3;
+margin-bottom: 4px;
 }
 
 .popup-subtitle {
-  font-size: 0.8rem;
-  line-height: 1.35;
-  margin-bottom: 12px;
-  color: #1e234d;
-  font-weight: 500;
+font-size: 0.8rem;
+line-height: 1.35;
+margin-bottom: 12px;
+color: #1e234d;
+font-weight: 500;
 }
 
 .popup-note {
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #1e234d;
+margin-bottom: 8px;
+font-weight: 500;
+color: #1e234d;
 }
 
 .popup-grid {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  column-gap: 8px;
-  row-gap: 6px;
-  align-items: baseline;
-  justify-content: start;
+display: grid;
+grid-template-columns: max-content max-content;
+column-gap: 8px;
+row-gap: 6px;
+align-items: baseline;
+justify-content: start;
 }
 
 .popup-label {
-  color: #1e234d;
+color: #1e234d;
 }
 
 .popup-value {
-  font-weight: 500;
-  text-align: left;
-  white-space: nowrap;
-  color: #1e234d;
+font-weight: 500;
+text-align: left;
+white-space: nowrap;
+color: #1e234d;
 }
 
 .popup-value--primary {
-  font-weight: 600;
-  color: #1e234d;
-  line-height: 1.35;
+font-weight: 600;
+color: #1e234d;
+line-height: 1.35;
 }
 
 .leaflet-popup-content {
-  font-family: 'Libre Franklin', sans-serif;
-  color: #1e234d;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 14px 16px;
+font-family: 'Libre Franklin', sans-serif;
+color: #1e234d;
+font-size: 0.9rem;
+line-height: 1.4;
+margin: 14px 16px;
 }
 
 .leaflet-popup-content strong {
-  color: #1e234d;
-  font-weight: 600;
+color: #1e234d;
+font-weight: 600;
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 16px;
+border-radius: 16px;
 }
 
 /* Leaflet control layout */
 .leaflet-top,
 .leaflet-bottom {
-  width: 100%;
+width: 100%;
 }
 
 .leaflet-left,
 .leaflet-right {
-  pointer-events: none;
+pointer-events: none;
 }
 
 .leaflet-left .leaflet-control,
 .leaflet-right .leaflet-control {
-  pointer-events: auto;
-}
-
-/* Default visibility: desktop layout */
-.postcode-search-wrapper,
-.legend-mobile-wrapper {
-  display: none;
-}
-
-.legend-desktop-wrapper {
-  display: block;
+pointer-events: auto;
 }
 
 /* Postcode search control */
 .postcode-search-control {
-  background: #f4f6fa;
-  color: #1e234d;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  padding: 0.9rem;
-  width: min(320px, calc(100vw - 2rem));
+background: #f4f6fa;
+color: #1e234d;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+border-radius: 4px;
+padding: 0.9rem;
+width: min(320px, calc(100vw - 2rem));
 }
 
 .postcode-search-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.75rem;
 }
 
 .postcode-search-control h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  line-height: 1.2;
+margin: 0 0 0.5rem;
+font-size: 1rem;
+line-height: 1.2;
 }
 
 .postcode-toggle {
-  min-width: 24px;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0.15rem 0.35rem;
-  font-size: 0.8rem;
+min-width: 24px;
+min-height: 24px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+padding: 0.15rem 0.35rem;
+font-size: 0.8rem;
 }
 
 .postcode-search-content {
-  margin-top: 0.4rem;
+margin-top: 0.4rem;
 }
 
 .postcode-search-control.is-minimised .postcode-search-content {
-  display: none;
+display: none;
 }
 
 .postcode-search-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
 }
 
 .postcode-search-form input,
 #postcode-input {
-  flex: 1 1 160px;
-  min-width: 0;
-  border: 1px solid #c8ceda;
-  border-radius: 4px;
-  padding: 0.5rem 0.65rem;
-  background: #ffffff;
-  color: #1e234d;
-  box-sizing: border-box;
-  font-family: 'Libre Franklin', sans-serif;
-  font-size: 16px;
-  line-height: 1.2;
+flex: 1 1 160px;
+min-width: 0;
+border: 1px solid #c8ceda;
+border-radius: 4px;
+padding: 0.5rem 0.65rem;
+background: #ffffff;
+color: #1e234d;
+box-sizing: border-box;
+font-family: 'Libre Franklin', sans-serif;
+font-size: 16px;
+line-height: 1.2;
 }
 
 #postcode-input::placeholder {
-  font-family: 'Libre Franklin', sans-serif;
+font-family: 'Libre Franklin', sans-serif;
 }
 
 .postcode-search-form button,
 #postcode-search-button {
-  flex: 0 0 auto;
-  min-height: 34px;
+flex: 0 0 auto;
+min-height: 34px;
 }
 
 #postcode-message {
-  margin-top: 0.5rem;
-  min-height: 1.2em;
-  font-size: 0.9rem;
+margin-top: 0.5rem;
+min-height: 1.2em;
+font-size: 0.9rem;
 }
 
 /* Attribution control */
 .leaflet-control-attribution {
-  display: none;
+display: none;
 }
 
 .map-attribution {
-  background: #f4f6fa;
-  color: #1e234d;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.8rem;
-  line-height: 1.35;
-  max-width: 320px;
+background: #f4f6fa;
+color: #1e234d;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+border-radius: 4px;
+padding: 0.75rem 0.9rem;
+font-size: 0.8rem;
+line-height: 1.35;
+max-width: 320px;
 }
 
 .attribution-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.75rem;
 }
 
 .attribution-title {
-  font-weight: 700;
+font-weight: 700;
 }
 
 .attribution-toggle {
-  min-width: 24px;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0.8;
-  padding: 0.15rem 0.35rem;
-  font-size: 0.8rem;
+min-width: 24px;
+min-height: 24px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+line-height: 0.8;
+padding: 0.15rem 0.35rem;
+font-size: 0.8rem;
 }
 
 .attribution-content {
-  margin-top: 0.5rem;
+margin-top: 0.5rem;
 }
 
 .map-attribution.is-minimised .attribution-content {
-  display: none;
+display: none;
 }
 
 /* Toggle switch */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 36px;
-  height: 20px;
-  margin-right: 8px;
+position: relative;
+display: inline-block;
+width: 36px;
+height: 20px;
+margin-right: 8px;
 }
 
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+opacity: 0;
+width: 0;
+height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background-color: #ccc;
-  transition: .2s;
-  border-radius: 20px;
+position: absolute;
+cursor: pointer;
+inset: 0;
+background-color: #ccc;
+transition: .2s;
+border-radius: 20px;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .2s;
-  border-radius: 50%;
+position: absolute;
+content: "";
+height: 14px;
+width: 14px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .2s;
+border-radius: 50%;
 }
 
 .switch input:checked + .slider {
-  background-color: #1e234d;
+background-color: #1e234d;
 }
 
 .switch input:checked + .slider:before {
-  transform: translateX(16px);
+transform: translateX(16px);
 }
 
-/* Desktop / general layout spacing */
+/* Responsive rules */
 @media (max-width: 768px) {
-  .banner h1 {
-    font-size: 2rem;
-  }
-
-  .banner p {
-    font-size: 1.1rem;
-  }
-
-  .content {
-    padding: 0 1rem;
-  }
+.banner h1 {
+font-size: 2rem;
 }
 
-/* Touch devices: use mobile control layout on phones and tablets */
-@media (hover: none) and (pointer: coarse) {
-  #map {
-    height: 100dvh;
-    height: 100svh;
-  }
-
-  .leaflet-top.leaflet-left,
-  .leaflet-bottom.leaflet-left,
-  .leaflet-bottom.leaflet-right,
-  .leaflet-top.leaflet-right {
-    left: 0;
-    right: 0;
-  }
-
-  .legend-desktop-wrapper {
-    display: none;
-  }
-
-  .postcode-search-wrapper,
-  .legend-mobile-wrapper,
-  .attribution-wrapper {
-    display: block;
-  }
-
-  .leaflet-top.leaflet-left .postcode-search-wrapper,
-  .leaflet-bottom.leaflet-left .legend-mobile-wrapper,
-  .leaflet-bottom.leaflet-right .attribution-wrapper {
-    position: absolute;
-    left: 0.75rem;
-    right: 0.75rem;
-    width: auto;
-    max-width: none;
-    transform: none;
-    margin: 0;
-  }
-
-  .leaflet-top.leaflet-left .postcode-search-wrapper {
-    top: max(0.75rem, env(safe-area-inset-top));
-    display: flex;
-    justify-content: stretch;
-    z-index: 1000;
-  }
-
-  .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
-    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
-    display: flex;
-    justify-content: stretch;
-    z-index: 1000;
-  }
-
-  .leaflet-bottom.leaflet-right .attribution-wrapper {
-    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
-    display: flex;
-    justify-content: stretch;
-    z-index: 999;
-  }
-
-  .leaflet-top.leaflet-left .postcode-search-control,
-  .leaflet-bottom.leaflet-left .legend,
-  .leaflet-bottom.leaflet-right .map-attribution {
-    width: 100%;
-    max-width: none;
-  }
-
-  .leaflet-bottom.leaflet-left .legend {
-    max-height: min(62vh, 420px);
-    border-radius: 14px 14px 0 0;
-    transition: transform 0.25s ease;
-  }
-
-  .leaflet-bottom.leaflet-left .legend.is-minimised {
-    transform: translateY(calc(100% - 56px));
-  }
-
-  .leaflet-bottom.leaflet-left .legend .legend-content {
-    max-height: calc(min(62vh, 420px) - 64px);
-  }
-
-  .postcode-search-control {
-    padding: 0.55rem 0.7rem;
-  }
-
-  .postcode-search-control h3 {
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  #postcode-message {
-    margin-top: 0.35rem;
-    min-height: 0;
-    font-size: 0.82rem;
-    line-height: 1.25;
-  }
-
-  .leaflet-popup-content-wrapper {
-    max-width: 90vw;
-  }
-
-  .leaflet-popup-content {
-    max-height: 60vh;
-    overflow-y: auto;
-  }
+.banner p {
+font-size: 1.1rem;
 }
 
-/* Extra-tight tweaks for narrow touch screens */
-@media (hover: none) and (pointer: coarse) and (max-width: 480px) {
-  .postcode-search-control {
-    padding: 0.4rem 0.6rem;
-  }
-
-  .postcode-search-header {
-    margin-bottom: 0.25rem;
-  }
+.content {
+padding: 0 1rem;
 }
 
-/* Desktop legend postcode search */
+.leaflet-top.leaflet-left,
+.leaflet-bottom.leaflet-left,
+.leaflet-bottom.leaflet-right,
+.leaflet-top.leaflet-right {
+left: 0;
+right: 0;
+}
+
+.leaflet-top.leaflet-left .postcode-search-wrapper,
+.leaflet-bottom.leaflet-left .legend-mobile-wrapper,
+.leaflet-bottom.leaflet-right .attribution-wrapper {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+width: calc(100vw - 1.5rem); /* full viewport width minus side padding */
+max-width: 600px; /* optional safety cap */
+margin: 0;
+}
+
+.leaflet-top.leaflet-left .postcode-search-wrapper {
+top: max(0.75rem, env(safe-area-inset-top));
+display: flex;
+justify-content: stretch;
+z-index: 1000;
+}
+
+.leaflet-bottom.leaflet-left .legend-mobile-wrapper {
+bottom: calc(5.0rem + env(safe-area-inset-bottom, 0px));
+display: flex;
+justify-content: stretch;
+z-index: 1000;
+}
+
+.leaflet-bottom.leaflet-right .attribution-wrapper {
+bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+display: flex;
+justify-content: stretch;
+z-index: 999;
+}
+
+.leaflet-top.leaflet-left .postcode-search-control,
+.leaflet-bottom.leaflet-left .legend,
+.leaflet-bottom.leaflet-right .map-attribution {
+width: 100%;
+max-width: none;
+}
+
+.leaflet-bottom.leaflet-left .legend {
+max-height: min(62vh, 420px);
+border-radius: 14px 14px 0 0;
+transition: transform 0.25s ease;
+}
+
+.leaflet-bottom.leaflet-left .legend.is-minimised {
+transform: translateY(calc(100% - 56px));
+}
+
+.leaflet-bottom.leaflet-left .legend .legend-content {
+max-height: calc(min(62vh, 420px) - 64px);
+}
+
+.leaflet-top.leaflet-right .legend-desktop-wrapper {
+display: none;
+}
+
+.postcode-search-control {
+padding: 0.55rem 0.7rem;
+}
+
+.postcode-search-control h3 {
+margin: 0;
+font-size: 0.95rem;
+}
+
+#postcode-message {
+margin-top: 0.35rem;
+min-height: 0;
+font-size: 0.82rem;
+line-height: 1.25;
+}
+
+.leaflet-popup-content-wrapper {
+max-width: 90vw; /* keep popup within viewport width on phones */
+}
+
+.leaflet-popup-content {
+max-height: 60vh; /* limit vertical size on phones */
+overflow-y: auto; /* scroll inside popup if content is long */
+}
+
+}
+
+/* Constrain postcode lookup search control for small screens*/
+@media (max-width: 480px) {
+.postcode-search-control {
+padding: 0.4rem 0.6rem;
+}
+.postcode-search-header {
+margin-bottom: 0.25rem;
+}
+}
+
+@media (min-width: 769px) {
+.legend-mobile-wrapper {
+display: none;
+}
+
+.postcode-search-wrapper {
+display: none;
+}
+}
+
 .legend-postcode-search {
-  margin-top: 0.75rem;
+margin-top: 0.75rem;
 }
 
 .legend-postcode-title {
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  line-height: 1.35;
+font-weight: 700;
+margin-bottom: 0.6rem;
+line-height: 1.35;
 }
 
 .legend-postcode-form {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+display: flex;
+gap: 0.5rem;
+align-items: center;
 }
 
 .legend-postcode-form input {
-  flex: 1 1 auto;
-  min-width: 0;
-  border: 1px solid #c8ceda;
-  border-radius: 4px;
-  padding: 0.65rem 0.75rem;
-  background: #ffffff;
-  color: #1e234d;
-  box-sizing: border-box;
-  font-family: 'Libre Franklin', sans-serif;
-  font-size: 16px;
-  line-height: 1.2;
+flex: 1 1 auto;
+min-width: 0;
+border: 1px solid #c8ceda;
+border-radius: 4px;
+padding: 0.65rem 0.75rem;
+background: #ffffff;
+color: #1e234d;
+box-sizing: border-box;
+font-family: 'Libre Franklin', sans-serif;
+font-size: 16px;
+line-height: 1.2;
 }
 
 .legend-postcode-form button {
-  flex: 0 0 auto;
+flex: 0 0 auto;
 }
 
 #desktop-postcode-message {
-  margin-top: 0.5rem;
-  min-height: 1.2em;
-  font-size: 0.9rem;
+margin-top: 0.5rem;
+min-height: 1.2em;
+font-size: 0.9rem;
 }
