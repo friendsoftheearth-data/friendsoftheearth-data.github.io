@@ -167,18 +167,10 @@ hr.hr-thin,
   opacity: 1;
 }
 
-/* Map base – keep for desktop and as a general fallback */
+/* Map base */
 #map {
   height: 100vh;
   width: 100%;
-}
-
-/* Mobile override – only applies on small screens */
-@media (max-width: 768px) {
-  #map {
-    height: 100dvh;   /* dynamic viewport on modern browsers */
-    height: 100svh;   /* Safari small viewport as fallback */
-  }
 }
 
 /* Legend */
@@ -371,6 +363,16 @@ hr.hr-thin,
   pointer-events: auto;
 }
 
+/* Default visibility: desktop layout */
+.postcode-search-wrapper,
+.legend-mobile-wrapper {
+  display: none;
+}
+
+.legend-desktop-wrapper {
+  display: block;
+}
+
 /* Postcode search control */
 .postcode-search-control {
   background: #f4f6fa;
@@ -540,7 +542,7 @@ hr.hr-thin,
   transform: translateX(16px);
 }
 
-/* Responsive rules */
+/* Desktop / general layout spacing */
 @media (max-width: 768px) {
   .banner h1 {
     font-size: 2rem;
@@ -553,6 +555,14 @@ hr.hr-thin,
   .content {
     padding: 0 1rem;
   }
+}
+
+/* Touch devices: use mobile control layout on phones and tablets */
+@media (hover: none) and (pointer: coarse) {
+  #map {
+    height: 100dvh;
+    height: 100svh;
+  }
 
   .leaflet-top.leaflet-left,
   .leaflet-bottom.leaflet-left,
@@ -562,14 +572,25 @@ hr.hr-thin,
     right: 0;
   }
 
+  .legend-desktop-wrapper {
+    display: none;
+  }
+
+  .postcode-search-wrapper,
+  .legend-mobile-wrapper,
+  .attribution-wrapper {
+    display: block;
+  }
+
   .leaflet-top.leaflet-left .postcode-search-wrapper,
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper,
   .leaflet-bottom.leaflet-right .attribution-wrapper {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100vw - 1.5rem);     /* full viewport width minus side padding */
-    max-width: 600px;                 /* optional safety cap */
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    max-width: none;
+    transform: none;
     margin: 0;
   }
 
@@ -581,7 +602,7 @@ hr.hr-thin,
   }
 
   .leaflet-bottom.leaflet-left .legend-mobile-wrapper {
-    bottom: calc(5.0rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: stretch;
     z-index: 1000;
@@ -615,10 +636,6 @@ hr.hr-thin,
     max-height: calc(min(62vh, 420px) - 64px);
   }
 
-  .leaflet-top.leaflet-right .legend-desktop-wrapper {
-    display: none;
-  }
-
   .postcode-search-control {
     padding: 0.55rem 0.7rem;
   }
@@ -636,36 +653,27 @@ hr.hr-thin,
   }
 
   .leaflet-popup-content-wrapper {
-    max-width: 90vw;    /* keep popup within viewport width on phones */
+    max-width: 90vw;
   }
 
   .leaflet-popup-content {
-    max-height: 60vh;   /* limit vertical size on phones */
-    overflow-y: auto;   /* scroll inside popup if content is long */
+    max-height: 60vh;
+    overflow-y: auto;
   }
-  
 }
 
-/* Constrain postcode lookup search control for small screens*/
-@media (max-width: 480px) {
+/* Extra-tight tweaks for narrow touch screens */
+@media (hover: none) and (pointer: coarse) and (max-width: 480px) {
   .postcode-search-control {
     padding: 0.4rem 0.6rem;
   }
+
   .postcode-search-header {
     margin-bottom: 0.25rem;
   }
 }
 
-@media (min-width: 769px) {
-  .legend-mobile-wrapper {
-    display: none;
-  }
-
-  .postcode-search-wrapper {
-    display: none;
-  }
-}
-
+/* Desktop legend postcode search */
 .legend-postcode-search {
   margin-top: 0.75rem;
 }
