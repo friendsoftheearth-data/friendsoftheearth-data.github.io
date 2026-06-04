@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oil and gas licences within constituencies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/FOE_Logo_only_favicon.png">
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style-mobile.css">
+
+  <!-- Leaflet styles -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="map-page">
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // 1. CREATE MAP AND BASEMAP
+  const map = L.map('map', {
+    preferCanvas: true,
+    maxZoom: 15
+  }).setView([53, -2.5], 7);
+
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '© CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022)',
+    subdomains: 'abcd',
+    maxZoom: 18
+  }).addTo(map);
+
+  const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+    pane: 'labels',
+    attribution: '© OpenStreetMap contributors, © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 18
+  });
+
+  // 2. DATASET AND HELPER FUNCTIONS
+  const dataUrl = '/datasets/fossil-fuels/pcon-onshore-og-licences.geojson';
+  const classCount = 5;
+  const colourRamp = ['#d8dbe4', '#b0b5c7', '#878ea9', '#5a6386', '#1e234d'];
+
+  let geojsonLayer = null;
+  let classBreaks = null;
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function formatPercent(value) {
+    if (value === null || value === undefined || value === '') return 'Not available';
+    const num = Number(value);
+    if (Number.isNaN(num)) return 'Not available';
+    return `${Math.round(num * 100)}%`;
+  }
+
+  function getQuantileBreaks(values, nClasses) {
+    const sorted = values
+      .map(Number)
+      .filter(v => Number.isFinite(v))
+      .sort((a, b) => a - b);
+
+    if (!sorted.length) return null;
+
+    const breaks = [sorted[0]];
+
+    for (let i = 1; i < nClasses; i++) {
+      const pos = (sorted.length - 1) * (i / nClasses);
+      const lowerIndex = Math.floor(pos);
+      const upperIndex = Math.ceil(pos);
+      const lower = sorted[lowerIndex];
+      const upper = sorted[upperIndex];
+      const fraction = pos - lowerIndex;
+      const interpolated = lower + (upper - lower) * fraction;
+      breaks.push(interpolated);
+    }
+
+    breaks.push(sorted[sorted.length - 1]);
+    return breaks;
+  }
+
+  function getClassIndex(value) {
+    if (!classBreaks) return 0;
+
+    const num = Number(value);
+    if (!Number.isFinite(num)) return 0;
+
+    for (let i = 0; i < classBreaks.length - 1; i++) {
+      const min = classBreaks[i];
+      const max = classBreaks[i + 1];
+      const isLast = i === classBreaks.length - 2;
+
+      if ((num >= min && num < max) || (isLast && num <= max)) {
+        return i;
+      }
+    }
+
+    return classBreaks.length - 2;
+  }
+
+  function getFillColor(value) {
+    return colourRamp[getClassIndex(value)] || colourRamp[0];
+  }
+
+  function layerStyle(feature) {
+    const p = feature.properties || {};
+    return {
+      fillColor: getFillColor(p.licence_area_pct),
+      color: '#4f5b7a',
+      weight: 0.8,
+      opacity: 1,
+      fillOpacity: 0.8
+    };
+  }
+
+  function popupContent(feature, layer) {
+    const p = feature.properties || {};
+
+    const html = `
+      <div class="popup-card popup-card--oilgas">
+        <div class="popup-title">Constituency: <strong>${escapeHtml(p.constituency_name || 'Not available')}</strong></div>
+        <div class="popup-grid popup-grid--oilgas">
+          <div class="popup-label"><strong>MP name and party:</strong></div>
+          <div class="popup-value popup-value--primary popup-value--wrap">${escapeHtml(p.mp_party || 'Not available')}</div>
+
+          <div class="popup-label">Oil/Gas licence area (%):</div>
+          <div class="popup-value popup-value--wrap">${escapeHtml(formatPercent(p.licence_area_pct))}</div>
+
+          <div class="popup-label">Oil/Gas licence codes:</div>
+          <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_codes || 'Not available')}</div>
+
+          <div class="popup-label">Oil/Gas licence organisations:</div>
+          <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_orgs || 'Not available')}</div>
+        </div>
+      </div>
+    `;
+
+    layer.bindPopup(html, {
+      autoPan: false,
+      maxWidth: 320
+    });
+  }
+
+  // 3. HOVER AND CLICK BEHAVIOUR
+  function highlightFeature(e) {
+    const layer = e.target;
+    layer.setStyle({
+      stroke: true,
+      color: '#1e234d',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.9
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
+      labelsOnly.bringToFront();
+    }
+  }
+
+  function resetHighlight(e) {
+    if (geojsonLayer) {
+      geojsonLayer.resetStyle(e.target);
+      labelsOnly.bringToFront();
+    }
+  }
+
+  function onEachFeature(feature, layer) {
+    popupContent(feature, layer);
+
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: function () {
+        const center = layer.getBounds().getCenter();
+
+        map.panTo(center, {
+          animate: true,
+          duration: 0.5
+        });
+
+        map.once('moveend', function () {
+          layer.openPopup(center);
+        });
+      }
+    });
+  }
+
+  // 4. TITLE CONTROL
+  const titleControl = L.control({ position: 'topleft' });
+
+  titleControl.onAdd = function () {
+    const wrapper = L.DomUtil.create('div', 'map-title-wrapper');
+    const container = L.DomUtil.create('div', 'map-title-control', wrapper);
+
+    container.innerHTML = `
+      <div class="map-title-header">
+        <h3>Oil and gas licences within constituencies</h3>
+      </div>
+    `;
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  };
+
+  // 5. LEGEND
+  const desktopLegend = L.control({ position: 'topright' });
+  const mobileLegend = L.control({ position: 'bottomleft' });
+
+  function getLegendRanges() {
+    if (!classBreaks) return [];
+
+    const ranges = [];
+    for (let i = 0; i < classBreaks.length - 1; i++) {
+      const from = Math.round(classBreaks[i] * 100);
+      const to = Math.round(classBreaks[i + 1] * 100);
+      ranges.push(`${from}%–${to}%`);
+    }
+    return ranges;
+  }
+
+  function createLegendMarkup() {
+    const ranges = getLegendRanges();
+
+    return `
+      <div class="legend-header">
+        <div class="legend-title">Oil/Gas licence area (%)</div>
+        <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
+      </div>
+      <div class="legend-content">
+        This map shows the share of each constituency covered by intersecting onshore oil and gas licence areas.
+        <br><br>
+        The colour classes are calculated in the browser using five quantiles based on the loaded constituency data.
+        <br>
+        <hr class="hr-thin">
+        <div class="legend-scale">
+          <div class="legend-bar legend-bar--5">
+            <span style="background:#d8dbe4"></span>
+            <span style="background:#b0b5c7"></span>
+            <span style="background:#878ea9"></span>
+            <span style="background:#5a6386"></span>
+            <span style="background:#1e234d"></span>
+          </div>
+          <div class="legend-ranges">
+            ${ranges.map(label => `<span>${escapeHtml(label)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildLegend(wrapperClass, startMinimised = false) {
+    const wrapper = L.DomUtil.create('div', wrapperClass);
+    const container = L.DomUtil.create('div', 'legend', wrapper);
+
+    if (startMinimised) {
+      container.classList.add('is-minimised');
+    }
+
+    container.innerHTML = createLegendMarkup();
+
+    const toggleBtn = container.querySelector('.legend-toggle');
+    const content = container.querySelector('.legend-content');
+
+    function syncLegendState() {
+      const isMinimised = container.classList.contains('is-minimised');
+      toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
+      toggleBtn.textContent = isMinimised ? '+' : '−';
+      content.style.display = isMinimised ? 'none' : 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      container.classList.toggle('is-minimised');
+      syncLegendState();
+    });
+
+    syncLegendState();
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  }
+
+  desktopLegend.onAdd = function () {
+    return buildLegend('legend-desktop-wrapper', false);
+  };
+
+  mobileLegend.onAdd = function () {
+    return buildLegend('legend-mobile-wrapper', true);
+  };
+
+  // 6. DATA LOAD
+  async function loadOilGasLayer() {
+    try {
+      const res = await fetch(dataUrl);
+      if (!res.ok) {
+        throw new Error(`Failed to load GeoJSON: ${res.status}`);
+      }
+
+      const data = await res.json();
+      const values = (data.features || [])
+        .map(f => f?.properties?.licence_area_pct)
+        .filter(v => v !== null && v !== undefined && v !== '');
+
+      classBreaks = getQuantileBreaks(values, classCount);
+
+      geojsonLayer = L.geoJSON(data, {
+        style: layerStyle,
+        onEachFeature: onEachFeature
+      }).addTo(map);
+
+      const bounds = geojsonLayer.getBounds();
+      if (bounds && bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [5, 5] });
+      } else {
+        map.setView([52.8, -1.5], 6);
+      }
+
+      labelsOnly.addTo(map);
+      labelsOnly.bringToFront();
+
+      desktopLegend.addTo(map);
+      mobileLegend.addTo(map);
+    } catch (err) {
+      console.error('Error loading oil and gas GeoJSON:', err);
+      map.setView([52.8, -1.5], 6);
+      labelsOnly.addTo(map);
+      desktopLegend.addTo(map);
+      mobileLegend.addTo(map);
+    }
+  }
+
+  // 7. ATTRIBUTION CONTROL
+  map.attributionControl.setPrefix(false);
+
+  const attributionControl = L.control({ position: 'bottomright' });
+
+  attributionControl.onAdd = function () {
+    const wrapper = L.DomUtil.create('div', 'attribution-wrapper');
+    const container = L.DomUtil.create('div', 'map-attribution is-minimised', wrapper);
+
+    container.innerHTML = `
+      <div class="attribution-header">
+        <div class="attribution-title">Copyright acknowledgements</div>
+        <button type="button" class="button button--small attribution-toggle" aria-expanded="false">+</button>
+      </div>
+      <div class="attribution-content">
+        © CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022). © OpenStreetMap contributors.
+      </div>
+    `;
+
+    const toggleBtn = container.querySelector('.attribution-toggle');
+    const content = container.querySelector('.attribution-content');
+
+    function syncAttributionState() {
+      const isMinimised = container.classList.contains('is-minimised');
+      toggleBtn.setAttribute('aria-expanded', String(!isMinimised));
+      toggleBtn.textContent = isMinimised ? '+' : '−';
+      content.style.display = isMinimised ? 'none' : 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      container.classList.toggle('is-minimised');
+      syncAttributionState();
+    });
+
+    syncAttributionState();
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    return wrapper;
+  };
+
+  // 8. ADD CONTROLS AND INITIALISE
+  titleControl.addTo(map);
+  attributionControl.addTo(map);
+  loadOilGasLayer();
+</script>
+
+<style>
+  .map-title-control {
+    background: #f4f6fa;
+    color: #1e234d;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 0.9rem;
+    width: min(320px, calc(100vw - 2rem));
+    font-family: 'Libre Franklin', sans-serif;
+  }
+
+  .map-title-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .map-title-control h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: #1e234d;
+    font-family: 'Libre Franklin', sans-serif;
+  }
+
+  .legend-bar--5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 20px;
+  }
+
+  .legend-ranges {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-size: 0.76rem;
+    line-height: 1.25;
+    color: #1e234d;
+  }
+
+  .legend-ranges span {
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .popup-card--oilgas {
+    min-width: 220px;
+    max-width: min(300px, 72vw);
+  }
+
+  .popup-grid--oilgas {
+    grid-template-columns: minmax(0, 120px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .popup-value--wrap {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  @media (max-width: 768px) {
+    .leaflet-top.leaflet-left .map-title-wrapper {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100vw - 1.5rem);
+      max-width: 600px;
+      margin: 0;
+      top: max(0.75rem, env(safe-area-inset-top));
+      display: flex;
+      justify-content: stretch;
+      z-index: 1000;
+    }
+
+    .leaflet-top.leaflet-left .map-title-control {
+      width: 100%;
+      max-width: none;
+      padding: 0.55rem 0.7rem;
+    }
+
+    .map-title-control h3 {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .legend-ranges {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .legend-ranges span {
+      text-align: left;
+    }
+
+    .leaflet-popup-content-wrapper {
+      max-width: 90vw;
+    }
+
+    .leaflet-popup-content {
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .map-title-control {
+      padding: 0.4rem 0.6rem;
+    }
+
+    .map-title-header {
+      margin-bottom: 0.25rem;
+    }
+  }
+</style>
+
+</body>
+</html>
