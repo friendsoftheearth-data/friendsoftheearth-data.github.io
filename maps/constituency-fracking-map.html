@@ -137,13 +137,13 @@
           <div class="popup-label"><strong>MP name and party:</strong></div>
           <div class="popup-value popup-value--primary popup-value--wrap">${escapeHtml(p.mp_party || 'Not available')}</div>
 
-          <div class="popup-label">Oil/Gas licence area (%):</div>
+          <div class="popup-label">Licence area (%):</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(formatPercent(p.licence_area_pct))}</div>
 
-          <div class="popup-label">Oil/Gas licence codes:</div>
+          <div class="popup-label">Licence codes:</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_codes || 'Not available')}</div>
 
-          <div class="popup-label">Oil/Gas licence organisations:</div>
+          <div class="popup-label">Licence organisations:</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_orgs || 'Not available')}</div>
         </div>
       </div>
@@ -200,25 +200,7 @@
     });
   }
 
-  // 4. TITLE CONTROL
-  const titleControl = L.control({ position: 'topleft' });
-
-  titleControl.onAdd = function () {
-    const wrapper = L.DomUtil.create('div', 'map-title-wrapper');
-    const container = L.DomUtil.create('div', 'map-title-control', wrapper);
-
-    container.innerHTML = `
-      <div class="map-title-header">
-        <h3>Oil and gas licences within constituencies</h3>
-      </div>
-    `;
-
-    L.DomEvent.disableClickPropagation(container);
-    L.DomEvent.disableScrollPropagation(container);
-    return wrapper;
-  };
-
-  // 5. LEGEND
+  // 4. LEGEND
   const desktopLegend = L.control({ position: 'topright' });
   const mobileLegend = L.control({ position: 'bottomleft' });
 
@@ -239,15 +221,16 @@
 
     return `
       <div class="legend-header">
-        <div class="legend-title">Oil/Gas licence area (%)</div>
+        <div class="legend-title">Onshore petroleum licences within constituencies</div>
         <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
       </div>
       <div class="legend-content">
-        This map shows the share of each constituency covered by intersecting onshore oil and gas licence areas.
+        This map shows the percent of each constituency land area covered by onshore oil and gas licence areas.
         <br><br>
-        The colour classes are calculated in the browser using five quantiles based on the loaded constituency data.
+        There are 79 constituencies with at least 1km2 of petroleum extraction licences.
         <br>
         <hr class="hr-thin">
+        <div class="legend-scale-title">Oil/Gas licence area (%)</div>
         <div class="legend-scale">
           <div class="legend-bar legend-bar--5">
             <span style="background:#d8dbe4"></span>
@@ -304,7 +287,7 @@
     return buildLegend('legend-mobile-wrapper', true);
   };
 
-  // 6. DATA LOAD
+  // 5. DATA LOAD
   async function loadOilGasLayer() {
     try {
       const res = await fetch(dataUrl);
@@ -345,7 +328,7 @@
     }
   }
 
-  // 7. ATTRIBUTION CONTROL
+  // 6. ATTRIBUTION CONTROL
   map.attributionControl.setPrefix(false);
 
   const attributionControl = L.control({ position: 'bottomright' });
@@ -360,7 +343,7 @@
         <button type="button" class="button button--small attribution-toggle" aria-expanded="false">+</button>
       </div>
       <div class="attribution-content">
-        © CARTO, Contains public sector information licensed under the Open Government Licence v3.0, OS data © Crown copyright and database right (2022). © OpenStreetMap contributors.
+        © CARTO, NSTA Open User Licence, OS data © Crown copyright and database right (2022). © OpenStreetMap contributors.
       </div>
     `;
 
@@ -386,36 +369,18 @@
     return wrapper;
   };
 
-  // 8. ADD CONTROLS AND INITIALISE
-  titleControl.addTo(map);
+  // 7. ADD CONTROLS AND INITIALISE
   attributionControl.addTo(map);
   loadOilGasLayer();
 </script>
 
 <style>
-  .map-title-control {
-    background: #f4f6fa;
+  .legend-scale-title {
+    margin-top: 0.2rem;
+    margin-bottom: 0.45rem;
+    font-weight: 700;
     color: #1e234d;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    padding: 0.9rem;
-    width: min(320px, calc(100vw - 2rem));
-    font-family: 'Libre Franklin', sans-serif;
-  }
-
-  .map-title-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .map-title-control h3 {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.2;
-    color: #1e234d;
-    font-family: 'Libre Franklin', sans-serif;
+    line-height: 1.3;
   }
 
   .legend-bar--5 {
@@ -455,30 +420,6 @@
   }
 
   @media (max-width: 768px) {
-    .leaflet-top.leaflet-left .map-title-wrapper {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100vw - 1.5rem);
-      max-width: 600px;
-      margin: 0;
-      top: max(0.75rem, env(safe-area-inset-top));
-      display: flex;
-      justify-content: stretch;
-      z-index: 1000;
-    }
-
-    .leaflet-top.leaflet-left .map-title-control {
-      width: 100%;
-      max-width: none;
-      padding: 0.55rem 0.7rem;
-    }
-
-    .map-title-control h3 {
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
     .legend-ranges {
       grid-template-columns: 1fr;
       gap: 0.25rem;
@@ -495,16 +436,6 @@
     .leaflet-popup-content {
       max-height: 60vh;
       overflow-y: auto;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .map-title-control {
-      padding: 0.4rem 0.6rem;
-    }
-
-    .map-title-header {
-      margin-bottom: 0.25rem;
     }
   }
 </style>
