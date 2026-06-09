@@ -232,15 +232,12 @@
         <hr class="hr-thin">
         <div class="legend-scale-title">Oil/Gas licence area (%)</div>
         <div class="legend-scale">
-          <div class="legend-bar legend-bar--5">
-            <span style="background:#f1e5e4"></span>
-            <span style="background:#efc6cd"></span>
-            <span style="background:#eca6b6"></span>
-            <span style="background:#ea8794"></span>
-            <span style="background:#ed6132"></span>
-          </div>
-          <div class="legend-ranges">
-            ${ranges.map(label => `<span>${escapeHtml(label)}</span>`).join('')}
+          <div class="legend-bar legend-bar--5 legend-bar--labelled">
+            ${ranges.map((label, i) => `
+              <span class="${i >= 3 ? 'legend-bar-accessible' : ''}" style="background:${colourRamp[i]}">
+                <span class="legend-band-label">${escapeHtml(label)}</span>
+              </span>
+            `).join('')}
           </div>
         </div>
       </div>
@@ -385,22 +382,29 @@
 
   .legend-bar--5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    min-height: 20px;
+    min-height: 42px;
   }
 
-  .legend-ranges {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.35rem;
-    margin-top: 0.5rem;
-    font-size: 0.76rem;
-    line-height: 1.25;
-    color: #1e234d;
+  .legend-bar--labelled {
+    width: 100%;
   }
 
-  .legend-ranges span {
+  .legend-bar--labelled > span {
+    padding: 0.35rem 0.25rem;
     text-align: center;
+  }
+  
+  .legend-band-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #1e234d;
     overflow-wrap: anywhere;
+  }
+  
+  .legend-bar--labelled > span.legend-bar-accessible .legend-band-label {
+    color: #f4f6fa;
   }
 
   .popup-card--oilgas {
@@ -420,13 +424,13 @@
   }
 
   @media (max-width: 768px) {
-    .legend-ranges {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
+    .legend-bar--5 {
+      min-height: 56px;
     }
-
-    .legend-ranges span {
-      text-align: left;
+  
+    .legend-band-label {
+      font-size: 0.68rem;
+      line-height: 1.1;
     }
 
     .leaflet-popup-content-wrapper {
