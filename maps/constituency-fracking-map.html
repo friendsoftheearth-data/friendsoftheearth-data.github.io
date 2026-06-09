@@ -47,7 +47,7 @@
   // 2. DATASET AND HELPER FUNCTIONS
   const dataUrl = '/datasets/fossil-fuels/pcon-onshore-og-licences.geojson';
   const classCount = 5;
-  const colourRamp = ['#d8dbe4', '#b0b5c7', '#878ea9', '#5a6386', '#1e234d'];
+  const colourRamp = ['#f1e5e4', '#efc6cd', '#eca6b6', '#ea8794', '#ed6132'];
 
   let geojsonLayer = null;
   let classBreaks = null;
@@ -233,11 +233,11 @@
         <div class="legend-scale-title">Oil/Gas licence area (%)</div>
         <div class="legend-scale">
           <div class="legend-bar legend-bar--5">
-            <span style="background:#d8dbe4"></span>
-            <span style="background:#b0b5c7"></span>
-            <span style="background:#878ea9"></span>
-            <span style="background:#5a6386"></span>
-            <span style="background:#1e234d"></span>
+            <span style="background:#f1e5e4"></span>
+            <span style="background:#efc6cd"></span>
+            <span style="background:#eca6b6"></span>
+            <span style="background:#ea8794"></span>
+            <span style="background:#ed6132"></span>
           </div>
           <div class="legend-ranges">
             ${ranges.map(label => `<span>${escapeHtml(label)}</span>`).join('')}
