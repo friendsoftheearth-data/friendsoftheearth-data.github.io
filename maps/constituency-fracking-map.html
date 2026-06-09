@@ -186,15 +186,13 @@
       mouseover: highlightFeature,
       mouseout: resetHighlight,
       click: function () {
-        const center = layer.getBounds().getCenter();
+        const clickLatLng = e.latlng;
 
-        map.panTo(center, {
+        layer.openPopup(clickLatLng);
+      
+        map.panTo(clickLatLng, {
           animate: true,
           duration: 0.5
-        });
-
-        map.once('moveend', function () {
-          layer.openPopup(center);
         });
       }
     });
