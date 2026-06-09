@@ -211,7 +211,7 @@
     for (let i = 0; i < classBreaks.length - 1; i++) {
       const from = Math.round(classBreaks[i] * 100);
       const to = Math.round(classBreaks[i + 1] * 100);
-      ranges.push(`${from}%–${to}%`);
+      ranges.push(`${from}-${to}%`);
     }
     return ranges;
   }
