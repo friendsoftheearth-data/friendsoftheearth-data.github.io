@@ -181,18 +181,20 @@
 
   function onEachFeature(feature, layer) {
     popupContent(feature, layer);
-
+  
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight,
-      click: function () {
+      click: function (e) {
         const clickLatLng = e.latlng;
-
-        layer.openPopup(clickLatLng);
-      
+  
         map.panTo(clickLatLng, {
           animate: true,
           duration: 0.5
+        });
+  
+        map.once('moveend', function () {
+          layer.openPopup(clickLatLng);
         });
       }
     });
