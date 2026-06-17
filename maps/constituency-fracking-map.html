@@ -46,11 +46,15 @@
 
   // 2. DATASET AND HELPER FUNCTIONS
   const dataUrl = '/datasets/fossil-fuels/pcon-onshore-og-licences.geojson';
+  const licenceBlocksUrl = '/datasets/fossil-fuels/onshore-og-licences.geojson';
   const classCount = 5;
   const colourRamp = ['#f1e5e4', '#efc6cd', '#eca6b6', '#ea8794', '#ed6132'];
 
   let geojsonLayer = null;
   let classBreaks = null;
+  let licenceBlocksLayer = null;
+  let licenceBlocksVisible = true;
+  let legendToggleButtons = [];
 
   function escapeHtml(value) {
     return String(value ?? '')
@@ -127,6 +131,16 @@
     };
   }
 
+  function licenceBlockStyle() {
+    return {
+      color: '#1e234d',
+      weight: 1.5,
+      opacity: 1,
+      fill: false,
+      fillOpacity: 0
+    };
+  }
+
   function popupContent(feature, layer) {
     const p = feature.properties || {};
 
@@ -155,6 +169,79 @@
     });
   }
 
+  function licenceBlockPopupContent(feature) {
+    const p = feature.properties || {};
+
+    return `
+      <div class="popup-card popup-card--oilgas">
+        <div class="popup-grid popup-grid--oilgas">
+          <div class="popup-label">Licence ref:</div>
+          <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_no || 'Not available')}</div>
+
+          <div class="popup-label">Licence organisations:</div>
+          <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_orgs || 'Not available')}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function onEachLicenceBlock(feature, layer) {
+    layer.bindPopup(licenceBlockPopupContent(feature), {
+      maxWidth: 340,
+      autoPan: true
+    });
+  }
+
+  function updateLicenceToggleUI() {
+    legendToggleButtons.forEach(btn => {
+      btn.setAttribute('aria-pressed', String(licenceBlocksVisible));
+      btn.textContent = licenceBlocksVisible ? 'Hide' : 'Show';
+      btn.classList.toggle('is-inactive', !licenceBlocksVisible);
+    });
+  }
+
+  function toggleLicenceBlocks() {
+    if (!licenceBlocksLayer) return;
+
+    if (map.hasLayer(licenceBlocksLayer)) {
+      map.removeLayer(licenceBlocksLayer);
+      licenceBlocksVisible = false;
+    } else {
+      licenceBlocksLayer.addTo(map);
+      licenceBlocksLayer.bringToFront();
+      labelsOnly.bringToFront();
+      licenceBlocksVisible = true;
+    }
+
+    updateLicenceToggleUI();
+  }
+
+  async function loadLicenceBlocksLayer() {
+    try {
+      const res = await fetch(licenceBlocksUrl);
+      if (!res.ok) {
+        throw new Error(`Failed to load licence blocks GeoJSON: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      licenceBlocksLayer = L.geoJSON(data, {
+        style: licenceBlockStyle,
+        onEachFeature: onEachLicenceBlock
+      });
+
+      if (licenceBlocksVisible) {
+        licenceBlocksLayer.addTo(map);
+        licenceBlocksLayer.bringToFront();
+        labelsOnly.bringToFront();
+      }
+
+      updateLicenceToggleUI();
+    } catch (err) {
+      console.error('Error loading licence blocks GeoJSON:', err);
+    }
+  }
+
   // 3. HOVER AND CLICK BEHAVIOUR
   function highlightFeature(e) {
     const layer = e.target;
@@ -168,6 +255,11 @@
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
       layer.bringToFront();
+
+      if (licenceBlocksLayer && map.hasLayer(licenceBlocksLayer)) {
+        licenceBlocksLayer.bringToFront();
+      }
+
       labelsOnly.bringToFront();
     }
   }
@@ -175,24 +267,29 @@
   function resetHighlight(e) {
     if (geojsonLayer) {
       geojsonLayer.resetStyle(e.target);
+
+      if (licenceBlocksLayer && map.hasLayer(licenceBlocksLayer)) {
+        licenceBlocksLayer.bringToFront();
+      }
+
       labelsOnly.bringToFront();
     }
   }
 
   function onEachFeature(feature, layer) {
     popupContent(feature, layer);
-  
+
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight,
       click: function (e) {
         const clickLatLng = e.latlng;
-  
+
         map.panTo(clickLatLng, {
           animate: true,
           duration: 0.5
         });
-  
+
         map.once('moveend', function () {
           layer.openPopup(clickLatLng);
         });
@@ -240,6 +337,13 @@
             `).join('')}
           </div>
         </div>
+
+        <hr class="hr-thin">
+        <div class="legend-overlay-row">
+          <div class="legend-overlay-symbol" aria-hidden="true"></div>
+          <div class="legend-overlay-label">Onshore oil and gas licence blocks</div>
+          <button type="button" class="button button--small legend-layer-toggle" data-layer-toggle="licence-blocks" aria-pressed="true">Hide</button>
+        </div>
       </div>
     `;
   }
@@ -256,6 +360,7 @@
 
     const toggleBtn = container.querySelector('.legend-toggle');
     const content = container.querySelector('.legend-content');
+    const layerToggleBtn = container.querySelector('[data-layer-toggle="licence-blocks"]');
 
     function syncLegendState() {
       const isMinimised = container.classList.contains('is-minimised');
@@ -269,7 +374,16 @@
       syncLegendState();
     });
 
+    if (layerToggleBtn) {
+      legendToggleButtons.push(layerToggleBtn);
+      layerToggleBtn.addEventListener('click', function (evt) {
+        evt.stopPropagation();
+        toggleLicenceBlocks();
+      });
+    }
+
     syncLegendState();
+    updateLicenceToggleUI();
 
     L.DomEvent.disableClickPropagation(container);
     L.DomEvent.disableScrollPropagation(container);
@@ -316,12 +430,18 @@
 
       desktopLegend.addTo(map);
       mobileLegend.addTo(map);
+
+      await loadLicenceBlocksLayer();
     } catch (err) {
       console.error('Error loading oil and gas GeoJSON:', err);
       map.setView([52.8, -1.5], 6);
       labelsOnly.addTo(map);
+      labelsOnly.bringToFront();
+
       desktopLegend.addTo(map);
       mobileLegend.addTo(map);
+
+      await loadLicenceBlocksLayer();
     }
   }
 
@@ -393,7 +513,7 @@
     padding: 0.35rem 0.25rem;
     text-align: center;
   }
-  
+
   .legend-band-label {
     display: block;
     font-size: 0.72rem;
@@ -402,9 +522,34 @@
     color: #1e234d;
     overflow-wrap: anywhere;
   }
-  
+
   .legend-bar--labelled > span.legend-bar-accessible .legend-band-label {
     color: #f4f6fa;
+  }
+
+  .legend-overlay-row {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr) auto;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 0.2rem;
+  }
+
+  .legend-overlay-symbol {
+    width: 18px;
+    height: 0;
+    border-top: 2px solid #1e234d;
+    justify-self: center;
+  }
+
+  .legend-overlay-label {
+    line-height: 1.3;
+    color: #1e234d;
+  }
+
+  .legend-layer-toggle.is-inactive {
+    background-color: #d9dde6;
+    color: #1e234d;
   }
 
   .popup-card--oilgas {
@@ -427,10 +572,20 @@
     .legend-bar--5 {
       min-height: 32px;
     }
-  
+
     .legend-band-label {
       font-size: 0.68rem;
       line-height: 1.1;
+    }
+
+    .legend-overlay-row {
+      grid-template-columns: 18px minmax(0, 1fr);
+    }
+
+    .legend-layer-toggle {
+      grid-column: 2;
+      justify-self: start;
+      margin-top: 0.2rem;
     }
 
     .leaflet-popup-content-wrapper {
