@@ -137,7 +137,7 @@
       weight: 1.5,
       opacity: 1,
       fillColor: '#f4f6fa',
-      fillOpacity: 0.1
+      fillOpacity: 0.25
     };
   }
 
@@ -544,16 +544,18 @@
     margin-top: 0.2rem;
   }
 
-  .legend-overlay-symbol {
-    width: 18px;
-    height: 0;
-    border-top: 2px solid #1e234d;
-    justify-self: center;
-  }
-
-  .legend-overlay-symbol--fill {
-    height: 12px;
+ .legend-overlay-symbol {
+    width: 20px;
+    height: 14px;
+    box-sizing: border-box;
     border: 1.5px solid #1e234d;
+    background: transparent;
+    justify-self: center;
+    display: block;
+    flex: 0 0 auto;
+  }
+  
+  .legend-overlay-symbol--fill {
     background: rgba(244, 246, 250, 0.1);
   }
 
