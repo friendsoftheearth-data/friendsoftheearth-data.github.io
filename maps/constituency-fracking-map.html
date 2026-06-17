@@ -538,25 +538,39 @@
 
   .legend-overlay-row {
     display: grid;
-    grid-template-columns: 18px minmax(0, 1fr) auto;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
     gap: 0.6rem;
     align-items: center;
     margin-top: 0.2rem;
   }
-
- .legend-overlay-symbol {
+  
+  .legend-overlay-symbol {
     width: 20px;
     height: 14px;
     box-sizing: border-box;
     border: 1.5px solid #1e234d;
     background: transparent;
-    justify-self: center;
     display: block;
-    flex: 0 0 auto;
+    justify-self: start;
   }
   
   .legend-overlay-symbol--fill {
-    background: rgba(244, 246, 250, 0.1);
+    background-color: rgba(244, 246, 250, 0.25);
+  }
+  
+  @media (max-width: 768px) {
+    .legend-overlay-row {
+      gap: 0.5rem;
+    }
+  
+    .leaflet-popup-content-wrapper {
+      max-width: 90vw;
+    }
+  
+    .leaflet-popup-content {
+      max-height: 60vh;
+      overflow-y: auto;
+    }
   }
 
   .legend-overlay-label {
@@ -643,11 +657,6 @@
     .legend-band-label {
       font-size: 0.68rem;
       line-height: 1.1;
-    }
-
-    .legend-overlay-row {
-      grid-template-columns: 18px minmax(0, 1fr) auto;
-      gap: 0.5rem;
     }
 
     .leaflet-popup-content-wrapper {
