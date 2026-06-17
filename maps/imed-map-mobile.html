@@ -82,7 +82,7 @@
     };
   }
 
- function popupContent(feature, layer) {
+  function popupContent(feature, layer) {
     const p = feature.properties || {};
     const lsoaCode = p.LSOA21CD || 'Area';
     const msoaName = p.msoa21_name ?? 'Not available';
@@ -112,9 +112,13 @@
 
   // 3. HOVER BEHAVIOUR FUNCTIONS
   let geojsonLayer = null;
+  let selectedLayer = null;
 
   function highlightFeature(e) {
     const layer = e.target;
+
+    if (layer === selectedLayer) return;
+
     layer.setStyle({
       stroke: true,
       color: '#ffffff',
@@ -129,9 +133,34 @@
   }
 
   function resetHighlight(e) {
-    if (geojsonLayer) {
+    if (geojsonLayer && e.target !== selectedLayer) {
       geojsonLayer.resetStyle(e.target);
     }
+  }
+
+  function selectNeighbourhood(layer, popupLatLng = null) {
+    if (!layer) return;
+
+    if (selectedLayer && geojsonLayer) {
+      geojsonLayer.resetStyle(selectedLayer);
+    }
+
+    selectedLayer = layer;
+
+    layer.setStyle({
+      stroke: true,
+      color: '#ffffff',
+      weight: 2,
+      opacity: 0.9,
+      fillOpacity: 0.75
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
+    }
+
+    const popupLocation = popupLatLng || layer.getBounds().getCenter();
+    layer.openPopup(popupLocation);
   }
 
   function onEachFeature(feature, layer) {
@@ -149,7 +178,7 @@
         });
 
         map.once('moveend', function () {
-          layer.openPopup(center);
+          selectNeighbourhood(layer, center);
         });
       }
     });
@@ -251,7 +280,7 @@
   }
   
   // POSTCODE SEARCH FUNCTIONS
-    async function findPostcode(mode = 'mobile') {
+  async function findPostcode(mode = 'mobile') {
     const input = document.getElementById(
       mode === 'desktop' ? 'desktop-postcode-input' : 'postcode-input'
     );
@@ -312,7 +341,7 @@
       });
 
       if (matchedLayer) {
-        matchedLayer.openPopup([lat, lon]);
+        selectNeighbourhood(matchedLayer, [lat, lon]);
         message.textContent = '';
       } else {
         message.textContent = 'Postcode found, but no matching LSOA polygon was identified.';
@@ -326,7 +355,7 @@
   // 4. SEARCH CONTROL AND LEGEND
   const searchControl = L.control({ position: 'topleft' });
 
-    searchControl.onAdd = function () {
+  searchControl.onAdd = function () {
     const wrapper = L.DomUtil.create('div', 'postcode-search-wrapper');
     const container = L.DomUtil.create('div', 'postcode-search-control', wrapper);
     container.innerHTML = `
@@ -368,7 +397,7 @@
   const desktopLegend = L.control({ position: 'topright' });
   const mobileLegend = L.control({ position: 'bottomleft' });
 
-    function createLegendMarkup(isDesktop = false) {
+  function createLegendMarkup(isDesktop = false) {
     return `
       <div class="legend-header">
         <div class="legend-title">Index of Multiple Environmental Deprivation (IMED)</div>
@@ -416,7 +445,7 @@
     `;
   }
 
-    function buildLegend(wrapperClass, startMinimised = false, isDesktop = false) {
+  function buildLegend(wrapperClass, startMinimised = false, isDesktop = false) {
     const wrapper = L.DomUtil.create('div', wrapperClass);
     const container = L.DomUtil.create('div', 'legend', wrapper);
 
