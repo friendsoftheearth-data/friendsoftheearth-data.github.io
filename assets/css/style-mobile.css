@@ -355,36 +355,6 @@ font-weight: 600;
 border-radius: 16px;
 }
 
-@media (max-width: 480px) {
-.popup-card {
-min-width: 0;
-max-width: calc(100vw - 40px);
-}
-
-.popup-grid {
-grid-template-columns: 1fr;
-row-gap: 4px;
-}
-
-.popup-value {
-white-space: normal;
-overflow-wrap: anywhere;
-word-break: break-word;
-margin-bottom: 6px;
-}
-
-.leaflet-popup-content {
-font-size: 0.85rem;
-line-height: 1.35;
-margin: 12px 12px;
-max-width: calc(100vw - 40px);
-}
-
-.leaflet-popup-content-wrapper {
-max-width: calc(100vw - 24px);
-}
-}
-
 /* Leaflet control layout */
 .leaflet-top,
 .leaflet-bottom {
