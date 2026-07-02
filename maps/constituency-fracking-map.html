@@ -146,18 +146,20 @@
 
     const html = `
       <div class="popup-card popup-card--oilgas">
-        <div class="popup-title">Constituency: <strong>${escapeHtml(p.constituency_name || 'Not available')}</strong></div>
         <div class="popup-grid popup-grid--oilgas">
-          <div class="popup-label"><strong>MP name and party:</strong></div>
+          <div class="popup-label">Constituency: </div>
+          <div class="popup-value popup-value--primary popup-value--wrap">${escapeHtml(p.constituency_name || 'Not available')}</div>
+          
+          <div class="popup-label">MP party:</div>
           <div class="popup-value popup-value--primary popup-value--wrap">${escapeHtml(p.mp_party || 'Not available')}</div>
 
-          <div class="popup-label">Licence area (%):</div>
+          <div class="popup-label">Licence coverage (%):</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(formatPercent(p.licence_area_pct))}</div>
 
           <div class="popup-label">Licence codes:</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_codes || 'Not available')}</div>
 
-          <div class="popup-label">Licence organisations:</div>
+          <div class="popup-label">Licence holders:</div>
           <div class="popup-value popup-value--wrap">${escapeHtml(p.licence_orgs || 'Not available')}</div>
         </div>
       </div>
@@ -321,12 +323,10 @@
         <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
       </div>
       <div class="legend-content">
-        This map shows all the constituencies in England which have at least 1km2 covered by onshore oil and gas licence blocks.
-        <br><br>
-        There are 79 constituencies which have such licences in their area.
+        This map shows all 79 constituencies in England with at least 1 km2 covered by onshore oil and gas licence blocks.
         <br>
         <hr class="hr-thin">
-        <div class="legend-scale-title">Oil/Gas licence area (%)</div>
+        <div class="legend-scale-title">Area covered by oil and gas licences (%)</div>
         <div class="legend-scale">
           <div class="legend-bar legend-bar--5 legend-bar--labelled">
             ${ranges.map((label, i) => `
