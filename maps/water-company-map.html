@@ -36,6 +36,13 @@
       pane: 'labels'
     }).addTo(map);
 
+const IceSpace =     ['#f4f6fa', '#bec0ce', '#8b8ea5', '#545879', '#1e234d'];
+const IceSunset =    ['#f4f6fa', '#edd5cf', '#f1ad98', '#ef8563', '#ed6132'];
+const IceLeafSpace = ['#f4f6fa', '#a8d9d1', '#61bdaa', '#3a717f', '#1e234d'];
+const IceIris =      ['#f4f6fa', '#cecee3', '#a7a5cd', '#817db7', '#5a54a0'];
+const IceOcean1 =    ['#f4f6fa', '#b7d1de', '#7aabc2', '#3d85a6', '#00608a'];
+const IceForest4 =   ['#f4f6fa', '#b9cbcb', '#839a96', '#3f7066', '#094839'];
+    
     const layerConfigs = {
       bills: {
         key: 'bills',
@@ -43,7 +50,7 @@
         description: 'Increase between 2024/25 and 2026/27 (%)',
         field: 'bill_change_2024_26_pct',
         isProportion: true,
-        palette: ['#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#cb181d']
+        palette: IceSpace
       },
       sewage: {
         key: 'sewage',
@@ -51,7 +58,7 @@
         description: 'Average spill duration per outlet in hours (2024-2026)',
         field: 'overflows_average_spill_duration_hours_per_outlet_2024_2026',
         isProportion: false,
-        palette: ['#feedde', '#fdbe85', '#fd8d3c', '#e6550d', '#a63603']
+        palette: IceSunset
       },
       bathing: {
         key: 'bathing',
@@ -59,7 +66,7 @@
         description: 'Bathing locations where water quality is below Good (%)',
         field: 'bathing_poor_sufficient_2025_pct',
         isProportion: true,
-        palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
+        palette: IceIris
       },
       bathingSewage: {
         key: 'bathingSewage',
@@ -67,7 +74,7 @@
         description: 'Average number of annual sewage spills per bathing location',
         field: 'bathing_overflows_average_annual_spills_per_location',
         isProportion: false,
-        palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
+        palette: IceLeafSpace
       },
       bathingPollution: {
         key: 'bathingPollution',
@@ -75,7 +82,7 @@
         description: 'Number of pollution events at bathing locations',
         field: 'pollution_incidents_2024_2026',
         isProportion: false,
-        palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
+        palette: IceOcean1
       },
       river: {
         key: 'river',
@@ -83,7 +90,7 @@
         description: 'Rivers where ecological condition is below Good (%)',
         field: 'ecological_class_less_than_good_pct',
         isProportion: true,
-        palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
+        palette: IceForest4
       }
     };
 
