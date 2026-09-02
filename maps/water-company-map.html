@@ -64,8 +64,16 @@
       bathingSewage: {
         key: 'bathingSewage',
         label: 'Sewage in bathing locations',
-        description: 'Average number of sewage spills per bathing locations',
+        description: 'Average number of annual sewage spills per bathing location',
         field: 'bathing_overflows_average_annual_spills_per_location',
+        isProportion: false,
+        palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
+      },
+      bathingPollution: {
+        key: 'bathingPollution',
+        label: 'Pollution events at bathing locations',
+        description: 'Number of pollution events at bathing locations',
+        field: 'pollution_incidents_2024_2026',
         isProportion: false,
         palette: ['#efedf5', '#bcbddc', '#9e9ac8', '#756bb1', '#54278f']
       },
@@ -153,12 +161,14 @@
             <div class="popup-value">${formatPercentFromProportion(p.bill_change_2024_26_pct)}</div>
             <div class="popup-label">Sewage spills: Avg per outlet (hrs)</div>
             <div class="popup-value">${formatValue(p.overflows_average_spill_duration_hours_per_outlet_2024_2026)}</div>
-            <div class="popup-label">Rivers ecology: Less than good (%)</div>
-            <div class="popup-value">${formatPercentFromProportion(p.ecological_class_less_than_good_pct)}</div>
             <div class="popup-label">Bathing waters: Less than good (%)</div>
             <div class="popup-value">${formatPercentFromProportion(p.bathing_poor_sufficient_2025_pct)}</div>
+            <div class="popup-label">Bathing waters: Sewage spills per location</div>
+            <div class="popup-value">${formatValue(p.bathing_overflows_average_annual_spills_per_location, { thousands: true })}</div>
             <div class="popup-label">Bathing waters: Pollution events (no.)</div>
             <div class="popup-value">${formatValue(p.pollution_incidents_2024_2026, { thousands: true })}</div>
+            <div class="popup-label">Rivers ecology: Less than good (%)</div>
+            <div class="popup-value">${formatPercentFromProportion(p.ecological_class_less_than_good_pct)}</div>
           </div>
         </div>`;
     }
@@ -271,13 +281,11 @@
     function createLegendMarkup() {
       return `
         <div class="legend-header">
-          <div class="legend-title">Water companies: bills and pollution</div>
+          <div class="legend-title">Water companies: bills and pollution in England</div>
           <button type="button" class="button button--small legend-toggle" aria-expanded="true">−</button>
         </div>
         <div class="legend-content">
-          Data on recent water bill rises, sewage pollution, poor ecological classification of rivers, bathing water status and recent pollution incidents/warnings by water supply and sewerage company (WASC) in England and Wales.
-          <br><br>
-          See <a href="https://action.friendsoftheearth.uk/target/clean-water-now" target="_blank" rel="noopener noreferrer">here</a> for more info on our Water Bill Reform Campaign/to sign our petition demanding clean water now.
+          TODO: add link to Water Bill Reform Campaign, etc.
           <hr class="hr-thin" />
           <form class="layer-toggle-group" aria-label="Map layers">
           <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
@@ -294,17 +302,24 @@
               <span class="slider"></span>
             </span>
           </label>
-          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem;">
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
             <span>Poor bathing water quality</span>
             <span class="switch">
               <input type="checkbox" name="layer-toggle" value="bathing" />
               <span class="slider"></span>
             </span>
           </label>
-          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem;">
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
             <span>Sewage in bathing locations</span>
             <span class="switch">
               <input type="checkbox" name="layer-toggle" value="bathingSewage" />
+              <span class="slider"></span>
+            </span>
+          </label>
+          <label class="layer-toggle-option" style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.5rem;">
+            <span>Pollution events at bathing locations</span>
+            <span class="switch">
+              <input type="checkbox" name="layer-toggle" value="bathingPollution" />
               <span class="slider"></span>
             </span>
           </label>
