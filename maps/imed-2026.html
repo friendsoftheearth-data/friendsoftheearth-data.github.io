@@ -23,6 +23,8 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<script src="/assets/js/carto-basemap.js"></script>
+  
 <script>
   // 1. CREATE MAP AND BASEMAP
   const map = L.map('map', {
@@ -34,25 +36,11 @@
   map.getPane('labels').style.zIndex = 650;
   map.getPane('labels').style.pointerEvents = 'none';
 
-  const cartoKey = 'cb1_2s1u_1_8f25e8f342fa438d46d69300';
-  
-  L.tileLayer(
-    `https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png?key=${cartoKey}`,
-    {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
-        '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 18
-    }
-  ).addTo(map);
+  addCartoLightNoLabels(map);
 
-  const labelsOnly = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-    pane: 'labels',
-    attribution: '© OpenStreetMap contributors, © CARTO',
-    subdomains: 'abcd',
-    maxZoom: 18
-  });
+    const labelsOnly = createCartoLightOnlyLabels({
+      pane: 'labels'
+    }).addTo(map);
 
   // 2. DEFINE HELPER FUNCTIONS AND POPUP
   function getDecileColor(decile) {
