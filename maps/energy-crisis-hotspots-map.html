@@ -116,13 +116,12 @@
     }
   }, 0);
 
- addCartoLightNoLabels(map);
-
   map.createPane('labels');
   map.getPane('labels').style.zIndex = 650;
   map.getPane('labels').style.pointerEvents = 'none';
 
-    addCartoLightNoLabels(map);
+  addCartoLightNoLabels(map);
+  
   const labelsOnly = createCartoLightOnlyLabels({
     pane: 'labels'
   }).addTo(map);
